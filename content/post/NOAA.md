@@ -16,6 +16,7 @@ categories:  ["Tech" ]
 最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。
 
 #### 数据来源
+
 数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。
 
 数据来自NCDC的公开FTP服务器中的  ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/。
@@ -26,6 +27,7 @@ categories:  ["Tech" ]
 
 分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210330063122553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQyMTg2OQ==,size_16,color_FFFFFF,t_70)
+
 #### 原始数据结构
 以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。![](https://img-blog.csdnimg.cn/img_convert/0291f0ac1f93f9ae17c36f400bf5f164.png)
 先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。
