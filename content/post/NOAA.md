@@ -5,7 +5,7 @@ subtitle:    ""
 description: "NOAA ISD Data Cleaning"
 date:        2018-06-04
 author:      ""
-image:       "http://ww1.sinaimg.cn/large/008iTKOogy1grh6iwymhlj31e00u0x6p.jpg"
+image:       "images/noaa.jpeg"
 tags:        ["NOAA", "Geo-Economics"]
 categories:  ["Tech" ]
 
