@@ -11,7 +11,7 @@ paginate = 5000 #frontpage pagination
       unsafe = true
 
 [params]
-  header_image = "/static/mainbg.jpeg"
+  header_image = "static/mainbg.jpeg"
   title = "Mengjie's Academic Notes"
   SEOTitle = "Mengjie Xu's Blog"
   keyword = "Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling"
@@ -24,7 +24,7 @@ paginate = 5000 #frontpage pagination
   #featured_tags = flase 
   #featured_condition_size = 2 # How many posts have to have a given tag to be featured (greater-than)
 
-  image_404 = "images/404.png"
+  image_404 = "static/404.png"
   title_404 = "The page is missing"
 
   omit_categories = false
