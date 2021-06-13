@@ -1,5 +1,3 @@
-## 从 SEC EDGAR 获取股东治理数据 (Shareholder Activism)
-
 ---
 
 title:       "Get Shareholder Activism Data From SEC EDGAR "
