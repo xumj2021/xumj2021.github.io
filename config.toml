@@ -11,7 +11,7 @@ paginate = 5000 #frontpage pagination
       unsafe = true
 
 [params]
-  header_image = "/Users/mengjiexu/Documents/Github/myblog.dev.repo/images/mainbg.jpeg"
+  header_image = "http://ww1.sinaimg.cn/large/008iTKOogy1grh7e9v3bzj308u04fmx7.jpg"
   title = "Mengjie's Academic Notes"
   SEOTitle = "Mengjie Xu's Blog"
   keyword = "Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling"
