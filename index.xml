@@ -6,14 +6,19 @@
     <description>Recent content on Mengjie Xu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>An Example Post</title>
-      <link>https://xumj2021.github.io/post/testpage/</link>
-      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      <title>Obtain All Archive Data From Wall Street Journal</title>
+      <link>https://xumj2021.github.io/post/parse-wsj-archive/</link>
+      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://xumj2021.github.io/post/testpage/</guid>
-      <description></description>
+      <guid>https://xumj2021.github.io/post/parse-wsj-archive/</guid>
+      <description>从读论文和写论文的体验来看，传闻证据 (anecdotes) 对论文能不能给人可靠的第一印象有决定性作用。传闻证据到位了，就不会有人追着问一些澄清性问题 (clarification questions)，后面论证研究题目的重要性时也会顺利很多 (why care)，此外，很多时候传闻证据对作者本人更好地了解研究背景 (institutional background) 并提出合情合理的研究设计也有很大的帮助作用1。
+据我所知，华尔街日报 (Wall Street Journal) 给很多顶刊论文提供了灵感。比如 Zhu (2019 RFS) 与 用停车场数据预测零售公司业绩的报道非常相关 (2014.11.20 WSJ)， 一篇关于对冲基金经理与大数据的报道 (2013.12.18 WSJ) 则提出了 Katona et al. (2018 WP, MS R&amp;amp;R) 和 Mukherjee et al. (2021 JFE) 的主要论点。
+所以我最近写论文的时候爬了华尔街日报的所有历史数据，源网址是 WSJ Archives，事实证明这个工作在我最近的论文展示中起到了相当正面的作用2。
+1. 获取 Cookies 按照惯例，还是先获取 Cookies。首先登陆，登陆后等待大概 20 秒左右会跳出一个小框，要求接受 cookies，需要点击 YES, I AGREE， 经过这步操作的 Cookies 才能顺利获取文章列表或文章内容，否则会被网站识别为爬虫。
+另外， Cookies 有失效时间 (expiry time)，最好每次爬之前都更新下 Cookies。
+from selenium import webdriver import time import json option = webdriver.</description>
     </item>
     
     <item>
@@ -29,6 +34,18 @@
  链接: https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ 密码: l8j9
  分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。 原始数据结构 以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。 先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。 详细变量说明如下：
  Introduction  The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements. The data are typically stored in a single file corresponding to the ISD data, i.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xumj2021.github.io/post/parse-shareholder-activism/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/parse-shareholder-activism/</guid>
+      <description>从 SEC EDGAR 获取股东治理数据 (Shareholder Activism)  title: &amp;ldquo;Get Shareholder Activism Data From SEC EDGAR &amp;quot; subtitle: &amp;quot;&amp;rdquo; description: &amp;ldquo;Crawling SC-13D Files&amp;rdquo; date: 2021-06-13 author: &amp;quot;&amp;quot; image: &amp;ldquo;images/shareholder.png&amp;rdquo; tags: [&amp;ldquo;SEC&amp;rdquo;, &amp;ldquo;Shareholder&amp;rdquo;] categories: [&amp;ldquo;Tech&amp;rdquo; ]
+ 写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。
+获取 Cookies 我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。
+打开 源网址 后呈现的页面如下</description>
     </item>
     
   </channel>
