@@ -18,7 +18,7 @@ paginate = 5000 #frontpage pagination
  
   # Sidebar settings
   sidebar_about_description = "A Second-Year Phd Student at Frankfurt School of Finance and Mangement"
-  sidebar_avatar = "/Users/mengjiexu/Documents/Github/myblog.dev.repo/images/xmj.png"
+  sidebar_avatar = "xmj.png"
   about_me = true
 
   #featured_tags = flase 
