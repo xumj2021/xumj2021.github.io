@@ -24,7 +24,7 @@ paginate = 5000 #frontpage pagination
   #featured_tags = flase 
   #featured_condition_size = 2 # How many posts have to have a given tag to be featured (greater-than)
 
-  image_404 = "http://ww1.sinaimg.cn/large/008iTKOogy1grh35ugeenj307g058dfr.jpg"
+  image_404 = "/Users/mengjiexu/Documents/Github/myblog.dev.repo/images/404.png"
   title_404 = "The page is missing"
 
   omit_categories = false
