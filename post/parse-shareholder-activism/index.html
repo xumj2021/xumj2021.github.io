@@ -28,15 +28,15 @@
     
 
     
-    <meta name="title" content="Learning By Doing" />
-    <meta property="og:title" content="Learning By Doing" />
-    <meta property="twitter:title" content="Learning By Doing" />
+    <meta name="title" content="Get Shareholder Activism Data From SEC EDGAR " />
+    <meta property="og:title" content="Get Shareholder Activism Data From SEC EDGAR " />
+    <meta property="twitter:title" content="Get Shareholder Activism Data From SEC EDGAR " />
     
 
     
-    <meta name="description" content="">
-    <meta property="og:description" content="" />
-    <meta property="twitter:description" content="" />
+    <meta name="description" content="Crawling SC-13D Files">
+    <meta property="og:description" content="Crawling SC-13D Files" />
+    <meta property="twitter:description" content="Crawling SC-13D Files" />
     
 
     
@@ -47,7 +47,7 @@
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Mengjie Xu&#39;s Blog</title>
+    <title>Get Shareholder Activism Data From SEC EDGAR -Mengjie Xu&#39;s Blog</title>
 
     <link rel="canonical" href="/post/parse-shareholder-activism/">
 
@@ -160,7 +160,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('/mainbg.jpeg')
+        background-image: url('/images/shareholder.png')
     }
 </style>
 <header class="intro-header">
@@ -170,8 +170,16 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/sec" title="SEC">
+                            SEC
+                        </a>
+                        
+                        <a class="tag" href="/tags/shareholder" title="Shareholder">
+                            Shareholder
+                        </a>
+                        
                     </div>
-                    <h1></h1>
+                    <h1>Get Shareholder Activism Data From SEC EDGAR </h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
@@ -179,7 +187,7 @@
                                 Mengjie Xu
                          
                         on 
-                        Monday, January 1, 0001
+                        Sunday, June 13, 2021
                         
                         
                         
@@ -204,18 +212,7 @@
                 post-container">
 
                 
-                <h2 id="从-sec-edgar-获取股东治理数据-shareholder-activism">从 SEC EDGAR 获取股东治理数据 (Shareholder Activism)</h2>
-<hr>
-<p>title:       &ldquo;Get Shareholder Activism Data From SEC EDGAR &quot;
-subtitle:    &quot;&rdquo;
-description: &ldquo;Crawling SC-13D Files&rdquo;
-date:        2021-06-13
-author:      &quot;&quot;
-image:       &ldquo;images/shareholder.png&rdquo;
-tags:        [&ldquo;SEC&rdquo;, &ldquo;Shareholder&rdquo;]
-categories:  [&ldquo;Tech&rdquo; ]</p>
-<hr>
-<p>写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。</p>
+                <p>写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。</p>
 <h4 id="获取-cookies">获取 Cookies</h4>
 <p>我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。</p>
 <p>打开 <a href="https://www.sec.gov/edgar/search/#/dateRange=custom&amp;category=custom&amp;startdt=2001-01-01&amp;enddt=2021-05-27&amp;forms=SC%252013">源网址</a>  后呈现的页面如下</p>
@@ -450,11 +447,11 @@ headers <span style="color:#f92672">=</span> {
                 <hr>
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/post/noaa/" data-toggle="tooltip" data-placement="top" title="From NOAA To Province Panel">Next
-                            Post &rarr;</a>
+                    <li class="previous">
+                        <a href="/post/parse-wsj-archive/" data-toggle="tooltip" data-placement="top" title="Obtain All Archive Data From Wall Street Journal">&larr;
+                            Previous Post</a>
                     </li>
+                    
                     
                 </ul>
 

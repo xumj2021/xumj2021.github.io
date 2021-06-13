@@ -189,6 +189,29 @@
             
 
 <div class="post-preview">
+    <a href="https://xumj2021.github.io/post/parse-shareholder-activism/">
+        <h2 class="post-title">
+            Get Shareholder Activism Data From SEC EDGAR 
+        </h2>
+	
+        <div class="post-content-preview">
+	    
+            Crawling SC-13D Files
+        
+       
+
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Mengjie Xu Sunday, June 13, 2021
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://xumj2021.github.io/post/parse-wsj-archive/">
         <h2 class="post-title">
             Obtain All Archive Data From Wall Street Journal
@@ -227,32 +250,6 @@
     </a>
     <p class="post-meta">
     Posted by Mengjie Xu Monday, June 4, 2018
-    
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://xumj2021.github.io/post/parse-shareholder-activism/">
-        <h2 class="post-title">
-            
-        </h2>
-	
-        <div class="post-content-preview">
-	    
-            从 SEC EDGAR 获取股东治理数据 (Shareholder Activism)  title: &ldquo;Get Shareholder Activism Data From SEC EDGAR &quot; subtitle: &quot;&rdquo; description: &ldquo;Crawling SC-13D Files&rdquo; date: 2021-06-13 author: &quot;&quot; image: &ldquo;images/shareholder.png&rdquo; tags: [&ldquo;SEC&rdquo;, &ldquo;Shareholder&rdquo;] categories: [&ldquo;Tech&rdquo; ]
- 写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。
-获取 Cookies 我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。
-打开 源网址 后呈现的页面如下
-        
-       
-
-        </div>
-    </a>
-    <p class="post-meta">
-    Posted by Mengjie Xu Monday, January 1, 0001
     
     
     </p>
