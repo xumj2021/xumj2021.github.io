@@ -5,7 +5,7 @@ subtitle:    ""
 description: "NOAA ISD Data Cleaning"
 date:        2018-06-04
 author:      ""
-image:       "https://img-blog.csdnimg.cn/20210614175105838.jpeg"
+image:       "https://www.groovypost.com/wp-content/uploads/2019/01/space-communications-satellite-earth-featured.jpg"
 tags:        ["NOAA", "Geo-Economics"]
 categories:  ["Tech" ]
 
