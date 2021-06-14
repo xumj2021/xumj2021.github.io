@@ -5,7 +5,7 @@ subtitle:    ""
 description: "Crawling SC-13D Files"
 date:        2021-06-13
 author:      ""
-image:       "images/shareholder.png"
+image:       "static/shareholder.png"
 tags:        ["SEC", "Shareholder"]
 categories:  ["Tech" ]
 
