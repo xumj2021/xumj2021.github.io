@@ -189,6 +189,29 @@
             
 
 <div class="post-preview">
+    <a href="https://xumj2021.github.io/post/parse-shareholder-activism/">
+        <h2 class="post-title">
+            Get Shareholder Activism Data From SEC EDGAR 
+        </h2>
+	
+        <div class="post-content-preview">
+	    
+            Crawling SC-13D Files
+        
+       
+
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Mengjie Xu Sunday, June 13, 2021
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="https://xumj2021.github.io/post/parse-wsj-archive/">
         <h2 class="post-title">
             Obtain All Archive Data From Wall Street Journal
@@ -227,6 +250,52 @@
     </a>
     <p class="post-meta">
     Posted by      &#34;&#34; Monday, June 4, 2018
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://xumj2021.github.io/post/noaa/">
+        <h2 class="post-title">
+            From NOAA To Province Panel
+        </h2>
+	
+        <div class="post-content-preview">
+	    
+            NOAA ISD Data Cleaning
+        
+       
+
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Mengjie Xu Monday, June 4, 2018
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://xumj2021.github.io/post/parse-twitter/">
+        <h2 class="post-title">
+            
+        </h2>
+	
+        <div class="post-content-preview">
+	    
+            爬公司推特数据: Twitter API 2.0 介绍 import requests import os import json import csv import time from tqdm import tqdm # To set your environment variables in your terminal run the following line: # export &#39;BEARER_TOKEN&#39;=&#39;&lt;your_bearer_token&gt;&#39; # Or set bearer_token in the code directly # bearer_token = &#34;xxx&#34; search_url = &#34;https://api.twitter.com/2/tweets/search/all&#34; # Optional params: start_time,end_time,since_id,until_id,max_results,next_token, # expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields def setpara(firm,start_time,end_time): query_params = {&#39;start_time&#39;: &#34;%s&#34;%start_time, &#39;end_time&#39;:&#34;%s&#34;%end_time, &#39;query&#39;: &#34;%s&#34;%firm, &#39;tweet.fields&#39;: &#34;created_at,public_metrics,author_id,geo,lang,non_public_metrics,promoted_metrics&#34;,&#39;max_results&#39;: 10} return(query_params) def create_headers(bearer_token): headers = {&#34;Authorization&#34;: &#34;Bearer {}&#34;.
+        
+       
+
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Mengjie Xu Monday, January 1, 0001
     
     
     </p>
