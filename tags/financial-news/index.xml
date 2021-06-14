@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Mengjie Xu</title>
-    <link>https://xumj2021.github.io/post/</link>
-    <description>Recent content in Posts on Mengjie Xu</description>
+    <title>Financial News on Mengjie Xu</title>
+    <link>https://xumj2021.github.io/tags/financial-news/</link>
+    <description>Recent content in Financial News on Mengjie Xu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/tags/financial-news/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Obtain All Archive Data From Wall Street Journal</title>
       <link>https://xumj2021.github.io/post/parse-wsj-archive/</link>
@@ -19,15 +19,6 @@
 1. 获取 Cookies 按照惯例，还是先获取 Cookies。首先登陆，登陆后等待大概 20 秒左右会跳出一个小框，要求接受 cookies，需要点击 YES, I AGREE， 经过这步操作的 Cookies 才能顺利获取文章列表或文章内容，否则会被网站识别为爬虫。
 另外， Cookies 有失效时间 (expiry time)，最好每次爬之前都更新下 Cookies。
 from selenium import webdriver import time import json option = webdriver.</description>
-    </item>
-    
-    <item>
-      <title>An Example Post</title>
-      <link>https://xumj2021.github.io/post/testpage/</link>
-      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://xumj2021.github.io/post/testpage/</guid>
-      <description></description>
     </item>
     
   </channel>
