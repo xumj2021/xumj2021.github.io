@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mengjie Xu</title>
+    <link>https://xumj2021.github.io/</link>
+    <description>Recent content on Mengjie Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Get Shareholder Activism Data From SEC EDGAR </title>
+      <link>https://xumj2021.github.io/post/parse-shareholder-activism/</link>
+      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/parse-shareholder-activism/</guid>
+      <description>写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。
+获取 Cookies 我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。
+打开 源网址 后呈现的页面如下
+ 下拉默认只有三列数据
+ 勾选了其他数据栏后会呈现多列数据，相应的 Cookies 也会发现变化
+ 代码
+from selenium import webdriver import time import json option = webdriver.FirefoxOptions() option.add_argument(&amp;#39;-headless&amp;#39;) driver = webdriver.Firefox(executable_path=&amp;#39;/Users/mengjiexu/Dropbox/Pythoncodes/geckodriver&amp;#39;) driver.get(&amp;#34;https://www.sec.gov/edgar/search/#/dateRange=custom&amp;amp;category=custom&amp;amp;startdt=2001-01-01&amp;amp;enddt=2021-05-27&amp;amp;forms=SC%252013D&amp;#34;) # 打开源网页 time.sleep(3) driver.execute_script(&amp;#39;window.scrollTo(0,500)&amp;#39;) # 向下拉到勾选位置 time.sleep(2) driver.find_element_by_xpath(&amp;#34;//input[@value=&amp;#39;cik&amp;#39;]&amp;#34;).click() # 点选 CIK driver.</description>
+    </item>
+    
+    <item>
+      <title>Obtain All Archive Data From Wall Street Journal</title>
+      <link>https://xumj2021.github.io/post/parse-wsj-archive/</link>
+      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/parse-wsj-archive/</guid>
+      <description>从读论文和写论文的体验来看，传闻证据 (anecdotes) 对论文能不能给人可靠的第一印象有决定性作用。传闻证据到位了，就不会有人追着问一些澄清性问题 (clarification questions)，后面论证研究题目的重要性时也会顺利很多 (why care)，此外，很多时候传闻证据对作者本人更好地了解研究背景 (institutional background) 并提出合情合理的研究设计也有很大的帮助作用1。
+据我所知，华尔街日报 (Wall Street Journal) 给很多顶刊论文提供了灵感。比如 Zhu (2019 RFS) 与 用停车场数据预测零售公司业绩的报道非常相关 (2014.11.20 WSJ)， 一篇关于对冲基金经理与大数据的报道 (2013.12.18 WSJ) 则提出了 Katona et al. (2018 WP, MS R&amp;amp;R) 和 Mukherjee et al. (2021 JFE) 的主要论点。
+所以我最近写论文的时候爬了华尔街日报的所有历史数据，源网址是 WSJ Archives，事实证明这个工作在我最近的论文展示中起到了相当正面的作用2。
+1. 获取 Cookies 按照惯例，还是先获取 Cookies。首先登陆，登陆后等待大概 20 秒左右会跳出一个小框，要求接受 cookies，需要点击 YES, I AGREE， 经过这步操作的 Cookies 才能顺利获取文章列表或文章内容，否则会被网站识别为爬虫。
+另外， Cookies 有失效时间 (expiry time)，最好每次爬之前都更新下 Cookies。
+from selenium import webdriver import time import json option = webdriver.</description>
+    </item>
+    
+    <item>
+      <title>From NOAA To Province Panel</title>
+      <link>https://xumj2021.github.io/post/noaa/</link>
+      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/noaa/</guid>
+      <description>最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。
+数据来源 数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。
+数据来自NCDC的公开FTP服务器中的 ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/。
+为了方便查看，文章中提到的所有数据源文件都可以在我的百度网盘分享链接里找到。
+ 链接: https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ 密码: l8j9
+ 分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。 原始数据结构 以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。 先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。 详细变量说明如下：
+ Introduction  The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements. The data are typically stored in a single file corresponding to the ISD data, i.</description>
+    </item>
+    
+  </channel>
+</rss>

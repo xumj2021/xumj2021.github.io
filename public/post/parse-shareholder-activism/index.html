@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177198277-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/static/mainbg.jpeg">
+    <meta property="twitter:image" content="https://xumj2021.github.io/static/mainbg.jpeg" />
+    
+
+    
+    <meta name="title" content="Get Shareholder Activism Data From SEC EDGAR " />
+    <meta property="og:title" content="Get Shareholder Activism Data From SEC EDGAR " />
+    <meta property="twitter:title" content="Get Shareholder Activism Data From SEC EDGAR " />
+    
+
+    
+    <meta name="description" content="Crawling SC-13D Files">
+    <meta property="og:description" content="Crawling SC-13D Files" />
+    <meta property="twitter:description" content="Crawling SC-13D Files" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Get Shareholder Activism Data From SEC EDGAR -Mengjie Xu&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/parse-shareholder-activism/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/static/shareholder.png')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/sec" title="SEC">
+                            SEC
+                        </a>
+                        
+                        <a class="tag" href="/tags/shareholder" title="Shareholder">
+                            Shareholder
+                        </a>
+                        
+                    </div>
+                    <h1>Get Shareholder Activism Data From SEC EDGAR </h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                                Mengjie Xu
+                         
+                        on 
+                        Sunday, June 13, 2021
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。</p>
+<h4 id="获取-cookies">获取 Cookies</h4>
+<p>我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。</p>
+<p>打开 <a href="https://www.sec.gov/edgar/search/#/dateRange=custom&amp;category=custom&amp;startdt=2001-01-01&amp;enddt=2021-05-27&amp;forms=SC%252013">源网址</a>  后呈现的页面如下</p>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grdg610cu4j31wi0usk9h.jpg" alt="image-20210610135001530">
+
+</p>
+<p>下拉默认只有三列数据</p>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grdgifjrxij31gq0h2449.jpg" alt="">
+
+</p>
+<p>勾选了其他数据栏后会呈现多列数据，相应的 Cookies 也会发现变化</p>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grdgayv1vnj31z40g0q6m.jpg" alt="勾选后">
+
+</p>
+<p>代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> json
+
+option <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>FirefoxOptions()
+option<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#39;-headless&#39;</span>)
+driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Firefox(executable_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Users/mengjiexu/Dropbox/Pythoncodes/geckodriver&#39;</span>)
+
+driver<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://www.sec.gov/edgar/search/#/dateRange=custom&amp;category=custom&amp;startdt=2001-01-01&amp;enddt=2021-05-27&amp;forms=SC%252013D&#34;</span>)
+<span style="color:#75715e"># 打开源网页</span>
+
+time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+driver<span style="color:#f92672">.</span>execute_script(<span style="color:#e6db74">&#39;window.scrollTo(0,500)&#39;</span>)
+<span style="color:#75715e"># 向下拉到勾选位置</span>
+time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//input[@value=&#39;cik&#39;]&#34;</span>)<span style="color:#f92672">.</span>click() 
+<span style="color:#75715e"># 点选 CIK</span>
+driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//input[@value=&#39;file-num&#39;]&#34;</span>)<span style="color:#f92672">.</span>click() 
+<span style="color:#75715e"># 点选 File number</span>
+time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+
+<span style="color:#75715e"># 记录 cookies 并写入 txt 文件中</span>
+orcookies <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span>get_cookies()
+<span style="color:#66d9ef">print</span>(orcookies)
+cookies <span style="color:#f92672">=</span> {}
+<span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> orcookies:
+    cookies[item[<span style="color:#e6db74">&#39;name&#39;</span>]] <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;value&#39;</span>]
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;edgarcookies.txt&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    f<span style="color:#f92672">.</span>write(json<span style="color:#f92672">.</span>dumps(cookies))
+
+driver<span style="color:#f92672">.</span>close()
+</code></pre></div><h4 id="获取-json">获取 Json</h4>
+<p>从 search-index 中可以找到返回的 Json 源</p>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grdgbah4eoj31z20e0n77.jpg" alt="image-20210610135913826">
+
+</p>
+<p>翻到第二页，Fetch 得到 post 的参数信息，这里关键是是 headers 和 body</p>
+<pre><code>await fetch(&quot;https://efts.sec.gov/LATEST/search-index&quot;, {
+    &quot;credentials&quot;: &quot;omit&quot;,
+    &quot;headers&quot;: {
+        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0&quot;,
+        &quot;Accept&quot;: &quot;application/json, text/javascript, */*; q=0.01&quot;,
+        &quot;Accept-Language&quot;: &quot;en-US,en;q=0.5&quot;,
+        &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;
+    },
+    &quot;referrer&quot;: &quot;https://www.sec.gov/&quot;,
+    &quot;body&quot;: &quot;{\&quot;dateRange\&quot;:\&quot;custom\&quot;,\&quot;category\&quot;:\&quot;custom\&quot;,\&quot;startdt\&quot;:\&quot;2001-01-01\&quot;,\&quot;enddt\&quot;:\&quot;2021-05-27\&quot;,\&quot;forms\&quot;:[\&quot;SC 13D\&quot;],\&quot;page\&quot;:\&quot;2\&quot;,\&quot;from\&quot;:100}&quot;,
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;mode&quot;: &quot;cors&quot;
+});
+</code></pre><p>body 里包含了向服务器 post 的查询参数，包括</p>
+<ul>
+<li>查询起始日期 startdt / enddt</li>
+<li>文件类型 forms = SC 13D</li>
+<li>当前页数 page</li>
+<li>前续页数 from = 前一页码 $\times$ 100</li>
+</ul>
+<h4 id="分析-json">分析 Json</h4>
+<p>双击截图中的  search-index ，可以看到格式化的 Json，命名为 info。将每条结果命名为 case。这里主要提取的变量及对应的 Json 路径为：</p>
+<ul>
+<li>查询结果总数 <code>info['hits']['total']['value']</code></li>
+<li>对于每条结果：
+<ul>
+<li>文件 id  <code>case['_id']</code></li>
+<li>CIK
+<ul>
+<li>Shareholder Letter 接受实体  <code>case['_source']['ciks'][0]</code></li>
+<li>Shareholder Letter 发出实体  <code>case['_source']['ciks'][1]</code></li>
+</ul>
+</li>
+<li>文件序号  <code>case['_source']['file_num']</code></li>
+<li>实体名称
+<ul>
+<li>Shareholder Letter 接受实体  <code>case['_source']['display_names'][0]</code></li>
+<li>Shareholder Letter 发出实体  <code>case['_source']['display_names'][1]</code></li>
+</ul>
+</li>
+<li>文件日期  <code>case['_source']['file_date']</code></li>
+<li>Adsh  <code>case['_source']['adsh']</code></li>
+</ul>
+</li>
+</ul>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grdgbkg6cej312g0tc41i.jpg" alt="image-20210610141015069">
+
+</p>
+<h4 id="爬取文件列表代码">爬取文件列表代码</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">import</span> math
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+
+headers <span style="color:#f92672">=</span> {
+        <span style="color:#e6db74">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#34;</span>,
+        <span style="color:#e6db74">&#34;Accept&#34;</span>: <span style="color:#e6db74">&#34;application/json, text/javascript, */*; q=0.01&#34;</span>,
+        <span style="color:#e6db74">&#34;Accept-Language&#34;</span>: <span style="color:#e6db74">&#34;en-US,en;q=0.5&#34;</span>,
+        <span style="color:#e6db74">&#34;Content-Type&#34;</span>: <span style="color:#e6db74">&#34;application/x-www-form-urlencoded; charset=UTF-8&#34;</span>
+           }
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">postpage</span>(year, page):
+    come <span style="color:#f92672">=</span> (page<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>
+    post <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">dateRange</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">custom</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">category</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">custom</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">startdt</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">-01-01</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">enddt</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">-12-31</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">forms</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:[</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">SC 13D</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">],</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">page</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">from</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">}&#34;</span><span style="color:#f92672">%</span>(year,year,page,come)
+    <span style="color:#66d9ef">return</span>(post)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getinfo</span>(year, page):    
+    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;edgarcookies.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)<span style="color:#66d9ef">as</span> f:
+        cookies <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+        cookies <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(cookies)
+        session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>session()
+
+        url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://efts.sec.gov/LATEST/search-index&#34;</span>
+        data <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(url,  headers<span style="color:#f92672">=</span>headers, cookies<span style="color:#f92672">=</span>cookies, data<span style="color:#f92672">=</span>postpage(year, page))
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+
+        info <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(data<span style="color:#f92672">.</span>text)
+
+        totalnum <span style="color:#f92672">=</span> info[<span style="color:#e6db74">&#39;hits&#39;</span>][<span style="color:#e6db74">&#39;total&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>]
+
+        <span style="color:#66d9ef">for</span> case <span style="color:#f92672">in</span> info[<span style="color:#e6db74">&#39;hits&#39;</span>][<span style="color:#e6db74">&#39;hits&#39;</span>]:
+            <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;edgar13D_check.csv&#39;</span>,<span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> g:
+                h <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(g)
+
+                id <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_id&#39;</span>]
+                <span style="color:#66d9ef">try</span>:
+                    cik0 <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;ciks&#39;</span>][<span style="color:#ae81ff">0</span>]
+                    cik1 <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;ciks&#39;</span>][<span style="color:#ae81ff">1</span>]
+                <span style="color:#66d9ef">except</span>:
+                    cik0 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+                    cik1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+                root_form <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;root_form&#39;</span>]
+                file_num <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;file_num&#39;</span>]
+                <span style="color:#66d9ef">try</span>:
+                    display_names_0 <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;display_names&#39;</span>][<span style="color:#ae81ff">0</span>]
+                    display_names_1 <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;display_names&#39;</span>][<span style="color:#ae81ff">1</span>]
+                <span style="color:#66d9ef">except</span>:
+                    display_names_0 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+                    display_names_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+                file_date <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;file_date&#39;</span>]
+                adsh <span style="color:#f92672">=</span> case[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;adsh&#39;</span>]
+
+                out <span style="color:#f92672">=</span> [id,cik0,cik1,root_form, file_num, display_names_0, display_names_1,file_date,adsh]
+                h<span style="color:#f92672">.</span>writerow(out)
+
+        <span style="color:#66d9ef">return</span>(totalnum)
+
+<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2001</span>, <span style="color:#ae81ff">2022</span>):
+    totalnum <span style="color:#f92672">=</span> getinfo(year,<span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">print</span>(totalnum)
+    pagenum <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>ceil(totalnum<span style="color:#f92672">/</span><span style="color:#ae81ff">100</span>)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>(year,pagenum))
+    <span style="color:#66d9ef">for</span> page <span style="color:#f92672">in</span> tqdm(range(<span style="color:#ae81ff">2</span>,pagenum)):
+        getinfo(year,page)
+</code></pre></div><h4 id="列表爬取结果">列表爬取结果</h4>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grdgbt1g22j311a0mw7bz.jpg" alt="image-20210610142043228">
+
+</p>
+<h4 id="分析-edgar-文件地址">分析 EDGAR 文件地址</h4>
+<p>先来分析 EDGAR 文件地址的结构，一个典型的 EDGAR 文件地址</p>
+<blockquote>
+<p><a href="https://www.sec.gov/Archives/edgar/data/0001762728/000092189521001513/sc13da412475002_05272021.htm">https://www.sec.gov/Archives/edgar/data/0001762728/000092189521001513/sc13da412475002_05272021.htm</a></p>
+</blockquote>
+<p>主要包含三个部分</p>
+<ul>
+<li>
+<p>“https://www.sec.gov/Archives/edgar/data/”</p>
+</li>
+<li>
+<p>接受实体 CIK [上表列2]</p>
+</li>
+<li>
+<p>id (e.g., 0001214659-21-005763:p519211sc13da7.htm) [上表列1] 中的 &ldquo;:&rdquo; 换成  &ldquo;/&quot;， &ldquo;-&rdquo; 换成  &quot;&rdquo;</p>
+</li>
+</ul>
+<h4 id="爬取对应-edgar-文件代码">爬取对应 EDGAR 文件代码</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+<span style="color:#f92672">import</span> requests
+
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;edgar13d09-16.csv&#34;</span>,header<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+
+headers <span style="color:#f92672">=</span> {
+        <span style="color:#e6db74">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#34;</span>,
+        <span style="color:#e6db74">&#34;Accept&#34;</span>: <span style="color:#e6db74">&#34;application/json, text/javascript, */*; q=0.01&#34;</span>,
+        <span style="color:#e6db74">&#34;Accept-Language&#34;</span>: <span style="color:#e6db74">&#34;en-US,en;q=0.5&#34;</span>,
+        <span style="color:#e6db74">&#34;Content-Type&#34;</span>: <span style="color:#e6db74">&#34;application/x-www-form-urlencoded; charset=UTF-8&#34;</span>
+           }
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;edgarcookies.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)<span style="color:#66d9ef">as</span> f:
+	cookies <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+	cookies <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(cookies)
+	session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>session()
+
+
+<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> tqdm(df<span style="color:#f92672">.</span>iterrows()):
+	url <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;:&#34;</span>,<span style="color:#e6db74">&#34;/&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;-&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)
+	cik <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>]
+	filedate <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">7</span>]<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;/&#39;</span>,<span style="color:#e6db74">&#39;-&#39;</span>)
+	filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>(filedate,row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>])
+	href<span style="color:#f92672">=</span>  <span style="color:#e6db74">&#34;https://www.sec.gov/Archives/edgar/data/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>(cik,url)
+	data <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(href,  headers<span style="color:#f92672">=</span>headers, cookies<span style="color:#f92672">=</span>cookies)
+	<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;/Users/mengjiexu/Dropbox/edgar13d/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>filename,<span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> g:
+		g<span style="color:#f92672">.</span>write(data<span style="color:#f92672">.</span>content)
+</code></pre></div>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/parse-wsj-archive/" data-toggle="tooltip" data-placement="top" title="Obtain All Archive Data From Wall Street Journal">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

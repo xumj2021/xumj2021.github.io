@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Geo-Economics on Mengjie Xu</title>
+    <link>https://xumj2021.github.io/tags/geo-economics/</link>
+    <description>Recent content in Geo-Economics on Mengjie Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/tags/geo-economics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From NOAA To Province Panel</title>
+      <link>https://xumj2021.github.io/post/noaa/</link>
+      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/noaa/</guid>
+      <description>最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。
+数据来源 数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。
+数据来自NCDC的公开FTP服务器中的 ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/。
+为了方便查看，文章中提到的所有数据源文件都可以在我的百度网盘分享链接里找到。
+ 链接: https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ 密码: l8j9
+ 分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。 原始数据结构 以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。 先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。 详细变量说明如下：
+ Introduction  The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements. The data are typically stored in a single file corresponding to the ISD data, i.</description>
+    </item>
+    
+  </channel>
+</rss>

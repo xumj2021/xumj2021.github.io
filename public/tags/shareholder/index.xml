@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shareholder on Mengjie Xu</title>
+    <link>https://xumj2021.github.io/tags/shareholder/</link>
+    <description>Recent content in Shareholder on Mengjie Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/tags/shareholder/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Get Shareholder Activism Data From SEC EDGAR </title>
+      <link>https://xumj2021.github.io/post/parse-shareholder-activism/</link>
+      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/parse-shareholder-activism/</guid>
+      <description>写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。
+获取 Cookies 我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。
+打开 源网址 后呈现的页面如下
+ 下拉默认只有三列数据
+ 勾选了其他数据栏后会呈现多列数据，相应的 Cookies 也会发现变化
+ 代码
+from selenium import webdriver import time import json option = webdriver.FirefoxOptions() option.add_argument(&amp;#39;-headless&amp;#39;) driver = webdriver.Firefox(executable_path=&amp;#39;/Users/mengjiexu/Dropbox/Pythoncodes/geckodriver&amp;#39;) driver.get(&amp;#34;https://www.sec.gov/edgar/search/#/dateRange=custom&amp;amp;category=custom&amp;amp;startdt=2001-01-01&amp;amp;enddt=2021-05-27&amp;amp;forms=SC%252013D&amp;#34;) # 打开源网页 time.sleep(3) driver.execute_script(&amp;#39;window.scrollTo(0,500)&amp;#39;) # 向下拉到勾选位置 time.sleep(2) driver.find_element_by_xpath(&amp;#34;//input[@value=&amp;#39;cik&amp;#39;]&amp;#34;).click() # 点选 CIK driver.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177198277-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/static/mainbg.jpeg">
+    <meta property="twitter:image" content="https://xumj2021.github.io/static/mainbg.jpeg" />
+    
+
+    
+    <meta name="title" content="Obtain All Archive Data From Wall Street Journal" />
+    <meta property="og:title" content="Obtain All Archive Data From Wall Street Journal" />
+    <meta property="twitter:title" content="Obtain All Archive Data From Wall Street Journal" />
+    
+
+    
+    <meta name="description" content="Crawling WSJ Archive">
+    <meta property="og:description" content="Crawling WSJ Archive" />
+    <meta property="twitter:description" content="Crawling WSJ Archive" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Obtain All Archive Data From Wall Street Journal-Mengjie Xu&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/parse-wsj-archive/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/static/wsj.jpeg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/wsj" title="WSJ">
+                            WSJ
+                        </a>
+                        
+                        <a class="tag" href="/tags/financial-news" title="Financial News">
+                            Financial News
+                        </a>
+                        
+                    </div>
+                    <h1>Obtain All Archive Data From Wall Street Journal</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                                Mengjie Xu
+                         
+                        on 
+                        Sunday, June 13, 2021
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>从读论文和写论文的体验来看，传闻证据 (anecdotes) 对论文能不能给人可靠的第一印象有决定性作用。传闻证据到位了，就不会有人追着问一些澄清性问题 (clarification questions)，后面论证研究题目的重要性时也会顺利很多 (why care)，此外，很多时候传闻证据对作者本人更好地了解研究背景 (institutional background) 并提出合情合理的研究设计也有很大的帮助作用<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
+<p>据我所知，华尔街日报 (Wall Street Journal) 给很多顶刊论文提供了灵感。比如 <a href="https://academic.oup.com/rfs/article/32/5/2021/5427775">Zhu (2019 RFS)</a> 与 <a href="https://www.wsj.com/articles/startups-mine-market-moving-data-from-fields-parking-lotseven-shadows-1416502993">用停车场数据预测零售公司业绩的报道非常相关 (2014.11.20 WSJ)</a>， <a href="https://www.wsj.com/articles/SB10001424052702303497804579240182187225264">一篇关于对冲基金经理与大数据的报道 (2013.12.18 WSJ)</a> 则提出了 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3222741">Katona et al. (2018 WP, MS R&amp;R)</a>  和 <a href="https://www.sciencedirect.com/science/article/pii/S0304405X21000921">Mukherjee et al. (2021 JFE)</a> 的主要论点。</p>
+<p>所以我最近写论文的时候爬了华尔街日报的所有历史数据，源网址是 <a href="https://www.wsj.com/news/archive/years">WSJ Archives</a>，事实证明这个工作在我最近的论文展示中起到了相当正面的作用<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<h4 id="1-获取-cookies">1. 获取 Cookies</h4>
+<p>按照惯例，还是先获取 Cookies。首先登陆，登陆后等待大概 20 秒左右会跳出一个小框，要求接受 cookies，需要点击 <code>YES, I AGREE</code>， 经过这步操作的 Cookies 才能顺利获取文章列表或文章内容，否则会被网站识别为爬虫。</p>
+<p>另外， Cookies 有失效时间 (expiry time)，最好每次爬之前都更新下 Cookies。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> selenium <span style="color:#f92672">import</span> webdriver
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> json
+
+option <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>FirefoxOptions()
+option<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#39;-headless&#39;</span>)
+driver <span style="color:#f92672">=</span> webdriver<span style="color:#f92672">.</span>Firefox(executable_path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/Users/mengjiexu/Dropbox/Pythoncodes/Bleier/geckodriver&#39;</span>)
+
+<span style="color:#75715e"># 填入 WSJ 账户信息</span>
+email <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;username&#39;</span>
+pw <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;password&#39;</span>
+  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>(email, pw):
+    driver<span style="color:#f92672">.</span>get(
+        <span style="color:#e6db74">&#34;https://sso.accounts.dowjones.com/login?&#34;</span>)
+    <span style="color:#75715e"># 为了不透露个人信息，需要读者自己粘贴登陆界面的 url</span>
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">5</span>)
+    driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//div/input[@name = &#39;username&#39;]&#34;</span>)<span style="color:#f92672">.</span>send_keys(email)
+    driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//div/input[@name = &#39;password&#39;]&#34;</span>)<span style="color:#f92672">.</span>send_keys(pw)
+    driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//div/button[@type = &#39;submit&#39;]&#34;</span>)<span style="color:#f92672">.</span>click()
+
+<span style="color:#75715e"># 登陆</span>
+login(email, pw)
+
+time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">20</span>)
+
+<span style="color:#75715e"># 切换到跳出的小框</span>
+driver<span style="color:#f92672">.</span>switch_to_frame(<span style="color:#e6db74">&#34;sp_message_iframe_490357&#34;</span>)
+<span style="color:#75715e"># 点击接受收集 Cookies </span>
+driver<span style="color:#f92672">.</span>find_element_by_xpath(<span style="color:#e6db74">&#34;//button[@title=&#39;YES, I AGREE&#39;]&#34;</span>)<span style="color:#f92672">.</span>click()
+
+time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">5</span>)
+
+<span style="color:#75715e"># 将 Cookies 写入文件</span>
+orcookies <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span>get_cookies()
+<span style="color:#66d9ef">print</span>(orcookies)
+cookies <span style="color:#f92672">=</span> {}
+<span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> orcookies:
+    cookies[item[<span style="color:#e6db74">&#39;name&#39;</span>]] <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;value&#39;</span>]
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;wsjcookies.txt&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    f<span style="color:#f92672">.</span>write(json<span style="color:#f92672">.</span>dumps(cookies))
+</code></pre></div><h4 id="2-获取文章列表">2. 获取文章列表</h4>
+<h5 id="21-网页分析">2.1 网页分析</h5>
+<p>WSJ 每日文章列表 url 的命名方式十分简单，由以下两部分组成：</p>
+<ul>
+<li><a href="https://www.wsj.com/news/archive/">https://www.wsj.com/news/archive/</a></li>
+<li>年/月/日</li>
+</ul>
+<p>所以在指定时间范围内遍历每一天即可得到每一天的文章列表。不过我爬的时候顺手爬了所有的日期列表，所以代码中直接遍历了日期列表。</p>
+<blockquote>
+<p>WSJ Daylist: 链接: <a href="https://pan.baidu.com/s/1kPYlot5lmYtQwWlHxA6OpQ">https://pan.baidu.com/s/1kPYlot5lmYtQwWlHxA6OpQ</a>  密码: 0b44</p>
+</blockquote>
+<p>以 2021 年 6 月 10 日的文章列表为例 (如下图)，对于每一篇文章，主要关注四个变量：</p>
+<ul>
+<li>文章所属板块 - 黄色框</li>
+<li>文章标题 - 红色框</li>
+<li>文章链接 - 绿色框</li>
+<li>文章日期 - 前定</li>
+</ul>
+<p>很多日期的文章列表都不止一页，所以需要：</p>
+<ul>
+<li>判断翻页条件：详见代码中 <code>pagenation(page)</code> 函数</li>
+<li>如果满足翻页条件，进行翻页：<code>newdaylink = daylink + &quot;?page=%s&quot;%pagenum</code></li>
+</ul>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grebju21whj31ew0wqam6.jpg" alt="截屏2021-06-10 下午3.33.56">
+
+</p>
+<h5 id="22-代码">2.2 代码</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> lxml <span style="color:#f92672">import</span> etree
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">import</span> unicodedata
+<span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> punctuation
+
+f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;wsjdaylist.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>)
+
+headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;</span>,
+<span style="color:#e6db74">&#34;content-type&#34;</span>: <span style="color:#e6db74">&#34;application/json; charset=UTF-8&#34;</span>,
+<span style="color:#e6db74">&#34;Connection&#34;</span>: <span style="color:#e6db74">&#34;keep-alive&#34;</span>
+}
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parsearticle</span>(date, daylink):
+    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;wsjcookies.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)<span style="color:#66d9ef">as</span> f:
+        cookies <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+        cookies <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(cookies)
+    session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>session()
+    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://www.wsj.com&#34;</span> <span style="color:#f92672">+</span> daylink
+    data <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(url, headers<span style="color:#f92672">=</span>headers, cookies <span style="color:#f92672">=</span> cookies)
+
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+    page <span style="color:#f92672">=</span> etree<span style="color:#f92672">.</span>HTML(data<span style="color:#f92672">.</span>content)
+
+    href <span style="color:#f92672">=</span> page<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//h2[@class=&#39;WSJTheme--headline--unZqjb45 reset WSJTheme--heading-3--2z_phq5h typography--serif-display--ZXeuhS5E &#39;]/a/@href&#34;</span>)
+
+    sector <span style="color:#f92672">=</span> page<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//h2[@class=&#39;WSJTheme--headline--unZqjb45 reset WSJTheme--heading-3--2z_phq5h typography--serif-display--ZXeuhS5E &#39;]/parent::div[1]/parent::div[1]/preceding-sibling::div[1]//text()[1]&#34;</span>)
+    module <span style="color:#f92672">=</span> [unicodedata<span style="color:#f92672">.</span>normalize(<span style="color:#e6db74">&#39;NFD&#39;</span>, i)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>, <span style="color:#e6db74">&#39;ignore&#39;</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34; &#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> sector <span style="color:#66d9ef">if</span> len(i)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>]
+    
+    article <span style="color:#f92672">=</span> page<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//h2[@class=&#39;WSJTheme--headline--unZqjb45 reset WSJTheme--heading-3--2z_phq5h typography--serif-display--ZXeuhS5E &#39;]/a/text()&#34;</span>)
+    article <span style="color:#f92672">=</span> [unicodedata<span style="color:#f92672">.</span>normalize(<span style="color:#e6db74">&#39;NFD&#39;</span>, i)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;ascii&#39;</span>, <span style="color:#e6db74">&#39;ignore&#39;</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34; &#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> article]
+    
+    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;wsjarticlelist_test.csv&#34;</span>,<span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> h:
+        k <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(h)
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(href)):
+            k<span style="color:#f92672">.</span>writerow([article[i], module[i], href[i], date])
+
+    <span style="color:#66d9ef">return</span>(page)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pagenation</span>(page):
+    next_page <span style="color:#f92672">=</span> page<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//span[contains(text(), &#39;Next Page&#39;)]&#34;</span>)
+    <span style="color:#66d9ef">return</span>(next_page)
+
+<span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> f:
+    daylink <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>strip()
+    date <span style="color:#f92672">=</span> daylink<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/archive/&#34;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+    page <span style="color:#f92672">=</span> parsearticle(date, daylink)
+    next_page <span style="color:#f92672">=</span> pagenation(page)
+    pagenum <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> next_page:
+        pagenum <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">print</span>(pagenum)
+        newdaylink <span style="color:#f92672">=</span> daylink <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;?page=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>pagenum
+        page <span style="color:#f92672">=</span> parsearticle(date, newdaylink)
+        next_page <span style="color:#f92672">=</span> pagenation(page)
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</code></pre></div><h5 id="23-文章列表">2.3 文章列表</h5>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1greclpq58nj31fu0va14z.jpg" alt="image-20210611091513883">
+
+</p>
+<h5 id="24-文章年份分布">2.4 文章年份分布</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Year</th>
+<th style="text-align:center">ArticleNum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1997</td>
+<td style="text-align:center">171</td>
+</tr>
+<tr>
+<td style="text-align:center">1998</td>
+<td style="text-align:center">45953</td>
+</tr>
+<tr>
+<td style="text-align:center">1999</td>
+<td style="text-align:center">48813</td>
+</tr>
+<tr>
+<td style="text-align:center">2000</td>
+<td style="text-align:center">51485</td>
+</tr>
+<tr>
+<td style="text-align:center">2001</td>
+<td style="text-align:center">46691</td>
+</tr>
+<tr>
+<td style="text-align:center">2002</td>
+<td style="text-align:center">42997</td>
+</tr>
+<tr>
+<td style="text-align:center">2003</td>
+<td style="text-align:center">38974</td>
+</tr>
+<tr>
+<td style="text-align:center">2004</td>
+<td style="text-align:center">39071</td>
+</tr>
+<tr>
+<td style="text-align:center">2005</td>
+<td style="text-align:center">40219</td>
+</tr>
+<tr>
+<td style="text-align:center">2006</td>
+<td style="text-align:center">41779</td>
+</tr>
+<tr>
+<td style="text-align:center">2007</td>
+<td style="text-align:center">44754</td>
+</tr>
+<tr>
+<td style="text-align:center">2008</td>
+<td style="text-align:center">51897</td>
+</tr>
+<tr>
+<td style="text-align:center">2009</td>
+<td style="text-align:center">54993</td>
+</tr>
+<tr>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">66245</td>
+</tr>
+<tr>
+<td style="text-align:center">2011</td>
+<td style="text-align:center">70842</td>
+</tr>
+<tr>
+<td style="text-align:center">2012</td>
+<td style="text-align:center">66032</td>
+</tr>
+<tr>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">64420</td>
+</tr>
+<tr>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">71768</td>
+</tr>
+<tr>
+<td style="text-align:center">2015</td>
+<td style="text-align:center">66051</td>
+</tr>
+<tr>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">74229</td>
+</tr>
+<tr>
+<td style="text-align:center">2017</td>
+<td style="text-align:center">59907</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">49528</td>
+</tr>
+<tr>
+<td style="text-align:center">2019</td>
+<td style="text-align:center">36292</td>
+</tr>
+<tr>
+<td style="text-align:center">2020</td>
+<td style="text-align:center">35819</td>
+</tr>
+<tr>
+<td style="text-align:center">2021</td>
+<td style="text-align:center">12011</td>
+</tr>
+<tr>
+<td style="text-align:center">Total</td>
+<td style="text-align:center">1220941</td>
+</tr>
+</tbody>
+</table>
+<h5 id="25-文章主题分布">2.5 文章主题分布</h5>
+<p>排除空白主题，1997-2021年共有 5822 个不同的主题。这里列出使用次数超出 10,000 的主题。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Sector</th>
+<th style="text-align:center">ArticleNum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Business</td>
+<td style="text-align:center">60119</td>
+</tr>
+<tr>
+<td style="text-align:center">Markets</td>
+<td style="text-align:center">34663</td>
+</tr>
+<tr>
+<td style="text-align:center">U.S.</td>
+<td style="text-align:center">23402</td>
+</tr>
+<tr>
+<td style="text-align:center">Heard on the Street</td>
+<td style="text-align:center">23340</td>
+</tr>
+<tr>
+<td style="text-align:center">Major Business News</td>
+<td style="text-align:center">22598</td>
+</tr>
+<tr>
+<td style="text-align:center">Letters</td>
+<td style="text-align:center">21531</td>
+</tr>
+<tr>
+<td style="text-align:center">Politics</td>
+<td style="text-align:center">20991</td>
+</tr>
+<tr>
+<td style="text-align:center">Tech Center</td>
+<td style="text-align:center">18511</td>
+</tr>
+<tr>
+<td style="text-align:center">Earnings</td>
+<td style="text-align:center">18178</td>
+</tr>
+<tr>
+<td style="text-align:center">Technology</td>
+<td style="text-align:center">17346</td>
+</tr>
+<tr>
+<td style="text-align:center">U.S. Business News</td>
+<td style="text-align:center">17109</td>
+</tr>
+<tr>
+<td style="text-align:center">Europe</td>
+<td style="text-align:center">15134</td>
+</tr>
+<tr>
+<td style="text-align:center">Economy</td>
+<td style="text-align:center">14432</td>
+</tr>
+<tr>
+<td style="text-align:center">Photos</td>
+<td style="text-align:center">14290</td>
+</tr>
+<tr>
+<td style="text-align:center">Review &amp; Outlook</td>
+<td style="text-align:center">13759</td>
+</tr>
+<tr>
+<td style="text-align:center">Business and Finance - Europe</td>
+<td style="text-align:center">13530</td>
+</tr>
+<tr>
+<td style="text-align:center">Commentary</td>
+<td style="text-align:center">13428</td>
+</tr>
+<tr>
+<td style="text-align:center">Health</td>
+<td style="text-align:center">12979</td>
+</tr>
+<tr>
+<td style="text-align:center">Business and Finance - Asia</td>
+<td style="text-align:center">12723</td>
+</tr>
+<tr>
+<td style="text-align:center">Asia</td>
+<td style="text-align:center">11163</td>
+</tr>
+<tr>
+<td style="text-align:center">Bookshelf</td>
+<td style="text-align:center">11128</td>
+</tr>
+<tr>
+<td style="text-align:center">World</td>
+<td style="text-align:center">10833</td>
+</tr>
+<tr>
+<td style="text-align:center">Media &amp; Marketing</td>
+<td style="text-align:center">10629</td>
+</tr>
+<tr>
+<td style="text-align:center">Asian Business News</td>
+<td style="text-align:center">10428</td>
+</tr>
+<tr>
+<td style="text-align:center">Commodities</td>
+<td style="text-align:center">10159</td>
+</tr>
+<tr>
+<td style="text-align:center">Tech</td>
+<td style="text-align:center">10153</td>
+</tr>
+</tbody>
+</table>
+<p>主题中包含中国的文章有</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Sector</th>
+<th style="text-align:center">ArticleNum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">China 2008</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">China 2009</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">Snow in China</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">China Stocks</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">China&rsquo;s Changing Workforce</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">China&rsquo;s Money Trail</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">China&rsquo;s Rising Risks</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">China: The People&rsquo;s Republic at 50</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:center">My China</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:center">China Trade Breakthrough</td>
+<td style="text-align:center">19</td>
+</tr>
+<tr>
+<td style="text-align:center">China&rsquo;s World</td>
+<td style="text-align:center">79</td>
+</tr>
+<tr>
+<td style="text-align:center">China Circuit</td>
+<td style="text-align:center">86</td>
+</tr>
+<tr>
+<td style="text-align:center">Chinas World</td>
+<td style="text-align:center">127</td>
+</tr>
+<tr>
+<td style="text-align:center">China News</td>
+<td style="text-align:center">1101</td>
+</tr>
+<tr>
+<td style="text-align:center">China</td>
+<td style="text-align:center">1875</td>
+</tr>
+<tr>
+<td style="text-align:center">Total</td>
+<td style="text-align:center">3322</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-爬取文章内容">3. 爬取文章内容</h4>
+<h5 id="31-分析网页">3.1 分析网页</h5>
+<p>从网页中获取所有文字信息并不难，但是 WSJ 文章会在文章中插入超链接，如果不做处理的话，爬下来的文字会有很多不符合阅读习惯的换行。我做的处理有：</p>
+<ul>
+<li>使用函数 <code>translist(infolist)</code> 筛掉不必要的空格和换行</li>
+<li>没有采用直接获取符合条件 html element 下的所有文字的方法，而是对每个 element 进行遍历进行更加精细的筛选。这样做的速度稍微慢一点，但是基本上能呈现比较好的视觉呈现效果</li>
+</ul>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1gredmij3mkj31e80woqiq.jpg" alt="image-20210611095037381">
+
+</p>
+<h5 id="32-爬取文章代码">3.2 爬取文章代码</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">from</span> lxml <span style="color:#f92672">import</span> etree
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">import</span> unicodedata
+<span style="color:#f92672">from</span> string <span style="color:#f92672">import</span> punctuation
+
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_excel(<span style="color:#e6db74">&#34;/Users/mengjiexu/Dropbox/wsj0512/wsj0513.xlsx&#34;</span>,header<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+
+headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;</span>,
+<span style="color:#e6db74">&#34;content-type&#34;</span>: <span style="color:#e6db74">&#34;application/json; charset=UTF-8&#34;</span>,
+<span style="color:#e6db74">&#34;Connection&#34;</span>: <span style="color:#e6db74">&#34;keep-alive&#34;</span>
+}
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">translist</span>(infolist):
+    out <span style="color:#f92672">=</span> list(filter(<span style="color:#66d9ef">lambda</span> s: s <span style="color:#f92672">and</span> (type(s) <span style="color:#f92672">!=</span> str <span style="color:#f92672">or</span> len(s<span style="color:#f92672">.</span>strip()) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>), [i<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> infolist]))
+    <span style="color:#66d9ef">return</span>(out)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parsearticle</span>(title, date, articlelink):
+    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;wsjcookies.txt&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)<span style="color:#66d9ef">as</span> f:
+        cookies <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+        cookies <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(cookies)
+    session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>session()
+    data <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(articlelink, headers<span style="color:#f92672">=</span>headers, cookies <span style="color:#f92672">=</span> cookies)
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+    
+    page <span style="color:#f92672">=</span> etree<span style="color:#f92672">.</span>HTML(data<span style="color:#f92672">.</span>content)
+
+    arcontent <span style="color:#f92672">=</span> title <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">+</span> date <span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>
+
+    content <span style="color:#f92672">=</span> page<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#34;//div[@class=&#39;article-content  &#39;]//p&#34;</span>)
+    <span style="color:#66d9ef">for</span> element <span style="color:#f92672">in</span> content:
+        subelement <span style="color:#f92672">=</span> etree<span style="color:#f92672">.</span>tostring(element)<span style="color:#f92672">.</span>decode()
+        subpage <span style="color:#f92672">=</span> etree<span style="color:#f92672">.</span>HTML(subelement)
+        tree <span style="color:#f92672">=</span> subpage<span style="color:#f92672">.</span>xpath(<span style="color:#e6db74">&#39;//text()&#39;</span>)
+        line <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(translist(tree))<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;  &#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>
+        arcontent <span style="color:#f92672">+=</span> line
+
+    <span style="color:#66d9ef">return</span>(arcontent)
+
+
+<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> tqdm(df<span style="color:#f92672">.</span>iterrows()):
+    title <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;/&#39;</span>,<span style="color:#e6db74">&#39;-&#39;</span>)
+    articlelink <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>]
+    date <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">3</span>]<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;/&#39;</span>,<span style="color:#e6db74">&#39;-&#39;</span>)
+    arcontent <span style="color:#f92672">=</span> parsearticle(title, date, articlelink)
+    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;/Users/mengjiexu/Dropbox/articles/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">.txt&#34;</span><span style="color:#f92672">%</span>(date,title),<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> g:
+        g<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(arcontent))
+</code></pre></div><h5 id="33-爬取文章样例">3.3 爬取文章样例</h5>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1greeas4m6cj31j410sqdm.jpg" alt="image-20210611095918552">
+
+</p>
+<h4 id="4-翻译">4. 翻译</h4>
+<p>英语阅读速度比较慢的朋友可以调用 <a href="https://api.fanyi.baidu.com/api/trans/product/desktop?req=detail">百度 API</a>  对文章进行翻译，这样可以一目十行快速提取大量文章信息。为了提高翻译速度，最好整篇文章作为一个文字整体翻译。</p>
+<h5 id="41-翻译文章代码">4.1 翻译文章代码</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> md5
+<span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm
+
+file_list <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#34;/Users/mengjiexu/Dropbox/articles/&#34;</span>)
+
+<span style="color:#75715e"># Set your own appid/appkey.</span>
+appid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;xxx&#39;</span>
+appkey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;xxx&#39;</span>
+
+<span style="color:#75715e"># For list of language codes, please refer to `https://api.fanyi.baidu.com/doc/21`</span>
+from_lang <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;en&#39;</span>
+to_lang <span style="color:#f92672">=</span>  <span style="color:#e6db74">&#39;zh&#39;</span>
+
+endpoint <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://api.fanyi.baidu.com&#39;</span>
+path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/api/trans/vip/translate&#39;</span>
+url <span style="color:#f92672">=</span> endpoint <span style="color:#f92672">+</span> path
+
+<span style="color:#75715e"># Generate salt and sign</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_md5</span>(s, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>):
+    <span style="color:#66d9ef">return</span> md5(s<span style="color:#f92672">.</span>encode(encoding))<span style="color:#f92672">.</span>hexdigest()
+
+salt <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">32768</span>, <span style="color:#ae81ff">65536</span>)
+headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;Content-Type&#39;</span>: <span style="color:#e6db74">&#39;application/x-www-form-urlencoded&#39;</span>}
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">trans</span>(query):
+
+	sign <span style="color:#f92672">=</span> make_md5(appid <span style="color:#f92672">+</span> query <span style="color:#f92672">+</span> str(salt) <span style="color:#f92672">+</span> appkey)
+
+	<span style="color:#75715e"># Build request</span>
+	payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;appid&#39;</span>: appid, <span style="color:#e6db74">&#39;q&#39;</span>: query, <span style="color:#e6db74">&#39;from&#39;</span>: from_lang, <span style="color:#e6db74">&#39;to&#39;</span>: to_lang, <span style="color:#e6db74">&#39;salt&#39;</span>: salt, <span style="color:#e6db74">&#39;sign&#39;</span>: sign}
+
+	<span style="color:#75715e"># Send request</span>
+	r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url, params<span style="color:#f92672">=</span>payload, headers<span style="color:#f92672">=</span>headers)
+	result <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>json()
+
+	<span style="color:#75715e"># Show response</span>
+	rusult <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(result, indent<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, ensure_ascii<span style="color:#f92672">=</span>False)
+
+	<span style="color:#66d9ef">return</span>(result[<span style="color:#e6db74">&#34;trans_result&#34;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#34;dst&#34;</span>])
+
+<span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> tqdm(file_list):
+	content <span style="color:#f92672">=</span>open(<span style="color:#e6db74">&#34;/Users/mengjiexu/Dropbox/articles/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>file, <span style="color:#e6db74">&#39;r&#39;</span>)<span style="color:#f92672">.</span>read()
+	<span style="color:#66d9ef">print</span>(trans(content<span style="color:#f92672">.</span>strip()))
+</code></pre></div><h5 id="42-翻译文章样例">4.2 翻译文章样例</h5>
+<p>
+  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1gredy2v7mxj31ki1181kx.jpg" alt="image-20210611100138437">
+
+</p>
+<h4 id="参考文献">参考文献</h4>
+<ul>
+<li>
+<p>Zhu, Christina. 2019. “Big Data as a Governance Mechanism.” <em>The Review of Financial Studies</em> 32 (5): 2021–61.<a href="https://doi.org/10.1093/rfs/hhy081">-PDF-</a>.</p>
+</li>
+<li>
+<p>Katona, Zsolt, Marcus Painter, Panos N. Patatoukas, and Jean Zeng. 2018. “On the Capital Market Consequences of Alternative Data: Evidence from Outer Space.” SSRN Scholarly Paper ID 3222741. Rochester, NY: Social Science Research Network. <a href="https://doi.org/10.2139/ssrn.3222741">-PDF-</a>.</p>
+</li>
+<li>
+<p>Mukherjee, Abhiroop, George Panayotov, and Janghoon Shon. 2021. “Eye in the Sky: Private Satellites and Government Macro Data.” <em>Journal of Financial Economics</em>, March. <a href="https://doi.org/10.1016/j.jfineco.2021.03.002">-PDF-</a>.</p>
+</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>写上对应的英语表达是确保读者理解的意思和我表达的意思不出现偏差而做的一个双重解释。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>获取 WSJ Archive 信息需要购买 WSJ 账号，本文只做交流学习使用，不建议使用本文内容获利。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/noaa/" data-toggle="tooltip" data-placement="top" title="From NOAA To Province Panel">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/parse-shareholder-activism/" data-toggle="tooltip" data-placement="top" title="Get Shareholder Activism Data From SEC EDGAR ">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

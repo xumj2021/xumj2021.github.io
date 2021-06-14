@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177198277-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/static/mainbg.jpeg">
+    <meta property="twitter:image" content="https://xumj2021.github.io/static/mainbg.jpeg" />
+    
+
+    
+    <meta name="title" content="From NOAA To Province Panel" />
+    <meta property="og:title" content="From NOAA To Province Panel" />
+    <meta property="twitter:title" content="From NOAA To Province Panel" />
+    
+
+    
+    <meta name="description" content="NOAA ISD Data Cleaning">
+    <meta property="og:description" content="NOAA ISD Data Cleaning" />
+    <meta property="twitter:description" content="NOAA ISD Data Cleaning" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>From NOAA To Province Panel-Mengjie Xu&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/noaa/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/images/noaa.jpeg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/noaa" title="NOAA">
+                            NOAA
+                        </a>
+                        
+                        <a class="tag" href="/tags/geo-economics" title="Geo-Economics">
+                            Geo-Economics
+                        </a>
+                        
+                    </div>
+                    <h1>From NOAA To Province Panel</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                                Mengjie Xu
+                         
+                        on 
+                        Monday, June 4, 2018
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。</p>
+<h4 id="数据来源">数据来源</h4>
+<p>数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。</p>
+<p>数据来自NCDC的公开FTP服务器中的  <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/</a>。</p>
+<p>为了方便查看，文章中提到的所有数据源文件都可以在我的百度网盘分享链接里找到。</p>
+<blockquote>
+<p>链接: <a href="https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ">https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ</a>  密码: l8j9</p>
+</blockquote>
+<p>分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。
+
+  <img src="https://img-blog.csdnimg.cn/20210330063122553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQyMTg2OQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+
+</p>
+<h4 id="原始数据结构">原始数据结构</h4>
+<p>以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。
+  <img src="https://img-blog.csdnimg.cn/img_convert/0291f0ac1f93f9ae17c36f400bf5f164.png" alt="">
+
+
+先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。
+
+  <img src="https://img-blog.csdnimg.cn/img_convert/707465c364d0a4132afc86d569d1a6df.png" alt="image-20210610102217295">
+
+
+详细变量说明如下：</p>
+<blockquote>
+<p>Introduction
+<br/>
+The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
+<br/>
+Data Format
+<br/>
+Field 1: Pos 1-4, Length 4: Observation Year
+Year of observation, rounded to nearest whole hour
+<br/>
+Field 2: Pos 6-7, Length 2: Observation Month
+Month of observation, rounded to nearest whole hour
+<br/>
+Field 3: Pos 9-11, Length 2: Observation Day
+Day of observation, rounded to nearest whole hour
+<br/>
+Field 4: Pos 12-13, Length 2: Observation Hour
+Hour of observation, rounded to nearest whole hour
+<br/>
+Field 5: Pos 14-19, Length 6:  Air Temperature
+The temperature of the air
+UNITS:  Degrees Celsius
+SCALING FACTOR: 10
+MISSING VALUE: -9999
+<br/>
+Field 6: Pos 20-24, Length 6: Dew Point Temperature
+The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
+UNITS: Degrees Celsius
+SCALING FACTOR: 10
+MISSING VALUE: -9999
+<br/>
+Field 7: Pos 26-31, Length 6: Sea Level Pressure
+The air pressure relative to Mean Sea Level (MSL).
+UNITS:  Hectopascals
+SCALING FACTOR: 10
+MISSING VALUE: -9999
+<br/>
+Field 8: Pos 32-37, Length 6: Wind Direction
+The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
+UNITS: Angular Degrees
+SCALING FACTOR: 1
+MISSING VALUE: -9999
+*NOTE:  Wind direction for calm winds is coded as 0.
+<br/></p>
+<p>Field 9: Pos 38-43, Length 6: Wind Speed Rate
+The rate of horizontal travel of air past a fixed point.
+UNITS: meters per second
+SCALING FACTOR: 10-
+}</p>
+</blockquote>
+<pre><code>local saveadd=&quot;/.../Data/Aggregate2000-2020/chinaclimate&quot;+&quot;`i'&quot;
+dis &quot;`saveadd'&quot;
+
+* 将指定年份所有的 isd 数据存储到一个 dta 文件里
+save &quot;`saveadd'&quot;, replace emptyok
+</code></pre>
+<p>}</p>
+<pre><code>
+经过这一步，得到以年为单位存储的 dta 格式的所有 isd 数据
+
+![](https://img-blog.csdnimg.cn/img_convert/52f5e3f0796c3c4a5e4882e1edd3b8de.png)
+#### Step 3: 导入 linktable, 便于将气象站 id 映射到省份
+linktable 的数据样例如下
+![image-20210610101811354](https://img-blog.csdnimg.cn/img_convert/4fb473bdcaf652fd100825b9f7144925.png)
+#### Step 4: 处理以年为单位存储的 dta 格式的所有 isd 数据，得到每个变量年平均数据
+
+​```stata
+forvalues i = 2000/2020{
+	* 遍历每个年份的 isd 数据
+	use chinaclimate`i'
+	drop if year==&quot;year&quot;
+	* 删除多余的标题行
+	replace station=substr(station, 1, 5)
+	* 保留 stationid 的前五位，便于与 linktable 配对
+	sort station
+	merge station using linktable
+	keep if _merge==3
+	drop _merge
+	* 与 linktable 配对，得到每个气象站对应的省份
+
+	rename precipitation_depth_one_hour precipitation_one_hour
+	rename precipitation_depth_six_hour precipitation_six_hour
+
+	sort year mon day station hour
+	local vars air_temperature-precipitation_six_hour
+	destring `vars',replace
+	* 转换为数值型变量
+
+	global vars air_temperature dew_point_temperature sea_level_pressure wind_direction wind_speed cloud_cover precipitation_one_hour precipitation_six_hour
+
+	foreach v of global vars{
+		replace `v'=. if `v'==-9999
+		* 对于每个变量，将值为 -9999 的观测替换为缺失值
+		by year mon day station: egen dayave_`v'=mean(`v')
+		* 对于每个观测站每个日期，求每个变量的日平均
+		drop `v'
+		* 只保留求日平均之后的变量
+	}
+
+	drop hour
+	duplicates drop year mon day station,force
+	* 对于每个观测站的每个日期，保留唯一观测
+	
+	foreach v of global vars{
+		replace dayave_`v'=. if dayave_`v'==-9999
+		* 对于每个日平均变量，将值为 -9999 的观测替换为缺失值
+		bys year province: egen yearave_`v'=mean(dayave_`v')
+		* 对于每个省份每个年份，求每个变量的年平均
+		drop dayave_`v'
+		* 只保留年平均变量
+	}
+
+	keep year province clouday yearave*
+	duplicates drop year province,force
+	* 对于每个观测站每个年份，保留唯一观测
+	save yearclimate`i'
+	* 将省份-年平均 isd 数据存储到相应年份命名的 dta 文件中
+}
+</code></pre><h4 id="step-5-将2000-2020年所有省份-年平均-isd-数据写入一个-dta-文件中">Step 5: 将2000-2020年所有省份-年平均 isd 数据写入一个 dta 文件中</h4>
+<pre><code class="language-stata" data-lang="stata">clear
+set obs 0
+save yearclimate2000-2020, emptyok
+local ff : dir . files &quot;*.dta&quot;
+	foreach f of local ff {
+		local tag = (substr(&quot;`f'&quot;,1,11)==&quot;yearclimate&quot;)
+		* 识别出文件夹内所有以 yearclimate 开头的 dta 文件并将其合并到一个 dta 文件里
+			dis `tag'
+			if `tag'==1{
+				append using `f'
+			}
+	}
+save yearclimate2000-2020, replace
+</code></pre><h4 id="最终得到每个省份每年的平均气象数据文件">最终得到每个省份每年的平均气象数据文件</h4>
+<p>
+  <img src="https://img-blog.csdnimg.cn/img_convert/5e2068267d473c5622cdde3871699733.png" alt="">
+
+</p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/post/parse-wsj-archive/" data-toggle="tooltip" data-placement="top" title="Obtain All Archive Data From Wall Street Journal">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
