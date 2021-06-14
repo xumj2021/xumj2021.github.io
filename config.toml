@@ -15,6 +15,8 @@ paginate = 5000 #frontpage pagination
   title = "Data and Tech"
   SEOTitle = "Mengjie Xu's Blog"
   keyword = "Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling"
+
+  hyvor = true
  
   # Sidebar settings
   sidebar_about_description = "A Second-Year Phd Student at Frankfurt School of Finance and Mangement"
