@@ -6,16 +6,7 @@
     <description>Recent content in Posts on Mengjie Xu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Parse Twitter: Introduction to Twitter API 2.0</title>
-      <link>https://xumj2021.github.io/post/parse-twitter/</link>
-      <pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://xumj2021.github.io/post/parse-twitter/</guid>
-      <description>import requests import os import json import csv import time from tqdm import tqdm # To set your environment variables in your terminal run the following line: # export &amp;#39;BEARER_TOKEN&amp;#39;=&amp;#39;&amp;lt;your_bearer_token&amp;gt;&amp;#39; # Or set bearer_token in the code directly # bearer_token = &amp;#34;xxx&amp;#34; search_url = &amp;#34;https://api.twitter.com/2/tweets/search/all&amp;#34; # Optional params: start_time,end_time,since_id,until_id,max_results,next_token, # expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields def setpara(firm,start_time,end_time): query_params = {&amp;#39;start_time&amp;#39;: &amp;#34;%s&amp;#34;%start_time, &amp;#39;end_time&amp;#39;:&amp;#34;%s&amp;#34;%end_time, &amp;#39;query&amp;#39;: &amp;#34;%s&amp;#34;%firm, &amp;#39;tweet.fields&amp;#39;: &amp;#34;created_at,public_metrics,author_id,geo,lang,non_public_metrics,promoted_metrics&amp;#34;,&amp;#39;max_results&amp;#39;: 10} return(query_params) def create_headers(bearer_token): headers = {&amp;#34;Authorization&amp;#34;: &amp;#34;Bearer {}&amp;#34;.</description>
-    </item>
-    
+    <lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Get Shareholder Activism Data From SEC EDGAR </title>
       <link>https://xumj2021.github.io/post/parse-shareholder-activism/</link>
