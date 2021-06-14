@@ -23,7 +23,7 @@ paginate = 5000 #frontpage pagination
   # Sidebar settings
   sidebar_about_description = "A Second-Year Phd Student at Frankfurt School of Finance and Mangement"
   sidebar_avatar = "https://img-blog.csdnimg.cn/2021061422202497.jpg"
-  about_me = false
+  about_me = true
 
   #featured_tags = flase 
   #featured_condition_size = 2 # How many posts have to have a given tag to be featured (greater-than)
@@ -34,8 +34,8 @@ paginate = 5000 #frontpage pagination
   omit_categories = false
 
   [[params.addtional_menus]]
-  title =  "ABOUT"
-  href =  "/top/about/"
+  title =  "Papers"
+  href =  "/top/papers/"
 
   [params.social]
   rss            = true
