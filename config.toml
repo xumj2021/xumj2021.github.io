@@ -11,7 +11,7 @@ paginate = 5000 #frontpage pagination
       unsafe = true
 
 [params]
-  header_image = "http://ww1.sinaimg.cn/large/008iTKOogy1grhxp4ei4yj32yo1o07rz.jpg"
+  header_image = "https://img-blog.csdnimg.cn/20210614185836485.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQyMTg2OQ==,size_16,color_FFFFFF,t_70"
   title = "Learning By Doing"
   SEOTitle = "Mengjie Xu's Blog"
   keyword = "Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling"
