@@ -12,8 +12,8 @@ paginate = 5000 #frontpage pagination
 
 [params]
   header_image = "https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962"
-  title = "Data and Tech"
-  SEOTitle = "Mengjie Xu's Blog"
+  title = "Mengjie's Blog"
+  SEOTitle = "Mengjie's Blog"
   keyword = "Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling"
 
   hyvor = true
