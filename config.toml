@@ -20,7 +20,7 @@ paginate = 5000 #frontpage pagination
  
   # Sidebar settings
   sidebar_about_description = "A Second-Year Phd Student at Frankfurt School of Finance and Mangement"
-  sidebar_avatar = "https://img-blog.csdnimg.cn/20210614174705241.png"
+  sidebar_avatar = "https://img-blog.csdnimg.cn/2021061422202497.jpg"
   about_me = true
 
   #featured_tags = flase 
