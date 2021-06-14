@@ -5,7 +5,7 @@ subtitle:    ""
 description: "Crawling WSJ Archive"
 date:        2021-06-13
 author:      ""
-image:       "static/wsj.jpeg"
+image:       "https://cdn.pixabay.com/photo/2016/11/23/15/49/bundle-1853667_1280.jpg"
 tags:        ["WSJ", "Financial News"]
 categories:  ["Tech" ]
 
