@@ -1,8 +1,8 @@
 ---
 
 title:       "From NOAA ISD Dataset to Panel Data"
-subtitle:    "China Stations As An Example"
-description: "NOAA ISD Data Cleaning"
+subtitle:    ""
+description: "China Stations As An Example"
 date:        2021-06-15
 author:      "Mengjie Xu"
 image:       "https://www.groovypost.com/wp-content/uploads/2019/01/space-communications-satellite-earth-featured.jpg"
