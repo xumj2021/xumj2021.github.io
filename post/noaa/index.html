@@ -28,9 +28,9 @@
     
 
     
-    <meta name="title" content="From NOAA To Province Panel" />
-    <meta property="og:title" content="From NOAA To Province Panel" />
-    <meta property="twitter:title" content="From NOAA To Province Panel" />
+    <meta name="title" content="From NOAA ISD Dataset to Panel Data" />
+    <meta property="og:title" content="From NOAA ISD Dataset to Panel Data" />
+    <meta property="twitter:title" content="From NOAA ISD Dataset to Panel Data" />
     
 
     
@@ -47,7 +47,7 @@
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
     <link rel="shortcut icon" href="https://img-blog.csdnimg.cn/20210615041606326.png">
 
-    <title>From NOAA To Province Panel-Mengjie&#39;s Blog</title>
+    <title>From NOAA ISD Dataset to Panel Data-Mengjie&#39;s Blog</title>
 
     <link rel="canonical" href="/post/noaa/">
 
@@ -117,6 +117,10 @@
                         <a href="/">Home</a>
                     </li>
                     
+                        
+                        <li>
+                            <a href="/categories/papers">papers</a>
+                        </li>
                         
                         <li>
                             <a href="/categories/tech">tech</a>
@@ -189,15 +193,15 @@
                         </a>
                         
                     </div>
-                    <h1>From NOAA To Province Panel</h1>
-                    <h2 class="subheading"></h2>
+                    <h1>From NOAA ISD Dataset to Panel Data</h1>
+                    <h2 class="subheading">China Stations As An Example</h2>
                     <span class="meta">
                         Posted by 
                         
-                                Mengjie Xu
+                            Mengjie Xu
                          
                         on 
-                        Monday, June 4, 2018
+                        Tuesday, June 15, 2021
                         
                         
                         
@@ -222,7 +226,9 @@
                 post-container">
 
                 
-                <p>最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。</p>
+                <h4 id="motivation">Motivation</h4>
+<p>The motivation to clean this dataset is from Mukherjee et al. (2021, JFE).</p>
+<p>最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。</p>
 <h4 id="数据来源">数据来源</h4>
 <p>数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。</p>
 <p>数据来自NCDC的公开FTP服务器中的  <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/</a>。</p>
@@ -390,11 +396,11 @@ save yearclimate2000-2020, replace
                 <hr>
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/post/parse-wsj-archive/" data-toggle="tooltip" data-placement="top" title="Obtain All Archive Data From Wall Street Journal">Next
-                            Post &rarr;</a>
+                    <li class="previous">
+                        <a href="/post/parse-twitter/" data-toggle="tooltip" data-placement="top" title="Parse Twitter: Introduction to Twitter API 2.0">&larr;
+                            Previous Post</a>
                     </li>
+                    
                     
                 </ul>
 
