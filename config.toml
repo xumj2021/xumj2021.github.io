@@ -34,8 +34,7 @@ paginate = 5000 #frontpage pagination
   omit_categories = false
 
   [[params.addtional_menus]]
-  title =  "Papers"
-  href =  "/top/papers/"
+
 
   [params.social]
   rss            = true
