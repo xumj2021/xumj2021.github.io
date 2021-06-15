@@ -1,17 +1,21 @@
 ---
 
-title:       "From NOAA To Province Panel"
-subtitle:    ""
+title:       "From NOAA ISD Dataset to Panel Data"
+subtitle:    "China Stations As An Example"
 description: "NOAA ISD Data Cleaning"
-date:        2018-06-04
-author:      ""
+date:        2021-06-15
+author:      "Mengjie Xu"
 image:       "https://www.groovypost.com/wp-content/uploads/2019/01/space-communications-satellite-earth-featured.jpg"
 tags:        ["NOAA", "Geo-Economics"]
-categories:  ["Tech" ]
+categories:  ["PAPERS" ]
 
 ---
 
 
+
+#### Motivation
+
+The motivation to clean this dataset is from Mukherjee et al. (2021, JFE). 
 
 最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。
 
