@@ -5,3 +5,7 @@
 	path = public
 	url = https://github.com/xumj2021/xumj2021.github.io
 	branch = master
+[submodule "reference"]
+	path = reference
+	url = https://github.com/xumj2021/myblog.dev.repo
+	branch = master
