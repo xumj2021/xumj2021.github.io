@@ -15,7 +15,7 @@ categories:  ["papers" ]
 
 #### Motivation
 
-The motivation to clean this dataset is from Mukherjee et al. (2021, JFE). 
+The motivation to clean this dataset is from [Mukherjee et al. (2021, JFE)](https://www.sciencedirect.com/science/article/pii/S0304405X21000921). In this paper, the authors documented the 
 
 最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。
 
