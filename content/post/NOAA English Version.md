@@ -5,7 +5,7 @@ subtitle:    ""
 description: "China Stations As An Example"
 date:        2021-06-15
 author:      "Mengjie Xu"
-image:       "img/test.jpg"
+image:       "https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/space-communications-satellite-earth-featured.jpeg"
 tags:        ["NOAA", "Geo-Economics"]
 categories:  ["papers" ]
 
