@@ -29,7 +29,7 @@
       <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://xumj2021.github.io/post/noaa-english-version/</guid>
-      <description>Motivation The motivation to clean this dataset is from Mukherjee et al. (2021, JFE).
+      <description>Motivation The motivation to clean this dataset is from Mukherjee et al. (2021, JFE). In this paper, the authors documented the
 最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。
 数据来源 数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。
 数据来自NCDC的公开FTP服务器中的 ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/。
