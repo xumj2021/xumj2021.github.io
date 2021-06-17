@@ -6,14 +6,17 @@ languageCode = "en-us"
 paginate = 5000 #frontpage pagination
 
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
   [markup.highlight]
-    anchorLineNos = false
+    anchorLineNos = true
     codeFences = true
-    guessSyntax = false
+    guessSyntax = true
     hl_Lines = ""
     lineAnchors = ""
     lineNoStart = 1
-    lineNos = false
+    lineNos = true
     lineNumbersInTable = true
     noClasses = true
     style = "monokailight"
