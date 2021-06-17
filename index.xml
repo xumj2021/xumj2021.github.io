@@ -20,7 +20,7 @@
 为了方便查看，文章中提到的所有数据源文件都可以在我的百度网盘分享链接里找到。
  链接: https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ 密码: l8j9
  分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。 原始数据结构 以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。 先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。 详细变量说明如下：
- Introduction The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.</description>
+ Introduction  The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@
       <pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://xumj2021.github.io/post/parse-twitter/</guid>
-      <description>import requests import os import json import csv import time from tqdm import tqdm # To set your environment variables in your terminal run the following line: # export &amp;#39;BEARER_TOKEN&amp;#39;=&amp;#39;&amp;lt;your_bearer_token&amp;gt;&amp;#39; # Or set bearer_token in the code directly # bearer_token = &amp;#34;xxx&amp;#34; search_url = &amp;#34;https://api.twitter.com/2/tweets/search/all&amp;#34; # Optional params: start_time,end_time,since_id,until_id,max_results,next_token, # expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields def setpara(firm,start_time,end_time): query_params = {&amp;#39;start_time&amp;#39;: &amp;#34;%s&amp;#34;%start_time, &amp;#39;end_time&amp;#39;:&amp;#34;%s&amp;#34;%end_time, &amp;#39;query&amp;#39;: &amp;#34;%s&amp;#34;%firm, &amp;#39;tweet.fields&amp;#39;: &amp;#34;created_at,public_metrics,author_id,geo,lang,non_public_metrics,promoted_metrics&amp;#34;,&amp;#39;max_results&amp;#39;: 10} return(query_params) def create_headers(bearer_token): headers = {&amp;#34;Authorization&amp;#34;: &amp;#34;Bearer {}&amp;#34;.</description>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81  import requests import os import json import csv import time from tqdm import tqdm # To set your environment variables in your terminal run the following line: # export &amp;#39;BEARER_TOKEN&amp;#39;=&amp;#39;&amp;lt;your_bearer_token&amp;gt;&amp;#39; # Or set bearer_token in the code directly # bearer_token = &amp;#34;xxx&amp;#34; search_url = &amp;#34;https://api.</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@
  下拉默认只有三列数据
  勾选了其他数据栏后会呈现多列数据，相应的 Cookies 也会发现变化
  代码
-from selenium import webdriver import time import json option = webdriver.FirefoxOptions() option.add_argument(&amp;#39;-headless&amp;#39;) driver = webdriver.Firefox(executable_path=&amp;#39;/Users/mengjiexu/Dropbox/Pythoncodes/geckodriver&amp;#39;) driver.get(&amp;#34;https://www.sec.gov/edgar/search/#/dateRange=custom&amp;amp;category=custom&amp;amp;startdt=2001-01-01&amp;amp;enddt=2021-05-27&amp;amp;forms=SC%252013D&amp;#34;) # 打开源网页 time.sleep(3) driver.execute_script(&amp;#39;window.scrollTo(0,500)&amp;#39;) # 向下拉到勾选位置 time.sleep(2) driver.find_element_by_xpath(&amp;#34;//input[@value=&amp;#39;cik&amp;#39;]&amp;#34;).click() # 点选 CIK driver.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31  from selenium import webdriver import time import json option = webdriver.</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@ from selenium import webdriver import time import json option = webdriver.Firefo
 所以我最近写论文的时候爬了华尔街日报的所有历史数据，源网址是 WSJ Archives，事实证明这个工作在我最近的论文展示中起到了相当正面的作用2。
 1. 获取 Cookies 按照惯例，还是先获取 Cookies。首先登陆，登陆后等待大概 20 秒左右会跳出一个小框，要求接受 cookies，需要点击 YES, I AGREE， 经过这步操作的 Cookies 才能顺利获取文章列表或文章内容，否则会被网站识别为爬虫。
 另外， Cookies 有失效时间 (expiry time)，最好每次爬之前都更新下 Cookies。
-from selenium import webdriver import time import json option = webdriver.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41  from selenium import webdriver import time import json option = webdriver.</description>
     </item>
     
   </channel>

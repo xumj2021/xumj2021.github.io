@@ -236,9 +236,9 @@
 <h5 id="brief-introduction-to-isd-dataset">Brief Introduction to ISD dataset</h5>
 <blockquote>
 <p>The Integrated Surface Database (ISD) consists of global hourly and synoptic observations compiled from numerous sources into a single common ASCII format and common data model.</p>
-<!-- raw HTML omitted -->
+<br>
 <p>The database includes over 35,000 stations worldwide, with some having data as far back as 1901, though the data show a substantial increase in volume in the 1940s and again in the early 1970s. Currently, there are over 14,000 &ldquo;active&rdquo; stations updated daily in the database.</p>
-<!-- raw HTML omitted -->
+<center><img src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Integrated-Surface-Database-Stations-Over-Time-Chart.jpeg"/><br>Station Number</center>
 </blockquote>
 <h5 id="subsample-used-in-this-article">Subsample Used In This Article</h5>
 <ul>
@@ -250,108 +250,182 @@
 <ul>
 <li>
 <p>The folders are named by year</p>
-<!-- raw HTML omitted -->
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.18.12.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: NOAA Folder List</div>
+</center>
 </li>
 <li>
 <p>For each year, there is individual file for each station</p>
-<!-- raw HTML omitted -->
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.24.28.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: NOAA ISD File List</div>
+</center>
 </li>
 <li>
 <p>For each file in a given year, the naming format is &ldquo;Station ID-NCDC WBAN Number-Year&rdquo;</p>
 </li>
 <li>
 <p>For each file (with a relative station id and year), there are 12 columns</p>
-<!-- raw HTML omitted -->
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.39.34.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 3: Sample ISD File</div>
+</center>
 </li>
 <li>
 <p>Variable Definitions</p>
 <blockquote>
 <p>Integrated Surface Data - Lite
-<!-- raw HTML omitted -->Format Documentation
-<!-- raw HTML omitted --><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->June 20, 2006
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->Introduction
-<!-- raw HTML omitted --><!-- raw HTML omitted -->The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Data Format
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 1: Pos 1-4, Length 4: Observation Year
-<!-- raw HTML omitted -->Year of observation, rounded to nearest whole hour
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 2: Pos 6-7, Length 2: Observation Month
-<!-- raw HTML omitted -->Month of observation, rounded to nearest whole hour
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 3: Pos 9-11, Length 2: Observation Day
-<!-- raw HTML omitted -->Day of observation, rounded to nearest whole hour
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 4: Pos 12-13, Length 2: Observation Hour
-<!-- raw HTML omitted -->Hour of observation, rounded to nearest whole hour
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 5: Pos 14-19, Length 6:  Air Temperature
-<!-- raw HTML omitted -->The temperature of the air
-<!-- raw HTML omitted -->UNITS:  Degrees Celsius
-<!-- raw HTML omitted -->SCALING FACTOR: 10
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 6: Pos 20-24, Length 6: Dew Point Temperature
-<!-- raw HTML omitted -->The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
-<!-- raw HTML omitted -->UNITS: Degrees Celsius
-<!-- raw HTML omitted -->SCALING FACTOR: 10
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 7: Pos 26-31, Length 6: Sea Level Pressure
-<!-- raw HTML omitted -->The air pressure relative to Mean Sea Level (MSL).
-<!-- raw HTML omitted -->UNITS:  Hectopascals
-<!-- raw HTML omitted -->SCALING FACTOR: 10
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 8: Pos 32-37, Length 6: Wind Direction
-<!-- raw HTML omitted -->The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
-<!-- raw HTML omitted -->UNITS: Angular Degrees
-<!-- raw HTML omitted -->SCALING FACTOR: 1
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted -->*NOTE:  Wind direction for calm winds is coded as 0.
-<!-- raw HTML omitted --><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->Field 9: Pos 38-43, Length 6: Wind Speed Rate
-<!-- raw HTML omitted -->The rate of horizontal travel of air past a fixed point.
-<!-- raw HTML omitted -->UNITS: meters per second
-<!-- raw HTML omitted -->SCALING FACTOR: 10
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 10: Pos 44-49, Length 6: Sky Condition Total Coverage Code
-<!-- raw HTML omitted -->The code that denotes the fraction of the total celestial dome covered by clouds or other obscuring phenomena.
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted -->DOMAIN:
-<!-- raw HTML omitted -->0: None, SKC or CLR
-<!-- raw HTML omitted -->1: One okta - 1/10 or less but not zero
-<!-- raw HTML omitted -->2: Two oktas - 2/10 - 3/10, or FEW
-<!-- raw HTML omitted -->3: Three oktas - 4/10
-<!-- raw HTML omitted -->4: Four oktas - 5/10, or SCT
-<!-- raw HTML omitted -->5: Five oktas - 6/10
-<!-- raw HTML omitted -->6: Six oktas - 7/10 - 8/10
-<!-- raw HTML omitted -->7: Seven oktas - 9/10 or more but not 10/10, or BKN
-<!-- raw HTML omitted -->8: Eight oktas - 10/10, or OVC
-<!-- raw HTML omitted -->9: Sky obscured, or cloud amount cannot be estimated
-<!-- raw HTML omitted -->10: Partial obscuration
-<!-- raw HTML omitted -->11: Thin scattered
-<!-- raw HTML omitted -->12: Scattered
-<!-- raw HTML omitted -->13: Dark scattered
-<!-- raw HTML omitted -->14: Thin broken
-<!-- raw HTML omitted -->15: Broken
-<!-- raw HTML omitted -->16: Dark broken
-<!-- raw HTML omitted -->17: Thin overcast
-<!-- raw HTML omitted -->18: Overcast
-<!-- raw HTML omitted -->19: Dark overcast
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 11: Pos 50-55, Length 6: Liquid Precipitation Depth Dimension - One Hour Duration
-<!-- raw HTML omitted -->The depth of liquid precipitation that is measured over a one hour accumulation period.
-<!-- raw HTML omitted -->UNITS: millimeters
-<!-- raw HTML omitted -->SCALING FACTOR: 10
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted --><em>NOTE</em>:  Trace precipitation is coded as -1
-<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 12: Pos 56-61, Length 6: Liquid Precipitation Depth Dimension - Six Hour Duration
-<!-- raw HTML omitted -->The depth of liquid precipitation that is measured over a six hour accumulation period.
-<!-- raw HTML omitted -->UNITS: millimeters
-<!-- raw HTML omitted -->SCALING FACTOR: 10
-<!-- raw HTML omitted -->MISSING VALUE: -9999
-<!-- raw HTML omitted --><em>NOTE</em>:  Trace precipitation is coded as -1</p>
+<br>Format Documentation
+<br><br>
+<br>June 20, 2006
+<br>
+<br>Introduction
+<br><br>The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
+<br><br>Data Format
+<br><br>Field 1: Pos 1-4, Length 4: Observation Year
+<br>Year of observation, rounded to nearest whole hour
+<br><br>Field 2: Pos 6-7, Length 2: Observation Month
+<br>Month of observation, rounded to nearest whole hour
+<br><br>Field 3: Pos 9-11, Length 2: Observation Day
+<br>Day of observation, rounded to nearest whole hour
+<br><br>Field 4: Pos 12-13, Length 2: Observation Hour
+<br>Hour of observation, rounded to nearest whole hour
+<br><br>Field 5: Pos 14-19, Length 6:  Air Temperature
+<br>The temperature of the air
+<br>UNITS:  Degrees Celsius
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 6: Pos 20-24, Length 6: Dew Point Temperature
+<br>The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
+<br>UNITS: Degrees Celsius
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 7: Pos 26-31, Length 6: Sea Level Pressure
+<br>The air pressure relative to Mean Sea Level (MSL).
+<br>UNITS:  Hectopascals
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 8: Pos 32-37, Length 6: Wind Direction
+<br>The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
+<br>UNITS: Angular Degrees
+<br>SCALING FACTOR: 1
+<br>MISSING VALUE: -9999
+<br>*NOTE:  Wind direction for calm winds is coded as 0.
+<br><br>
+<br>Field 9: Pos 38-43, Length 6: Wind Speed Rate
+<br>The rate of horizontal travel of air past a fixed point.
+<br>UNITS: meters per second
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 10: Pos 44-49, Length 6: Sky Condition Total Coverage Code
+<br>The code that denotes the fraction of the total celestial dome covered by clouds or other obscuring phenomena.
+<br>MISSING VALUE: -9999
+<br>DOMAIN:
+<br>0: None, SKC or CLR
+<br>1: One okta - 1/10 or less but not zero
+<br>2: Two oktas - 2/10 - 3/10, or FEW
+<br>3: Three oktas - 4/10
+<br>4: Four oktas - 5/10, or SCT
+<br>5: Five oktas - 6/10
+<br>6: Six oktas - 7/10 - 8/10
+<br>7: Seven oktas - 9/10 or more but not 10/10, or BKN
+<br>8: Eight oktas - 10/10, or OVC
+<br>9: Sky obscured, or cloud amount cannot be estimated
+<br>10: Partial obscuration
+<br>11: Thin scattered
+<br>12: Scattered
+<br>13: Dark scattered
+<br>14: Thin broken
+<br>15: Broken
+<br>16: Dark broken
+<br>17: Thin overcast
+<br>18: Overcast
+<br>19: Dark overcast
+<br><br>Field 11: Pos 50-55, Length 6: Liquid Precipitation Depth Dimension - One Hour Duration
+<br>The depth of liquid precipitation that is measured over a one hour accumulation period.
+<br>UNITS: millimeters
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><em>NOTE</em>:  Trace precipitation is coded as -1
+<br><br>Field 12: Pos 56-61, Length 6: Liquid Precipitation Depth Dimension - Six Hour Duration
+<br>The depth of liquid precipitation that is measured over a six hour accumulation period.
+<br>UNITS: millimeters
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><em>NOTE</em>:  Trace precipitation is coded as -1</p>
 </blockquote>
 </li>
 </ul>
 <h4 id="processing-data">Processing Data</h4>
 <h5 id="preparing-data">Preparing Data</h5>
 <p>As the number of ISD files is too big, it will create too many redundent <code>dta</code> files when writing those datasets into <code>Stata</code>. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder &ldquo;china_isd_lite_&rdquo; + the respect year.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 
 <span style="color:#111">dir</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/.../Data/&#34;</span>
@@ -394,7 +468,9 @@
 <span style="color:#00a8c8">for</span> <span style="color:#111">year</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">2000</span><span style="color:#111">,</span><span style="color:#ae81ff">2021</span><span style="color:#111">):</span>
     <span style="color:#111">transisd2csv</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">)</span>
     <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Year </span><span style="color:#d88200">%s</span><span style="color:#d88200"> completed&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
-</code></pre></div>
+</code></pre></td></tr></table>
+</div>
+</div>
 
                 
 
