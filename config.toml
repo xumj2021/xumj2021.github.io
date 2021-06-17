@@ -10,6 +10,7 @@ paginate = 5000 #frontpage pagination
     [markup.goldmark.renderer]
       unsafe = true
 
+
 [params]
   header_image = "https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962"
   title = "Mengjie's Blog"
@@ -19,6 +20,9 @@ paginate = 5000 #frontpage pagination
   hyvor = true
 
   googleAnalytics = "G-309KENXF47"
+
+  pygmentsCodeFences = true
+  pygmentsUseClasses = true
  
   # Sidebar settings
   sidebar_about_description = "A Second-Year Phd Student at Frankfurt School of Finance and Mangement"
