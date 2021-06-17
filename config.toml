@@ -29,6 +29,7 @@ paginate = 5000 #frontpage pagination
   keyword = "Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling"
 
   hyvor = true
+  showtoc = true
 
   googleAnalytics = "G-309KENXF47"
 

@@ -1,19 +1,21 @@
 ---
 
-title:       "From NOAA ISD Dataset to Panel Data - English Version"
+title:       "From NOAA ISD Dataset to Panel Data"
 subtitle:    ""
 description: "China Stations As An Example"
 date:        2021-06-15
 author:      "Mengjie Xu"
+toc:         true
 image:       "https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/space-communications-satellite-earth-featured.jpeg"
 tags:        ["NOAA", "Geo-Economics"]
-categories:  ["papers" ]
+categories:  ["Tech" ]
+
 
 ---
 
 
 
-#### Motivation
+## Motivation
 
 The motivation to clean this dataset is from [Mukherjee et al. (2021, JFE)](https://www.sciencedirect.com/science/article/pii/S0304405X21000921). In this paper, the authors documented that one can get ahead-of-announcement estimation about the storage hubs for crude oil in the US from satellite images and trade on it. This will decrease the market reaction around the release of official figures because the oil storage information has been partially revealed during the traders' arbitrage before announcement due to traders' use of satellite images. To establish the causality between traders' satellite image use and the lower market reaction around official figure release, this paper adopted cloudiness in the storage sites as Instrument Variable because the satellite images will be more obscure and thus less useful when the weather is cloudy. It turns out that the lowered market reaction is indeed less prominent during cloudy weeks. 
 
@@ -21,13 +23,13 @@ In this article, I tried to construct a high-frequency cloudiness variable follo
 
 
 
-#### Data Source
+## Data Source
 
 The original data source is [National Oceanic and Atmospheric Administration](https://www.ncdc.noaa.gov/isd) and I downloaded the Integrated Surface Database (ISD) dataset from its [FTP server](ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/).
 
 
 
-##### Brief Introduction to ISD dataset
+### Brief Introduction to ISD dataset
 
 > The Integrated Surface Database (ISD) consists of global hourly and synoptic observations compiled from numerous sources into a single common ASCII format and common data model.
 >
@@ -39,7 +41,7 @@ The original data source is [National Oceanic and Atmospheric Administration](ht
 
 
 
-##### Subsample Used In This Article
+### Subsample Used In This Article
 
 - Period: 2000 - 2020
 - Station Range: 2168 Stations located in China (Range from 50136 to 59951)
@@ -47,7 +49,7 @@ The original data source is [National Oceanic and Atmospheric Administration](ht
 
 
 
-##### Original Data Structure
+### Original Data Structure
 
 - The folders are named by year
 
@@ -176,55 +178,238 @@ The original data source is [National Oceanic and Atmospheric Administration](ht
 
 
 
-#### Processing Data
+## Processing Data
 
-##### Preparing Data
+### Step 1: Preparing Data
 
-As the number of ISD files is too big, it will create too many redundent `dta` files when writing those datasets into `Stata`. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder "china_isd_lite_" + the respect year.
+As the number of ISD files is too big, it will create too many redundent `dta` files when writing those datasets into `Stata`. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder "china_isd_lite_" + the respect year. This procedure is implemented in `Python`. All the following steps are implemented in `Stata`.
 
 ```python
 import os
 import csv
 
 dir = "/.../Data/"
-# isd 文件存储路径
+# save address for isd files
 
 headline = ['year','mon','day','hour','air_temperature','dew_point_temperature',
             'sea_level_pressure','wind_direction','wind_speed','cloud_cover',
             'precipitation_depth_one_hour','precipitation_depth_six_hour','station']
-# 标题行
+# headline
 
 def transisd2csv(year):
     g = os.walk(dir + "china_isd_lite_%s"%year)
-    # 遍历指定年份isd文件夹内所有文件
+    # iterate all isd files of a given year
     isExists = os.path.exists(dir + "Aggregate%s/" % year)
     if not isExists:
         os.makedirs(dir + "Aggregate%s/" % year)
-    # 如果没有指定年份 Aggregate 文件夹，则创建一个
+    # If thre is no folder named by "Aggregate" + year, then create one
     for path, dir_list, file_list in g:
         for file_name in file_list:
             if file_name!=".DS_Store":
                 station = file_name.split("-")[0]
-                # 从每个 isd 文件名中提取气象站 id
+                # Extract station id from each isd file name
                 csvFile = open(dir + "Aggregate%s/r%s.csv" % (year, station[:2]), "a", newline='', encoding='utf-8')
-                # 命名一个以气象站id前两位命名的csv文件，如果没有则创建一个，存储到前面创建的 Aggregate 文件夹中
+                # For each year, create a csv file named by the first two digit of station id
                 writer = csv.writer(csvFile)
                 writer.writerow(headline)
-                # 写入标题行
+                # Write headline row
                 f = open(dir + "china_isd_lite_%s/" % year + file_name, "r")
-                # 逐个打开指定年份isd文件夹中的每个文件
+                # iterate each isd file
                 for line in f:
-                  	# 对于每个打开的 isd 文件，逐行读取数据
+                  	# Read each row for each ISD file
                     csvRow = line.split()
-                    # 对于每一行，以空格分割，得到该行数据的 list 形式
+                    # For each row, split the text by space and get a list
                     csvRow.append(station)
-                    # 每列末尾加上气象站 id
+                    # Add the station id in each row
                     writer.writerow(csvRow)
-                    # 向之前创建的 csv 文件里写入每行数据
+                    # Write each row into the previously created csv file named by the first two digit of station id
 
 
 for year in range(2000,2021):
     transisd2csv(year)
     print("Year %s completed"%year)
 ```
+
+After this procedure, we should get folders for each year named by "Aggregate" + year.
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.00.59.png" width=800 height=400>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Preparing Data - 1</div>
+</center>
+
+In each folder, there should be a list of csv files named by the first two digits of station id.
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.03.55.png" width=800 height=300>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 5: Preparing Data - 2</div>
+</center>
+
+
+
+### Step 2: Write All ISD data in a Given Year Into A Same dta file
+
+```stata
+forvalues i = 2000/2020{
+	* Iterate year
+	
+	local add= "/.../Data/Aggregate"+"`i'/"
+	cd "`add'"
+	* Change work dictionary to the Aggregate folder of the specified year
+
+	local ff : dir . files "*.csv"
+	foreach f of local ff {
+		clear
+		dis "`f'"
+		local filename = substr("`f'",1,ustrrpos("`f'",".")-1)
+		if "`filename'"!=""{
+			dis "`filename'" 
+			import delimited "`f'", delimiter(comma) varnames(1)
+			save "`filename'", replace emptyok
+		}
+	}
+	* Transfer the pre-cleaned csv files into the respect dta files
+
+	use r45,replace
+	local ff : dir . files "*.dta"
+	foreach f of local ff {
+		append using `f'
+	}
+	* Merge all dta files in a given year
+	
+	local saveadd="/.../Data/Aggregate2000-2020/chinaclimate"+"`i'"
+	dis "`saveadd'"
+	
+	save "`saveadd'", replace emptyok
+	* Save the dta which contains all the isd data rows in a given year, named as "chinaclimate" + year
+}
+```
+
+This step produces a series of dta files named as "chinaclimate" + year, which contains all isd data rows in a given year.
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.25.42.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 6: ISD Data By Year</div>
+</center>
+
+
+
+### Step 3: Import Linktable in Order to Map Station Id into Province
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.10.31.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 7: LinkTable</div>
+</center>
+
+
+
+### Step 4: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year
+
+```stata
+forvalues i = 2000/2020{
+	use chinaclimate`i'
+	* Iterate dta file obatined in Step 2 for each year
+	
+	drop if year=="year"
+	* Delete redundant headlines
+	
+	replace station=substr(station, 1, 5)
+	* Keep the first five digits of station id to accommodate the id format in linktable
+	
+	sort station
+	merge station using linktable
+	keep if _merge==3
+	drop _merge
+	* Merge with linktable to get the respect province for each station
+
+	rename precipitation_depth_one_hour precipitation_one_hour
+	rename precipitation_depth_six_hour precipitation_six_hour
+
+	sort year mon day station hour
+	local vars air_temperature-precipitation_six_hour
+	destring `vars',replace
+
+	global vars air_temperature dew_point_temperature sea_level_pressure wind_direction wind_speed cloud_cover precipitation_one_hour precipitation_six_hour
+
+	foreach v of global vars{
+		replace `v'=. if `v'==-9999
+		* For each variable, tag the observation as mising if it equals to -9999
+		
+		by year mon day station: egen dayave_`v'=mean(`v')
+		* Get daily average for each station on each observation date
+		
+		drop `v'
+		* Only keep averaged variables
+	}
+
+	drop hour
+	duplicates drop year mon day station,force
+	* Keep one unique observation for each station on each observation day
+	
+	foreach v of global vars{
+		bys year province: egen yearave_`v'=mean(dayave_`v')
+		* Get year-level average for each province in each year
+		drop dayave_`v'
+		* Only keep year-level variables
+	}
+
+	keep year province clouday yearave*
+	duplicates drop year province,force
+	* Keep one unique observation for each station in each observation year
+	
+	save yearclimate`i'
+	* Save province-year average data in dta named by the respective year
+}
+```
+
+
+
+### Step 5: Append All Province-Year Level Average Dta Files
+
+```stata
+clear
+set obs 0
+save yearclimate2000-2020, emptyok
+local ff : dir . files "*.dta"
+	foreach f of local ff {
+		local tag = (substr("`f'",1,11)=="yearclimate")
+			dis `tag'
+			if `tag'==1{
+				append using `f'
+			}
+	}
+	* Identify all dta files with names starting by "yearclimate" and append them all
+	
+save yearclimate2000-2020, replace
+* Save the year-province level panel data into dta file named by "yearclimate2000-2020"
+```
+
+
+
+## References
+
+Mukherjee, Abhiroop, George Panayotov, and Janghoon Shon. 2021. “Eye in the Sky: Private Satellites and Government Macro Data.” Journal of Financial Economics, March. [- PDF -](https://doi.org/10.1016/j.jfineco.2021.03.002)
 
