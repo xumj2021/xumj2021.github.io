@@ -236,9 +236,9 @@
 <h5 id="brief-introduction-to-isd-dataset">Brief Introduction to ISD dataset</h5>
 <blockquote>
 <p>The Integrated Surface Database (ISD) consists of global hourly and synoptic observations compiled from numerous sources into a single common ASCII format and common data model.</p>
-<br>
+<!-- raw HTML omitted -->
 <p>The database includes over 35,000 stations worldwide, with some having data as far back as 1901, though the data show a substantial increase in volume in the 1940s and again in the early 1970s. Currently, there are over 14,000 &ldquo;active&rdquo; stations updated daily in the database.</p>
-<center><img src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Integrated-Surface-Database-Stations-Over-Time-Chart.jpeg"/><br>Station Number</center>
+<!-- raw HTML omitted -->
 </blockquote>
 <h5 id="subsample-used-in-this-article">Subsample Used In This Article</h5>
 <ul>
@@ -250,177 +250,150 @@
 <ul>
 <li>
 <p>The folders are named by year</p>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.18.12.png" width=800 height=500>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 1: NOAA Folder List</div>
-</center>
+<!-- raw HTML omitted -->
 </li>
 <li>
 <p>For each year, there is individual file for each station</p>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.24.28.png" width=800 height=500>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 2: NOAA ISD File List</div>
-</center>
+<!-- raw HTML omitted -->
 </li>
 <li>
 <p>For each file in a given year, the naming format is &ldquo;Station ID-NCDC WBAN Number-Year&rdquo;</p>
 </li>
 <li>
 <p>For each file (with a relative station id and year), there are 12 columns</p>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.39.34.png" width=800 height=500>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 3: Sample ISD File</div>
-</center>
+<!-- raw HTML omitted -->
 </li>
 <li>
 <p>Variable Definitions</p>
 <blockquote>
 <p>Integrated Surface Data - Lite
-<br>Format Documentation
-<br><br>
-<br>June 20, 2006
-<br>
-<br>Introduction
-<br><br>The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
-<br><br>Data Format
-<br><br>Field 1: Pos 1-4, Length 4: Observation Year
-<br>Year of observation, rounded to nearest whole hour
-<br><br>Field 2: Pos 6-7, Length 2: Observation Month
-<br>Month of observation, rounded to nearest whole hour
-<br><br>Field 3: Pos 9-11, Length 2: Observation Day
-<br>Day of observation, rounded to nearest whole hour
-<br><br>Field 4: Pos 12-13, Length 2: Observation Hour
-<br>Hour of observation, rounded to nearest whole hour
-<br><br>Field 5: Pos 14-19, Length 6:  Air Temperature
-<br>The temperature of the air
-<br>UNITS:  Degrees Celsius
-<br>SCALING FACTOR: 10
-<br>MISSING VALUE: -9999
-<br><br>Field 6: Pos 20-24, Length 6: Dew Point Temperature
-<br>The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
-<br>UNITS: Degrees Celsius
-<br>SCALING FACTOR: 10
-<br>MISSING VALUE: -9999
-<br><br>Field 7: Pos 26-31, Length 6: Sea Level Pressure
-<br>The air pressure relative to Mean Sea Level (MSL).
-<br>UNITS:  Hectopascals
-<br>SCALING FACTOR: 10
-<br>MISSING VALUE: -9999
-<br><br>Field 8: Pos 32-37, Length 6: Wind Direction
-<br>The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
-<br>UNITS: Angular Degrees
-<br>SCALING FACTOR: 1
-<br>MISSING VALUE: -9999
-<br>*NOTE:  Wind direction for calm winds is coded as 0.
-<br><br>
-<br>Field 9: Pos 38-43, Length 6: Wind Speed Rate
-<br>The rate of horizontal travel of air past a fixed point.
-<br>UNITS: meters per second
-<br>SCALING FACTOR: 10
-<br>MISSING VALUE: -9999
-<br><br>Field 10: Pos 44-49, Length 6: Sky Condition Total Coverage Code
-<br>The code that denotes the fraction of the total celestial dome covered by clouds or other obscuring phenomena.
-<br>MISSING VALUE: -9999
-<br>DOMAIN:
-<br>0: None, SKC or CLR
-<br>1: One okta - 1/10 or less but not zero
-<br>2: Two oktas - 2/10 - 3/10, or FEW
-<br>3: Three oktas - 4/10
-<br>4: Four oktas - 5/10, or SCT
-<br>5: Five oktas - 6/10
-<br>6: Six oktas - 7/10 - 8/10
-<br>7: Seven oktas - 9/10 or more but not 10/10, or BKN
-<br>8: Eight oktas - 10/10, or OVC
-<br>9: Sky obscured, or cloud amount cannot be estimated
-<br>10: Partial obscuration
-<br>11: Thin scattered
-<br>12: Scattered
-<br>13: Dark scattered
-<br>14: Thin broken
-<br>15: Broken
-<br>16: Dark broken
-<br>17: Thin overcast
-<br>18: Overcast
-<br>19: Dark overcast
-<br><br>Field 11: Pos 50-55, Length 6: Liquid Precipitation Depth Dimension - One Hour Duration
-<br>The depth of liquid precipitation that is measured over a one hour accumulation period.
-<br>UNITS: millimeters
-<br>SCALING FACTOR: 10
-<br>MISSING VALUE: -9999
-<br><em>NOTE</em>:  Trace precipitation is coded as -1
-<br><br>Field 12: Pos 56-61, Length 6: Liquid Precipitation Depth Dimension - Six Hour Duration
-<br>The depth of liquid precipitation that is measured over a six hour accumulation period.
-<br>UNITS: millimeters
-<br>SCALING FACTOR: 10
-<br>MISSING VALUE: -9999
-<br><em>NOTE</em>:  Trace precipitation is coded as -1</p>
+<!-- raw HTML omitted -->Format Documentation
+<!-- raw HTML omitted --><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->June 20, 2006
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->Introduction
+<!-- raw HTML omitted --><!-- raw HTML omitted -->The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Data Format
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 1: Pos 1-4, Length 4: Observation Year
+<!-- raw HTML omitted -->Year of observation, rounded to nearest whole hour
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 2: Pos 6-7, Length 2: Observation Month
+<!-- raw HTML omitted -->Month of observation, rounded to nearest whole hour
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 3: Pos 9-11, Length 2: Observation Day
+<!-- raw HTML omitted -->Day of observation, rounded to nearest whole hour
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 4: Pos 12-13, Length 2: Observation Hour
+<!-- raw HTML omitted -->Hour of observation, rounded to nearest whole hour
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 5: Pos 14-19, Length 6:  Air Temperature
+<!-- raw HTML omitted -->The temperature of the air
+<!-- raw HTML omitted -->UNITS:  Degrees Celsius
+<!-- raw HTML omitted -->SCALING FACTOR: 10
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 6: Pos 20-24, Length 6: Dew Point Temperature
+<!-- raw HTML omitted -->The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
+<!-- raw HTML omitted -->UNITS: Degrees Celsius
+<!-- raw HTML omitted -->SCALING FACTOR: 10
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 7: Pos 26-31, Length 6: Sea Level Pressure
+<!-- raw HTML omitted -->The air pressure relative to Mean Sea Level (MSL).
+<!-- raw HTML omitted -->UNITS:  Hectopascals
+<!-- raw HTML omitted -->SCALING FACTOR: 10
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 8: Pos 32-37, Length 6: Wind Direction
+<!-- raw HTML omitted -->The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
+<!-- raw HTML omitted -->UNITS: Angular Degrees
+<!-- raw HTML omitted -->SCALING FACTOR: 1
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted -->*NOTE:  Wind direction for calm winds is coded as 0.
+<!-- raw HTML omitted --><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->Field 9: Pos 38-43, Length 6: Wind Speed Rate
+<!-- raw HTML omitted -->The rate of horizontal travel of air past a fixed point.
+<!-- raw HTML omitted -->UNITS: meters per second
+<!-- raw HTML omitted -->SCALING FACTOR: 10
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 10: Pos 44-49, Length 6: Sky Condition Total Coverage Code
+<!-- raw HTML omitted -->The code that denotes the fraction of the total celestial dome covered by clouds or other obscuring phenomena.
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted -->DOMAIN:
+<!-- raw HTML omitted -->0: None, SKC or CLR
+<!-- raw HTML omitted -->1: One okta - 1/10 or less but not zero
+<!-- raw HTML omitted -->2: Two oktas - 2/10 - 3/10, or FEW
+<!-- raw HTML omitted -->3: Three oktas - 4/10
+<!-- raw HTML omitted -->4: Four oktas - 5/10, or SCT
+<!-- raw HTML omitted -->5: Five oktas - 6/10
+<!-- raw HTML omitted -->6: Six oktas - 7/10 - 8/10
+<!-- raw HTML omitted -->7: Seven oktas - 9/10 or more but not 10/10, or BKN
+<!-- raw HTML omitted -->8: Eight oktas - 10/10, or OVC
+<!-- raw HTML omitted -->9: Sky obscured, or cloud amount cannot be estimated
+<!-- raw HTML omitted -->10: Partial obscuration
+<!-- raw HTML omitted -->11: Thin scattered
+<!-- raw HTML omitted -->12: Scattered
+<!-- raw HTML omitted -->13: Dark scattered
+<!-- raw HTML omitted -->14: Thin broken
+<!-- raw HTML omitted -->15: Broken
+<!-- raw HTML omitted -->16: Dark broken
+<!-- raw HTML omitted -->17: Thin overcast
+<!-- raw HTML omitted -->18: Overcast
+<!-- raw HTML omitted -->19: Dark overcast
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 11: Pos 50-55, Length 6: Liquid Precipitation Depth Dimension - One Hour Duration
+<!-- raw HTML omitted -->The depth of liquid precipitation that is measured over a one hour accumulation period.
+<!-- raw HTML omitted -->UNITS: millimeters
+<!-- raw HTML omitted -->SCALING FACTOR: 10
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted --><em>NOTE</em>:  Trace precipitation is coded as -1
+<!-- raw HTML omitted --><!-- raw HTML omitted -->Field 12: Pos 56-61, Length 6: Liquid Precipitation Depth Dimension - Six Hour Duration
+<!-- raw HTML omitted -->The depth of liquid precipitation that is measured over a six hour accumulation period.
+<!-- raw HTML omitted -->UNITS: millimeters
+<!-- raw HTML omitted -->SCALING FACTOR: 10
+<!-- raw HTML omitted -->MISSING VALUE: -9999
+<!-- raw HTML omitted --><em>NOTE</em>:  Trace precipitation is coded as -1</p>
 </blockquote>
 </li>
 </ul>
 <h4 id="processing-data">Processing Data</h4>
 <h5 id="preparing-data">Preparing Data</h5>
 <p>As the number of ISD files is too big, it will create too many redundent <code>dta</code> files when writing those datasets into <code>Stata</code>. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder &ldquo;china_isd_lite_&rdquo; + the respect year.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
-<span style="color:#f92672">import</span> csv
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
+<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 
-dir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/.../Data/&#34;</span>
+<span style="color:#111">dir</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/.../Data/&#34;</span>
 <span style="color:#75715e"># isd 文件存储路径</span>
 
-headline <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;year&#39;</span>,<span style="color:#e6db74">&#39;mon&#39;</span>,<span style="color:#e6db74">&#39;day&#39;</span>,<span style="color:#e6db74">&#39;hour&#39;</span>,<span style="color:#e6db74">&#39;air_temperature&#39;</span>,<span style="color:#e6db74">&#39;dew_point_temperature&#39;</span>,
-            <span style="color:#e6db74">&#39;sea_level_pressure&#39;</span>,<span style="color:#e6db74">&#39;wind_direction&#39;</span>,<span style="color:#e6db74">&#39;wind_speed&#39;</span>,<span style="color:#e6db74">&#39;cloud_cover&#39;</span>,
-            <span style="color:#e6db74">&#39;precipitation_depth_one_hour&#39;</span>,<span style="color:#e6db74">&#39;precipitation_depth_six_hour&#39;</span>,<span style="color:#e6db74">&#39;station&#39;</span>]
+<span style="color:#111">headline</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;year&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;mon&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;day&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;hour&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;air_temperature&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;dew_point_temperature&#39;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#39;sea_level_pressure&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;wind_direction&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;wind_speed&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;cloud_cover&#39;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#39;precipitation_depth_one_hour&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;precipitation_depth_six_hour&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;station&#39;</span><span style="color:#111">]</span>
 <span style="color:#75715e"># 标题行</span>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">transisd2csv</span>(year):
-    g <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>walk(dir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;china_isd_lite_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">%</span>year)
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">transisd2csv</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">):</span>
+    <span style="color:#111">g</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">walk</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;china_isd_lite_</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
     <span style="color:#75715e"># 遍历指定年份isd文件夹内所有文件</span>
-    isExists <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(dir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Aggregate</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/&#34;</span> <span style="color:#f92672">%</span> year)
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isExists:
-        os<span style="color:#f92672">.</span>makedirs(dir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Aggregate</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/&#34;</span> <span style="color:#f92672">%</span> year)
+    <span style="color:#111">isExists</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">path</span><span style="color:#f92672">.</span><span style="color:#111">exists</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;Aggregate</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">year</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">isExists</span><span style="color:#111">:</span>
+        <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">makedirs</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;Aggregate</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">year</span><span style="color:#111">)</span>
     <span style="color:#75715e"># 如果没有指定年份 Aggregate 文件夹，则创建一个</span>
-    <span style="color:#66d9ef">for</span> path, dir_list, file_list <span style="color:#f92672">in</span> g:
-        <span style="color:#66d9ef">for</span> file_name <span style="color:#f92672">in</span> file_list:
-            <span style="color:#66d9ef">if</span> file_name<span style="color:#f92672">!=</span><span style="color:#e6db74">&#34;.DS_Store&#34;</span>:
-                station <span style="color:#f92672">=</span> file_name<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;-&#34;</span>)[<span style="color:#ae81ff">0</span>]
+    <span style="color:#00a8c8">for</span> <span style="color:#111">path</span><span style="color:#111">,</span> <span style="color:#111">dir_list</span><span style="color:#111">,</span> <span style="color:#111">file_list</span> <span style="color:#f92672">in</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">file_name</span> <span style="color:#f92672">in</span> <span style="color:#111">file_list</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#111">file_name</span><span style="color:#f92672">!=</span><span style="color:#d88200">&#34;.DS_Store&#34;</span><span style="color:#111">:</span>
+                <span style="color:#111">station</span> <span style="color:#f92672">=</span> <span style="color:#111">file_name</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;-&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span>
                 <span style="color:#75715e"># 从每个 isd 文件名中提取气象站 id</span>
-                csvFile <span style="color:#f92672">=</span> open(dir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Aggregate</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/r</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">.csv&#34;</span> <span style="color:#f92672">%</span> (year, station[:<span style="color:#ae81ff">2</span>]), <span style="color:#e6db74">&#34;a&#34;</span>, newline<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
+                <span style="color:#111">csvFile</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;Aggregate</span><span style="color:#d88200">%s</span><span style="color:#d88200">/r</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">station</span><span style="color:#111">[:</span><span style="color:#ae81ff">2</span><span style="color:#111">]),</span> <span style="color:#d88200">&#34;a&#34;</span><span style="color:#111">,</span> <span style="color:#111">newline</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf-8&#39;</span><span style="color:#111">)</span>
                 <span style="color:#75715e"># 命名一个以气象站id前两位命名的csv文件，如果没有则创建一个，存储到前面创建的 Aggregate 文件夹中</span>
-                writer <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(csvFile)
-                writer<span style="color:#f92672">.</span>writerow(headline)
+                <span style="color:#111">writer</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">csvFile</span><span style="color:#111">)</span>
+                <span style="color:#111">writer</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">headline</span><span style="color:#111">)</span>
                 <span style="color:#75715e"># 写入标题行</span>
-                f <span style="color:#f92672">=</span> open(dir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;china_isd_lite_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/&#34;</span> <span style="color:#f92672">%</span> year <span style="color:#f92672">+</span> file_name, <span style="color:#e6db74">&#34;r&#34;</span>)
+                <span style="color:#111">f</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;china_isd_lite_</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">year</span> <span style="color:#f92672">+</span> <span style="color:#111">file_name</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;r&#34;</span><span style="color:#111">)</span>
                 <span style="color:#75715e"># 逐个打开指定年份isd文件夹中的每个文件</span>
-                <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> f:
+                <span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">f</span><span style="color:#111">:</span>
                   	<span style="color:#75715e"># 对于每个打开的 isd 文件，逐行读取数据</span>
-                    csvRow <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>split()
+                    <span style="color:#111">csvRow</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">()</span>
                     <span style="color:#75715e"># 对于每一行，以空格分割，得到该行数据的 list 形式</span>
-                    csvRow<span style="color:#f92672">.</span>append(station)
+                    <span style="color:#111">csvRow</span><span style="color:#f92672">.</span><span style="color:#111">append</span><span style="color:#111">(</span><span style="color:#111">station</span><span style="color:#111">)</span>
                     <span style="color:#75715e"># 每列末尾加上气象站 id</span>
-                    writer<span style="color:#f92672">.</span>writerow(csvRow)
+                    <span style="color:#111">writer</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">csvRow</span><span style="color:#111">)</span>
                     <span style="color:#75715e"># 向之前创建的 csv 文件里写入每行数据</span>
 
 
-<span style="color:#66d9ef">for</span> year <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2000</span>,<span style="color:#ae81ff">2021</span>):
-    transisd2csv(year)
-    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Year </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> completed&#34;</span><span style="color:#f92672">%</span>year)
+<span style="color:#00a8c8">for</span> <span style="color:#111">year</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">2000</span><span style="color:#111">,</span><span style="color:#ae81ff">2021</span><span style="color:#111">):</span>
+    <span style="color:#111">transisd2csv</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Year </span><span style="color:#d88200">%s</span><span style="color:#d88200"> completed&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
 </code></pre></div>
 
                 
