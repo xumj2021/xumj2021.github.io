@@ -2,7 +2,7 @@
 
 title:       "Obtain All Searched Results From WSJ Website"
 subtitle:    ""
-description: "A shortcut to get anecdots for your paper"
+description: "A shortcut to get anecdotes for your paper"
 date:        2021-06-30
 author:      ""
 toc:      	 true
