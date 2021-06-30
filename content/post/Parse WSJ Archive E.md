@@ -437,8 +437,6 @@ for row in tqdm(df.iterrows()):
 
 ## Preview Results
 
-
-
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -465,11 +463,7 @@ for row in tqdm(df.iterrows()):
 
 
 
-
-
-
-
-#### Reference
+## Reference
 
 - Zhu, Christina. 2019. “Big Data as a Governance Mechanism.” *The Review of Financial Studies* 32 (5): 2021–61.[-PDF-](https://doi.org/10.1093/rfs/hhy081).
 
