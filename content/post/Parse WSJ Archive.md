@@ -144,7 +144,7 @@ There is a plenty of information about the article in the returned json (Named `
 
 
 
-### Step 5: Download Articles (Optional)
+### Step 5: Download Articles
 
 All we need to do in this step are :
 
