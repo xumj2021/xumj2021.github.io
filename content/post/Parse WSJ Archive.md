@@ -111,7 +111,7 @@ The returned search result is in json format. We name the root of the json as `r
 
 
 
-### Step 5: Get Article Information Based on Article ID
+### Step 4: Get Article Information Based on Article ID
 
 The two key parameters will be posted to the origin url `https://www.wsj.com/search`:
 
@@ -144,7 +144,7 @@ There is a plenty of information about the article in the returned json (Named `
 
 
 
-### Step 6: Download Articles (Optional)
+### Step 5: Download Articles (Optional)
 
 All we need to do in this step are :
 
