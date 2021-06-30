@@ -3,7 +3,7 @@ baseURL = "https://xumj2021.github.io"
 title = "Mengjie Xu"
 theme = "hugo-theme-cleanwhite-rsy"
 languageCode = "en-us"
-paginate = 5000 #frontpage pagination
+paginate = 20 #frontpage pagination
 
 [markup]
   [markup.goldmark]
@@ -30,6 +30,9 @@ paginate = 5000 #frontpage pagination
 
   hyvor = true
   showtoc = true
+
+  leancloud_app_id = '3P9jaIQ2NvKaz5vHlUzUD98r-MdYXbMMI'
+  leancloud_app_key = 'XadtPSYxmWAQm9iUAyMCzHOG'
 
   googleAnalytics = "G-309KENXF47"
 
