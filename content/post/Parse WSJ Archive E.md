@@ -29,6 +29,8 @@ To enable the script obtaining the information automatically, we need to get to 
 
 ### Step 1: Login in WSJ Account
 
+Obviously, the first thing is to open an active session with enough authority to access the arctiles.
+
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -41,7 +43,6 @@ To enable the script obtaining the information automatically, we need to get to 
 </center>
 
 
-
 ### Step 2: Accept the Website's Cookies Policy
 
 In many websites, only saving the cookies after logining in to keep the logining status is enough for freely accessing the data. For WSJ website, you need in addition to agree its Cookies policy to keep the session active. 
@@ -49,13 +50,14 @@ In many websites, only saving the cookies after logining in to keep the logining
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/cookie.png" width=800 height=500>
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/cookie.png" width=800 height=600>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
     padding: 2px;">Figure 2: Accept Cookies</div>
 </center>
+
 
 
 
@@ -68,13 +70,14 @@ The parameters will be posted to the origin url `https://www.wsj.com/search` in 
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/qu1.png" width=800 height=500>
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/qu1.png" width=800 height=600>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
     padding: 2px;">Figure 3: Input Search Parameters</div>
 </center>
+
 
 The returned search result is in json format. We name the root of the json as `root`. There are three main parts in the returned json:
 
@@ -106,6 +109,7 @@ The returned search result is in json format. We name the root of the json as `r
 
 
 
+
 ### Step 5: Get Article Information Based on Article ID
 
 The two key parameters will be posted to the origin url `https://www.wsj.com/search`:
@@ -124,6 +128,7 @@ The two key parameters will be posted to the origin url `https://www.wsj.com/sea
     padding: 2px;">Figure 5: Returned Json - Article Info</div>
 </center>
 
+
 There is a plenty of information about the article in the returned json (Named `info`). The features I take are:
 
 - Section Name `info['articleSection']`
@@ -135,6 +140,16 @@ There is a plenty of information about the article in the returned json (Named `
 - Word Count `info['wordCount']`
 - Created Time `info['timestampCreatedAt']`
 - Print Time `info['timestampPrint']`
+
+
+
+### Step 6: Download Articles (Optional)
+
+All we need to do in this step are :
+
+- Open the link for each article
+- Extract all relevant text content
+- Write the text content into the specified file
 
 
 
@@ -337,7 +352,7 @@ def getarticle(id):
     res = [section, byline, headline, printheadline, summary, href, wordcount, createat, printat]
     return(res)
   
-# Write article information into existed article list
+# Write article information and article id into csv file
 with open('resref.csv', 'a') as g:
     h = csv.writer(g)
     headline = ['Keywords',	'PageNum', 'ArticleID',	'ArticleType', 'Section',	'Authors', 'Headline', \
@@ -351,7 +366,77 @@ with open('resref.csv', 'a') as g:
 
 
 
+### Code IV: Extract Article Contents
+
+```python
+import time
+from lxml import etree
+import csv
+import re
+from tqdm import tqdm
+import requests
+import json
+import pandas as pd
+import unicodedata
+from string import punctuation
+
+# Read the article id list
+df = pd.read_csv("resref.csv",header=0)
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0',
+"content-type": "application/json; charset=UTF-8",
+"Connection": "keep-alive"
+}
+
+# A function filtering unnecessary spaces and line break
+def translist(infolist):
+    out = list(filter(lambda s: s and (type(s) != str or len(s.strip()) > 0),\ 	  [i.strip() for i in infolist]))
+    return(out)
+
+def parsearticle(title, date, articlelink):
+  	
+    # Obtain content of article page
+    with open("wsjcookies.txt", "r")as f:
+        cookies = f.read()
+        cookies = json.loads(cookies)
+    session = requests.session()
+    data = session.get(articlelink, headers=headers, cookies = cookies)
+    time.sleep(1)
+    
+    page = etree.HTML(data.content)
+		
+    # First record title and date into article content
+    arcontent = title + '\n\n' + date +'\n\n'
+    
+		# Get article content
+    content = page.xpath("//div[@class='article-content  ']//p")
+    for element in content:
+        subelement = etree.tostring(element).decode()
+        subpage = etree.HTML(subelement)
+        tree = subpage.xpath('//text()')
+        line = ''.join(translist(tree)).replace('\n','').replace('\t','').replace('  ','').strip()+'\n\n'
+        arcontent += line
+
+    return(arcontent)
+
+for row in tqdm(df.iterrows()):
+    # Column Headline
+    title = row[1][6].replace('/','_')
+    # Column Url
+    articlelink = row[1][9]
+    # Column CreatedAt
+    date = row[1][11].split(" ")[0].replace('/','-')
+    # Write article content into the file named by its headline and date
+    arcontent = parsearticle(title, date, articlelink)
+    with open("%s_%s.txt"%(date,title),'w') as g:
+        g.write(''.join(arcontent))
+```
+
+
+
 ## Preview Results
+
+
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -361,7 +446,20 @@ with open('resref.csv', 'a') as g:
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 6: Preview Results</div>
+    padding: 2px;">Figure 6: Preview Article List</div>
+</center>
+
+
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/ar.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 7: Preview Article Content</div>
 </center>
 
 
