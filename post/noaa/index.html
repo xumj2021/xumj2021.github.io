@@ -4,13 +4,13 @@
     
 
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-309KENXF47');
+    gtag('config', 'UA-177198277-1');
     </script>
 
 
@@ -45,7 +45,7 @@
     
 
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
-    <link rel="shortcut icon" href="https://img-blog.csdnimg.cn/20210615041606326.png">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>From NOAA ISD Dataset to Panel Data-Mengjie&#39;s Blog</title>
 
@@ -55,8 +55,6 @@
 	
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="/css/syntax.css">
 
     
     <link rel="stylesheet" href="/css/hux-blog.min.css">
@@ -82,16 +80,6 @@
 
     
     
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-309KENXF47');
-    </script>
 
 </head>
 
@@ -119,10 +107,6 @@
                         <a href="/">Home</a>
                     </li>
                     
-                        
-                        <li>
-                            <a href="/categories/papers">papers</a>
-                        </li>
                         
                         <li>
                             <a href="/categories/tech">tech</a>
@@ -176,7 +160,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://www.groovypost.com/wp-content/uploads/2019/01/space-communications-satellite-earth-featured.jpg')
+        background-image: url('https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/space-communications-satellite-earth-featured.jpeg')
     }
 </style>
 <header class="intro-header">
@@ -228,89 +212,392 @@
                 post-container">
 
                 
-                <h4 id="motivation">Motivation</h4>
-<p>The motivation to clean this dataset is from Mukherjee et al. (2021, JFE).</p>
-<p>最近看到Mukherjee et al. (2021, JFE) 的文章，受到了点启发，想找中国的云层数据来试试，但是没有质量特别高的数据，只好老老实实按照这篇论文中的做法从NOAA 下数据洗出来。</p>
-<h4 id="数据来源">数据来源</h4>
-<p>数据源为NCDC(美国国家气候数据中心，National Climatic Data Center)，隶属于NOAA(美国国家海洋及大气管理局，National Oceanic and Atmospheric Administration)。</p>
-<p>数据来自NCDC的公开FTP服务器中的  <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/</a>。</p>
-<p>为了方便查看，文章中提到的所有数据源文件都可以在我的百度网盘分享链接里找到。</p>
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#data-source">Data Source</a>
+      <ul>
+        <li><a href="#brief-introduction-to-isd-dataset">Brief Introduction to ISD dataset</a></li>
+        <li><a href="#subsample-used-in-this-article">Subsample Used In This Article</a></li>
+        <li><a href="#original-data-structure">Original Data Structure</a></li>
+      </ul>
+    </li>
+    <li><a href="#processing-data">Processing Data</a>
+      <ul>
+        <li><a href="#step-1-preparing-data">Step 1: Preparing Data</a></li>
+        <li><a href="#step-2-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 2: Write All ISD data in a Given Year Into A Same dta file</a></li>
+        <li><a href="#step-3-import-linktable-in-order-to-map-station-id-into-province">Step 3: Import Linktable in Order to Map Station Id into Province</a></li>
+        <li><a href="#step-4-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 4: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</a></li>
+        <li><a href="#step-5-append-all-province-year-level-average-dta-files">Step 5: Append All Province-Year Level Average Dta Files</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="motivation">Motivation</h2>
+<p>The motivation to clean this dataset is from <a href="https://www.sciencedirect.com/science/article/pii/S0304405X21000921">Mukherjee et al. (2021, JFE)</a>. In this paper, the authors documented that one can get ahead-of-announcement estimation about the storage hubs for crude oil in the US from satellite images and trade on it. This will decrease the market reaction around the release of official figures because the oil storage information has been partially revealed during the traders' arbitrage before announcement due to traders' use of satellite images. To establish the causality between traders' satellite image use and the lower market reaction around official figure release, this paper adopted cloudiness in the storage sites as Instrument Variable because the satellite images will be more obscure and thus less useful when the weather is cloudy. It turns out that the lowered market reaction is indeed less prominent during cloudy weeks.</p>
+<p>In this article, I tried to construct a high-frequency cloudiness variable following the Mukherjee paper.</p>
+<h2 id="data-source">Data Source</h2>
+<p>The original data source is <a href="https://www.ncdc.noaa.gov/isd">National Oceanic and Atmospheric Administration</a> and I downloaded the Integrated Surface Database (ISD) dataset from its <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">FTP server</a>.</p>
+<h3 id="brief-introduction-to-isd-dataset">Brief Introduction to ISD dataset</h3>
 <blockquote>
-<p>链接: <a href="https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ">https://pan.baidu.com/s/1GraMF6SgSg3DBIPxVNlgQQ</a>  密码: l8j9</p>
+<p>The Integrated Surface Database (ISD) consists of global hourly and synoptic observations compiled from numerous sources into a single common ASCII format and common data model.</p>
+<br>
+<p>The database includes over 35,000 stations worldwide, with some having data as far back as 1901, though the data show a substantial increase in volume in the 1940s and again in the early 1970s. Currently, there are over 14,000 &ldquo;active&rdquo; stations updated daily in the database.</p>
+<center><img src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Integrated-Surface-Database-Stations-Over-Time-Chart.jpeg"/><br>Station Number</center>
 </blockquote>
-<p>分析样本为 2000-2020 年间中国的地面气象数据 （每三小时记录一次）。
-
-  <img src="https://img-blog.csdnimg.cn/20210330063122553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODQyMTg2OQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
-
-</p>
-<h4 id="原始数据结构">原始数据结构</h4>
-<p>以2020年为例，文件命名方式为 气象站id - 99999 (NCDC WBAN Number) - 年份。
-  <img src="https://img-blog.csdnimg.cn/img_convert/0291f0ac1f93f9ae17c36f400bf5f164.png" alt="">
-
-
-先看一个样例文件，该文件有 9 列，其变量按顺序分别为 观测年份，观测月份，观测日期，观测小时，空气温度，露点温度，海平面气压，风向，风速，云层厚度，液体渗透深度(1小时)，液体渗透深度(6小时)。
-
-  <img src="https://img-blog.csdnimg.cn/img_convert/707465c364d0a4132afc86d569d1a6df.png" alt="image-20210610102217295">
-
-
-详细变量说明如下：</p>
+<h3 id="subsample-used-in-this-article">Subsample Used In This Article</h3>
+<ul>
+<li>Period: 2000 - 2020</li>
+<li>Station Range: 2168 Stations located in China (Range from 50136 to 59951)</li>
+<li>Freqency: Every 3 hours</li>
+</ul>
+<h3 id="original-data-structure">Original Data Structure</h3>
+<ul>
+<li>
+<p>The folders are named by year</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.18.12.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: NOAA Folder List</div>
+</center>
+</li>
+<li>
+<p>For each year, there is individual file for each station</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.24.28.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: NOAA ISD File List</div>
+</center>
+</li>
+<li>
+<p>For each file in a given year, the naming format is &ldquo;Station ID-NCDC WBAN Number-Year&rdquo;</p>
+</li>
+<li>
+<p>For each file (with a relative station id and year), there are 12 columns</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-16%20%E4%B8%8B%E5%8D%881.39.34.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 3: Sample ISD File</div>
+</center>
+</li>
+<li>
+<p>Variable Definitions</p>
 <blockquote>
-<p>Introduction
-<br/>
-The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
-<br/>
-Data Format
-<br/>
-Field 1: Pos 1-4, Length 4: Observation Year
-Year of observation, rounded to nearest whole hour
-<br/>
-Field 2: Pos 6-7, Length 2: Observation Month
-Month of observation, rounded to nearest whole hour
-<br/>
-Field 3: Pos 9-11, Length 2: Observation Day
-Day of observation, rounded to nearest whole hour
-<br/>
-Field 4: Pos 12-13, Length 2: Observation Hour
-Hour of observation, rounded to nearest whole hour
-<br/>
-Field 5: Pos 14-19, Length 6:  Air Temperature
-The temperature of the air
-UNITS:  Degrees Celsius
-SCALING FACTOR: 10
-MISSING VALUE: -9999
-<br/>
-Field 6: Pos 20-24, Length 6: Dew Point Temperature
-The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
-UNITS: Degrees Celsius
-SCALING FACTOR: 10
-MISSING VALUE: -9999
-<br/>
-Field 7: Pos 26-31, Length 6: Sea Level Pressure
-The air pressure relative to Mean Sea Level (MSL).
-UNITS:  Hectopascals
-SCALING FACTOR: 10
-MISSING VALUE: -9999
-<br/>
-Field 8: Pos 32-37, Length 6: Wind Direction
-The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
-UNITS: Angular Degrees
-SCALING FACTOR: 1
-MISSING VALUE: -9999
-*NOTE:  Wind direction for calm winds is coded as 0.
-<br/></p>
-<p>Field 9: Pos 38-43, Length 6: Wind Speed Rate
-The rate of horizontal travel of air past a fixed point.
-UNITS: meters per second
-SCALING FACTOR: 10-
-}</p>
+<p>Integrated Surface Data - Lite
+<br>Format Documentation
+<br><br>
+<br>June 20, 2006
+<br>
+<br>Introduction
+<br><br>The ISD-Lite data contain a fixed-width formatted subset of the complete Integrated Surface Data (ISD) for a select number of observational elements.  The data are typically stored in a single file corresponding to the ISD data, i.e. one file per station per year.  For more information on the ISD-Lite format, consult the ISD-Lite technical document.
+<br><br>Data Format
+<br><br>Field 1: Pos 1-4, Length 4: Observation Year
+<br>Year of observation, rounded to nearest whole hour
+<br><br>Field 2: Pos 6-7, Length 2: Observation Month
+<br>Month of observation, rounded to nearest whole hour
+<br><br>Field 3: Pos 9-11, Length 2: Observation Day
+<br>Day of observation, rounded to nearest whole hour
+<br><br>Field 4: Pos 12-13, Length 2: Observation Hour
+<br>Hour of observation, rounded to nearest whole hour
+<br><br>Field 5: Pos 14-19, Length 6:  Air Temperature
+<br>The temperature of the air
+<br>UNITS:  Degrees Celsius
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 6: Pos 20-24, Length 6: Dew Point Temperature
+<br>The temperature to which a given parcel of air must be cooled at constant pressure and water vapor content in order for saturation to occur.
+<br>UNITS: Degrees Celsius
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 7: Pos 26-31, Length 6: Sea Level Pressure
+<br>The air pressure relative to Mean Sea Level (MSL).
+<br>UNITS:  Hectopascals
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 8: Pos 32-37, Length 6: Wind Direction
+<br>The angle, measured in a clockwise direction, between true north and the direction from which the wind is blowing.
+<br>UNITS: Angular Degrees
+<br>SCALING FACTOR: 1
+<br>MISSING VALUE: -9999
+<br>*NOTE:  Wind direction for calm winds is coded as 0.
+<br><br>
+<br>Field 9: Pos 38-43, Length 6: Wind Speed Rate
+<br>The rate of horizontal travel of air past a fixed point.
+<br>UNITS: meters per second
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><br>Field 10: Pos 44-49, Length 6: Sky Condition Total Coverage Code
+<br>The code that denotes the fraction of the total celestial dome covered by clouds or other obscuring phenomena.
+<br>MISSING VALUE: -9999
+<br>DOMAIN:
+<br>0: None, SKC or CLR
+<br>1: One okta - 1/10 or less but not zero
+<br>2: Two oktas - 2/10 - 3/10, or FEW
+<br>3: Three oktas - 4/10
+<br>4: Four oktas - 5/10, or SCT
+<br>5: Five oktas - 6/10
+<br>6: Six oktas - 7/10 - 8/10
+<br>7: Seven oktas - 9/10 or more but not 10/10, or BKN
+<br>8: Eight oktas - 10/10, or OVC
+<br>9: Sky obscured, or cloud amount cannot be estimated
+<br>10: Partial obscuration
+<br>11: Thin scattered
+<br>12: Scattered
+<br>13: Dark scattered
+<br>14: Thin broken
+<br>15: Broken
+<br>16: Dark broken
+<br>17: Thin overcast
+<br>18: Overcast
+<br>19: Dark overcast
+<br><br>Field 11: Pos 50-55, Length 6: Liquid Precipitation Depth Dimension - One Hour Duration
+<br>The depth of liquid precipitation that is measured over a one hour accumulation period.
+<br>UNITS: millimeters
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><em>NOTE</em>:  Trace precipitation is coded as -1
+<br><br>Field 12: Pos 56-61, Length 6: Liquid Precipitation Depth Dimension - Six Hour Duration
+<br>The depth of liquid precipitation that is measured over a six hour accumulation period.
+<br>UNITS: millimeters
+<br>SCALING FACTOR: 10
+<br>MISSING VALUE: -9999
+<br><em>NOTE</em>:  Trace precipitation is coded as -1</p>
 </blockquote>
-<pre><code>local saveadd=&quot;/.../Data/Aggregate2000-2020/chinaclimate&quot;+&quot;`i'&quot;
-dis &quot;`saveadd'&quot;
+</li>
+</ul>
+<h2 id="processing-data">Processing Data</h2>
+<h3 id="step-1-preparing-data">Step 1: Preparing Data</h3>
+<p>As the number of ISD files is too big, it will create too many redundent <code>dta</code> files when writing those datasets into <code>Stata</code>. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder &ldquo;china_isd_lite_&rdquo; + the respect year. This procedure is implemented in <code>Python</code>. All the following steps are implemented in <code>Stata</code>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
+<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 
-* 将指定年份所有的 isd 数据存储到一个 dta 文件里
-save &quot;`saveadd'&quot;, replace emptyok
-</code></pre>
-<p>}</p>
+<span style="color:#111">dir</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/.../Data/&#34;</span>
+<span style="color:#75715e"># save address for isd files</span>
+
+<span style="color:#111">headline</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;year&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;mon&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;day&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;hour&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;air_temperature&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;dew_point_temperature&#39;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#39;sea_level_pressure&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;wind_direction&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;wind_speed&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;cloud_cover&#39;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#39;precipitation_depth_one_hour&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;precipitation_depth_six_hour&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;station&#39;</span><span style="color:#111">]</span>
+<span style="color:#75715e"># headline</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">transisd2csv</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">):</span>
+    <span style="color:#111">g</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">walk</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;china_isd_lite_</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
+    <span style="color:#75715e"># iterate all isd files of a given year</span>
+    <span style="color:#111">isExists</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">path</span><span style="color:#f92672">.</span><span style="color:#111">exists</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;Aggregate</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">year</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">isExists</span><span style="color:#111">:</span>
+        <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">makedirs</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;Aggregate</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">year</span><span style="color:#111">)</span>
+    <span style="color:#75715e"># If thre is no folder named by &#34;Aggregate&#34; + year, then create one</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">path</span><span style="color:#111">,</span> <span style="color:#111">dir_list</span><span style="color:#111">,</span> <span style="color:#111">file_list</span> <span style="color:#f92672">in</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">file_name</span> <span style="color:#f92672">in</span> <span style="color:#111">file_list</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#111">file_name</span><span style="color:#f92672">!=</span><span style="color:#d88200">&#34;.DS_Store&#34;</span><span style="color:#111">:</span>
+                <span style="color:#111">station</span> <span style="color:#f92672">=</span> <span style="color:#111">file_name</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;-&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span>
+                <span style="color:#75715e"># Extract station id from each isd file name</span>
+                <span style="color:#111">csvFile</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;Aggregate</span><span style="color:#d88200">%s</span><span style="color:#d88200">/r</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">station</span><span style="color:#111">[:</span><span style="color:#ae81ff">2</span><span style="color:#111">]),</span> <span style="color:#d88200">&#34;a&#34;</span><span style="color:#111">,</span> <span style="color:#111">newline</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf-8&#39;</span><span style="color:#111">)</span>
+                <span style="color:#75715e"># For each year, create a csv file named by the first two digit of station id</span>
+                <span style="color:#111">writer</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">csvFile</span><span style="color:#111">)</span>
+                <span style="color:#111">writer</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">headline</span><span style="color:#111">)</span>
+                <span style="color:#75715e"># Write headline row</span>
+                <span style="color:#111">f</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">dir</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;china_isd_lite_</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span> <span style="color:#f92672">%</span> <span style="color:#111">year</span> <span style="color:#f92672">+</span> <span style="color:#111">file_name</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;r&#34;</span><span style="color:#111">)</span>
+                <span style="color:#75715e"># iterate each isd file</span>
+                <span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+                  	<span style="color:#75715e"># Read each row for each ISD file</span>
+                    <span style="color:#111">csvRow</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">()</span>
+                    <span style="color:#75715e"># For each row, split the text by space and get a list</span>
+                    <span style="color:#111">csvRow</span><span style="color:#f92672">.</span><span style="color:#111">append</span><span style="color:#111">(</span><span style="color:#111">station</span><span style="color:#111">)</span>
+                    <span style="color:#75715e"># Add the station id in each row</span>
+                    <span style="color:#111">writer</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">csvRow</span><span style="color:#111">)</span>
+                    <span style="color:#75715e"># Write each row into the previously created csv file named by the first two digit of station id</span>
+
+
+<span style="color:#00a8c8">for</span> <span style="color:#111">year</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">2000</span><span style="color:#111">,</span><span style="color:#ae81ff">2021</span><span style="color:#111">):</span>
+    <span style="color:#111">transisd2csv</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Year </span><span style="color:#d88200">%s</span><span style="color:#d88200"> completed&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>After this procedure, we should get folders for each year named by &ldquo;Aggregate&rdquo; + year.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.00.59.png" width=800 height=400>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Preparing Data - 1</div>
+</center>
+<p>In each folder, there should be a list of csv files named by the first two digits of station id.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.03.55.png" width=800 height=300>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 5: Preparing Data - 2</div>
+</center>
+<h3 id="step-2-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 2: Write All ISD data in a Given Year Into A Same dta file</h3>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">forvalues i = 2000/2020{
+	* Iterate year
+	
+	local add= &#34;/.../Data/Aggregate&#34;+&#34;`i&#39;/&#34;
+	cd &#34;`add&#39;&#34;
+	* Change work dictionary to the Aggregate folder of the specified year
+
+	local ff : dir . files &#34;*.csv&#34;
+	foreach f of local ff {
+		clear
+		dis &#34;`f&#39;&#34;
+		local filename = substr(&#34;`f&#39;&#34;,1,ustrrpos(&#34;`f&#39;&#34;,&#34;.&#34;)-1)
+		if &#34;`filename&#39;&#34;!=&#34;&#34;{
+			dis &#34;`filename&#39;&#34; 
+			import delimited &#34;`f&#39;&#34;, delimiter(comma) varnames(1)
+			save &#34;`filename&#39;&#34;, replace emptyok
+		}
+	}
+	* Transfer the pre-cleaned csv files into the respect dta files
+
+	use r45,replace
+	local ff : dir . files &#34;*.dta&#34;
+	foreach f of local ff {
+		append using `f&#39;
+	}
+	* Merge all dta files in a given year
+	
+	local saveadd=&#34;/.../Data/Aggregate2000-2020/chinaclimate&#34;+&#34;`i&#39;&#34;
+	dis &#34;`saveadd&#39;&#34;
+	
+	save &#34;`saveadd&#39;&#34;, replace emptyok
+	* Save the dta which contains all the isd data rows in a given year, named as &#34;chinaclimate&#34; + year
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>This step produces a series of dta files named as &ldquo;chinaclimate&rdquo; + year, which contains all isd data rows in a given year.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.25.42.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 6: ISD Data By Year</div>
+</center>
+<h3 id="step-3-import-linktable-in-order-to-map-station-id-into-province">Step 3: Import Linktable in Order to Map Station Id into Province</h3>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.10.31.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 7: LinkTable</div>
+</center>
+<h3 id="step-4-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 4: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -367,37 +654,23 @@ save &quot;`saveadd'&quot;, replace emptyok
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
-经过这一步，得到以年为单位存储的 dta 格式的所有 isd 数据
-
-![](https://img-blog.csdnimg.cn/img_convert/52f5e3f0796c3c4a5e4882e1edd3b8de.png)
-#### Step 3: 导入 linktable, 便于将气象站 id 映射到省份
-linktable 的数据样例如下
-![image-20210610101811354](https://img-blog.csdnimg.cn/img_convert/4fb473bdcaf652fd100825b9f7144925.png)
-#### Step 4: 处理以年为单位存储的 dta 格式的所有 isd 数据，得到每个变量年平均数据
-
-​```stata
-forvalues i = 2000/2020{
-	* 遍历每个年份的 isd 数据
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">forvalues i = 2000/2020{
 	use chinaclimate`i&#39;
+	* Iterate dta file obatined in Step 2 for each year
+	
 	drop if year==&#34;year&#34;
-	* 删除多余的标题行
+	* Delete redundant headlines
+	
 	replace station=substr(station, 1, 5)
-	* 保留 stationid 的前五位，便于与 linktable 配对
+	* Keep the first five digits of station id to accommodate the id format in linktable
+	
 	sort station
 	merge station using linktable
 	keep if _merge==3
 	drop _merge
-	* 与 linktable 配对，得到每个气象站对应的省份
+	* Merge with linktable to get the respect province for each station
 
 	rename precipitation_depth_one_hour precipitation_one_hour
 	rename precipitation_depth_six_hour precipitation_six_hour
@@ -405,41 +678,41 @@ forvalues i = 2000/2020{
 	sort year mon day station hour
 	local vars air_temperature-precipitation_six_hour
 	destring `vars&#39;,replace
-	* 转换为数值型变量
 
 	global vars air_temperature dew_point_temperature sea_level_pressure wind_direction wind_speed cloud_cover precipitation_one_hour precipitation_six_hour
 
 	foreach v of global vars{
 		replace `v&#39;=. if `v&#39;==-9999
-		* 对于每个变量，将值为 -9999 的观测替换为缺失值
+		* For each variable, tag the observation as mising if it equals to -9999
+		
 		by year mon day station: egen dayave_`v&#39;=mean(`v&#39;)
-		* 对于每个观测站每个日期，求每个变量的日平均
+		* Get daily average for each station on each observation date
+		
 		drop `v&#39;
-		* 只保留求日平均之后的变量
+		* Only keep averaged variables
 	}
 
 	drop hour
 	duplicates drop year mon day station,force
-	* 对于每个观测站的每个日期，保留唯一观测
+	* Keep one unique observation for each station on each observation day
 	
 	foreach v of global vars{
-		replace dayave_`v&#39;=. if dayave_`v&#39;==-9999
-		* 对于每个日平均变量，将值为 -9999 的观测替换为缺失值
 		bys year province: egen yearave_`v&#39;=mean(dayave_`v&#39;)
-		* 对于每个省份每个年份，求每个变量的年平均
+		* Get year-level average for each province in each year
 		drop dayave_`v&#39;
-		* 只保留年平均变量
+		* Only keep year-level variables
 	}
 
 	keep year province clouday yearave*
 	duplicates drop year province,force
-	* 对于每个观测站每个年份，保留唯一观测
+	* Keep one unique observation for each station in each observation year
+	
 	save yearclimate`i&#39;
-	* 将省份-年平均 isd 数据存储到相应年份命名的 dta 文件中
+	* Save province-year average data in dta named by the respective year
 }
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="step-5-将2000-2020年所有省份-年平均-isd-数据写入一个-dta-文件中">Step 5: 将2000-2020年所有省份-年平均 isd 数据写入一个 dta 文件中</h4>
+</div><h3 id="step-5-append-all-province-year-level-average-dta-files">Step 5: Append All Province-Year Level Average Dta Files</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -455,6 +728,8 @@ forvalues i = 2000/2020{
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">clear
@@ -463,20 +738,19 @@ save yearclimate2000-2020, emptyok
 local ff : dir . files &#34;*.dta&#34;
 	foreach f of local ff {
 		local tag = (substr(&#34;`f&#39;&#34;,1,11)==&#34;yearclimate&#34;)
-		* 识别出文件夹内所有以 yearclimate 开头的 dta 文件并将其合并到一个 dta 文件里
 			dis `tag&#39;
 			if `tag&#39;==1{
 				append using `f&#39;
 			}
 	}
+	* Identify all dta files with names starting by &#34;yearclimate&#34; and append them all
+	
 save yearclimate2000-2020, replace
+* Save the year-province level panel data into dta file named by &#34;yearclimate2000-2020&#34;
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="最终得到每个省份每年的平均气象数据文件">最终得到每个省份每年的平均气象数据文件</h4>
-<p>
-  <img src="https://img-blog.csdnimg.cn/img_convert/5e2068267d473c5622cdde3871699733.png" alt="">
-
-</p>
+</div><h2 id="references">References</h2>
+<p>Mukherjee, Abhiroop, George Panayotov, and Janghoon Shon. 2021. “Eye in the Sky: Private Satellites and Government Macro Data.” Journal of Financial Economics, March. <a href="https://doi.org/10.1016/j.jfineco.2021.03.002">- PDF -</a></p>
 
 
                 
@@ -484,11 +758,11 @@ save yearclimate2000-2020, replace
                 <hr>
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/post/noaa-english-version/" data-toggle="tooltip" data-placement="top" title="From NOAA ISD Dataset to Panel Data - English Version">&larr;
-                            Previous Post</a>
-                    </li>
                     
+                    <li class="next">
+                        <a href="/post/parse-wsj-archive/" data-toggle="tooltip" data-placement="top" title="Obtain All Searched Results From WSJ Website">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -500,11 +774,12 @@ save yearclimate2000-2020, replace
     var HYVOR_TALK_WEBSITE = 4329; 
     var HYVOR_TALK_CONFIG = {
         url: false,
-        id: 4329
+        id: false
 };
 </script>
 <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 </div>
+
 
 
             </div>
@@ -594,7 +869,6 @@ save yearclimate2000-2020, replace
                 </ul>
 		<p class="copyright text-muted">
                     Copyright &copy; Mengjie Xu 2021
-                    <br>
                 </p>
             </div>
         </div>
