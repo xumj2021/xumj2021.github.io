@@ -1,8 +1,8 @@
 ---
 
 title:       "Obtain All Searched Results From WSJ Website"
-subtitle:    "A shortcut to get anecdots for your paper"
-description: "Crawling WSJ WebSite"
+subtitle:    ""
+description: "A shortcut to get anecdots for your paper"
 date:        2021-06-30
 author:      ""
 toc:      	 true
