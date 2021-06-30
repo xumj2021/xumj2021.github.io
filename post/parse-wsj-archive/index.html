@@ -4,13 +4,13 @@
     
 
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-309KENXF47');
+    gtag('config', 'UA-177198277-1');
     </script>
 
 
@@ -28,15 +28,15 @@
     
 
     
-    <meta name="title" content="Obtain All Archive Data From Wall Street Journal" />
-    <meta property="og:title" content="Obtain All Archive Data From Wall Street Journal" />
-    <meta property="twitter:title" content="Obtain All Archive Data From Wall Street Journal" />
+    <meta name="title" content="Obtain All Searched Results From WSJ Website" />
+    <meta property="og:title" content="Obtain All Searched Results From WSJ Website" />
+    <meta property="twitter:title" content="Obtain All Searched Results From WSJ Website" />
     
 
     
-    <meta name="description" content="Crawling WSJ Archive">
-    <meta property="og:description" content="Crawling WSJ Archive" />
-    <meta property="twitter:description" content="Crawling WSJ Archive" />
+    <meta name="description" content="A shortcut to get anecdotes for your paper">
+    <meta property="og:description" content="A shortcut to get anecdotes for your paper" />
+    <meta property="twitter:description" content="A shortcut to get anecdotes for your paper" />
     
 
     
@@ -45,9 +45,9 @@
     
 
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
-    <link rel="shortcut icon" href="https://img-blog.csdnimg.cn/20210615041606326.png">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Obtain All Archive Data From Wall Street Journal-Mengjie&#39;s Blog</title>
+    <title>Obtain All Searched Results From WSJ Website-Mengjie&#39;s Blog</title>
 
     <link rel="canonical" href="/post/parse-wsj-archive/">
 
@@ -55,8 +55,6 @@
 	
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="/css/syntax.css">
 
     
     <link rel="stylesheet" href="/css/hux-blog.min.css">
@@ -82,16 +80,6 @@
 
     
     
-
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-309KENXF47');
-    </script>
 
 </head>
 
@@ -119,10 +107,6 @@
                         <a href="/">Home</a>
                     </li>
                     
-                        
-                        <li>
-                            <a href="/categories/papers">papers</a>
-                        </li>
                         
                         <li>
                             <a href="/categories/tech">tech</a>
@@ -194,8 +178,12 @@
                             Financial News
                         </a>
                         
+                        <a class="tag" href="/tags/anecdotes" title="Anecdotes">
+                            Anecdotes
+                        </a>
+                        
                     </div>
-                    <h1>Obtain All Archive Data From Wall Street Journal</h1>
+                    <h1>Obtain All Searched Results From WSJ Website</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
@@ -203,7 +191,7 @@
                                 Mengjie Xu
                          
                         on 
-                        Sunday, June 13, 2021
+                        Wednesday, June 30, 2021
                         
                         
                         
@@ -228,12 +216,162 @@
                 post-container">
 
                 
-                <p>从读论文和写论文的体验来看，传闻证据 (anecdotes) 对论文能不能给人可靠的第一印象有决定性作用。传闻证据到位了，就不会有人追着问一些澄清性问题 (clarification questions)，后面论证研究题目的重要性时也会顺利很多 (why care)，此外，很多时候传闻证据对作者本人更好地了解研究背景 (institutional background) 并提出合情合理的研究设计也有很大的帮助作用<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。</p>
-<p>据我所知，华尔街日报 (Wall Street Journal) 给很多顶刊论文提供了灵感。比如 <a href="https://academic.oup.com/rfs/article/32/5/2021/5427775">Zhu (2019 RFS)</a> 与 <a href="https://www.wsj.com/articles/startups-mine-market-moving-data-from-fields-parking-lotseven-shadows-1416502993">用停车场数据预测零售公司业绩的报道非常相关 (2014.11.20 WSJ)</a>， <a href="https://www.wsj.com/articles/SB10001424052702303497804579240182187225264">一篇关于对冲基金经理与大数据的报道 (2013.12.18 WSJ)</a> 则提出了 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3222741">Katona et al. (2018 WP, MS R&amp;R)</a>  和 <a href="https://www.sciencedirect.com/science/article/pii/S0304405X21000921">Mukherjee et al. (2021 JFE)</a> 的主要论点。</p>
-<p>所以我最近写论文的时候爬了华尔街日报的所有历史数据，源网址是 <a href="https://www.wsj.com/news/archive/years">WSJ Archives</a>，事实证明这个工作在我最近的论文展示中起到了相当正面的作用<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
-<h4 id="1-获取-cookies">1. 获取 Cookies</h4>
-<p>按照惯例，还是先获取 Cookies。首先登陆，登陆后等待大概 20 秒左右会跳出一个小框，要求接受 cookies，需要点击 <code>YES, I AGREE</code>， 经过这步操作的 Cookies 才能顺利获取文章列表或文章内容，否则会被网站识别为爬虫。</p>
-<p>另外， Cookies 有失效时间 (expiry time)，最好每次爬之前都更新下 Cookies。</p>
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#analysing-wsj-website">Analysing WSJ Website</a>
+      <ul>
+        <li><a href="#step-1-login-in-wsj-account">Step 1: Login in WSJ Account</a></li>
+        <li><a href="#step-2-accept-the-websites-cookies-policy">Step 2: Accept the Website&rsquo;s Cookies Policy</a></li>
+        <li><a href="#step-3-input-searching-parameters">Step 3: Input Searching Parameters</a></li>
+        <li><a href="#step-4-get-article-information-based-on-article-id">Step 4: Get Article Information Based on Article ID</a></li>
+        <li><a href="#step-5-download-articles-optional">Step 5: Download Articles (Optional)</a></li>
+      </ul>
+    </li>
+    <li><a href="#crawl-wsj">Crawl WSJ</a>
+      <ul>
+        <li><a href="#code-i-get-cookies">Code I: Get Cookies</a></li>
+        <li><a href="#code-ii-get-article-list">Code II: Get Article List</a></li>
+        <li><a href="#code-iii-get-article-info-and-write-into-article-list">Code III: Get Article Info and Write Into Article List</a></li>
+        <li><a href="#code-iv-extract-article-contents">Code IV: Extract Article Contents</a></li>
+      </ul>
+    </li>
+    <li><a href="#preview-results">Preview Results</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="motivation">Motivation</h2>
+<p>From my experience of reading papers and listening to seminars, I found anecodotes are crucial for people to establish their &ldquo;first impression&rdquo; about the credibility of the story. With proper anecdotes, the speaker is less likely to be asked many clarification questions or be questioned the necessity of conducting their following analysis. In addition, anecodes can help the author to know better about the institutional background and propose more reasonable research design.</p>
+<p>As far as I know, Wall Street Journal inspired quite some top jornal articles. For example, <a href="https://academic.oup.com/rfs/article/32/5/2021/5427775">Zhu (2019 RFS) </a> is very related with a <a href="https://www.wsj.com/articles/startups-mine-market-moving-data-from-fields-parking-lotseven-shadows-1416502993">2014 WSJ article</a> which documents how the satellite images capturing retailors' parking lots can give precise inter-period performance estimation about the firms. A <a href="https://www.wsj.com/articles/SB10001424052702303497804579240182187225264">2013 WSJ article</a> which shows how hedge fund managers gain edges from big data is highly relevant to <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3222741">Katona et al. (2018 WP, MS R&amp;R)</a>  and <a href="https://www.sciencedirect.com/science/article/pii/S0304405X21000921">Mukherjee et al. (2021 JFE)</a>.</p>
+<p>In this blog, I will show how to parse the search results form WSJ website and how to formalize them for further textual analysis.</p>
+<h2 id="analysing-wsj-website">Analysing WSJ Website</h2>
+<p>To enable the script obtaining the information automatically, we need to get to know how we access the information manually.</p>
+<h3 id="step-1-login-in-wsj-account">Step 1: Login in WSJ Account</h3>
+<p>Obviously, the first thing is to open an active session with enough authority to access the arctiles.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/login.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Login In</div>
+</center>
+<h3 id="step-2-accept-the-websites-cookies-policy">Step 2: Accept the Website&rsquo;s Cookies Policy</h3>
+<p>In many websites, only saving the cookies after logining in to keep the logining status is enough for freely accessing the data. For WSJ website, you need in addition to agree its Cookies policy to keep the session active.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/cookie.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: Accept Cookies</div>
+</center>
+<h3 id="step-3-input-searching-parameters">Step 3: Input Searching Parameters</h3>
+<p>The parameters will be posted to the origin url <code>https://www.wsj.com/search</code> in the format of a dictionary:</p>
+<blockquote>
+<p>&ldquo;{&quot;query&quot;:{&quot;not&quot;:[{&quot;terms&quot;:{&quot;key&quot;:&quot;SectionType&quot;,&quot;value&quot;:[&quot;NewsPlus&quot;]}}],&quot;and&quot;:[{&quot;full_text&quot;:{&quot;value&quot;:&quot;<strong>twitter</strong>&quot;,&quot;parameters&quot;:[{&quot;property&quot;:&quot;headline&quot;,&quot;boost&quot;:3},{&quot;property&quot;:&quot;Keywords&quot;,&quot;boost&quot;:2},{&quot;property&quot;:&quot;Body&quot;,&quot;boost&quot;:1}]}},{&quot;terms&quot;:{&quot;key&quot;:&quot;Product&quot;,&quot;value&quot;:[&quot;WSJ.com&quot;,&quot;WSJ Blogs&quot;,&quot;WSJ Video&quot;,&quot;Interactive Media&quot;,&quot;WSJ.com Site Search&quot;,&quot;WSJPRO&quot;]}},{&quot;date&quot;:{&quot;key&quot;:&quot;UpdatedDate&quot;,&quot;value&quot;:&quot;<strong>2020-06-30T00:00:00+00:00</strong>&quot;,&quot;operand&quot;:&quot;GreaterEquals&quot;}}]},&quot;sort&quot;:[{&quot;key&quot;:&quot;liveDate&quot;,&quot;order&quot;:&quot;desc&quot;}],&quot;count&quot;:20}/<strong>page=0</strong>&rdquo;</p>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/qu1.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 3: Input Search Parameters</div>
+</center>
+<p>The returned search result is in json format. We name the root of the json as <code>root</code>. There are three main parts in the returned json:</p>
+<ul>
+<li>Posted Paremeters
+<ul>
+<li>Keywords</li>
+<li>Start Date (The latest day is the default end date)</li>
+<li>Current Page</li>
+</ul>
+</li>
+<li>Page Information <code>page = root['data']['linksForPagination']</code>
+<ul>
+<li>Number of articles that fit the search parameters <code>page['total']</code></li>
+<li>Current Page <code>page['self']</code></li>
+<li>First Page <code>page['first']</code></li>
+<li>Last Page <code>page['last']</code></li>
+<li>Next Page <code>page['next']</code></li>
+</ul>
+</li>
+<li>Article List in the Curent Page <code>collection = root['collection']</code>
+<ul>
+<li>Each article is represented by two parameters
+<ul>
+<li>Article ID <code>e.g., collection[0]['id'] for the first article</code></li>
+<li>Article Type - Typically is <strong>article|capi</strong>  <code>e.g., collection[0]['id'] for the first article</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/qu24.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Returned Json - Article List</div>
+</center>
+<h3 id="step-4-get-article-information-based-on-article-id">Step 4: Get Article Information Based on Article ID</h3>
+<p>The two key parameters will be posted to the origin url <code>https://www.wsj.com/search</code>:</p>
+<ul>
+<li>Article ID</li>
+<li>Article Type</li>
+</ul>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/ar23.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 5: Returned Json - Article Info</div>
+</center>
+<p>There is a plenty of information about the article in the returned json (Named <code>info</code>). The features I take are:</p>
+<ul>
+<li>Section Name <code>info['articleSection']</code></li>
+<li>Authors <code>info['byline']</code></li>
+<li>Headline <code>info['headline']</code></li>
+<li>Headline in Print Version <code>info['printedition_wsj_headline']</code></li>
+<li>Summary <code>info['summary']</code></li>
+<li>Article Url <code>info['url']</code></li>
+<li>Word Count <code>info['wordCount']</code></li>
+<li>Created Time <code>info['timestampCreatedAt']</code></li>
+<li>Print Time <code>info['timestampPrint']</code></li>
+</ul>
+<h3 id="step-5-download-articles-optional">Step 5: Download Articles (Optional)</h3>
+<p>All we need to do in this step are :</p>
+<ul>
+<li>Open the link for each article</li>
+<li>Extract all relevant text content</li>
+<li>Write the text content into the specified file</li>
+</ul>
+<h2 id="crawl-wsj">Crawl WSJ</h2>
+<p>For now, we have made clear three main issues for the script to execute automatically:</p>
+<ul>
+<li>Where to post - The origin url</li>
+<li>What to post - Key Parameters</li>
+<li>What to get - Returned Json</li>
+</ul>
+<p>The only thing left is to write the script out and execute it.</p>
+<h3 id="code-i-get-cookies">Code I: Get Cookies</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -272,47 +410,37 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">selenium</span> <span style="color:#f92672">import</span> <span style="color:#111">webdriver</span>
 <span style="color:#f92672">import</span> <span style="color:#111">time</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
 
-<span style="color:#111">option</span> <span style="color:#f92672">=</span> <span style="color:#111">webdriver</span><span style="color:#f92672">.</span><span style="color:#111">FirefoxOptions</span><span style="color:#111">()</span>
-<span style="color:#111">option</span><span style="color:#f92672">.</span><span style="color:#111">add_argument</span><span style="color:#111">(</span><span style="color:#d88200">&#39;-headless&#39;</span><span style="color:#111">)</span>
-<span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">webdriver</span><span style="color:#f92672">.</span><span style="color:#111">Firefox</span><span style="color:#111">(</span><span style="color:#111">executable_path</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;/Users/mengjiexu/Dropbox/Pythoncodes/Bleier/geckodriver&#39;</span><span style="color:#111">)</span>
+<span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">webdriver</span><span style="color:#f92672">.</span><span style="color:#111">Firefox</span><span style="color:#111">(</span><span style="color:#111">executable_path</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;/Users/mengjiexu/Dropbox/geckodriver&#39;</span><span style="color:#111">)</span>
 
-<span style="color:#75715e"># 填入 WSJ 账户信息</span>
-<span style="color:#111">email</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;username&#39;</span>
-<span style="color:#111">pw</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;password&#39;</span>
-  
+<span style="color:#75715e"># Insert WSJ Account and Password</span>
+<span style="color:#111">email</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;XXX&#39;</span>
+<span style="color:#111">pw</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;XXX&#39;</span>
+
+<span style="color:#75715e"># Login</span>
 <span style="color:#00a8c8">def</span> <span style="color:#75af00">login</span><span style="color:#111">(</span><span style="color:#111">email</span><span style="color:#111">,</span> <span style="color:#111">pw</span><span style="color:#111">):</span>
     <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span>
-        <span style="color:#d88200">&#34;https://sso.accounts.dowjones.com/login?&#34;</span><span style="color:#111">)</span>
-    <span style="color:#75715e"># 为了不透露个人信息，需要读者自己粘贴登陆界面的 url</span>
+        <span style="color:#d88200">&#34;https://sso.accounts.dowjones.com/signin&#34;</span><span style="color:#111">)</span>
     <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">)</span>
     <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div/input[@name = &#39;username&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">email</span><span style="color:#111">)</span>
     <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div/input[@name = &#39;password&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">pw</span><span style="color:#111">)</span>
     <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div/button[@type = &#39;submit&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">click</span><span style="color:#111">()</span>
 
-<span style="color:#75715e"># 登陆</span>
 <span style="color:#111">login</span><span style="color:#111">(</span><span style="color:#111">email</span><span style="color:#111">,</span> <span style="color:#111">pw</span><span style="color:#111">)</span>
+<span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">)</span>
 
-<span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">20</span><span style="color:#111">)</span>
-
-<span style="color:#75715e"># 切换到跳出的小框</span>
-<span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">switch_to_frame</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sp_message_iframe_490357&#34;</span><span style="color:#111">)</span>
-<span style="color:#75715e"># 点击接受收集 Cookies </span>
+<span style="color:#75715e"># Agree the Cookies Policy</span>
+<span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">switch_to</span><span style="color:#f92672">.</span><span style="color:#111">frame</span><span style="color:#111">(</span><span style="color:#d88200">&#34;sp_message_iframe_490357&#34;</span><span style="color:#111">)</span>
 <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//button[@title=&#39;YES, I AGREE&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">click</span><span style="color:#111">()</span>
 
 <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">5</span><span style="color:#111">)</span>
 
-<span style="color:#75715e"># 将 Cookies 写入文件</span>
+<span style="color:#75715e"># Save Cookies</span>
 <span style="color:#111">orcookies</span> <span style="color:#f92672">=</span> <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">get_cookies</span><span style="color:#111">()</span>
 <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#111">orcookies</span><span style="color:#111">)</span>
 <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">{}</span>
@@ -322,34 +450,7 @@
     <span style="color:#111">f</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">dumps</span><span style="color:#111">(</span><span style="color:#111">cookies</span><span style="color:#111">))</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="2-获取文章列表">2. 获取文章列表</h4>
-<h5 id="21-网页分析">2.1 网页分析</h5>
-<p>WSJ 每日文章列表 url 的命名方式十分简单，由以下两部分组成：</p>
-<ul>
-<li><a href="https://www.wsj.com/news/archive/">https://www.wsj.com/news/archive/</a></li>
-<li>年/月/日</li>
-</ul>
-<p>所以在指定时间范围内遍历每一天即可得到每一天的文章列表。不过我爬的时候顺手爬了所有的日期列表，所以代码中直接遍历了日期列表。</p>
-<blockquote>
-<p>WSJ Daylist: 链接: <a href="https://pan.baidu.com/s/1kPYlot5lmYtQwWlHxA6OpQ">https://pan.baidu.com/s/1kPYlot5lmYtQwWlHxA6OpQ</a>  密码: 0b44</p>
-</blockquote>
-<p>以 2021 年 6 月 10 日的文章列表为例 (如下图)，对于每一篇文章，主要关注四个变量：</p>
-<ul>
-<li>文章所属板块 - 黄色框</li>
-<li>文章标题 - 红色框</li>
-<li>文章链接 - 绿色框</li>
-<li>文章日期 - 前定</li>
-</ul>
-<p>很多日期的文章列表都不止一页，所以需要：</p>
-<ul>
-<li>判断翻页条件：详见代码中 <code>pagenation(page)</code> 函数</li>
-<li>如果满足翻页条件，进行翻页：<code>newdaylink = daylink + &quot;?page=%s&quot;%pagenum</code></li>
-</ul>
-<p>
-  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1grebju21whj31ew0wqam6.jpg" alt="截屏2021-06-10 下午3.33.56">
-
-</p>
-<h5 id="22-代码">2.2 代码</h5>
+</div><h3 id="code-ii-get-article-list">Code II: Get Article List</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -415,396 +516,92 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62">62</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63">63</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64">64</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65">65</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66">66</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67">67</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68">68</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69">69</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70">70</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71">71</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72">72</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
-<span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
-<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
-<span style="color:#f92672">import</span> <span style="color:#111">re</span>
-<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">json</span>
 <span style="color:#f92672">import</span> <span style="color:#111">requests</span>
-<span style="color:#f92672">import</span> <span style="color:#111">json</span>
-<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 <span style="color:#f92672">import</span> <span style="color:#111">unicodedata</span>
-<span style="color:#f92672">from</span> <span style="color:#111">string</span> <span style="color:#f92672">import</span> <span style="color:#111">punctuation</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">from</span> <span style="color:#111">random</span> <span style="color:#f92672">import</span> <span style="color:#111">randint</span>
 
-<span style="color:#111">f</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#39;wsjdaylist.txt&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">)</span>
+<span style="color:#75715e"># Customize headers with keywords and current pagenum</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getheader</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;User-Agent&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;</span><span style="color:#111">,</span>
+           <span style="color:#d88200">&#34;content-type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;application/json; charset=UTF-8&#34;</span><span style="color:#111">,</span>
+           <span style="color:#d88200">&#34;Connection&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;keep-alive&#34;</span><span style="color:#111">,</span>
+           <span style="color:#d88200">&#34;referrer&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;https://www.wsj.com/search?query=</span><span style="color:#d88200">%s</span><span style="color:#d88200">&amp;page=</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">)</span>
+           <span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">headers</span><span style="color:#111">)</span>
 
-<span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;User-Agent&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;</span><span style="color:#111">,</span>
-<span style="color:#d88200">&#34;content-type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;application/json; charset=UTF-8&#34;</span><span style="color:#111">,</span>
-<span style="color:#d88200">&#34;Connection&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;keep-alive&#34;</span>
-<span style="color:#111">}</span>
+<span style="color:#75715e"># Customize parameters with keywords, startdate, and current page number</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getpara</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">startdate</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">):</span>
+    <span style="color:#111">para</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">query</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">not</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:[{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">terms</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">key</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">SectionType</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">value</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:[</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">NewsPlus</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">]}}],</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    </span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">and</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:[{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">full_text</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">value</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">%s</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    </span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">parameters</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:[{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">property</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">headline</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">boost</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:3},</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    {</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">property</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">Keywords</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">boost</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:2},{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">property</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">Body</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">boost</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:1}]}},</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    {</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">terms</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">key</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">Product</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">value</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:[</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">WSJ.com</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">WSJ Blogs</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">WSJ Video</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    </span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">Interactive Media</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">WSJ.com Site Search</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">WSJPRO</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">]}},</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    {</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">date</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">key</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">UpdatedDate</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">value</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">%s</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    </span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">operand</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">GreaterEquals</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">}}]},</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">sort</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:[{</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">key</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">liveDate</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">,</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">order</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">desc</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">}],</span><span style="color:#8045ff">\
+</span><span style="color:#8045ff"></span><span style="color:#d88200">    </span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">count</span><span style="color:#8045ff">\&#34;</span><span style="color:#d88200">:20}/page=</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">startdate</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">para</span><span style="color:#111">)</span>
 
-
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">parsearticle</span><span style="color:#111">(</span><span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">daylink</span><span style="color:#111">):</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">searchlist</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">startdate</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">):</span>
+  
+  	<span style="color:#75715e"># Write cookies into RAM</span>
     <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;wsjcookies.txt&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;r&#34;</span><span style="color:#111">)</span><span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
         <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">f</span><span style="color:#f92672">.</span><span style="color:#111">read</span><span style="color:#111">()</span>
         <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">cookies</span><span style="color:#111">)</span>
+    
+    <span style="color:#75715e"># Open a session</span>
     <span style="color:#111">session</span> <span style="color:#f92672">=</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">session</span><span style="color:#111">()</span>
-    <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;https://www.wsj.com&#34;</span> <span style="color:#f92672">+</span> <span style="color:#111">daylink</span>
-    <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">session</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">cookies</span><span style="color:#111">)</span>
-
-    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
-    <span style="color:#111">page</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">content</span><span style="color:#111">)</span>
-
-    <span style="color:#111">href</span> <span style="color:#f92672">=</span> <span style="color:#111">page</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//h2[@class=&#39;WSJTheme--headline--unZqjb45 reset WSJTheme--heading-3--2z_phq5h typography--serif-display--ZXeuhS5E &#39;]/a/@href&#34;</span><span style="color:#111">)</span>
-
-    <span style="color:#111">sector</span> <span style="color:#f92672">=</span> <span style="color:#111">page</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//h2[@class=&#39;WSJTheme--headline--unZqjb45 reset WSJTheme--heading-3--2z_phq5h typography--serif-display--ZXeuhS5E &#39;]/parent::div[1]/parent::div[1]/preceding-sibling::div[1]//text()[1]&#34;</span><span style="color:#111">)</span>
-    <span style="color:#111">module</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">unicodedata</span><span style="color:#f92672">.</span><span style="color:#111">normalize</span><span style="color:#111">(</span><span style="color:#d88200">&#39;NFD&#39;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#d88200">&#39;ascii&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;ignore&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">(</span><span style="color:#d88200">&#34;utf-8&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34; &#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\t</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">sector</span> <span style="color:#00a8c8">if</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span>
     
-    <span style="color:#111">article</span> <span style="color:#f92672">=</span> <span style="color:#111">page</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//h2[@class=&#39;WSJTheme--headline--unZqjb45 reset WSJTheme--heading-3--2z_phq5h typography--serif-display--ZXeuhS5E &#39;]/a/text()&#34;</span><span style="color:#111">)</span>
-    <span style="color:#111">article</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">unicodedata</span><span style="color:#f92672">.</span><span style="color:#111">normalize</span><span style="color:#111">(</span><span style="color:#d88200">&#39;NFD&#39;</span><span style="color:#111">,</span> <span style="color:#111">i</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#d88200">&#39;ascii&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;ignore&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">(</span><span style="color:#d88200">&#34;utf-8&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#34; &#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\t</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#34;&#34;</span><span style="color:#111">)</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">article</span><span style="color:#111">]</span>
+    <span style="color:#75715e"># Update search url with keywords, startdate, and current pagenum</span>
+    <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;https://www.wsj.com/search?id=&#34;</span> \
+        <span style="color:#f92672">+</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">utils</span><span style="color:#f92672">.</span><span style="color:#111">quote</span><span style="color:#111">(</span><span style="color:#111">getpara</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">startdate</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">))</span> \
+        <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;&amp;type=allesseh_search_full_v2&#34;</span>
+
+    <span style="color:#75715e"># Load the opened session with parameters, headers, and cookies</span>
+    <span style="color:#75715e"># And Obtain json results from the server</span>
+    <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">session</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">getheader</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">),</span> <span style="color:#111">cookies</span><span style="color:#f92672">=</span><span style="color:#111">cookies</span><span style="color:#111">)</span>
+
+    <span style="color:#75715e"># Name the root json node of articles as &#39;info&#39;</span>
+    <span style="color:#111">info</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">text</span><span style="color:#111">)[</span><span style="color:#d88200">&#39;collection&#39;</span><span style="color:#111">]</span>
     
-    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;wsjarticlelist_test.csv&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">h</span><span style="color:#111">:</span>
-        <span style="color:#111">k</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">h</span><span style="color:#111">)</span>
-        <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#111">href</span><span style="color:#111">)):</span>
-            <span style="color:#111">k</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">([</span><span style="color:#111">article</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#111">module</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#111">href</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">],</span> <span style="color:#111">date</span><span style="color:#111">])</span>
+    <span style="color:#75715e"># Get the total page num</span>
+    <span style="color:#111">totalpage</span> <span style="color:#f92672">=</span> <span style="color:#111">int</span><span style="color:#111">(</span><span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">text</span><span style="color:#111">)[</span><span style="color:#d88200">&#39;data&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;linksForPagination&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;last&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;=&#34;</span><span style="color:#111">)[</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">])</span>
 
-    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">page</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#39;reslist_</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#39;</span><span style="color:#f92672">%</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+        <span style="color:#111">h</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">g</span><span style="color:#111">)</span>
+				
+        <span style="color:#75715e"># Write the id and type of each article into the opend csv file</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">)):</span>
+            <span style="color:#111">id</span> <span style="color:#f92672">=</span> <span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">type</span> <span style="color:#f92672">=</span> <span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">][</span><span style="color:#d88200">&#39;type&#39;</span><span style="color:#111">]</span>
+            <span style="color:#111">h</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">([</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">pagenum</span><span style="color:#111">,</span> <span style="color:#111">id</span><span style="color:#111">,</span> <span style="color:#111">type</span><span style="color:#111">])</span>
 
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">pagenation</span><span style="color:#111">(</span><span style="color:#111">page</span><span style="color:#111">):</span>
-    <span style="color:#111">next_page</span> <span style="color:#f92672">=</span> <span style="color:#111">page</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//span[contains(text(), &#39;Next Page&#39;)]&#34;</span><span style="color:#111">)</span>
-    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">next_page</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">totalpage</span><span style="color:#111">)</span>
 
-<span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">f</span><span style="color:#111">:</span>
-    <span style="color:#111">daylink</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span>
-    <span style="color:#111">date</span> <span style="color:#f92672">=</span> <span style="color:#111">daylink</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/archive/&#34;</span><span style="color:#111">)[</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span>
-    <span style="color:#111">page</span> <span style="color:#f92672">=</span> <span style="color:#111">parsearticle</span><span style="color:#111">(</span><span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">daylink</span><span style="color:#111">)</span>
-    <span style="color:#111">next_page</span> <span style="color:#f92672">=</span> <span style="color:#111">pagenation</span><span style="color:#111">(</span><span style="color:#111">page</span><span style="color:#111">)</span>
-    <span style="color:#111">pagenum</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#00a8c8">while</span> <span style="color:#111">next_page</span><span style="color:#111">:</span>
-        <span style="color:#111">pagenum</span> <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
-        <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#111">pagenum</span><span style="color:#111">)</span>
-        <span style="color:#111">newdaylink</span> <span style="color:#f92672">=</span> <span style="color:#111">daylink</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#34;?page=</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">pagenum</span>
-        <span style="color:#111">page</span> <span style="color:#f92672">=</span> <span style="color:#111">parsearticle</span><span style="color:#111">(</span><span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">newdaylink</span><span style="color:#111">)</span>
-        <span style="color:#111">next_page</span> <span style="color:#f92672">=</span> <span style="color:#111">pagenation</span><span style="color:#111">(</span><span style="color:#111">page</span><span style="color:#111">)</span>
-        <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">searchwsj</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">startdate</span><span style="color:#111">):</span>
+    <span style="color:#111">totalpage</span> <span style="color:#f92672">=</span> <span style="color:#111">searchlist</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">startdate</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">page</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#111">totalpage</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#111">)):</span>
+        <span style="color:#111">searchlist</span><span style="color:#111">(</span><span style="color:#111">keywords</span><span style="color:#111">,</span> <span style="color:#111">page</span><span style="color:#111">)</span>
+
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;__main__&#34;</span><span style="color:#111">:</span>
+    <span style="color:#111">searchwsj</span><span style="color:#111">(</span><span style="color:#d88200">&#34;twitter&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;2009-06-30T00:00:00+00:00&#34;</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h5 id="23-文章列表">2.3 文章列表</h5>
-<p>
-  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1greclpq58nj31fu0va14z.jpg" alt="image-20210611091513883">
-
-</p>
-<h5 id="24-文章年份分布">2.4 文章年份分布</h5>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Year</th>
-<th style="text-align:center">ArticleNum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1997</td>
-<td style="text-align:center">171</td>
-</tr>
-<tr>
-<td style="text-align:center">1998</td>
-<td style="text-align:center">45953</td>
-</tr>
-<tr>
-<td style="text-align:center">1999</td>
-<td style="text-align:center">48813</td>
-</tr>
-<tr>
-<td style="text-align:center">2000</td>
-<td style="text-align:center">51485</td>
-</tr>
-<tr>
-<td style="text-align:center">2001</td>
-<td style="text-align:center">46691</td>
-</tr>
-<tr>
-<td style="text-align:center">2002</td>
-<td style="text-align:center">42997</td>
-</tr>
-<tr>
-<td style="text-align:center">2003</td>
-<td style="text-align:center">38974</td>
-</tr>
-<tr>
-<td style="text-align:center">2004</td>
-<td style="text-align:center">39071</td>
-</tr>
-<tr>
-<td style="text-align:center">2005</td>
-<td style="text-align:center">40219</td>
-</tr>
-<tr>
-<td style="text-align:center">2006</td>
-<td style="text-align:center">41779</td>
-</tr>
-<tr>
-<td style="text-align:center">2007</td>
-<td style="text-align:center">44754</td>
-</tr>
-<tr>
-<td style="text-align:center">2008</td>
-<td style="text-align:center">51897</td>
-</tr>
-<tr>
-<td style="text-align:center">2009</td>
-<td style="text-align:center">54993</td>
-</tr>
-<tr>
-<td style="text-align:center">2010</td>
-<td style="text-align:center">66245</td>
-</tr>
-<tr>
-<td style="text-align:center">2011</td>
-<td style="text-align:center">70842</td>
-</tr>
-<tr>
-<td style="text-align:center">2012</td>
-<td style="text-align:center">66032</td>
-</tr>
-<tr>
-<td style="text-align:center">2013</td>
-<td style="text-align:center">64420</td>
-</tr>
-<tr>
-<td style="text-align:center">2014</td>
-<td style="text-align:center">71768</td>
-</tr>
-<tr>
-<td style="text-align:center">2015</td>
-<td style="text-align:center">66051</td>
-</tr>
-<tr>
-<td style="text-align:center">2016</td>
-<td style="text-align:center">74229</td>
-</tr>
-<tr>
-<td style="text-align:center">2017</td>
-<td style="text-align:center">59907</td>
-</tr>
-<tr>
-<td style="text-align:center">2018</td>
-<td style="text-align:center">49528</td>
-</tr>
-<tr>
-<td style="text-align:center">2019</td>
-<td style="text-align:center">36292</td>
-</tr>
-<tr>
-<td style="text-align:center">2020</td>
-<td style="text-align:center">35819</td>
-</tr>
-<tr>
-<td style="text-align:center">2021</td>
-<td style="text-align:center">12011</td>
-</tr>
-<tr>
-<td style="text-align:center">Total</td>
-<td style="text-align:center">1220941</td>
-</tr>
-</tbody>
-</table>
-<h5 id="25-文章主题分布">2.5 文章主题分布</h5>
-<p>排除空白主题，1997-2021年共有 5822 个不同的主题。这里列出使用次数超出 10,000 的主题。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Sector</th>
-<th style="text-align:center">ArticleNum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Business</td>
-<td style="text-align:center">60119</td>
-</tr>
-<tr>
-<td style="text-align:center">Markets</td>
-<td style="text-align:center">34663</td>
-</tr>
-<tr>
-<td style="text-align:center">U.S.</td>
-<td style="text-align:center">23402</td>
-</tr>
-<tr>
-<td style="text-align:center">Heard on the Street</td>
-<td style="text-align:center">23340</td>
-</tr>
-<tr>
-<td style="text-align:center">Major Business News</td>
-<td style="text-align:center">22598</td>
-</tr>
-<tr>
-<td style="text-align:center">Letters</td>
-<td style="text-align:center">21531</td>
-</tr>
-<tr>
-<td style="text-align:center">Politics</td>
-<td style="text-align:center">20991</td>
-</tr>
-<tr>
-<td style="text-align:center">Tech Center</td>
-<td style="text-align:center">18511</td>
-</tr>
-<tr>
-<td style="text-align:center">Earnings</td>
-<td style="text-align:center">18178</td>
-</tr>
-<tr>
-<td style="text-align:center">Technology</td>
-<td style="text-align:center">17346</td>
-</tr>
-<tr>
-<td style="text-align:center">U.S. Business News</td>
-<td style="text-align:center">17109</td>
-</tr>
-<tr>
-<td style="text-align:center">Europe</td>
-<td style="text-align:center">15134</td>
-</tr>
-<tr>
-<td style="text-align:center">Economy</td>
-<td style="text-align:center">14432</td>
-</tr>
-<tr>
-<td style="text-align:center">Photos</td>
-<td style="text-align:center">14290</td>
-</tr>
-<tr>
-<td style="text-align:center">Review &amp; Outlook</td>
-<td style="text-align:center">13759</td>
-</tr>
-<tr>
-<td style="text-align:center">Business and Finance - Europe</td>
-<td style="text-align:center">13530</td>
-</tr>
-<tr>
-<td style="text-align:center">Commentary</td>
-<td style="text-align:center">13428</td>
-</tr>
-<tr>
-<td style="text-align:center">Health</td>
-<td style="text-align:center">12979</td>
-</tr>
-<tr>
-<td style="text-align:center">Business and Finance - Asia</td>
-<td style="text-align:center">12723</td>
-</tr>
-<tr>
-<td style="text-align:center">Asia</td>
-<td style="text-align:center">11163</td>
-</tr>
-<tr>
-<td style="text-align:center">Bookshelf</td>
-<td style="text-align:center">11128</td>
-</tr>
-<tr>
-<td style="text-align:center">World</td>
-<td style="text-align:center">10833</td>
-</tr>
-<tr>
-<td style="text-align:center">Media &amp; Marketing</td>
-<td style="text-align:center">10629</td>
-</tr>
-<tr>
-<td style="text-align:center">Asian Business News</td>
-<td style="text-align:center">10428</td>
-</tr>
-<tr>
-<td style="text-align:center">Commodities</td>
-<td style="text-align:center">10159</td>
-</tr>
-<tr>
-<td style="text-align:center">Tech</td>
-<td style="text-align:center">10153</td>
-</tr>
-</tbody>
-</table>
-<p>主题中包含中国的文章有</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Sector</th>
-<th style="text-align:center">ArticleNum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">China 2008</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">China 2009</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">Snow in China</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">China Stocks</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">China&rsquo;s Changing Workforce</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:center">China&rsquo;s Money Trail</td>
-<td style="text-align:center">2</td>
-</tr>
-<tr>
-<td style="text-align:center">China&rsquo;s Rising Risks</td>
-<td style="text-align:center">4</td>
-</tr>
-<tr>
-<td style="text-align:center">China: The People&rsquo;s Republic at 50</td>
-<td style="text-align:center">12</td>
-</tr>
-<tr>
-<td style="text-align:center">My China</td>
-<td style="text-align:center">12</td>
-</tr>
-<tr>
-<td style="text-align:center">China Trade Breakthrough</td>
-<td style="text-align:center">19</td>
-</tr>
-<tr>
-<td style="text-align:center">China&rsquo;s World</td>
-<td style="text-align:center">79</td>
-</tr>
-<tr>
-<td style="text-align:center">China Circuit</td>
-<td style="text-align:center">86</td>
-</tr>
-<tr>
-<td style="text-align:center">Chinas World</td>
-<td style="text-align:center">127</td>
-</tr>
-<tr>
-<td style="text-align:center">China News</td>
-<td style="text-align:center">1101</td>
-</tr>
-<tr>
-<td style="text-align:center">China</td>
-<td style="text-align:center">1875</td>
-</tr>
-<tr>
-<td style="text-align:center">Total</td>
-<td style="text-align:center">3322</td>
-</tr>
-</tbody>
-</table>
-<h4 id="3-爬取文章内容">3. 爬取文章内容</h4>
-<h5 id="31-分析网页">3.1 分析网页</h5>
-<p>从网页中获取所有文字信息并不难，但是 WSJ 文章会在文章中插入超链接，如果不做处理的话，爬下来的文字会有很多不符合阅读习惯的换行。我做的处理有：</p>
-<ul>
-<li>使用函数 <code>translist(infolist)</code> 筛掉不必要的空格和换行</li>
-<li>没有采用直接获取符合条件 html element 下的所有文字的方法，而是对每个 element 进行遍历进行更加精细的筛选。这样做的速度稍微慢一点，但是基本上能呈现比较好的视觉呈现效果</li>
-</ul>
-<p>
-  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1gredmij3mkj31e80woqiq.jpg" alt="image-20210611095037381">
-
-</p>
-<h5 id="32-爬取文章代码">3.2 爬取文章代码</h5>
+</div><h3 id="code-iii-get-article-info-and-write-into-article-list">Code III: Get Article Info and Write Into Article List</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -860,71 +657,102 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62">62</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63">63</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64">64</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65">65</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66">66</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67">67</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68">68</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69">69</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70">70</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71">71</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72">72</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
-<span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
-<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
-<span style="color:#f92672">import</span> <span style="color:#111">re</span>
-<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
-<span style="color:#f92672">import</span> <span style="color:#111">requests</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
-<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">import</span> <span style="color:#111">requests</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">import</span> <span style="color:#111">unicodedata</span>
-<span style="color:#f92672">from</span> <span style="color:#111">string</span> <span style="color:#f92672">import</span> <span style="color:#111">punctuation</span>
+<span style="color:#f92672">from</span> <span style="color:#111">datetime</span> <span style="color:#f92672">import</span> <span style="color:#111">datetime</span>
 
-<span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_excel</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/mengjiexu/Dropbox/wsj0512/wsj0513.xlsx&#34;</span><span style="color:#111">,</span><span style="color:#111">header</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+<span style="color:#75715e"># Read the article ids from the article list obtained from last step</span>
+<span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;reslist_twitter.csv&#34;</span><span style="color:#111">,</span> <span style="color:#111">header</span> <span style="color:#f92672">=</span> <span style="color:#111">None</span><span style="color:#111">)</span>
 
-<span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;User-Agent&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;</span><span style="color:#111">,</span>
-<span style="color:#d88200">&#34;content-type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;application/json; charset=UTF-8&#34;</span><span style="color:#111">,</span>
-<span style="color:#d88200">&#34;Connection&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;keep-alive&#34;</span>
-<span style="color:#111">}</span>
+<span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#34;User-Agent&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;&#34;</span><span style="color:#111">,</span>
+        <span style="color:#d88200">&#34;Accept&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*/*&#34;</span><span style="color:#111">,</span>
+        <span style="color:#d88200">&#34;Accept-Language&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;en-US,en;q=0.5&#34;</span>
+           <span style="color:#111">}</span>
+<span style="color:#75715e"># A function dealing with the mismatching between ASCII and Unicode</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">transuni</span><span style="color:#111">(</span><span style="color:#111">str</span><span style="color:#111">):</span>
+    <span style="color:#111">str</span> <span style="color:#f92672">=</span> <span style="color:#111">unicodedata</span><span style="color:#f92672">.</span><span style="color:#111">normalize</span><span style="color:#111">(</span><span style="color:#d88200">&#39;NFD&#39;</span><span style="color:#111">,</span> <span style="color:#111">str</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#d88200">&#39;ascii&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;ignore&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">(</span><span style="color:#d88200">&#34;utf-8&#34;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">(</span><span style="color:#111">str</span><span style="color:#111">)</span>
 
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">translist</span><span style="color:#111">(</span><span style="color:#111">infolist</span><span style="color:#111">):</span>
-    <span style="color:#111">out</span> <span style="color:#f92672">=</span> <span style="color:#111">list</span><span style="color:#111">(</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#00a8c8">lambda</span> <span style="color:#111">s</span><span style="color:#111">:</span> <span style="color:#111">s</span> <span style="color:#f92672">and</span> <span style="color:#111">(</span><span style="color:#111">type</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">)</span> <span style="color:#f92672">!=</span> <span style="color:#111">str</span> <span style="color:#f92672">or</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">())</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">),</span> <span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">infolist</span><span style="color:#111">]))</span>
-    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">out</span><span style="color:#111">)</span>
+<span style="color:#75715e"># A function transferring timestamp into date format</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">transdate</span><span style="color:#111">(</span><span style="color:#111">stamp</span><span style="color:#111">):</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">stamp</span><span style="color:#111">:</span>
+        <span style="color:#111">date</span> <span style="color:#f92672">=</span> <span style="color:#111">datetime</span><span style="color:#f92672">.</span><span style="color:#111">fromtimestamp</span><span style="color:#111">(</span><span style="color:#111">int</span><span style="color:#111">(</span><span style="color:#111">stamp</span><span style="color:#111">)</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">strftime</span><span style="color:#111">(</span><span style="color:#d88200">&#34;%Y-%m-</span><span style="color:#d88200">%d</span><span style="color:#d88200"> %H:%M&#34;</span><span style="color:#111">)</span> 
+    <span style="color:#00a8c8">else</span><span style="color:#111">:</span>
+        <span style="color:#111">date</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;Invalid&#34;</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">date</span><span style="color:#111">)</span>
 
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">parsearticle</span><span style="color:#111">(</span><span style="color:#111">title</span><span style="color:#111">,</span> <span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">articlelink</span><span style="color:#111">):</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getarticle</span><span style="color:#111">(</span><span style="color:#111">id</span><span style="color:#111">):</span>
+    <span style="color:#75715e"># Write cookies into RAM</span>
     <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;wsjcookies.txt&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;r&#34;</span><span style="color:#111">)</span><span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
         <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">f</span><span style="color:#f92672">.</span><span style="color:#111">read</span><span style="color:#111">()</span>
         <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">cookies</span><span style="color:#111">)</span>
+		
+    <span style="color:#75715e"># Update url with article ID</span>
+    <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;https://www.wsj.com/search?id=&#34;</span><span style="color:#f92672">+</span><span style="color:#111">id</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;&amp;type=article%7Ccapi&#34;</span>
+
+    <span style="color:#75715e"># Open a session</span>
     <span style="color:#111">session</span> <span style="color:#f92672">=</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">session</span><span style="color:#111">()</span>
-    <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">session</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">articlelink</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">cookies</span><span style="color:#111">)</span>
-    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+		
+    <span style="color:#75715e"># Load the session with headers and cookies</span>
+    <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">session</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">cookies</span><span style="color:#f92672">=</span><span style="color:#111">cookies</span><span style="color:#111">)</span>
+		
+    <span style="color:#75715e"># Name the root node as &#39;info&#39;</span>
+    <span style="color:#111">info</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">text</span><span style="color:#111">)[</span><span style="color:#d88200">&#39;data&#39;</span><span style="color:#111">]</span>
+		
+    <span style="color:#75715e"># Extract needed features</span>
+    <span style="color:#111">section</span> <span style="color:#f92672">=</span> <span style="color:#111">transuni</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;articleSection&#39;</span><span style="color:#111">])</span>
+    <span style="color:#111">byline</span> <span style="color:#f92672">=</span> <span style="color:#111">transuni</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;byline&#39;</span><span style="color:#111">])</span>
+    <span style="color:#111">headline</span> <span style="color:#f92672">=</span> <span style="color:#111">transuni</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;headline&#39;</span><span style="color:#111">])</span>
+    <span style="color:#111">printheadline</span> <span style="color:#f92672">=</span> <span style="color:#111">transuni</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;printedition_wsj_headline&#39;</span><span style="color:#111">])</span>
+    <span style="color:#111">summary</span> <span style="color:#f92672">=</span> <span style="color:#111">transuni</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;summary&#39;</span><span style="color:#111">])</span>
+    <span style="color:#111">href</span> <span style="color:#f92672">=</span> <span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;url&#39;</span><span style="color:#111">]</span>
+    <span style="color:#111">wordcount</span> <span style="color:#f92672">=</span> <span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;wordCount&#39;</span><span style="color:#111">]</span>
+    <span style="color:#111">createat</span> <span style="color:#f92672">=</span> <span style="color:#111">transdate</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;timestampCreatedAt&#39;</span><span style="color:#111">])</span>
+    <span style="color:#111">printat</span> <span style="color:#f92672">=</span> <span style="color:#111">transdate</span><span style="color:#111">(</span><span style="color:#111">info</span><span style="color:#111">[</span><span style="color:#d88200">&#39;timestampPrint&#39;</span><span style="color:#111">])</span> 
     
-    <span style="color:#111">page</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">content</span><span style="color:#111">)</span>
-
-    <span style="color:#111">arcontent</span> <span style="color:#f92672">=</span> <span style="color:#111">title</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n\n</span><span style="color:#d88200">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#111">date</span> <span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n\n</span><span style="color:#d88200">&#39;</span>
-
-    <span style="color:#111">content</span> <span style="color:#f92672">=</span> <span style="color:#111">page</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[@class=&#39;article-content  &#39;]//p&#34;</span><span style="color:#111">)</span>
-    <span style="color:#00a8c8">for</span> <span style="color:#111">element</span> <span style="color:#f92672">in</span> <span style="color:#111">content</span><span style="color:#111">:</span>
-        <span style="color:#111">subelement</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">tostring</span><span style="color:#111">(</span><span style="color:#111">element</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">()</span>
-        <span style="color:#111">subpage</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">subelement</span><span style="color:#111">)</span>
-        <span style="color:#111">tree</span> <span style="color:#f92672">=</span> <span style="color:#111">subpage</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#39;//text()&#39;</span><span style="color:#111">)</span>
-        <span style="color:#111">line</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">(</span><span style="color:#111">translist</span><span style="color:#111">(</span><span style="color:#111">tree</span><span style="color:#111">))</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\t</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;  &#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span><span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n\n</span><span style="color:#d88200">&#39;</span>
-        <span style="color:#111">arcontent</span> <span style="color:#f92672">+=</span> <span style="color:#111">line</span>
-
-    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">arcontent</span><span style="color:#111">)</span>
-
-
-<span style="color:#00a8c8">for</span> <span style="color:#111">row</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">iterrows</span><span style="color:#111">()):</span>
-    <span style="color:#111">title</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;-&#39;</span><span style="color:#111">)</span>
-    <span style="color:#111">articlelink</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">2</span><span style="color:#111">]</span>
-    <span style="color:#111">date</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">3</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;-&#39;</span><span style="color:#111">)</span>
-    <span style="color:#111">arcontent</span> <span style="color:#f92672">=</span> <span style="color:#111">parsearticle</span><span style="color:#111">(</span><span style="color:#111">title</span><span style="color:#111">,</span> <span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">articlelink</span><span style="color:#111">)</span>
-    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/mengjiexu/Dropbox/articles/</span><span style="color:#d88200">%s</span><span style="color:#d88200">_</span><span style="color:#d88200">%s</span><span style="color:#d88200">.txt&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">date</span><span style="color:#111">,</span><span style="color:#111">title</span><span style="color:#111">),</span><span style="color:#d88200">&#39;w&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
-        <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">(</span><span style="color:#111">arcontent</span><span style="color:#111">))</span>
+    <span style="color:#111">res</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">section</span><span style="color:#111">,</span> <span style="color:#111">byline</span><span style="color:#111">,</span> <span style="color:#111">headline</span><span style="color:#111">,</span> <span style="color:#111">printheadline</span><span style="color:#111">,</span> <span style="color:#111">summary</span><span style="color:#111">,</span> <span style="color:#111">href</span><span style="color:#111">,</span> <span style="color:#111">wordcount</span><span style="color:#111">,</span> <span style="color:#111">createat</span><span style="color:#111">,</span> <span style="color:#111">printat</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">res</span><span style="color:#111">)</span>
+  
+<span style="color:#75715e"># Write article information and article id into csv file</span>
+<span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#39;resref.csv&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+    <span style="color:#111">h</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">g</span><span style="color:#111">)</span>
+    <span style="color:#111">headline</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;Keywords&#39;</span><span style="color:#111">,</span>	<span style="color:#d88200">&#39;PageNum&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;ArticleID&#39;</span><span style="color:#111">,</span>	<span style="color:#d88200">&#39;ArticleType&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;Section&#39;</span><span style="color:#111">,</span>	<span style="color:#d88200">&#39;Authors&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;Headline&#39;</span><span style="color:#111">,</span> \
+                <span style="color:#d88200">&#39;PrintedHeadline&#39;</span><span style="color:#111">,</span>	<span style="color:#d88200">&#39;Summary&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;Url&#39;</span><span style="color:#111">,</span>	<span style="color:#d88200">&#39;WordCount&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;CreatedAt&#39;</span><span style="color:#111">,</span>	<span style="color:#d88200">&#39;PrintedAt&#39;</span><span style="color:#111">]</span>
+    <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">headline</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">iterrows</span><span style="color:#111">()):</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">line</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">3</span><span style="color:#111">]</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;article|capi&#34;</span><span style="color:#111">:</span>
+            <span style="color:#111">res</span> <span style="color:#f92672">=</span> <span style="color:#111">getarticle</span><span style="color:#111">(</span><span style="color:#111">line</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">2</span><span style="color:#111">])</span>
+            <span style="color:#111">h</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">list</span><span style="color:#111">(</span><span style="color:#111">line</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">])</span><span style="color:#f92672">+</span><span style="color:#111">res</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h5 id="33-爬取文章样例">3.3 爬取文章样例</h5>
-<p>
-  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1greeas4m6cj31j410sqdm.jpg" alt="image-20210611095918552">
-
-</p>
-<h4 id="4-翻译">4. 翻译</h4>
-<p>英语阅读速度比较慢的朋友可以调用 <a href="https://api.fanyi.baidu.com/api/trans/product/desktop?req=detail">百度 API</a>  对文章进行翻译，这样可以一目十行快速提取大量文章信息。为了提高翻译速度，最好整篇文章作为一个文字整体翻译。</p>
-<h5 id="41-翻译文章代码">4.1 翻译文章代码</h5>
+</div><h3 id="code-iv-extract-article-contents">Code IV: Extract Article Contents</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -974,63 +802,107 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45">45</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46">46</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47">47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48">48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49">49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
-<span style="color:#f92672">import</span> <span style="color:#111">requests</span>
-<span style="color:#f92672">import</span> <span style="color:#111">random</span>
-<span style="color:#f92672">import</span> <span style="color:#111">json</span>
-<span style="color:#f92672">from</span> <span style="color:#111">hashlib</span> <span style="color:#f92672">import</span> <span style="color:#111">md5</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
+<span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
+<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
+<span style="color:#f92672">import</span> <span style="color:#111">re</span>
 <span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">import</span> <span style="color:#111">requests</span>
+<span style="color:#f92672">import</span> <span style="color:#111">json</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">import</span> <span style="color:#111">unicodedata</span>
+<span style="color:#f92672">from</span> <span style="color:#111">string</span> <span style="color:#f92672">import</span> <span style="color:#111">punctuation</span>
 
-<span style="color:#111">file_list</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">listdir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/mengjiexu/Dropbox/articles/&#34;</span><span style="color:#111">)</span>
+<span style="color:#75715e"># Read the article id list</span>
+<span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;resref.csv&#34;</span><span style="color:#111">,</span><span style="color:#111">header</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span>
 
-<span style="color:#75715e"># Set your own appid/appkey.</span>
-<span style="color:#111">appid</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;xxx&#39;</span>
-<span style="color:#111">appkey</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;xxx&#39;</span>
+<span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;User-Agent&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;</span><span style="color:#111">,</span>
+<span style="color:#d88200">&#34;content-type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;application/json; charset=UTF-8&#34;</span><span style="color:#111">,</span>
+<span style="color:#d88200">&#34;Connection&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;keep-alive&#34;</span>
+<span style="color:#111">}</span>
 
-<span style="color:#75715e"># For list of language codes, please refer to `https://api.fanyi.baidu.com/doc/21`</span>
-<span style="color:#111">from_lang</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;en&#39;</span>
-<span style="color:#111">to_lang</span> <span style="color:#f92672">=</span>  <span style="color:#d88200">&#39;zh&#39;</span>
+<span style="color:#75715e"># A function filtering unnecessary spaces and line break</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">translist</span><span style="color:#111">(</span><span style="color:#111">infolist</span><span style="color:#111">):</span>
+    <span style="color:#111">out</span> <span style="color:#f92672">=</span> <span style="color:#111">list</span><span style="color:#111">(</span><span style="color:#111">filter</span><span style="color:#111">(</span><span style="color:#00a8c8">lambda</span> <span style="color:#111">s</span><span style="color:#111">:</span> <span style="color:#111">s</span> <span style="color:#f92672">and</span> <span style="color:#111">(</span><span style="color:#111">type</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">)</span> <span style="color:#f92672">!=</span> <span style="color:#111">str</span> <span style="color:#f92672">or</span> <span style="color:#111">len</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">())</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#111">),</span>\ 	  <span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">infolist</span><span style="color:#111">]))</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">out</span><span style="color:#111">)</span>
 
-<span style="color:#111">endpoint</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;http://api.fanyi.baidu.com&#39;</span>
-<span style="color:#111">path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;/api/trans/vip/translate&#39;</span>
-<span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#111">endpoint</span> <span style="color:#f92672">+</span> <span style="color:#111">path</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">parsearticle</span><span style="color:#111">(</span><span style="color:#111">title</span><span style="color:#111">,</span> <span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">articlelink</span><span style="color:#111">):</span>
+  	
+    <span style="color:#75715e"># Obtain content of article page</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;wsjcookies.txt&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;r&#34;</span><span style="color:#111">)</span><span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+        <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">f</span><span style="color:#f92672">.</span><span style="color:#111">read</span><span style="color:#111">()</span>
+        <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">cookies</span><span style="color:#111">)</span>
+    <span style="color:#111">session</span> <span style="color:#f92672">=</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">session</span><span style="color:#111">()</span>
+    <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">session</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">articlelink</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">cookies</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    
+    <span style="color:#111">page</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">content</span><span style="color:#111">)</span>
+		
+    <span style="color:#75715e"># First record title and date into article content</span>
+    <span style="color:#111">arcontent</span> <span style="color:#f92672">=</span> <span style="color:#111">title</span> <span style="color:#f92672">+</span> <span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n\n</span><span style="color:#d88200">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#111">date</span> <span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n\n</span><span style="color:#d88200">&#39;</span>
+    
+		<span style="color:#75715e"># Get article content</span>
+    <span style="color:#111">content</span> <span style="color:#f92672">=</span> <span style="color:#111">page</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[@class=&#39;article-content  &#39;]//p&#34;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">element</span> <span style="color:#f92672">in</span> <span style="color:#111">content</span><span style="color:#111">:</span>
+        <span style="color:#111">subelement</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">tostring</span><span style="color:#111">(</span><span style="color:#111">element</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">()</span>
+        <span style="color:#111">subpage</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">subelement</span><span style="color:#111">)</span>
+        <span style="color:#111">tree</span> <span style="color:#f92672">=</span> <span style="color:#111">subpage</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#39;//text()&#39;</span><span style="color:#111">)</span>
+        <span style="color:#111">line</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">(</span><span style="color:#111">translist</span><span style="color:#111">(</span><span style="color:#111">tree</span><span style="color:#111">))</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\t</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;  &#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span><span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n\n</span><span style="color:#d88200">&#39;</span>
+        <span style="color:#111">arcontent</span> <span style="color:#f92672">+=</span> <span style="color:#111">line</span>
 
-<span style="color:#75715e"># Generate salt and sign</span>
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">make_md5</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf-8&#39;</span><span style="color:#111">):</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#111">md5</span><span style="color:#111">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#111">encoding</span><span style="color:#111">))</span><span style="color:#f92672">.</span><span style="color:#111">hexdigest</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">arcontent</span><span style="color:#111">)</span>
 
-<span style="color:#111">salt</span> <span style="color:#f92672">=</span> <span style="color:#111">random</span><span style="color:#f92672">.</span><span style="color:#111">randint</span><span style="color:#111">(</span><span style="color:#ae81ff">32768</span><span style="color:#111">,</span> <span style="color:#ae81ff">65536</span><span style="color:#111">)</span>
-<span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;Content-Type&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;application/x-www-form-urlencoded&#39;</span><span style="color:#111">}</span>
-
-<span style="color:#00a8c8">def</span> <span style="color:#75af00">trans</span><span style="color:#111">(</span><span style="color:#111">query</span><span style="color:#111">):</span>
-
-	<span style="color:#111">sign</span> <span style="color:#f92672">=</span> <span style="color:#111">make_md5</span><span style="color:#111">(</span><span style="color:#111">appid</span> <span style="color:#f92672">+</span> <span style="color:#111">query</span> <span style="color:#f92672">+</span> <span style="color:#111">str</span><span style="color:#111">(</span><span style="color:#111">salt</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">appkey</span><span style="color:#111">)</span>
-
-	<span style="color:#75715e"># Build request</span>
-	<span style="color:#111">payload</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;appid&#39;</span><span style="color:#111">:</span> <span style="color:#111">appid</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;q&#39;</span><span style="color:#111">:</span> <span style="color:#111">query</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;from&#39;</span><span style="color:#111">:</span> <span style="color:#111">from_lang</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;to&#39;</span><span style="color:#111">:</span> <span style="color:#111">to_lang</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;salt&#39;</span><span style="color:#111">:</span> <span style="color:#111">salt</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;sign&#39;</span><span style="color:#111">:</span> <span style="color:#111">sign</span><span style="color:#111">}</span>
-
-	<span style="color:#75715e"># Send request</span>
-	<span style="color:#111">r</span> <span style="color:#f92672">=</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">post</span><span style="color:#111">(</span><span style="color:#111">url</span><span style="color:#111">,</span> <span style="color:#111">params</span><span style="color:#f92672">=</span><span style="color:#111">payload</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">headers</span><span style="color:#111">)</span>
-	<span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">r</span><span style="color:#f92672">.</span><span style="color:#111">json</span><span style="color:#111">()</span>
-
-	<span style="color:#75715e"># Show response</span>
-	<span style="color:#111">rusult</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">dumps</span><span style="color:#111">(</span><span style="color:#111">result</span><span style="color:#111">,</span> <span style="color:#111">indent</span><span style="color:#f92672">=</span><span style="color:#ae81ff">4</span><span style="color:#111">,</span> <span style="color:#111">ensure_ascii</span><span style="color:#f92672">=</span><span style="color:#111">False</span><span style="color:#111">)</span>
-
-	<span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">result</span><span style="color:#111">[</span><span style="color:#d88200">&#34;trans_result&#34;</span><span style="color:#111">][</span><span style="color:#ae81ff">0</span><span style="color:#111">][</span><span style="color:#d88200">&#34;dst&#34;</span><span style="color:#111">])</span>
-
-<span style="color:#00a8c8">for</span> <span style="color:#111">file</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">file_list</span><span style="color:#111">):</span>
-	<span style="color:#111">content</span> <span style="color:#f92672">=</span><span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/mengjiexu/Dropbox/articles/</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">file</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">read</span><span style="color:#111">()</span>
-	<span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#111">trans</span><span style="color:#111">(</span><span style="color:#111">content</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()))</span>
+<span style="color:#00a8c8">for</span> <span style="color:#111">row</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">iterrows</span><span style="color:#111">()):</span>
+    <span style="color:#75715e"># Column Headline</span>
+    <span style="color:#111">title</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">6</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;_&#39;</span><span style="color:#111">)</span>
+    <span style="color:#75715e"># Column Url</span>
+    <span style="color:#111">articlelink</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">9</span><span style="color:#111">]</span>
+    <span style="color:#75715e"># Column CreatedAt</span>
+    <span style="color:#111">date</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span><span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">][</span><span style="color:#ae81ff">11</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34; &#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">replace</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;-&#39;</span><span style="color:#111">)</span>
+    <span style="color:#75715e"># Write article content into the file named by its headline and date</span>
+    <span style="color:#111">arcontent</span> <span style="color:#f92672">=</span> <span style="color:#111">parsearticle</span><span style="color:#111">(</span><span style="color:#111">title</span><span style="color:#111">,</span> <span style="color:#111">date</span><span style="color:#111">,</span> <span style="color:#111">articlelink</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">_</span><span style="color:#d88200">%s</span><span style="color:#d88200">.txt&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">date</span><span style="color:#111">,</span><span style="color:#111">title</span><span style="color:#111">),</span><span style="color:#d88200">&#39;w&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+        <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">(</span><span style="color:#111">arcontent</span><span style="color:#111">))</span>
 </code></pre></td></tr></table>
 </div>
-</div><h5 id="42-翻译文章样例">4.2 翻译文章样例</h5>
-<p>
-  <img src="http://ww1.sinaimg.cn/large/008iTKOogy1gredy2v7mxj31ki1181kx.jpg" alt="image-20210611100138437">
-
-</p>
-<h4 id="参考文献">参考文献</h4>
+</div><h2 id="preview-results">Preview Results</h2>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/es.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 6: Preview Article List</div>
+</center>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/ar.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 7: Preview Article Content</div>
+</center>
+<h2 id="reference">Reference</h2>
 <ul>
 <li>
 <p>Zhu, Christina. 2019. “Big Data as a Governance Mechanism.” <em>The Review of Financial Studies</em> 32 (5): 2021–61.<a href="https://doi.org/10.1093/rfs/hhy081">-PDF-</a>.</p>
@@ -1042,17 +914,6 @@
 <p>Mukherjee, Abhiroop, George Panayotov, and Janghoon Shon. 2021. “Eye in the Sky: Private Satellites and Government Macro Data.” <em>Journal of Financial Economics</em>, March. <a href="https://doi.org/10.1016/j.jfineco.2021.03.002">-PDF-</a>.</p>
 </li>
 </ul>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>写上对应的英语表达是确保读者理解的意思和我表达的意思不出现偏差而做的一个双重解释。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>获取 WSJ Archive 信息需要购买 WSJ 账号，本文只做交流学习使用，不建议使用本文内容获利。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
 
 
                 
@@ -1060,11 +921,11 @@
                 <hr>
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/post/parse-shareholder-activism/" data-toggle="tooltip" data-placement="top" title="Get Shareholder Activism Data From SEC EDGAR ">Next
-                            Post &rarr;</a>
+                    <li class="previous">
+                        <a href="/post/noaa-english-version/" data-toggle="tooltip" data-placement="top" title="From NOAA ISD Dataset to Panel Data">&larr;
+                            Previous Post</a>
                     </li>
+                    
                     
                 </ul>
 
@@ -1073,14 +934,15 @@
 
 <div id="hyvor-talk-view"></div>
 <script type="text/javascript">
-    var HYVOR_TALK_WEBSITE = 4329; 
+    var HYVOR_TALK_WEBSITE = 1798; 
     var HYVOR_TALK_CONFIG = {
         url: false,
-        id: 4329
+        id: false
 };
 </script>
 <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 </div>
+
 
 
             </div>
@@ -1171,6 +1033,12 @@
 		<p class="copyright text-muted">
                     Copyright &copy; Mengjie Xu 2021
                     <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
                 </p>
             </div>
         </div>
