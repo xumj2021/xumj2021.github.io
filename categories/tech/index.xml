@@ -25,20 +25,5 @@
       <description>Motivation The motivation to clean this dataset is from Mukherjee et al. (2021, JFE). In this paper, the authors documented that one can get ahead-of-announcement estimation about the storage hubs for crude oil in the US from satellite images and trade on it. This will decrease the market reaction around the release of official figures because the oil storage information has been partially revealed during the traders&#39; arbitrage before announcement due to traders&#39; use of satellite images.</description>
     </item>
     
-    <item>
-      <title>Get Shareholder Activism Data From SEC EDGAR </title>
-      <link>https://xumj2021.github.io/post/parse-shareholder-activism/</link>
-      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://xumj2021.github.io/post/parse-shareholder-activism/</guid>
-      <description>写论文的时候需要搞一个 shareholder activism 变量，但是学校没买。看了下 Brav et al. (2018 JFE)，发现这个数据是直接从 SEC EDGAR 的 13D 文件整理的，等图书馆订要好几天，索性自己爬了。
-获取 Cookies 我一般用 Selenium 获取 cookies，这种方法自动化，而且几乎对任何网站都适用。对于 EDGAR，由于默认只显示文件名称，文件日期和涉及实体的名称。打开网页后，需要下拉页面勾选 CIK，FIle number 等其他你需要的选项。其中最关键的是 CIK ，这是链接 SEC File 和其他财务数据库 (Compustat，CRSP 等) 的关键识别变量。
-打开 源网址 后呈现的页面如下
- 下拉默认只有三列数据
- 勾选了其他数据栏后会呈现多列数据，相应的 Cookies 也会发现变化
- 代码
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31  from selenium import webdriver import time import json option = webdriver.</description>
-    </item>
-    
   </channel>
 </rss>
