@@ -288,7 +288,7 @@ from datetime import datetime
 # Read the article ids from the article list obtained from last step
 df = pd.read_csv("reslist_twitter.csv", header = None)
 
-headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) 		 Gecko/20100101 Firefox/89.0",
+headers = {"User-Agent": "'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0'",
         "Accept": "*/*",
         "Accept-Language": "en-US,en;q=0.5"
            }
@@ -340,7 +340,8 @@ def getarticle(id):
 # Write article information into existed article list
 with open('resref.csv', 'a') as g:
     h = csv.writer(g)
-    headline = ['Keywords',	'PageNum', 'ArticleID',	'ArticleType', 'Section',	'Authors', 'Headline', 'PrintedHeadline',	'Summary', 'Url',	'WordCount', 'CreatedAt',	'PrintedAt']
+    headline = ['Keywords',	'PageNum', 'ArticleID',	'ArticleType', 'Section',	'Authors', 'Headline', \
+                'PrintedHeadline',	'Summary', 'Url',	'WordCount', 'CreatedAt',	'PrintedAt']
     g.writerow(headline)
     for line in tqdm(df.iterrows()):
         if line[1][3] == "article|capi":
