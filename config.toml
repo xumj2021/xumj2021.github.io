@@ -31,6 +31,7 @@ paginate = 20 #frontpage pagination
   hyvor = true
   showtoc = true
 
+  leancloud = true
   leancloud_app_id = '3P9jaIQ2NvKaz5vHlUzUD98r-MdYXbMMI'
   leancloud_app_key = 'XadtPSYxmWAQm9iUAyMCzHOG'
 
