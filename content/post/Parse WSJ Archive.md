@@ -8,7 +8,7 @@ author:      ""
 toc:      	 true
 image:       "https://cdn.pixabay.com/photo/2016/11/23/15/49/bundle-1853667_1280.jpg"
 tags:        ["WSJ", "Financial News", "Anecdotes"]
-categories:  ["Tech" ]
+categories:  ["Crawler" ]
 
 ---
 

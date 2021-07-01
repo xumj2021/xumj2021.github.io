@@ -8,7 +8,7 @@ author:      "Mengjie Xu"
 toc:         true
 image:       "https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/space-communications-satellite-earth-featured.jpeg"
 tags:        ["NOAA", "Geo-Economics"]
-categories:  ["Tech" ]
+categories:  ["Data" ]
 
 
 ---
@@ -91,9 +91,8 @@ The original data source is [National Oceanic and Atmospheric Administration](ht
       color: #999;
       padding: 2px;">Figure 3: Sample ISD File</div>
   </center>
-
   
-
+  
 - Variable Definitions
 
   > Integrated Surface Data - Lite 
