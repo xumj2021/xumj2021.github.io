@@ -232,13 +232,14 @@
     <li><a href="#processing-data">Processing Data</a>
       <ul>
         <li><a href="#step-1-extract-data-from-ftp-server">Step 1: Extract Data From FTP Server</a></li>
-        <li><a href="#step-2-preparing-data">Step 2: Preparing Data</a></li>
+        <li><a href="#step-2-prepare-data">Step 2: Prepare Data</a></li>
         <li><a href="#step-3-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 3: Write All ISD data in a Given Year Into A Same dta file</a></li>
         <li><a href="#step-4-import-linktable-in-order-to-map-station-id-into-province">Step 4: Import Linktable in Order to Map Station Id into Province</a></li>
         <li><a href="#step-5-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 5: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</a></li>
         <li><a href="#step-6-append-all-province-year-level-average-dta-files">Step 6: Append All Province-Year Level Average Dta Files</a></li>
       </ul>
     </li>
+    <li><a href="#sample-outcome">Sample Outcome</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -494,7 +495,7 @@
 				<span style="color:#111">copy</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="step-2-preparing-data">Step 2: Preparing Data</h3>
+</div><h3 id="step-2-prepare-data">Step 2: Prepare Data</h3>
 <p>As the number of ISD files is too big, it will create too many redundent <code>dta</code> files when writing those datasets into <code>Stata</code>. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder &ldquo;china_isd_lite_&rdquo; + the respect year. This procedure is implemented in <code>Python</code>. All the following steps are implemented in <code>Stata</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -848,7 +849,18 @@ save yearclimate2000-2020, replace
 * Save the year-province level panel data into dta file named by &#34;yearclimate2000-2020&#34;
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="references">References</h2>
+</div><h2 id="sample-outcome">Sample Outcome</h2>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/noaa.png" width=800 height=550>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 8: Sample Outcome: Province-Year Panel Data</div>
+</center>
+<h2 id="references">References</h2>
 <p>Mukherjee, Abhiroop, George Panayotov, and Janghoon Shon. 2021. “Eye in the Sky: Private Satellites and Government Macro Data.” Journal of Financial Economics, March. <a href="https://doi.org/10.1016/j.jfineco.2021.03.002">- PDF -</a></p>
 
 
