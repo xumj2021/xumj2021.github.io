@@ -4,7 +4,7 @@ title:       "Extract Mass Data Via Bloomberg API"
 subtitle:    ""
 description: "Operation Enviornment Preparation and Data Extracting"
 date:        2021-07-08
-author:      "Mengjie Xu"
+author:      "Mengjie Xu and Qi Zhang"
 toc:         true
 image:       "https://assets.bbhub.io/image/v1/convert?type=auto&amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2FCG_FX_SB_09_cam02_00061.jpg"
 tags:        ["Bloomberg", "API"]
