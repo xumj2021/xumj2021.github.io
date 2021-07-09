@@ -34,9 +34,9 @@
     
 
     
-    <meta name="description" content="China Stations As An Example">
-    <meta property="og:description" content="China Stations As An Example" />
-    <meta property="twitter:description" content="China Stations As An Example" />
+    <meta name="description" content="China stations as an example">
+    <meta property="og:description" content="China stations as an example" />
+    <meta property="twitter:description" content="China stations as an example" />
     
 
     
@@ -231,11 +231,12 @@
     </li>
     <li><a href="#processing-data">Processing Data</a>
       <ul>
-        <li><a href="#step-1-preparing-data">Step 1: Preparing Data</a></li>
-        <li><a href="#step-2-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 2: Write All ISD data in a Given Year Into A Same dta file</a></li>
-        <li><a href="#step-3-import-linktable-in-order-to-map-station-id-into-province">Step 3: Import Linktable in Order to Map Station Id into Province</a></li>
-        <li><a href="#step-4-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 4: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</a></li>
-        <li><a href="#step-5-append-all-province-year-level-average-dta-files">Step 5: Append All Province-Year Level Average Dta Files</a></li>
+        <li><a href="#step-1-extract-data-from-ftp-server">Step 1: Extract Data From FTP Server</a></li>
+        <li><a href="#step-2-preparing-data">Step 2: Preparing Data</a></li>
+        <li><a href="#step-3-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 3: Write All ISD data in a Given Year Into A Same dta file</a></li>
+        <li><a href="#step-4-import-linktable-in-order-to-map-station-id-into-province">Step 4: Import Linktable in Order to Map Station Id into Province</a></li>
+        <li><a href="#step-5-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 5: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</a></li>
+        <li><a href="#step-6-append-all-province-year-level-average-dta-files">Step 6: Append All Province-Year Level Average Dta Files</a></li>
       </ul>
     </li>
     <li><a href="#references">References</a></li>
@@ -390,7 +391,110 @@
 </li>
 </ul>
 <h2 id="processing-data">Processing Data</h2>
-<h3 id="step-1-preparing-data">Step 1: Preparing Data</h3>
+<h3 id="step-1-extract-data-from-ftp-server">Step 1: Extract Data From FTP Server</h3>
+<p>Suppose we already have a pre-specified station list and need to extract data files only for those stations from the <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">FTP server</a>.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.10.31.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Prespecified Station List/Linktable</div>
+</center>
+<p>To complete this work, you need to</p>
+<ul>
+<li>Find out the file names in the <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">FTP server</a> for each station respectively
+<ul>
+<li>For example,  data in year 2019 for station 58015 has name <code>580150-99999-2019.gz</code></li>
+<li>We could infer the names in <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">FTP server</a> contains three parts
+<ul>
+<li>Station ID (5 digits) followed by a &ldquo;0&rdquo;</li>
+<li>NCDC WBAN Number (typically <code>99999</code> for Chinese stations)</li>
+<li>Record year</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Filter out the data files in the <a href="ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/">FTP server</a> which belongs to the pre-specified station id list</li>
+<li>Copy the selected data files to your local folder</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">shutil</span> <span style="color:#f92672">import</span> <span style="color:#111">copyfile</span>
+<span style="color:#f92672">from</span> <span style="color:#111">sys</span> <span style="color:#f92672">import</span> <span style="color:#111">exit</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">import</span> <span style="color:#111">os</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
+
+<span style="color:#75715e"># import pre-specified station id list</span>
+<span style="color:#111">stations</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#39;linktable.csv&#39;</span><span style="color:#111">,</span> <span style="color:#111">header</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># find out all the FTP server data file names for the stations you need</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getchinalist</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">):</span>
+	<span style="color:#111">china_list</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">0-99999-</span><span style="color:#d88200">%s</span><span style="color:#d88200">.gz&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">year</span><span style="color:#111">)</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">stations</span><span style="color:#111">[</span><span style="color:#d88200">&#39;station&#39;</span><span style="color:#111">][</span><span style="color:#ae81ff">1</span><span style="color:#111">:]]</span>
+	<span style="color:#111">file_list</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">listdir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Volumes/isd-lite/</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
+	<span style="color:#00a8c8">return</span><span style="color:#111">([</span><span style="color:#111">china_list</span><span style="color:#111">,</span> <span style="color:#111">file_list</span><span style="color:#111">])</span>
+
+<span style="color:#75715e"># Copy the files from FTP server to your local folder</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">copy</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">):</span>
+	<span style="color:#111">source</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Volumes/isd-lite/</span><span style="color:#d88200">%s</span><span style="color:#d88200">/</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">)</span>
+	<span style="color:#111">target</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/mengjiexu/Dropbox/NOAA/isd</span><span style="color:#d88200">%s</span><span style="color:#d88200">/</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">)</span>
+	<span style="color:#111">copyfile</span><span style="color:#111">(</span><span style="color:#111">source</span><span style="color:#111">,</span> <span style="color:#111">target</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Open a csv file to record the data you&#39;ve copied</span>
+<span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#39;chinastations.csv&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+	<span style="color:#111">g</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span>
+	<span style="color:#75715e"># Iterate through the year from 1950 to 1999</span>
+	<span style="color:#00a8c8">for</span> <span style="color:#111">year</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">1950</span><span style="color:#111">,</span> <span style="color:#ae81ff">2000</span><span style="color:#111">):</span>
+		<span style="color:#111">[</span><span style="color:#111">china_list</span><span style="color:#111">,</span> <span style="color:#111">file_list</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">getchinalist</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">for</span> <span style="color:#111">file</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">file_list</span><span style="color:#111">):</span>
+			<span style="color:#00a8c8">if</span> <span style="color:#111">file</span> <span style="color:#f92672">in</span> <span style="color:#111">china_list</span><span style="color:#111">:</span>			
+				<span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">([</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">])</span>
+				<span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">path</span><span style="color:#f92672">.</span><span style="color:#111">exists</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/../NOAA/isd</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">):</span>
+					<span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">makedirs</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/../NOAA/isd</span><span style="color:#d88200">%s</span><span style="color:#d88200">/&#34;</span><span style="color:#f92672">%</span><span style="color:#111">year</span><span style="color:#111">)</span>
+				<span style="color:#111">copy</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="step-2-preparing-data">Step 2: Preparing Data</h3>
 <p>As the number of ISD files is too big, it will create too many redundent <code>dta</code> files when writing those datasets into <code>Stata</code>. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder &ldquo;china_isd_lite_&rdquo; + the respect year. This procedure is implemented in <code>Python</code>. All the following steps are implemented in <code>Stata</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -493,7 +597,7 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 4: Preparing Data - 1</div>
+    padding: 2px;">Figure 5: Preparing Data - 1</div>
 </center>
 <p>In each folder, there should be a list of csv files named by the first two digits of station id.</p>
 <center>
@@ -504,9 +608,9 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 5: Preparing Data - 2</div>
+    padding: 2px;">Figure 6: Preparing Data - 2</div>
 </center>
-<h3 id="step-2-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 2: Write All ISD data in a Given Year Into A Same dta file</h3>
+<h3 id="step-3-write-all-isd-data-in-a-given-year-into-a-same-dta-file">Step 3: Write All ISD data in a Given Year Into A Same dta file</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -588,20 +692,11 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 6: ISD Data By Year</div>
+    padding: 2px;">Figure 7: ISD Data By Year</div>
 </center>
-<h3 id="step-3-import-linktable-in-order-to-map-station-id-into-province">Step 3: Import Linktable in Order to Map Station Id into Province</h3>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.10.31.png" width=800 height=500>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 7: LinkTable</div>
-</center>
-<h3 id="step-4-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 4: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</h3>
+<h3 id="step-4-import-linktable-in-order-to-map-station-id-into-province">Step 4: Import Linktable in Order to Map Station Id into Province</h3>
+<p>The linktable is exactly the same as the station list we used in step 1. Suppose you name the imported linktable as <code>linktable.dta</code></p>
+<h3 id="step-5-iterate-pre-cleaned-csv-files-and-average-each-variable-in-each-year">Step 5: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -716,7 +811,7 @@
 }
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="step-5-append-all-province-year-level-average-dta-files">Step 5: Append All Province-Year Level Average Dta Files</h3>
+</div><h3 id="step-6-append-all-province-year-level-average-dta-files">Step 6: Append All Province-Year Level Average Dta Files</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
