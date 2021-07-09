@@ -1,7 +1,0 @@
-[submodule "themes/hugo-theme-cleanwhite-rsy"]
-	path = themes/hugo-theme-cleanwhite-rsy
-	url = https://github.com/youngkin/hugo-theme-cleanwhite-rsy
-[submodule "public"]
-	path = public
-	url = https://github.com/xumj2021/xumj2021.github.io
-	branch = master
