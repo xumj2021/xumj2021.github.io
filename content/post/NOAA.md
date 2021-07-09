@@ -244,7 +244,7 @@ with open('chinastations.csv', 'a') as f:
 
 
 
-### Step 2: Preparing Data
+### Step 2: Prepare Data
 
 As the number of ISD files is too big, it will create too many redundent `dta` files when writing those datasets into `Stata`. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder "china_isd_lite_" + the respect year. This procedure is implemented in `Python`. All the following steps are implemented in `Stata`.
 
@@ -464,6 +464,19 @@ save yearclimate2000-2020, replace
 ```
 
 
+
+## Sample Outcome
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/noaa.png" width=800 height=550>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 8: Sample Outcome: Province-Year Panel Data</div>
+</center>
 
 ## References
 
