@@ -1,6 +1,6 @@
 ---
 
-title:       "Obtain All Searched Results From WSJ Website"
+title:       "Obtain Searched Results From WSJ Website"
 subtitle:    ""
 description: "A shortcut to get anecdotes for your paper"
 date:        2021-06-30
