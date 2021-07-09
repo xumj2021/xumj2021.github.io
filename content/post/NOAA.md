@@ -2,7 +2,7 @@
 
 title:       "From NOAA ISD Dataset to Panel Data"
 subtitle:    ""
-description: "China Stations As An Example"
+description: "China stations as an example"
 date:        2021-06-15
 author:      "Mengjie Xu"
 toc:         true
@@ -179,7 +179,72 @@ The original data source is [National Oceanic and Atmospheric Administration](ht
 
 ## Processing Data
 
-### Step 1: Preparing Data
+### Step 1: Extract Data From FTP Server
+
+Suppose we already have a pre-specified station list and need to extract data files only for those stations from the [FTP server](ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/).
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.10.31.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Prespecified Station List/Linktable</div>
+</center>
+
+To complete this work, you need to
+
+- Find out the file names in the [FTP server](ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/) for each station respectively
+  - For example,  data in year 2019 for station 58015 has name `580150-99999-2019.gz`
+  - We could infer the names in [FTP server](ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/) contains three parts
+    - Station ID (5 digits) followed by a "0"
+    - NCDC WBAN Number (typically `99999` for Chinese stations)
+    - Record year
+- Filter out the data files in the [FTP server](ftp://ftp.ncdc.noaa.gov/pub/data/noaa/isd-lite/) which belongs to the pre-specified station id list
+- Copy the selected data files to your local folder
+
+```python
+from shutil import copyfile
+from sys import exit
+import pandas as pd
+import os
+from tqdm import tqdm
+import csv
+
+# import pre-specified station id list
+stations = pd.read_csv('linktable.csv', header = 0)
+
+# find out all the FTP server data file names for the stations you need
+def getchinalist(year):
+	china_list = ["%s0-99999-%s.gz"%(i, year) for i in stations['station'][1:]]
+	file_list = os.listdir("/Volumes/isd-lite/%s/"%year)
+	return([china_list, file_list])
+
+# Copy the files from FTP server to your local folder
+def copy(year, file):
+	source = "/Volumes/isd-lite/%s/%s"%(year, file)
+	target = "/Users/mengjiexu/Dropbox/NOAA/isd%s/%s"%(year, file)
+	copyfile(source, target)
+
+# Open a csv file to record the data you've copied
+with open('chinastations.csv', 'a') as f:
+	g = csv.writer(f)
+	# Iterate through the year from 1950 to 1999
+	for year in range(1950, 2000):
+		[china_list, file_list] = getchinalist(year)
+		for file in tqdm(file_list):
+			if file in china_list:			
+				g.writerow([year, file])
+				if not os.path.exists("/../NOAA/isd%s/"%year):
+					os.makedirs("/../NOAA/isd%s/"%year)
+				copy(year, file)
+```
+
+
+
+### Step 2: Preparing Data
 
 As the number of ISD files is too big, it will create too many redundent `dta` files when writing those datasets into `Stata`. Here I wrote all the ISD files recording data for the same first two-digit station ids in a same year into a new file, named by the first two-digit of station ids and store it into the folder "china_isd_lite_" + the respect year. This procedure is implemented in `Python`. All the following steps are implemented in `Stata`.
 
@@ -239,8 +304,9 @@ After this procedure, we should get folders for each year named by "Aggregate" +
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 4: Preparing Data - 1</div>
+    padding: 2px;">Figure 5: Preparing Data - 1</div>
 </center>
+
 
 In each folder, there should be a list of csv files named by the first two digits of station id.
 
@@ -252,12 +318,12 @@ In each folder, there should be a list of csv files named by the first two digit
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 5: Preparing Data - 2</div>
+    padding: 2px;">Figure 6: Preparing Data - 2</div>
 </center>
 
 
 
-### Step 2: Write All ISD data in a Given Year Into A Same dta file
+### Step 3: Write All ISD data in a Given Year Into A Same dta file
 
 ```stata
 forvalues i = 2000/2020{
@@ -305,27 +371,18 @@ This step produces a series of dta files named as "chinaclimate" + year, which c
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 6: ISD Data By Year</div>
+    padding: 2px;">Figure 7: ISD Data By Year</div>
 </center>
 
 
 
-### Step 3: Import Linktable in Order to Map Station Id into Province
+### Step 4: Import Linktable in Order to Map Station Id into Province
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-06-17%20%E4%B8%8B%E5%8D%881.10.31.png" width=800 height=500>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 7: LinkTable</div>
-</center>
+The linktable is exactly the same as the station list we used in step 1. Suppose you name the imported linktable as `linktable.dta`
 
 
 
-### Step 4: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year
+### Step 5: Iterate Pre-cleaned Csv Files and Average Each Variable in Each Year
 
 ```stata
 forvalues i = 2000/2020{
@@ -386,7 +443,7 @@ forvalues i = 2000/2020{
 
 
 
-### Step 5: Append All Province-Year Level Average Dta Files
+### Step 6: Append All Province-Year Level Average Dta Files
 
 ```stata
 clear
