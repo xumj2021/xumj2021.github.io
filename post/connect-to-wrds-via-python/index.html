@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177198277-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962">
+    <meta property="twitter:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962" />
+    
+
+    
+    <meta name="title" content="Connect to the WRDS Cloud via Python" />
+    <meta property="og:title" content="Connect to the WRDS Cloud via Python" />
+    <meta property="twitter:title" content="Connect to the WRDS Cloud via Python" />
+    
+
+    
+    <meta name="description" content="Make your WRDS data extraction replicable">
+    <meta property="og:description" content="Make your WRDS data extraction replicable" />
+    <meta property="twitter:description" content="Make your WRDS data extraction replicable" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Connect to the WRDS Cloud via Python-Mengjie&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/connect-to-wrds-via-python/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/crawler">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data">data</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/"></a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://media.istockphoto.com/photos/businessman-holding-tablet-and-showing-a-growing-virtual-hologram-of-picture-id1051659174?k=20&m=1051659174&s=612x612&w=0&h=UYD3OkgfeerPZ4P1M0vWrRb42AdHSMJysQa36zB-C_g=')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/wrds" title="WRDS">
+                            WRDS
+                        </a>
+                        
+                        <a class="tag" href="/tags/ssh" title="SSH">
+                            SSH
+                        </a>
+                        
+                    </div>
+                    <h1>Connect to the WRDS Cloud via Python</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Mengjie Xu
+                         
+                        on 
+                        Tuesday, October 12, 2021
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#connect-to-wrds-using-ssh">Connect to WRDS using SSH</a>
+      <ul>
+        <li><a href="#mac-os">Mac OS</a></li>
+        <li><a href="#windows">Windows</a></li>
+      </ul>
+    </li>
+    <li><a href="#open-ipython-in-the-cloud">Open IPython in the Cloud</a></li>
+    <li><a href="#initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</a>
+      <ul>
+        <li><a href="#explore-wrds-libraries-and-tables">Explore WRDS Libraries and Tables</a></li>
+        <li><a href="#submit-queries">Submit Queries</a></li>
+      </ul>
+    </li>
+    <li><a href="#quit-ipythona-and-log-out">Quit IPythona and Log Out</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="motivation">Motivation</h2>
+<p>The WRDS-SAS Studio cloud seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the reference), this blog will introduce how to connect WRDS cloud via Python. Though providing no additional information, this blog helps you quickly establish your python-wrds workflow without checking various manuals.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8A%E5%8D%8810.46.04.png" width=500 height=200>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Suspension of WRDS-SAS Studio</div>
+</center>
+<h2 id="connect-to-wrds-using-ssh">Connect to WRDS using SSH</h2>
+<h3 id="mac-os">Mac OS</h3>
+<p>MacOS computers come with a utility called <em>Terminal</em> that has SSH functionality built-in that can be used to connect to the WRDS Cloud. You can initiate an SSH connection to the WRDS Cloud as follows:</p>
+<ul>
+<li>Type <code>ssh wrdsusername@wrds-cloud.wharton.upenn.edu</code> where <em>wrdsusername</em> is your WRDS username: the same username you use to log onto the WRDS website.</li>
+<li>When prompted, enter your WRDS password.</li>
+<li>Once you have connected to the WRDS Cloud, you will be given a <em>prompt</em> &ndash; which indicates that the server is ready for your commands.</li>
+<li>You can disconnect from the WRDS Cloud at anytime by typing <code>logout</code> or using the key combination CTL-D.</li>
+</ul>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8A%E5%8D%8811.06.00.png" width=500 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Bloomberg Add-in in Excel</div>
+</center>
+<h3 id="windows">Windows</h3>
+<p>If you are on Windows, you will need to download and install SSH client software (e.g., PuTTY, WinSCP) to your computer.</p>
+<p>Once you have downloaded and installed one of the above, you can initiate an SSH connection to the WRDS Cloud as follows. This example uses PuTTY:</p>
+<p><strong>To configure PuTTY for SSH:</strong></p>
+<ol>
+<li>In <strong>Host Name</strong>, enter <code>wrds-cloud.wharton.upenn.edu</code></li>
+<li>In <strong>Port</strong> (skip if there is no Port field), enter <code>22</code></li>
+<li>When prompted, enter your WRDS username.</li>
+<li>When prompted, enter your WRDS password.</li>
+</ol>
+<h2 id="open-ipython-in-the-cloud">Open IPython in the Cloud</h2>
+<p>Interactive Python jobs allow you to run code in serial, and receive a response to each command as you enter it. To run interactive Python jobs, you will need to schedule an interactive job with the WRDS Cloud Grid Engine by entering <code>qrsh</code>  and then enter <code>ipython3</code> to enter an interactive python enviornment, which is exactly what you get in <code>Jupyter</code>. Don&rsquo;t forget to insert <code>pip install wrds</code> before you connect to the WRDS library list.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8A%E5%8D%8811.16.03.png" width=800 height=300>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Interactive Python Job</div>
+</center>
+<h2 id="initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</h2>
+<p>First, as with every Python program that intends to connect to WRDS, you must import the <strong>wrds</strong> module. Then you can make the connection and set up a <strong>pgpass</strong> file.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">4</span><span style="color:#111">]:</span> <span style="color:#111">db</span> <span style="color:#f92672">=</span> <span style="color:#111">wrds</span><span style="color:#f92672">.</span><span style="color:#111">Connection</span><span style="color:#111">()</span>
+<span style="color:#111">Enter</span> <span style="color:#111">your</span> <span style="color:#111">WRDS</span> <span style="color:#111">username</span> <span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#111">]:</span><span style="color:#111">xumj2019</span>
+<span style="color:#111">Enter</span> <span style="color:#111">your</span> <span style="color:#111">password</span><span style="color:#111">:</span>
+<span style="color:#111">WRDS</span> <span style="color:#111">recommends</span> <span style="color:#111">setting</span> <span style="color:#111">up</span> <span style="color:#111">a</span> <span style="color:#f92672">.</span><span style="color:#111">pgpass</span> <span style="color:#111">file</span><span style="color:#f92672">.</span>
+<span style="color:#111">Create</span> <span style="color:#f92672">.</span><span style="color:#111">pgpass</span> <span style="color:#111">file</span> <span style="color:#111">now</span> <span style="color:#111">[</span><span style="color:#111">y</span><span style="color:#f92672">/</span><span style="color:#111">n</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#111">:</span> <span style="color:#111">y</span>
+<span style="color:#111">Created</span> <span style="color:#f92672">.</span><span style="color:#111">pgpass</span> <span style="color:#111">file</span> <span style="color:#111">successfully</span><span style="color:#f92672">.</span>
+<span style="color:#111">Loading</span> <span style="color:#111">library</span> <span style="color:#111">list</span><span style="color:#f92672">...</span>
+<span style="color:#111">Done</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="explore-wrds-libraries-and-tables">Explore WRDS Libraries and Tables</h3>
+<p>You can analyze the structure of the data through its metadata using the <strong>wrds</strong> module, as outlined in the following steps:</p>
+<ul>
+<li>
+<p>List all available <em>libraries</em> at WRDS using <code>list_libraries()</code></p>
+</li>
+<li>
+<p>Select a library to work with, and list all available <em>datasets</em> within that library using <code>list_tables()</code></p>
+</li>
+<li>
+<p>Select a dataset, and list all available <em>variables</em> (column headers) within that dataset using <code>describe_table()</code></p>
+</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44">44</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45">45</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46">46</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47">47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48">48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49">49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">5</span><span style="color:#111">]:</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">list_libraries</span><span style="color:#111">()</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">5</span><span style="color:#111">]:</span> 
+<span style="color:#111">[</span><span style="color:#d88200">&#39;aha&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;aha_sample&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;ahasamp&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;audit&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;auditsmp&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;auditsmp_all&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;bank&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;blab&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;block&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;block_all&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;boardex&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;boardex_trial&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;boardsmp&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;bvd&#39;</span><span style="color:#111">,</span>
+	<span style="color:#f92672">...</span><span style="color:#111">]</span>
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">7</span><span style="color:#111">]:</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">list_tables</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;taqmsec&#39;</span><span style="color:#111">)</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">7</span><span style="color:#111">]:</span> 
+<span style="color:#111">[</span><span style="color:#d88200">&#39;cqm_20030910&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030911&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030912&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030915&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030916&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030917&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030918&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030919&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030922&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030923&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030924&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030925&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030926&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20030929&#39;</span><span style="color:#111">,</span>
+ <span style="color:#d88200">&#39;cqm_20070829&#39;</span><span style="color:#111">,</span>
+ 	<span style="color:#f92672">...</span><span style="color:#111">]</span>
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">]:</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">describe_table</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;taqmsec&#39;</span><span style="color:#111">,</span> <span style="color:#111">table</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;cqm_20070822&#39;</span><span style="color:#111">)</span>
+<span style="color:#111">The</span> <span style="color:#111">row</span> <span style="color:#111">count</span> <span style="color:#111">will</span> <span style="color:#00a8c8">return</span> <span style="color:#ae81ff">0</span> <span style="color:#111">due</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">structure</span> <span style="color:#111">of</span> <span style="color:#111">TAQ</span>
+<span style="color:#111">There</span> <span style="color:#111">was</span> <span style="color:#111">a</span> <span style="color:#111">problem</span> <span style="color:#00a8c8">with</span> <span style="color:#111">retrievingthe</span> <span style="color:#111">row</span> <span style="color:#111">count</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;NoneType&#39;</span> <span style="color:#111">object</span> <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#111">subscriptable</span>
+<span style="color:#111">Approximately</span> <span style="color:#ae81ff">0</span> <span style="color:#111">rows</span> <span style="color:#f92672">in</span> <span style="color:#111">taqmsec</span><span style="color:#f92672">.</span><span style="color:#111">cqm_20070822</span><span style="color:#f92672">.</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">]:</span> 
+           <span style="color:#111">name</span>  <span style="color:#111">nullable</span>         <span style="color:#111">type</span>
+<span style="color:#ae81ff">0</span>          <span style="color:#111">date</span>      <span style="color:#111">True</span>         <span style="color:#111">DATE</span>
+<span style="color:#ae81ff">1</span>        <span style="color:#111">time_m</span>      <span style="color:#111">True</span>         <span style="color:#111">TIME</span>
+<span style="color:#ae81ff">2</span>            <span style="color:#111">ex</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">3</span>      <span style="color:#111">sym_root</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">6</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">4</span>    <span style="color:#111">sym_suffix</span>      <span style="color:#111">True</span>  <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">5</span>           <span style="color:#111">bid</span>      <span style="color:#111">True</span>      <span style="color:#111">NUMERIC</span>
+<span style="color:#ae81ff">6</span>        <span style="color:#111">bidsiz</span>      <span style="color:#111">True</span>      <span style="color:#111">NUMERIC</span>
+<span style="color:#ae81ff">7</span>           <span style="color:#111">ask</span>      <span style="color:#111">True</span>      <span style="color:#111">NUMERIC</span>
+<span style="color:#ae81ff">8</span>        <span style="color:#111">asksiz</span>      <span style="color:#111">True</span>      <span style="color:#111">NUMERIC</span>
+<span style="color:#ae81ff">9</span>       <span style="color:#111">qu_cond</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">10</span>        <span style="color:#111">bidex</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">11</span>        <span style="color:#111">askex</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">12</span>    <span style="color:#111">qu_seqnum</span>      <span style="color:#111">True</span>      <span style="color:#111">NUMERIC</span>
+<span style="color:#ae81ff">13</span>   <span style="color:#111">natbbo_ind</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">14</span>  <span style="color:#111">nasdbbo_ind</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">15</span>    <span style="color:#111">qu_cancel</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+<span style="color:#ae81ff">16</span>    <span style="color:#111">qu_source</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="submit-queries">Submit Queries</h3>
+<p>Now that you know how to query the metadata and understand the structure of the data, you are ready to query WRDS data directly. The <strong>wrds</strong> module provides several methods that are useful in gathering data:</p>
+<ul>
+<li><code>get_table()</code> - fetches data by matching library and dataset, with the ability to filter using different parameters. This is the easiest method of accessing data.</li>
+<li><code>raw_sql()</code> - executes a SQL query against the specified library and dataset, allowing for highly-granular data queries.</li>
+<li><code>get_row_count()</code> - returns the number of rows in a given dataset.</li>
+</ul>
+<p>For parameters, and further explanation of each, use the built-in help: e.g., <code>help(db.get_table)</code>.</p>
+<p>Here are some examples.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">  1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">  2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">  3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">  4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">  5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">  6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">  7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">  8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">  9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10"> 10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11"> 11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12"> 12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13"> 13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14"> 14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15"> 15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16"> 16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17"> 17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18"> 18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19"> 19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20"> 20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21"> 21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22"> 22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23"> 23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24"> 24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25"> 25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26"> 26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27"> 27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28"> 28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29"> 29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30"> 30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31"> 31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32"> 32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33"> 33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34"> 34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35"> 35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36"> 36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37"> 37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38"> 38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39"> 39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40"> 40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41"> 41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42"> 42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43"> 43</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44"> 44</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45"> 45</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46"> 46</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47"> 47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48"> 48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49"> 49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50"> 50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51"> 51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52"> 52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53"> 53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54"> 54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55"> 55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56"> 56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57"> 57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58"> 58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59"> 59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60"> 60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61"> 61</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62"> 62</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63"> 63</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64"> 64</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65"> 65</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66"> 66</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67"> 67</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68"> 68</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69"> 69</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70"> 70</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71"> 71</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72"> 72</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="73"><a style="outline: none; text-decoration:none; color:inherit" href="#73"> 73</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="74"><a style="outline: none; text-decoration:none; color:inherit" href="#74"> 74</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="75"><a style="outline: none; text-decoration:none; color:inherit" href="#75"> 75</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="76"><a style="outline: none; text-decoration:none; color:inherit" href="#76"> 76</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="77"><a style="outline: none; text-decoration:none; color:inherit" href="#77"> 77</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="78"><a style="outline: none; text-decoration:none; color:inherit" href="#78"> 78</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="79"><a style="outline: none; text-decoration:none; color:inherit" href="#79"> 79</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="80"><a style="outline: none; text-decoration:none; color:inherit" href="#80"> 80</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="81"><a style="outline: none; text-decoration:none; color:inherit" href="#81"> 81</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="82"><a style="outline: none; text-decoration:none; color:inherit" href="#82"> 82</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="83"><a style="outline: none; text-decoration:none; color:inherit" href="#83"> 83</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="84"><a style="outline: none; text-decoration:none; color:inherit" href="#84"> 84</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="85"><a style="outline: none; text-decoration:none; color:inherit" href="#85"> 85</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="86"><a style="outline: none; text-decoration:none; color:inherit" href="#86"> 86</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="87"><a style="outline: none; text-decoration:none; color:inherit" href="#87"> 87</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="88"><a style="outline: none; text-decoration:none; color:inherit" href="#88"> 88</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="89"><a style="outline: none; text-decoration:none; color:inherit" href="#89"> 89</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="90"><a style="outline: none; text-decoration:none; color:inherit" href="#90"> 90</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="91"><a style="outline: none; text-decoration:none; color:inherit" href="#91"> 91</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="92"><a style="outline: none; text-decoration:none; color:inherit" href="#92"> 92</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="93"><a style="outline: none; text-decoration:none; color:inherit" href="#93"> 93</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="94"><a style="outline: none; text-decoration:none; color:inherit" href="#94"> 94</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="95"><a style="outline: none; text-decoration:none; color:inherit" href="#95"> 95</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="96"><a style="outline: none; text-decoration:none; color:inherit" href="#96"> 96</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="97"><a style="outline: none; text-decoration:none; color:inherit" href="#97"> 97</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="98"><a style="outline: none; text-decoration:none; color:inherit" href="#98"> 98</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="99"><a style="outline: none; text-decoration:none; color:inherit" href="#99"> 99</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="100"><a style="outline: none; text-decoration:none; color:inherit" href="#100">100</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="101"><a style="outline: none; text-decoration:none; color:inherit" href="#101">101</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="102"><a style="outline: none; text-decoration:none; color:inherit" href="#102">102</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="103"><a style="outline: none; text-decoration:none; color:inherit" href="#103">103</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="104"><a style="outline: none; text-decoration:none; color:inherit" href="#104">104</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="105"><a style="outline: none; text-decoration:none; color:inherit" href="#105">105</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="106"><a style="outline: none; text-decoration:none; color:inherit" href="#106">106</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="107"><a style="outline: none; text-decoration:none; color:inherit" href="#107">107</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="108"><a style="outline: none; text-decoration:none; color:inherit" href="#108">108</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]:</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">get_table</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;djones&#39;</span><span style="color:#111">,</span> <span style="color:#111">table</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;djdaily&#39;</span><span style="color:#111">,</span> <span style="color:#111">columns</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;dji&#39;</span><span style="color:#111">],</span> <span style="color:#111">obs</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">11</span><span style="color:#111">]:</span> <span style="color:#111">data</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">11</span><span style="color:#111">]:</span> 
+         <span style="color:#111">date</span>    <span style="color:#111">dji</span>
+<span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">05</span><span style="color:#f92672">-</span><span style="color:#ae81ff">26</span>  <span style="color:#ae81ff">40.94</span>
+<span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">05</span><span style="color:#f92672">-</span><span style="color:#ae81ff">27</span>  <span style="color:#ae81ff">40.58</span>
+<span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">05</span><span style="color:#f92672">-</span><span style="color:#ae81ff">28</span>  <span style="color:#ae81ff">40.20</span>
+<span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">05</span><span style="color:#f92672">-</span><span style="color:#ae81ff">29</span>  <span style="color:#ae81ff">40.63</span>
+<span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span>  <span style="color:#ae81ff">40.60</span>
+<span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">02</span>  <span style="color:#ae81ff">40.04</span>
+<span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span>  <span style="color:#ae81ff">39.77</span>
+<span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">04</span>  <span style="color:#ae81ff">39.94</span>
+<span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">05</span>  <span style="color:#ae81ff">40.32</span>
+<span style="color:#ae81ff">9</span>  <span style="color:#ae81ff">1896</span><span style="color:#f92672">-</span><span style="color:#ae81ff">06</span><span style="color:#f92672">-</span><span style="color:#ae81ff">08</span>  <span style="color:#ae81ff">39.81</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">12</span><span style="color:#111">]:</span> <span style="color:#111">parm</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;tickers&#39;</span><span style="color:#111">:</span> <span style="color:#111">(</span><span style="color:#d88200">&#39;0015B&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;0030B&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;0032A&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;0033A&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;0038A&#39;</span><span style="color:#111">)}</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">13</span><span style="color:#111">]:</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">raw_sql</span><span style="color:#111">(</span><span style="color:#d88200">&#39;SELECT datadate,gvkey,cusip FROM comp.funda WHERE tic in </span><span style="color:#d88200">%(tickers)s</span><span style="color:#d88200">&#39;</span><span style="color:#111">,</span> <span style="color:#111">params</span><span style="color:#f92672">=</span><span style="color:#111">parm</span><span style="color:#111">)</span>
+    <span style="color:#f92672">...</span><span style="color:#111">:</span> 
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">14</span><span style="color:#111">]:</span> <span style="color:#111">data</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">14</span><span style="color:#111">]:</span> 
+       <span style="color:#111">datadate</span>   <span style="color:#111">gvkey</span>      <span style="color:#111">cusip</span>
+<span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">1982</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">0024</span><span style="color:#ae81ff">84</span>  <span style="color:#ae81ff">121579932</span>
+<span style="color:#ae81ff">1</span>    <span style="color:#ae81ff">1983</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">0024</span><span style="color:#ae81ff">84</span>  <span style="color:#ae81ff">121579932</span>
+<span style="color:#ae81ff">2</span>    <span style="color:#ae81ff">1984</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">0024</span><span style="color:#ae81ff">84</span>  <span style="color:#ae81ff">121579932</span>
+<span style="color:#ae81ff">3</span>    <span style="color:#ae81ff">1985</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">0024</span><span style="color:#ae81ff">84</span>  <span style="color:#ae81ff">121579932</span>
+<span style="color:#ae81ff">4</span>    <span style="color:#ae81ff">1986</span><span style="color:#f92672">-</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">0024</span><span style="color:#ae81ff">84</span>  <span style="color:#ae81ff">121579932</span>
+<span style="color:#f92672">..</span>          <span style="color:#f92672">...</span>     <span style="color:#f92672">...</span>        <span style="color:#f92672">...</span>
+<span style="color:#ae81ff">208</span>  <span style="color:#ae81ff">2009</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">179519</span>  <span style="color:#ae81ff">61847</span><span style="color:#111">Z002</span>
+<span style="color:#ae81ff">209</span>  <span style="color:#ae81ff">2010</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">179519</span>  <span style="color:#ae81ff">61847</span><span style="color:#111">Z002</span>
+<span style="color:#ae81ff">210</span>  <span style="color:#ae81ff">2010</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">179519</span>  <span style="color:#ae81ff">61847</span><span style="color:#111">Z002</span>
+<span style="color:#ae81ff">211</span>  <span style="color:#ae81ff">2011</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">179519</span>  <span style="color:#ae81ff">61847</span><span style="color:#111">Z002</span>
+<span style="color:#ae81ff">212</span>  <span style="color:#ae81ff">2011</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">179519</span>  <span style="color:#ae81ff">61847</span><span style="color:#111">Z002</span>
+
+<span style="color:#111">[</span><span style="color:#ae81ff">213</span> <span style="color:#111">rows</span> <span style="color:#111">x</span> <span style="color:#ae81ff">3</span> <span style="color:#111">columns</span><span style="color:#111">]</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">15</span><span style="color:#111">]:</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">get_row_count</span><span style="color:#111">(</span><span style="color:#d88200">&#39;djones&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;djdaily&#39;</span><span style="color:#111">)</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">16</span><span style="color:#111">]:</span> <span style="color:#111">data</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">16</span><span style="color:#111">]:</span> <span style="color:#ae81ff">27933</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">17</span><span style="color:#111">]:</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">raw_sql</span><span style="color:#111">(</span><span style="color:#d88200">&#34;select a.gvkey, a.datadate, a.tic, a.conm, a.at, a.lt, b.prccm, b.cshoq from comp.funda a join comp.secm b on </span>
+    <span style="color:#f92672">...</span><span style="color:#111">:</span> <span style="color:#111">a</span><span style="color:#f92672">.</span><span style="color:#111">gvkey</span> <span style="color:#f92672">=</span> <span style="color:#111">b</span><span style="color:#f92672">.</span><span style="color:#111">gvkey</span> <span style="color:#f92672">and</span> <span style="color:#111">a</span><span style="color:#f92672">.</span><span style="color:#111">datadate</span> <span style="color:#f92672">=</span> <span style="color:#111">b</span><span style="color:#f92672">.</span><span style="color:#111">datadate</span> <span style="color:#111">where</span> <span style="color:#111">a</span><span style="color:#f92672">.</span><span style="color:#111">tic</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;IBM&#39;</span> <span style="color:#f92672">and</span> <span style="color:#111">a</span><span style="color:#f92672">.</span><span style="color:#111">datafmt</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;STD&#39;</span> <span style="color:#f92672">and</span> <span style="color:#111">a</span><span style="color:#f92672">.</span><span style="color:#111">consol</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;C&#39;</span> <span style="color:#f92672">and</span> <span style="color:#111">a</span><span style="color:#f92672">.</span><span style="color:#111">indfmt</span> <span style="color:#f92672">=</span> 
+    <span style="color:#f92672">...</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;INDL&#39;</span><span style="color:#d88200">&#34;)</span>
+    <span style="color:#f92672">...</span><span style="color:#111">:</span> 
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">17</span><span style="color:#111">]:</span> 
+     <span style="color:#111">gvkey</span>    <span style="color:#111">datadate</span>  <span style="color:#111">tic</span>                         <span style="color:#111">conm</span>          <span style="color:#111">at</span>          <span style="color:#111">lt</span>       <span style="color:#111">prccm</span>     <span style="color:#111">cshoq</span>
+<span style="color:#ae81ff">0</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1962</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">2112.301</span>     <span style="color:#ae81ff">731.700</span>  <span style="color:#ae81ff">389.999567</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">1</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1963</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">2373.857</span>     <span style="color:#ae81ff">782.119</span>  <span style="color:#ae81ff">506.999353</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1964</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">3309.152</span>    <span style="color:#ae81ff">1055.072</span>  <span style="color:#ae81ff">409.499496</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">3</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1965</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">3744.917</span>    <span style="color:#ae81ff">1166.771</span>  <span style="color:#ae81ff">498.999146</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">4</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1966</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">4660.777</span>    <span style="color:#ae81ff">1338.149</span>  <span style="color:#ae81ff">371.499662</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">5</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1967</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">5598.668</span>    <span style="color:#ae81ff">1767.067</span>  <span style="color:#ae81ff">626.999512</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">6</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1968</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">6743.430</span>    <span style="color:#ae81ff">2174.291</span>  <span style="color:#ae81ff">314.999847</span>       <span style="color:#111">NaN</span>
+<span style="color:#ae81ff">7</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1969</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">7389.957</span>    <span style="color:#ae81ff">2112.967</span>  <span style="color:#ae81ff">364.499359</span>   <span style="color:#ae81ff">113.717</span>
+<span style="color:#ae81ff">8</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1970</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">8539.047</span>    <span style="color:#ae81ff">2591.909</span>  <span style="color:#ae81ff">317.749634</span>   <span style="color:#ae81ff">114.587</span>
+<span style="color:#ae81ff">9</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1971</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">9576.219</span>    <span style="color:#ae81ff">2933.837</span>  <span style="color:#ae81ff">336.499634</span>   <span style="color:#ae81ff">115.534</span>
+<span style="color:#ae81ff">10</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1972</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">10792.398</span>    <span style="color:#ae81ff">3226.508</span>  <span style="color:#ae81ff">401.999512</span>   <span style="color:#ae81ff">116.399</span>
+<span style="color:#ae81ff">11</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1973</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">12289.500</span>    <span style="color:#ae81ff">3477.465</span>  <span style="color:#ae81ff">246.749878</span>   <span style="color:#ae81ff">146.713</span>
+<span style="color:#ae81ff">12</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1974</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">14027.098</span>    <span style="color:#ae81ff">3916.766</span>  <span style="color:#ae81ff">167.999878</span>   <span style="color:#ae81ff">148.259</span>
+<span style="color:#ae81ff">13</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1975</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">15530.504</span>    <span style="color:#ae81ff">4114.705</span>  <span style="color:#ae81ff">224.249878</span>   <span style="color:#ae81ff">149.845</span>
+<span style="color:#ae81ff">14</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1976</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">17723.203</span>    <span style="color:#ae81ff">4974.035</span>  <span style="color:#ae81ff">279.124756</span>   <span style="color:#ae81ff">150.695</span>
+<span style="color:#ae81ff">15</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1977</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">18978.402</span>    <span style="color:#ae81ff">6359.965</span>  <span style="color:#ae81ff">273.499756</span>   <span style="color:#ae81ff">147.471</span>
+<span style="color:#ae81ff">16</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1978</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">20771.406</span>    <span style="color:#ae81ff">7277.759</span>  <span style="color:#ae81ff">298.499878</span>   <span style="color:#ae81ff">145.810</span>
+<span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1979</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">24530.004</span>    <span style="color:#ae81ff">9568.734</span>   <span style="color:#ae81ff">64.374969</span>   <span style="color:#ae81ff">583.595</span>
+<span style="color:#ae81ff">18</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1980</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">26703.008</span>   <span style="color:#ae81ff">10250.000</span>   <span style="color:#ae81ff">67.874939</span>   <span style="color:#ae81ff">583.807</span>
+<span style="color:#ae81ff">19</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1981</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">29586.008</span>   <span style="color:#ae81ff">11425.000</span>   <span style="color:#ae81ff">56.874969</span>   <span style="color:#ae81ff">592.294</span>
+<span style="color:#ae81ff">20</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1982</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">32541.008</span>   <span style="color:#ae81ff">12581.000</span>   <span style="color:#ae81ff">96.250000</span>   <span style="color:#ae81ff">602.406</span>
+<span style="color:#ae81ff">21</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1983</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">37243.008</span>   <span style="color:#ae81ff">14024.000</span>  <span style="color:#ae81ff">122.000000</span>   <span style="color:#ae81ff">610.725</span>
+<span style="color:#ae81ff">22</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1984</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">42808.012</span>   <span style="color:#ae81ff">16319.000</span>  <span style="color:#ae81ff">123.125000</span>   <span style="color:#ae81ff">612.685</span>
+<span style="color:#ae81ff">23</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1985</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">52634.016</span>   <span style="color:#ae81ff">20644.000</span>  <span style="color:#ae81ff">155.500000</span>   <span style="color:#ae81ff">615.418</span>
+<span style="color:#ae81ff">24</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1986</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">57814.016</span>   <span style="color:#ae81ff">23440.000</span>  <span style="color:#ae81ff">120.000000</span>   <span style="color:#ae81ff">605.923</span>
+<span style="color:#ae81ff">25</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1987</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">63688.000</span>   <span style="color:#ae81ff">25425.000</span>  <span style="color:#ae81ff">115.500000</span>   <span style="color:#ae81ff">597.052</span>
+<span style="color:#ae81ff">26</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1988</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">73037.000</span>   <span style="color:#ae81ff">33528.000</span>  <span style="color:#ae81ff">121.875000</span>   <span style="color:#ae81ff">589.741</span>
+<span style="color:#ae81ff">27</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1989</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">77734.000</span>   <span style="color:#ae81ff">39225.000</span>   <span style="color:#ae81ff">94.125000</span>   <span style="color:#ae81ff">574.700</span>
+<span style="color:#ae81ff">28</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1990</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">87568.000</span>   <span style="color:#ae81ff">44736.000</span>  <span style="color:#ae81ff">113.000000</span>   <span style="color:#ae81ff">571.391</span>
+<span style="color:#ae81ff">29</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1991</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">92473.000</span>   <span style="color:#ae81ff">55467.000</span>   <span style="color:#ae81ff">89.000000</span>   <span style="color:#ae81ff">571.018</span>
+<span style="color:#ae81ff">30</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1992</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">86705.000</span>   <span style="color:#ae81ff">59081.000</span>   <span style="color:#ae81ff">50.375000</span>   <span style="color:#ae81ff">571.436</span>
+<span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1993</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81113.000</span>   <span style="color:#ae81ff">61375.000</span>   <span style="color:#ae81ff">56.500000</span>   <span style="color:#ae81ff">581.386</span>
+<span style="color:#ae81ff">32</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1994</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81091.000</span>   <span style="color:#ae81ff">57678.000</span>   <span style="color:#ae81ff">73.500000</span>   <span style="color:#ae81ff">587.710</span>
+<span style="color:#ae81ff">33</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1995</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">80292.000</span>   <span style="color:#ae81ff">57869.000</span>   <span style="color:#ae81ff">91.375000</span>   <span style="color:#ae81ff">547.774</span>
+<span style="color:#ae81ff">34</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1996</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81132.000</span>   <span style="color:#ae81ff">59504.000</span>  <span style="color:#ae81ff">151.500000</span>   <span style="color:#ae81ff">507.981</span>
+<span style="color:#ae81ff">35</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1997</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81499.000</span>   <span style="color:#ae81ff">61683.000</span>  <span style="color:#ae81ff">104.625000</span>   <span style="color:#ae81ff">958.091</span>
+<span style="color:#ae81ff">36</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1998</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">86100.000</span>   <span style="color:#ae81ff">66667.000</span>  <span style="color:#ae81ff">184.375000</span>   <span style="color:#ae81ff">915.907</span>
+<span style="color:#ae81ff">37</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1999</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">87495.000</span>   <span style="color:#ae81ff">66984.000</span>  <span style="color:#ae81ff">107.875000</span>  <span style="color:#ae81ff">1784.216</span>
+<span style="color:#ae81ff">38</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2000</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">88349.000</span>   <span style="color:#ae81ff">67725.000</span>   <span style="color:#ae81ff">85.000000</span>  <span style="color:#ae81ff">1742.900</span>
+<span style="color:#ae81ff">39</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2001</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">88313.000</span>   <span style="color:#ae81ff">64699.000</span>  <span style="color:#ae81ff">120.960000</span>  <span style="color:#ae81ff">1723.194</span>
+<span style="color:#ae81ff">40</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2002</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">96484.000</span>   <span style="color:#ae81ff">73702.000</span>   <span style="color:#ae81ff">77.500000</span>  <span style="color:#ae81ff">1722.367</span>
+<span style="color:#ae81ff">41</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2003</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">104457.000</span>   <span style="color:#ae81ff">76593.000</span>   <span style="color:#ae81ff">92.680000</span>  <span style="color:#ae81ff">1694.509</span>
+<span style="color:#ae81ff">42</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2004</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">109183.000</span>   <span style="color:#ae81ff">79436.000</span>   <span style="color:#ae81ff">98.580000</span>  <span style="color:#ae81ff">1645.592</span>
+<span style="color:#ae81ff">43</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2005</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">105748.000</span>   <span style="color:#ae81ff">72650.000</span>   <span style="color:#ae81ff">82.200000</span>  <span style="color:#ae81ff">1573.980</span>
+<span style="color:#ae81ff">44</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2006</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">103234.000</span>   <span style="color:#ae81ff">74728.000</span>   <span style="color:#ae81ff">97.150000</span>  <span style="color:#ae81ff">1506.483</span>
+<span style="color:#ae81ff">45</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2007</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">120431.000</span>   <span style="color:#ae81ff">91961.000</span>  <span style="color:#ae81ff">108.100000</span>  <span style="color:#ae81ff">1385.234</span>
+<span style="color:#ae81ff">46</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2008</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">109524.000</span>   <span style="color:#ae81ff">96059.000</span>   <span style="color:#ae81ff">84.160000</span>  <span style="color:#ae81ff">1339.096</span>
+<span style="color:#ae81ff">47</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2009</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">109022.000</span>   <span style="color:#ae81ff">86267.000</span>  <span style="color:#ae81ff">130.900000</span>  <span style="color:#ae81ff">1305.337</span>
+<span style="color:#ae81ff">48</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2010</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">113452.000</span>   <span style="color:#ae81ff">90280.000</span>  <span style="color:#ae81ff">146.760000</span>  <span style="color:#ae81ff">1227.993</span>
+<span style="color:#ae81ff">49</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2011</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">116433.000</span>   <span style="color:#ae81ff">96197.000</span>  <span style="color:#ae81ff">183.880000</span>  <span style="color:#ae81ff">1163.183</span>
+<span style="color:#ae81ff">50</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2012</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">119213.000</span>  <span style="color:#ae81ff">100229.000</span>  <span style="color:#ae81ff">191.550000</span>  <span style="color:#ae81ff">1117.368</span>
+<span style="color:#ae81ff">51</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2013</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">126223.000</span>  <span style="color:#ae81ff">103294.000</span>  <span style="color:#ae81ff">187.570000</span>  <span style="color:#ae81ff">1054.391</span>
+<span style="color:#ae81ff">52</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2014</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">117532.000</span>  <span style="color:#ae81ff">105518.000</span>  <span style="color:#ae81ff">160.440000</span>   <span style="color:#ae81ff">990.524</span>
+<span style="color:#ae81ff">53</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">110495.000</span>   <span style="color:#ae81ff">96071.000</span>  <span style="color:#ae81ff">137.620000</span>   <span style="color:#ae81ff">965.729</span>
+<span style="color:#ae81ff">54</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2016</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">117470.000</span>   <span style="color:#ae81ff">99078.000</span>  <span style="color:#ae81ff">165.990000</span>   <span style="color:#ae81ff">945.867</span>
+<span style="color:#ae81ff">55</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">125356.000</span>  <span style="color:#ae81ff">107631.000</span>  <span style="color:#ae81ff">153.420000</span>   <span style="color:#ae81ff">922.179</span>
+<span style="color:#ae81ff">56</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2018</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">123382.000</span>  <span style="color:#ae81ff">106453.000</span>  <span style="color:#ae81ff">113.670000</span>   <span style="color:#ae81ff">892.479</span>
+<span style="color:#ae81ff">57</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2019</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">152186.000</span>  <span style="color:#ae81ff">131201.000</span>  <span style="color:#ae81ff">134.040000</span>   <span style="color:#ae81ff">887.110</span>
+<span style="color:#ae81ff">58</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2020</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">155971.000</span>  <span style="color:#ae81ff">135244.000</span>  <span style="color:#ae81ff">125.880000</span>   <span style="color:#ae81ff">892.653</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="quit-ipythona-and-log-out">Quit IPythona and Log Out</h2>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-wrds-cloud/">PYTHON: On the WRDS Cloud</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/submitting-python-programs/">Submitting Python Jobs</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/running-jobs/interactive-jobs-wrds-cloud/">Interactive Jobs on the WRDS Cloud</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/querying-wrds-data-python/">Querying WRDS Data using Python</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-example-data-workflow/">Example Python Data Workflow</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/">Storing Your Data on the WRDS Cloud</a></li>
+</ul>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/bloomberg-api/" data-toggle="tooltip" data-placement="top" title="Extract Mass Data Via Bloomberg API">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="hyvor-talk-view"></div>
+<script type="text/javascript">
+    var HYVOR_TALK_WEBSITE = 4329; 
+    var HYVOR_TALK_CONFIG = {
+        url: false,
+        id: false
+};
+</script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2021
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
