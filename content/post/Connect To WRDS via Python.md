@@ -58,9 +58,7 @@ MacOS computers come with a utility called *Terminal* that has SSH functionality
 
 If you are on Windows, you will need to download and install SSH client software (e.g., PuTTY, WinSCP) to your computer. 
 
-Once you have downloaded and installed one of the above, you can initiate an SSH connection to the WRDS Cloud as follows. This example uses PuTTY:
-
-**To configure PuTTY for SSH:**
+Once you have downloaded and installed one of the above, you can initiate an SSH connection to the WRDS Cloud. Suppose you use PuTTY and want **to configure PuTTY for SSH:**
 
 1. In **Host Name**, enter `wrds-cloud.wharton.upenn.edu`
 2. In **Port** (skip if there is no Port field), enter `22`
@@ -297,6 +295,25 @@ Out[17]:
 56  006066  2018-12-31  IBM  INTL BUSINESS MACHINES CORP  123382.000  106453.000  113.670000   892.479
 57  006066  2019-12-31  IBM  INTL BUSINESS MACHINES CORP  152186.000  131201.000  134.040000   887.110
 58  006066  2020-12-31  IBM  INTL BUSINESS MACHINES CORP  155971.000  135244.000  125.880000   892.653
+In [42]: data=db.raw_sql("SELECT * FROM taqmsec.cqm_20170829 WHERE sym_root = 'A
+    ...: APL' AND time_m>='04:00:00.084000' and time_m <= '04:01:00.084000'")
+
+In [43]: data
+Out[43]: 
+          date           time_m ex  ...  finra_adf_mquo_ind  sym_root  sym_suffix
+0   2017-08-29  04:00:00.084000  Q  ...                None      AAPL        None
+1   2017-08-29  04:00:00.084000  Q  ...                None      AAPL        None
+2   2017-08-29  04:00:00.203000  P  ...                None      AAPL        None
+3   2017-08-29  04:00:00.203000  P  ...                None      AAPL        None
+4   2017-08-29  04:00:00.203000  P  ...                None      AAPL        None
+..         ...              ... ..  ...                 ...       ...         ...
+89  2017-08-29  04:00:57.213000  P  ...                None      AAPL        None
+90  2017-08-29  04:00:57.288000  P  ...                None      AAPL        None
+91  2017-08-29  04:00:57.293000  P  ...                None      AAPL        None
+92  2017-08-29  04:00:59.543000  P  ...                None      AAPL        None
+93  2017-08-29  04:00:59.543000  P  ...                None      AAPL        None
+
+[94 rows x 24 columns]
 ```
 
 
