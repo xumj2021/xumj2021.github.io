@@ -235,6 +235,7 @@
         <li><a href="#submit-queries">Submit Queries</a></li>
       </ul>
     </li>
+    <li><a href="#transfer-data-through-dropbox">Transfer Data through Dropbox</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -268,7 +269,7 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 1: Bloomberg Add-in in Excel</div>
+    padding: 2px;">Figure 2: Bloomberg Add-in in Excel</div>
 </center>
 <h3 id="windows">Windows</h3>
 <p>If you are on Windows, you will need to download and install SSH client software (e.g., PuTTY, WinSCP) to your computer.</p>
@@ -289,7 +290,7 @@
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 1: Interactive Python Job</div>
+    padding: 2px;">Figure 3: Interactive Python Job</div>
 </center>
 <h2 id="initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</h2>
 <p>First, as with every Python program that intends to connect to WRDS, you must import the <strong>wrds</strong> module. Then you can make the connection and set up a <strong>pgpass</strong> file.</p>
@@ -588,6 +589,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="125"><a style="outline: none; text-decoration:none; color:inherit" href="#125">125</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="126"><a style="outline: none; text-decoration:none; color:inherit" href="#126">126</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="127"><a style="outline: none; text-decoration:none; color:inherit" href="#127">127</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="128"><a style="outline: none; text-decoration:none; color:inherit" href="#128">128</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]:</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">get_table</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;djones&#39;</span><span style="color:#111">,</span> <span style="color:#111">table</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;djdaily&#39;</span><span style="color:#111">,</span> <span style="color:#111">columns</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;dji&#39;</span><span style="color:#111">],</span> <span style="color:#111">obs</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span>
@@ -717,16 +719,96 @@
 <span style="color:#ae81ff">93</span>  <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">08</span><span style="color:#f92672">-</span><span style="color:#ae81ff">29</span>  <span style="color:#ae81ff">04</span><span style="color:#111">:</span><span style="color:#ae81ff">00</span><span style="color:#111">:</span><span style="color:#ae81ff">59.543000</span>  <span style="color:#111">P</span>  <span style="color:#f92672">...</span>                <span style="color:#111">None</span>      <span style="color:#111">AAPL</span>        <span style="color:#111">None</span>
 
 <span style="color:#111">[</span><span style="color:#ae81ff">94</span> <span style="color:#111">rows</span> <span style="color:#111">x</span> <span style="color:#ae81ff">24</span> <span style="color:#111">columns</span><span style="color:#111">]</span>
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">44</span><span style="color:#111">]:</span> <span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">to_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;test.csv&#34;</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="references">References</h2>
+</div><h2 id="transfer-data-through-dropbox">Transfer Data through Dropbox</h2>
+<p>Insert <code>ls</code> in your ssh command line, you will find the files you&rsquo;ve saved in your wrds cloud. Apparently, how to transfer files with the wrds cloud is an issue you cannot sidestep. After tests, I personally found linking WRDS with Dropbox is the most efficient way to do this job.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">sas7</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#f92672">~</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">ls</span>
+<span style="color:#111">autoexec</span><span style="color:#f92672">.</span><span style="color:#111">sas</span>      <span style="color:#111">testaq</span><span style="color:#f92672">.</span><span style="color:#111">sas</span>                 <span style="color:#111">WRDS_batch_ticker_ctm</span><span style="color:#f92672">.</span><span style="color:#111">sas</span>
+<span style="color:#111">evt_taqinput</span><span style="color:#f92672">.</span><span style="color:#111">txt</span>  <span style="color:#111">test</span><span style="color:#f92672">.</span><span style="color:#111">csv</span>                   <span style="color:#111">WRDS_batch_ticker_ct</span><span style="color:#f92672">.</span><span style="color:#111">sas</span>
+<span style="color:#111">myProgram</span><span style="color:#f92672">.</span><span style="color:#111">csv</span>     <span style="color:#111">WRDS_batch_ticker_cqm</span><span style="color:#f92672">.</span><span style="color:#111">sas</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>WRDS provides the <code>dbxcli</code> command on the WRDS cloud login nodes to transfer data directly between WRDS and your dropbox shares. <code>dbxcli</code> is a simple, ftp like transfer client; it only transfers files between dropbox and clients.</p>
+<p>To do this, you need:</p>
+<ul>
+<li>
+<p>Login to the WRDS cloud via ssh</p>
+<ul>
+<li>If you are in the IPython enviornment, you need to insert <code>quit</code> to quit IPython, and then <code>logout</code> to exit the Interactive Jobs</li>
+</ul>
+</li>
+<li>
+<p>Run the <code>dbxcli account</code> command.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PYTHON" data-lang="PYTHON"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#f92672">~</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">dbxcli</span> <span style="color:#111">account</span>
+<span style="color:#ae81ff">1.</span> <span style="color:#111">Go</span> <span style="color:#111">to</span> <span style="color:#111">https</span><span style="color:#111">:</span><span style="color:#f92672">//</span><span style="color:#111">www</span><span style="color:#f92672">.</span><span style="color:#111">dropbox</span><span style="color:#f92672">.</span><span style="color:#111">com</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#111">oauth2</span><span style="color:#f92672">/</span><span style="color:#111">authorize</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#111">client_id</span><span style="color:#f92672">=</span><span style="color:#ae81ff">07</span><span style="color:#111">o23gulcj8qi69</span><span style="color:#f92672">&amp;</span><span style="color:#111">response_type</span><span style="color:#f92672">=</span><span style="color:#111">code</span><span style="color:#f92672">&amp;</span><span style="color:#111">state</span><span style="color:#f92672">=</span><span style="color:#111">state</span>
+<span style="color:#ae81ff">2.</span> <span style="color:#111">Click</span> <span style="color:#d88200">&#34;Allow&#34;</span> <span style="color:#111">(</span><span style="color:#111">you</span> <span style="color:#111">might</span> <span style="color:#111">have</span> <span style="color:#111">to</span> <span style="color:#111">log</span> <span style="color:#f92672">in</span> <span style="color:#111">first</span><span style="color:#111">)</span><span style="color:#f92672">.</span>
+<span style="color:#ae81ff">3.</span> <span style="color:#111">Copy</span> <span style="color:#111">the</span> <span style="color:#111">authorization</span> <span style="color:#111">code</span><span style="color:#f92672">.</span>
+<span style="color:#111">Enter</span> <span style="color:#111">the</span> <span style="color:#111">authorization</span> <span style="color:#111">code</span> <span style="color:#111">here</span><span style="color:#111">:</span> <span style="color:#111">NMdc</span><span style="color:#f92672">-</span><span style="color:#111">gHdd7AAAAAAAAAEL3CRL_GpJce0RQ</span>
+<span style="color:#111">Logged</span> <span style="color:#f92672">in</span> <span style="color:#00a8c8">as</span> <span style="color:#111">xx</span> <span style="color:#111">xx</span> <span style="color:#f92672">&lt;</span><span style="color:#111">xx</span><span style="color:#75af00">@xx.com</span><span style="color:#f92672">&gt;</span>
+
+<span style="color:#111">Account</span> <span style="color:#111">Id</span><span style="color:#111">:</span>        <span style="color:#111">dbid</span><span style="color:#111">:</span><span style="color:#111">AAB4yqaueMTEfU4</span><span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>
+<span style="color:#111">Account</span> <span style="color:#111">Type</span><span style="color:#111">:</span>      <span style="color:#111">pro</span>
+<span style="color:#111">Locale</span><span style="color:#111">:</span>            <span style="color:#111">en</span>
+<span style="color:#111">Referral</span> <span style="color:#111">Link</span><span style="color:#111">:</span>     <span style="color:#111">https</span><span style="color:#111">:</span><span style="color:#f92672">//</span><span style="color:#111">www</span><span style="color:#f92672">.</span><span style="color:#111">dropbox</span><span style="color:#f92672">.</span><span style="color:#111">com</span><span style="color:#f92672">/</span><span style="color:#111">referrals</span><span style="color:#f92672">/</span><span style="color:#111">AABnCSjxOA</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#111">src</span><span style="color:#f92672">=</span><span style="color:#111">app9</span><span style="color:#f92672">-</span><span style="color:#ae81ff">934508</span>
+<span style="color:#111">Profile</span> <span style="color:#111">Photo</span> <span style="color:#111">Url</span><span style="color:#111">:</span> <span style="color:#111">https</span><span style="color:#111">:</span><span style="color:#f92672">//</span><span style="color:#111">dl</span><span style="color:#f92672">-</span><span style="color:#111">web</span><span style="color:#f92672">.</span><span style="color:#111">dropbox</span><span style="color:#f92672">.</span><span style="color:#111">com</span><span style="color:#f92672">/</span><span style="color:#111">account_photo</span><span style="color:#f92672">/</span><span style="color:#111">get</span><span style="color:#f92672">/</span><span style="color:#111">dbaphid</span><span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#111">AAAAgMQf5azIHq65no</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">128</span><span style="color:#111">x128</span><span style="color:#f92672">&amp;</span><span style="color:#111">vers</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1561290642421</span>
+<span style="color:#111">Paired</span> <span style="color:#111">Account</span><span style="color:#111">:</span>    <span style="color:#111">false</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Follow the instructions the command gives and paste in the authorization code.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8B%E5%8D%884.42.14.png" width=500 height=300>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Connect WRDS Cloud to Dropbox</div>
+</center>
+</li>
+<li>
+<p>If you successfully logged in the command should print your dropbox account information. You may run <code>dbxcli account</code> again to confirm if your account is connected, if it prints your account information it is connected.</p>
+</li>
+</ul>
+<h2 id="references">References</h2>
 <ul>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-wrds-cloud/">PYTHON: On the WRDS Cloud</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/submitting-python-programs/">Submitting Python Jobs</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/using-ssh-connect-wrds-cloud/">Login to the WRDS cloud via ssh</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/running-jobs/interactive-jobs-wrds-cloud/">Interactive Jobs on the WRDS Cloud</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/querying-wrds-data-python/">Querying WRDS Data using Python</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-example-data-workflow/">Example Python Data Workflow</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/">Storing Your Data on the WRDS Cloud</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/transfering-data-with-dropbox/">Transfering Data with Dropbox</a></li>
 </ul>
 
 
