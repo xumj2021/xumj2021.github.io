@@ -51,8 +51,9 @@ MacOS computers come with a utility called *Terminal* that has SSH functionality
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 1: Bloomberg Add-in in Excel</div>
+    padding: 2px;">Figure 2: Bloomberg Add-in in Excel</div>
 </center>
+
 
 ### Windows
 
@@ -79,8 +80,9 @@ Interactive Python jobs allow you to run code in serial, and receive a response 
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 1: Interactive Python Job</div>
+    padding: 2px;">Figure 3: Interactive Python Job</div>
 </center>
+
 
 
 
@@ -314,16 +316,70 @@ Out[43]:
 93  2017-08-29  04:00:59.543000  P  ...                None      AAPL        None
 
 [94 rows x 24 columns]
+In [44]: data.to_csv("test.csv")
 ```
 
 
+
+## Transfer Data through Dropbox
+
+Insert `ls` in your ssh command line, you will find the files you've saved in your wrds cloud. Apparently, how to transfer files with the wrds cloud is an issue you cannot sidestep. After tests, I personally found linking WRDS with Dropbox is the most efficient way to do this job.
+
+```python
+[xumj2019@wrds-sas7-w ~]$ ls
+autoexec.sas      testaq.sas                 WRDS_batch_ticker_ctm.sas
+evt_taqinput.txt  test.csv                   WRDS_batch_ticker_ct.sas
+myProgram.csv     WRDS_batch_ticker_cqm.sas
+```
+
+WRDS provides the `dbxcli` command on the WRDS cloud login nodes to transfer data directly between WRDS and your dropbox shares. `dbxcli` is a simple, ftp like transfer client; it only transfers files between dropbox and clients.
+
+To do this, you need:
+
+- Login to the WRDS cloud via ssh
+  - If you are in the IPython enviornment, you need to insert `quit` to quit IPython, and then `logout` to exit the Interactive Jobs
+
+- Run the `dbxcli account` command.
+
+  ```PYTHON
+  [xumj2019@wrds-cloud-login2-w ~]$ dbxcli account
+  1. Go to https://www.dropbox.com/1/oauth2/authorize?client_id=07o23gulcj8qi69&response_type=code&state=state
+  2. Click "Allow" (you might have to log in first).
+  3. Copy the authorization code.
+  Enter the authorization code here: NMdc-gHdd7AAAAAAAAAEL3CRL_GpJce0RQ
+  Logged in as xx xx <xx@xx.com>
+  
+  Account Id:        dbid:AAB4yqaueMTEfU4-8
+  Account Type:      pro
+  Locale:            en
+  Referral Link:     https://www.dropbox.com/referrals/AABnCSjxOA?src=app9-934508
+  Profile Photo Url: https://dl-web.dropbox.com/account_photo/get/dbaphid%3AAAAgMQf5azIHq65no?size=128x128&vers=1561290642421
+  Paired Account:    false
+  ```
+
+- Follow the instructions the command gives and paste in the authorization code.
+
+  <center>
+      <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8B%E5%8D%884.42.14.png" width=500 height=300>
+      <br>
+      <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+      display: inline-block;
+      color: #999;
+      padding: 2px;">Figure 4: Connect WRDS Cloud to Dropbox</div>
+  </center>
+
+- If you successfully logged in the command should print your dropbox account information. You may run `dbxcli account` again to confirm if your account is connected, if it prints your account information it is connected.
 
 ## References
 
 - [PYTHON: On the WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-wrds-cloud/)
 - [Submitting Python Jobs](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/submitting-python-programs/)
+- [Login to the WRDS cloud via ssh](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/using-ssh-connect-wrds-cloud/) 
 - [Interactive Jobs on the WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/running-jobs/interactive-jobs-wrds-cloud/)
 - [Querying WRDS Data using Python](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/querying-wrds-data-python/)
 - [Example Python Data Workflow](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-example-data-workflow/)
 - [Storing Your Data on the WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/)
+- [Transfering Data with Dropbox](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/transfering-data-with-dropbox/)
 
