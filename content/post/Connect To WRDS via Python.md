@@ -6,7 +6,7 @@ description: "Make your WRDS data extraction replicable"
 date:        2021-10-12
 author:      "Mengjie Xu"
 toc:         true
-image:       "https://media.istockphoto.com/photos/businessman-holding-tablet-and-showing-a-growing-virtual-hologram-of-picture-id1051659174?k=20&m=1051659174&s=612x612&w=0&h=UYD3OkgfeerPZ4P1M0vWrRb42AdHSMJysQa36zB-C_g="
+image:    "https://assets.bbhub.io/company/sites/51/2020/11/BBG_Barclays_sphere_680x455.jpg"
 tags:        ["WRDS", "SSH"]
 categories:  ["Data" ]
 
@@ -298,12 +298,6 @@ Out[17]:
 57  006066  2019-12-31  IBM  INTL BUSINESS MACHINES CORP  152186.000  131201.000  134.040000   887.110
 58  006066  2020-12-31  IBM  INTL BUSINESS MACHINES CORP  155971.000  135244.000  125.880000   892.653
 ```
-
-
-
-## Quit IPythona and Log Out
-
-
 
 
 
