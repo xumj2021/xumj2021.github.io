@@ -229,12 +229,9 @@
       </ul>
     </li>
     <li><a href="#open-ipython-in-the-cloud">Open IPython in the Cloud</a></li>
-    <li><a href="#initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</a>
-      <ul>
-        <li><a href="#explore-wrds-libraries-and-tables">Explore WRDS Libraries and Tables</a></li>
-        <li><a href="#submit-queries">Submit Queries</a></li>
-      </ul>
-    </li>
+    <li><a href="#initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</a></li>
+    <li><a href="#explore-wrds-libraries-and-tables">Explore WRDS Libraries and Tables</a></li>
+    <li><a href="#submit-queries">Submit Queries</a></li>
     <li><a href="#transfer-data-through-dropbox">Transfer Data through Dropbox</a>
       <ul>
         <li><a href="#files-in-your-wrds-cloud">Files in your WRDS Cloud</a></li>
@@ -291,17 +288,31 @@
 </ol>
 <h2 id="open-ipython-in-the-cloud">Open IPython in the Cloud</h2>
 <p>Interactive Python jobs allow you to run code in serial, and receive a response to each command as you enter it. To run interactive Python jobs, you will need to schedule an interactive job with the WRDS Cloud Grid Engine by entering <code>qrsh</code>  and then enter <code>ipython3</code> to enter an interactive python enviornment, which is exactly what you get in <code>Jupyter</code>. Don&rsquo;t forget to insert <code>pip install wrds</code> before you connect to the WRDS library list.</p>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8A%E5%8D%8811.16.03.png" width=800 height=300>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 3: Interactive Python Job</div>
-</center>
-<h2 id="initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">9</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>xumj2019@wrds-cloud-login2-w ~<span style="color:#f92672">]</span>$ qrsh
+Last login: Tue Oct <span style="color:#ae81ff">12</span> 14:53:16 <span style="color:#ae81ff">2021</span> from wrds-cloud-login2-w.wharton.private
+<span style="color:#f92672">[</span>xumj2019@wrds-sas7-w ~<span style="color:#f92672">]</span>$ pip install wrds
+Requirement already satisfied: wrds in /usr/local/sas/grid/python2-2.7.17/lib/python2.7/site-packages <span style="color:#f92672">(</span>3.0.8<span style="color:#f92672">)</span>
+<span style="color:#f92672">[</span>xumj2019@wrds-sas7-w ~<span style="color:#f92672">]</span>$ ipython
+Python 3.9.5 <span style="color:#f92672">(</span>default, May  <span style="color:#ae81ff">6</span> 2021, 14:32:00<span style="color:#f92672">)</span> 
+Type <span style="color:#d88200">&#39;copyright&#39;</span>, <span style="color:#d88200">&#39;credits&#39;</span> or <span style="color:#d88200">&#39;license&#39;</span> <span style="color:#00a8c8">for</span> more information
+IPython 7.23.1 -- An enhanced Interactive Python. Type <span style="color:#d88200">&#39;?&#39;</span> <span style="color:#00a8c8">for</span> help.
+In <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="initiating-a-wrds-connection-in-python">Initiating a WRDS connection in Python</h2>
 <p>First, as with every Python program that intends to connect to WRDS, you must import the <strong>wrds</strong> module. Then you can make the connection and set up a <strong>pgpass</strong> file.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -325,7 +336,7 @@
 <span style="color:#111">Done</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="explore-wrds-libraries-and-tables">Explore WRDS Libraries and Tables</h3>
+</div><h2 id="explore-wrds-libraries-and-tables">Explore WRDS Libraries and Tables</h2>
 <p>You can analyze the structure of the data through its metadata using the <strong>wrds</strong> module, as outlined in the following steps:</p>
 <ul>
 <li>
@@ -460,7 +471,7 @@
 <span style="color:#ae81ff">16</span>    <span style="color:#111">qu_source</span>      <span style="color:#111">True</span>   <span style="color:#111">VARCHAR</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="submit-queries">Submit Queries</h3>
+</div><h2 id="submit-queries">Submit Queries</h2>
 <p>Now that you know how to query the metadata and understand the structure of the data, you are ready to query WRDS data directly. The <strong>wrds</strong> module provides several methods that are useful in gathering data:</p>
 <ul>
 <li><code>get_table()</code> - fetches data by matching library and dataset, with the ability to filter using different parameters. This is the easiest method of accessing data.</li>
@@ -753,12 +764,12 @@ Last updated: 10/13/21 at 05:00 EDT
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8B%E5%8D%884.42.14.png" width=500 height=300>
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8B%E5%8D%884.42.14.png" width=500 height=250>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 4: Connect WRDS Cloud to Dropbox</div>
+    padding: 2px;">Figure 3: Connect WRDS Cloud to Dropbox</div>
 </center>
 </li>
 <li>
@@ -880,7 +891,7 @@ Last updated: 10/13/21 at 05:00 EDT
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 5: Transfer Files From WRDS to Dropbox</div>
+    padding: 2px;">Figure 4: Transfer Files From WRDS to Dropbox</div>
 </center>
 </li>
 </ol>
