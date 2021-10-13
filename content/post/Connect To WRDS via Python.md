@@ -1,8 +1,8 @@
 ---
 
-title:       "Connect to the WRDS Cloud via Python"
+title:       "Exploit WRDS Cloud via Python"
 subtitle:    ""
-description: "Make your WRDS data extraction replicable"
+description: "Make your WRDS data extraction and processing replicable"
 date:        2021-10-12
 author:      "Mengjie Xu"
 toc:         true
@@ -17,7 +17,9 @@ categories:  ["Data" ]
 
 ## Motivation
 
-The WRDS-SAS Studio cloud seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the reference), this blog will introduce how to connect WRDS cloud via Python. Though providing no additional information, this blog helps you quickly establish your python-wrds workflow without checking various manuals.
+The WRDS-SAS Studio seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the **Reference** part), this blog will introduce how to exploit WRDS cloud via Python. 
+
+The biggest advantage of WRDS Cloud is that you don't have to download everything to your computer but just deal with the massive data using the computing source of WRDS Cloud. Following this blog, one can quickly establish a python-wrds cloud workflow without checking various manuals.
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -82,8 +84,6 @@ Interactive Python jobs allow you to run code in serial, and receive a response 
     color: #999;
     padding: 2px;">Figure 3: Interactive Python Job</div>
 </center>
-
-
 
 
 ## Initiating a WRDS connection in Python
@@ -241,62 +241,7 @@ Out[17]:
 0   006066  1962-12-31  IBM  INTL BUSINESS MACHINES CORP    2112.301     731.700  389.999567       NaN
 1   006066  1963-12-31  IBM  INTL BUSINESS MACHINES CORP    2373.857     782.119  506.999353       NaN
 2   006066  1964-12-31  IBM  INTL BUSINESS MACHINES CORP    3309.152    1055.072  409.499496       NaN
-3   006066  1965-12-31  IBM  INTL BUSINESS MACHINES CORP    3744.917    1166.771  498.999146       NaN
-4   006066  1966-12-31  IBM  INTL BUSINESS MACHINES CORP    4660.777    1338.149  371.499662       NaN
-5   006066  1967-12-31  IBM  INTL BUSINESS MACHINES CORP    5598.668    1767.067  626.999512       NaN
-6   006066  1968-12-31  IBM  INTL BUSINESS MACHINES CORP    6743.430    2174.291  314.999847       NaN
-7   006066  1969-12-31  IBM  INTL BUSINESS MACHINES CORP    7389.957    2112.967  364.499359   113.717
-8   006066  1970-12-31  IBM  INTL BUSINESS MACHINES CORP    8539.047    2591.909  317.749634   114.587
-9   006066  1971-12-31  IBM  INTL BUSINESS MACHINES CORP    9576.219    2933.837  336.499634   115.534
-10  006066  1972-12-31  IBM  INTL BUSINESS MACHINES CORP   10792.398    3226.508  401.999512   116.399
-11  006066  1973-12-31  IBM  INTL BUSINESS MACHINES CORP   12289.500    3477.465  246.749878   146.713
-12  006066  1974-12-31  IBM  INTL BUSINESS MACHINES CORP   14027.098    3916.766  167.999878   148.259
-13  006066  1975-12-31  IBM  INTL BUSINESS MACHINES CORP   15530.504    4114.705  224.249878   149.845
-14  006066  1976-12-31  IBM  INTL BUSINESS MACHINES CORP   17723.203    4974.035  279.124756   150.695
-15  006066  1977-12-31  IBM  INTL BUSINESS MACHINES CORP   18978.402    6359.965  273.499756   147.471
-16  006066  1978-12-31  IBM  INTL BUSINESS MACHINES CORP   20771.406    7277.759  298.499878   145.810
-17  006066  1979-12-31  IBM  INTL BUSINESS MACHINES CORP   24530.004    9568.734   64.374969   583.595
-18  006066  1980-12-31  IBM  INTL BUSINESS MACHINES CORP   26703.008   10250.000   67.874939   583.807
-19  006066  1981-12-31  IBM  INTL BUSINESS MACHINES CORP   29586.008   11425.000   56.874969   592.294
-20  006066  1982-12-31  IBM  INTL BUSINESS MACHINES CORP   32541.008   12581.000   96.250000   602.406
-21  006066  1983-12-31  IBM  INTL BUSINESS MACHINES CORP   37243.008   14024.000  122.000000   610.725
-22  006066  1984-12-31  IBM  INTL BUSINESS MACHINES CORP   42808.012   16319.000  123.125000   612.685
-23  006066  1985-12-31  IBM  INTL BUSINESS MACHINES CORP   52634.016   20644.000  155.500000   615.418
-24  006066  1986-12-31  IBM  INTL BUSINESS MACHINES CORP   57814.016   23440.000  120.000000   605.923
-25  006066  1987-12-31  IBM  INTL BUSINESS MACHINES CORP   63688.000   25425.000  115.500000   597.052
-26  006066  1988-12-31  IBM  INTL BUSINESS MACHINES CORP   73037.000   33528.000  121.875000   589.741
-27  006066  1989-12-31  IBM  INTL BUSINESS MACHINES CORP   77734.000   39225.000   94.125000   574.700
-28  006066  1990-12-31  IBM  INTL BUSINESS MACHINES CORP   87568.000   44736.000  113.000000   571.391
-29  006066  1991-12-31  IBM  INTL BUSINESS MACHINES CORP   92473.000   55467.000   89.000000   571.018
-30  006066  1992-12-31  IBM  INTL BUSINESS MACHINES CORP   86705.000   59081.000   50.375000   571.436
-31  006066  1993-12-31  IBM  INTL BUSINESS MACHINES CORP   81113.000   61375.000   56.500000   581.386
-32  006066  1994-12-31  IBM  INTL BUSINESS MACHINES CORP   81091.000   57678.000   73.500000   587.710
-33  006066  1995-12-31  IBM  INTL BUSINESS MACHINES CORP   80292.000   57869.000   91.375000   547.774
-34  006066  1996-12-31  IBM  INTL BUSINESS MACHINES CORP   81132.000   59504.000  151.500000   507.981
-35  006066  1997-12-31  IBM  INTL BUSINESS MACHINES CORP   81499.000   61683.000  104.625000   958.091
-36  006066  1998-12-31  IBM  INTL BUSINESS MACHINES CORP   86100.000   66667.000  184.375000   915.907
-37  006066  1999-12-31  IBM  INTL BUSINESS MACHINES CORP   87495.000   66984.000  107.875000  1784.216
-38  006066  2000-12-31  IBM  INTL BUSINESS MACHINES CORP   88349.000   67725.000   85.000000  1742.900
-39  006066  2001-12-31  IBM  INTL BUSINESS MACHINES CORP   88313.000   64699.000  120.960000  1723.194
-40  006066  2002-12-31  IBM  INTL BUSINESS MACHINES CORP   96484.000   73702.000   77.500000  1722.367
-41  006066  2003-12-31  IBM  INTL BUSINESS MACHINES CORP  104457.000   76593.000   92.680000  1694.509
-42  006066  2004-12-31  IBM  INTL BUSINESS MACHINES CORP  109183.000   79436.000   98.580000  1645.592
-43  006066  2005-12-31  IBM  INTL BUSINESS MACHINES CORP  105748.000   72650.000   82.200000  1573.980
-44  006066  2006-12-31  IBM  INTL BUSINESS MACHINES CORP  103234.000   74728.000   97.150000  1506.483
-45  006066  2007-12-31  IBM  INTL BUSINESS MACHINES CORP  120431.000   91961.000  108.100000  1385.234
-46  006066  2008-12-31  IBM  INTL BUSINESS MACHINES CORP  109524.000   96059.000   84.160000  1339.096
-47  006066  2009-12-31  IBM  INTL BUSINESS MACHINES CORP  109022.000   86267.000  130.900000  1305.337
-48  006066  2010-12-31  IBM  INTL BUSINESS MACHINES CORP  113452.000   90280.000  146.760000  1227.993
-49  006066  2011-12-31  IBM  INTL BUSINESS MACHINES CORP  116433.000   96197.000  183.880000  1163.183
-50  006066  2012-12-31  IBM  INTL BUSINESS MACHINES CORP  119213.000  100229.000  191.550000  1117.368
-51  006066  2013-12-31  IBM  INTL BUSINESS MACHINES CORP  126223.000  103294.000  187.570000  1054.391
-52  006066  2014-12-31  IBM  INTL BUSINESS MACHINES CORP  117532.000  105518.000  160.440000   990.524
-53  006066  2015-12-31  IBM  INTL BUSINESS MACHINES CORP  110495.000   96071.000  137.620000   965.729
-54  006066  2016-12-31  IBM  INTL BUSINESS MACHINES CORP  117470.000   99078.000  165.990000   945.867
-55  006066  2017-12-31  IBM  INTL BUSINESS MACHINES CORP  125356.000  107631.000  153.420000   922.179
-56  006066  2018-12-31  IBM  INTL BUSINESS MACHINES CORP  123382.000  106453.000  113.670000   892.479
-57  006066  2019-12-31  IBM  INTL BUSINESS MACHINES CORP  152186.000  131201.000  134.040000   887.110
-58  006066  2020-12-31  IBM  INTL BUSINESS MACHINES CORP  155971.000  135244.000  125.880000   892.653
+....
 In [42]: data=db.raw_sql("SELECT * FROM taqmsec.cqm_20170829 WHERE sym_root = 'A
     ...: APL' AND time_m>='04:00:00.084000' and time_m <= '04:01:00.084000'")
 
@@ -323,7 +268,11 @@ In [44]: data.to_csv("test.csv")
 
 ## Transfer Data through Dropbox
 
-Insert `ls` in your ssh command line, you will find the files you've saved in your wrds cloud. Apparently, how to transfer files with the wrds cloud is an issue you cannot sidestep. After tests, I personally found linking WRDS with Dropbox is the most efficient way to do this job.
+### Files in your WRDS Cloud
+
+Insert `ls` in your ssh command line, you will find the files you've saved in your Wrds Cloud. Seems that you have got the files you desire but the files are stored in WRDS Cloud. The next step is to determine how to exchange files between your personal computer and the WRDS Cloud. 
+
+After testing several alternatives (e.g., adopt an FTP server Cyberduck), I personally found linking WRDS with Dropbox is the most efficient way to do this job. [Transferring files using SCP](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/accessing-wrds-remotely-scp/) is also a good idea but it doesn't automatically backup your workflows as Dropbox does.
 
 ```python
 [xumj2019@wrds-sas7-w ~]$ ls
@@ -331,6 +280,58 @@ autoexec.sas      testaq.sas                 WRDS_batch_ticker_ctm.sas
 evt_taqinput.txt  test.csv                   WRDS_batch_ticker_ct.sas
 myProgram.csv     WRDS_batch_ticker_cqm.sas
 ```
+
+### Data Storage Locations
+
+Having a big picture about how WRDS Cloud stores our files can make our file transferring job more intuitive. As the WRDS Cloud is a shared resource, with many hundreds of users accessing at any one time, this storage space is managed by a *quota*. Typically, there are two separate quota for your, depending on the storage locations and how long the WRDS Cloud keeps the data for you. Type `quota` in your command line, you will find how much storage you've used.
+
+```shell
+[xumj2019@wrds-cloud-login2-w xmj]$ quota
+Current disk usage for xumj2019 (frankfurt):
+
+DIRECTORY  USED / LIMIT
+    Home:  548KB / 10GB
+ Scratch:  220KB / 500GB
+
+** Remember that the Scratch directory quota is shared **
+** with all other members of your subscribing institution **
+
+NOTE: Quota usage is updated every 30 minutes.
+Last updated: 10/13/21 at 05:00 EDT
+
+
+```
+
+#### Permanent Storage - Home Directory
+
+All users are given 10 GB dedicated permanent storage in their home directory in the WRDS Cloud.
+
+Your home directory is located at:
+
+**/home/[group name]/[username]**
+
+- You may store up to **10GB** of data in this directory.
+- Files in this directory are **never deleted** by WRDS.
+- Files in this directory are **backed up via** **snapshots** created on a regular basis (see the *File Recovery* section, below)
+
+**Note:** To determine your *group name*, use the `id` command on the WRDS Cloud: the name in the second set or parenthesis is your group name.  From my case below, it's easy to find my **group name** in WRDS is `frankfurt`
+
+``` shell
+[xumj2019@wrds-cloud-login2-w xmj]$ id
+uid=323854(xumj2019) gid=60052(frankfurt) group=60052(frankfurt)
+```
+
+#### Temporary Storage - Scratch Directory
+
+All subscribing institutions are given 500 GB shared temporary storage in the scratch directory. Generally, users should direct your larger output result data to this directory for staging before downloading, or before loading into subsequent programs. The scratch directory is located at:
+
+**/scratch/[group name]**
+
+- Members of your institution may store up to **500GB** of data in this directory, shared between all members.
+- Files in your shared scratch directory are **deleted after one week (168 hours)**. 
+- Files in this directory are **not backed up anywhere**, and should be downloaded shortly after being generated by your programs.
+
+### Link WRDS with Dropbox
 
 WRDS provides the `dbxcli` command on the WRDS cloud login nodes to transfer data directly between WRDS and your dropbox shares. `dbxcli` is a simple, ftp like transfer client; it only transfers files between dropbox and clients.
 
@@ -372,6 +373,101 @@ To do this, you need:
 
 - If you successfully logged in the command should print your dropbox account information. You may run `dbxcli account` again to confirm if your account is connected, if it prints your account information it is connected.
 
+Once you've successfully link the wrds with your Dropbpox account, you could create a new folder in the Dropbox, say `testdir1013`
+
+```python
+[xumj2019@wrds-cloud-login2-w ~]$ dbxcli mkdir testdir1013
+```
+
+At the same time, you could also create a directory in your institution's scratch volume with a unique name. I would use `xmj` 
+
+```python
+[xumj2019@wrds-cloud-login2-w ~]$ mkdir /scratch/frankfurt/xmj/
+```
+
+### Transfer Files From WRDS to Dropbox
+
+Files can be transferred to Dropbox with the `put` subcommand.
+
+1. Make a directory in your institution's [scratch volume](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/) with a unique name, such as your username. (I've introduced this part in **Data Storage Locations section**)
+
+2. Run your job and save your output to this directory. For example, I save a csv file `test1013.csv` and a graph file `testgraph1013.png` into the scratch direcory I've created before **/scratch/frankfurt/xmj/**
+
+   ```python
+   In [7]: import matplotlib.pyplot as plt
+   
+   In [8]: data = db.raw_sql("select date,dji from djones.djdaily", date_cols=['dat
+      ...: e'], index_col=['date'])
+   
+   In [9]: plt.plot(data)
+   Out[9]: [<matplotlib.lines.Line2D at 0x2ba61364ad90>]
+   
+   In [10]: plt.xlabel('date')
+   Out[10]: Text(0.5, 0, 'date')
+   
+   In [11]: plt.ylabel('dji')
+   Out[11]: Text(0, 0.5, 'dji')
+   
+   In [12]: plt.show()
+   
+   In [13]: plt.show()
+   
+   In [14]: plt.savefig('/scratch/frankfurt/xmj/testgraph1013.png') 
+                                                                               
+   In [14]: data.to_csv("/scratch/frankfurt/xmj/test1013.csv")
+   ```
+
+3. When you are done go to the login node and `cd` to your scratch directory.
+
+   ```python
+   In [15]: quit()
+   [xumj2019@wrds-sas5-w ~]$ logout
+   [xumj2019@wrds-cloud-login2-w xmj]$ cd /scratch/frankfurt/xmj/
+   ```
+
+4. Once here transfer your file(s) from WRDS to Dropbox with `dbxcli put`.
+
+   ```python
+   [xumj2019@wrds-cloud-login2-w xmj]$ dbxcli put test1013.csv /testdir1013/test1013.csv
+   Uploading 25 KiB/25 KiB
+   [xumj2019@wrds-cloud-login2-w xmj]$ dbxcli put testgraph1013.png /testdir1013/testgraph1013.png
+   Uploading 21 KiB/21 KiB
+   ```
+
+   Then you will find the files show up in your Dropbox
+
+   <center>
+       <img style="border-radius: 0.3125em;
+       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+       src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-13%20%E4%B8%8A%E5%8D%8810.48.20.png" width=500 height=100>
+       <br>
+       <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+       display: inline-block;
+       color: #999;
+       padding: 2px;">Figure 5: Transfer Files From WRDS to Dropbox</div>
+   </center>
+
+### Transfer Files From Dropbox to WRDS
+
+Files can be transferred to WRDS Cloud with the `get` subcommand.
+
+1. `cd` to your scratch directory or home directory, depending on whether you want the files to be stored permanently or temporarily in the Cloud.
+
+    ```python
+    [xumj2019@wrds-cloud-login2-w xmj]$ cd /scratch/frankfurt/xmj/
+    ```
+
+2. Once here transfer your file(s) to WRDS with `dbxcli get`. With the following code, I can transfer the `test.csv` located in my Dropbox root folder to the scratch volume. Type `ls` in the WRDS command line,  and one will find the `test.csv` have been successfully listed in my scatch directory. 
+
+   ```PYTHON
+   [xumj2019@wrds-cloud-login2-w xmj]$ dbxcli get test.csv .
+   Downloading 93 KiB/93 KiB 
+   [xumj2019@wrds-cloud-login2-w xmj]$ ls
+   test1013.csv  test.csv  testgraph1013.png
+   ```
+
+   
+
 ## References
 
 - [PYTHON: On the WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-wrds-cloud/)
@@ -382,4 +478,7 @@ To do this, you need:
 - [Example Python Data Workflow](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-example-data-workflow/)
 - [Storing Your Data on the WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/)
 - [Transfering Data with Dropbox](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/transfering-data-with-dropbox/)
+- [Storing Your Data on the WRDS Cloud](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/)
+- [Graphing Data using Python](https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/graphing-data-python/)
+- [Transferring Files using SCP](https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/accessing-wrds-remotely-scp/)
 
