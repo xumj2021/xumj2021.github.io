@@ -74,16 +74,18 @@ Once you have downloaded and installed one of the above, you can initiate an SSH
 
 Interactive Python jobs allow you to run code in serial, and receive a response to each command as you enter it. To run interactive Python jobs, you will need to schedule an interactive job with the WRDS Cloud Grid Engine by entering `qrsh`  and then enter `ipython3` to enter an interactive python enviornment, which is exactly what you get in `Jupyter`. Don't forget to insert `pip install wrds` before you connect to the WRDS library list.
 
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8A%E5%8D%8811.16.03.png" width=800 height=300>
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Figure 3: Interactive Python Job</div>
-</center>
+```shell
+[xumj2019@wrds-cloud-login2-w ~]$ qrsh
+Last login: Tue Oct 12 14:53:16 2021 from wrds-cloud-login2-w.wharton.private
+[xumj2019@wrds-sas7-w ~]$ pip install wrds
+Requirement already satisfied: wrds in /usr/local/sas/grid/python2-2.7.17/lib/python2.7/site-packages (3.0.8)
+[xumj2019@wrds-sas7-w ~]$ ipython
+Python 3.9.5 (default, May  6 2021, 14:32:00) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.23.1 -- An enhanced Interactive Python. Type '?' for help.
+In [1]: 
+```
+
 
 
 ## Initiating a WRDS connection in Python
@@ -103,7 +105,7 @@ Done
 
 
 
-### Explore WRDS Libraries and Tables
+## Explore WRDS Libraries and Tables
 
 You can analyze the structure of the data through its metadata using the **wrds** module, as outlined in the following steps:
 
@@ -176,7 +178,7 @@ Out[9]:
 
 
 
-### Submit Queries
+## Submit Queries
 
 Now that you know how to query the metadata and understand the structure of the data, you are ready to query WRDS data directly. The **wrds** module provides several methods that are useful in gathering data:
 
@@ -363,12 +365,12 @@ To do this, you need:
   <center>
       <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8B%E5%8D%884.42.14.png" width=500 height=300>
+      src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-12%20%E4%B8%8B%E5%8D%884.42.14.png" width=500 height=250>
       <br>
       <div style="color:orange; border-bottom: 1px solid #d9d9d9;
       display: inline-block;
       color: #999;
-      padding: 2px;">Figure 4: Connect WRDS Cloud to Dropbox</div>
+      padding: 2px;">Figure 3: Connect WRDS Cloud to Dropbox</div>
   </center>
 
 - If you successfully logged in the command should print your dropbox account information. You may run `dbxcli account` again to confirm if your account is connected, if it prints your account information it is connected.
@@ -444,7 +446,7 @@ Files can be transferred to Dropbox with the `put` subcommand.
        <div style="color:orange; border-bottom: 1px solid #d9d9d9;
        display: inline-block;
        color: #999;
-       padding: 2px;">Figure 5: Transfer Files From WRDS to Dropbox</div>
+       padding: 2px;">Figure 4: Transfer Files From WRDS to Dropbox</div>
    </center>
 
 ### Transfer Files From Dropbox to WRDS
