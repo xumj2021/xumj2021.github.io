@@ -28,15 +28,15 @@
     
 
     
-    <meta name="title" content="Connect to the WRDS Cloud via Python" />
-    <meta property="og:title" content="Connect to the WRDS Cloud via Python" />
-    <meta property="twitter:title" content="Connect to the WRDS Cloud via Python" />
+    <meta name="title" content="Exploit WRDS Cloud via Python" />
+    <meta property="og:title" content="Exploit WRDS Cloud via Python" />
+    <meta property="twitter:title" content="Exploit WRDS Cloud via Python" />
     
 
     
-    <meta name="description" content="Make your WRDS data extraction replicable">
-    <meta property="og:description" content="Make your WRDS data extraction replicable" />
-    <meta property="twitter:description" content="Make your WRDS data extraction replicable" />
+    <meta name="description" content="Make your WRDS data extraction and processing replicable">
+    <meta property="og:description" content="Make your WRDS data extraction and processing replicable" />
+    <meta property="twitter:description" content="Make your WRDS data extraction and processing replicable" />
     
 
     
@@ -47,7 +47,7 @@
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Connect to the WRDS Cloud via Python-Mengjie&#39;s Blog</title>
+    <title>Exploit WRDS Cloud via Python-Mengjie&#39;s Blog</title>
 
     <link rel="canonical" href="/post/connect-to-wrds-via-python/">
 
@@ -183,7 +183,7 @@
                         </a>
                         
                     </div>
-                    <h1>Connect to the WRDS Cloud via Python</h1>
+                    <h1>Exploit WRDS Cloud via Python</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
@@ -235,13 +235,22 @@
         <li><a href="#submit-queries">Submit Queries</a></li>
       </ul>
     </li>
-    <li><a href="#transfer-data-through-dropbox">Transfer Data through Dropbox</a></li>
+    <li><a href="#transfer-data-through-dropbox">Transfer Data through Dropbox</a>
+      <ul>
+        <li><a href="#files-in-your-wrds-cloud">Files in your WRDS Cloud</a></li>
+        <li><a href="#data-storage-locations">Data Storage Locations</a></li>
+        <li><a href="#link-wrds-with-dropbox">Link WRDS with Dropbox</a></li>
+        <li><a href="#transfer-files-from-wrds-to-dropbox">Transfer Files From WRDS to Dropbox</a></li>
+        <li><a href="#transfer-files-from-dropbox-to-wrds">Transfer Files From Dropbox to WRDS</a></li>
+      </ul>
+    </li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
                 
                 <h2 id="motivation">Motivation</h2>
-<p>The WRDS-SAS Studio cloud seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the reference), this blog will introduce how to connect WRDS cloud via Python. Though providing no additional information, this blog helps you quickly establish your python-wrds workflow without checking various manuals.</p>
+<p>The WRDS-SAS Studio seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the <strong>Reference</strong> part), this blog will introduce how to exploit WRDS cloud via Python.</p>
+<p>The biggest advantage of WRDS Cloud is that you don&rsquo;t have to download everything to your computer but just deal with the massive data using the computing source of WRDS Cloud. Following this blog, one can quickly establish a python-wrds cloud workflow without checking various manuals.</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -462,134 +471,79 @@
 <p>Here are some examples.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">  1</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">  2</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">  3</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">  4</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">  5</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">  6</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">  7</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">  8</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">  9</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10"> 10</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11"> 11</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12"> 12</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13"> 13</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14"> 14</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15"> 15</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16"> 16</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17"> 17</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18"> 18</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19"> 19</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20"> 20</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21"> 21</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22"> 22</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23"> 23</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24"> 24</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25"> 25</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26"> 26</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27"> 27</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28"> 28</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29"> 29</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30"> 30</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31"> 31</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32"> 32</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33"> 33</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34"> 34</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35"> 35</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36"> 36</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37"> 37</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38"> 38</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39"> 39</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40"> 40</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41"> 41</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42"> 42</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43"> 43</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44"> 44</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45"> 45</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46"> 46</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47"> 47</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48"> 48</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49"> 49</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50"> 50</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51"> 51</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52"> 52</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53"> 53</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54"> 54</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55"> 55</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56"> 56</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57"> 57</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58"> 58</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59"> 59</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60"> 60</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61"> 61</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62"> 62</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63"> 63</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64"> 64</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65"> 65</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66"> 66</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67"> 67</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68"> 68</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69"> 69</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70"> 70</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71"> 71</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72"> 72</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="73"><a style="outline: none; text-decoration:none; color:inherit" href="#73"> 73</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="74"><a style="outline: none; text-decoration:none; color:inherit" href="#74"> 74</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="75"><a style="outline: none; text-decoration:none; color:inherit" href="#75"> 75</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="76"><a style="outline: none; text-decoration:none; color:inherit" href="#76"> 76</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="77"><a style="outline: none; text-decoration:none; color:inherit" href="#77"> 77</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="78"><a style="outline: none; text-decoration:none; color:inherit" href="#78"> 78</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="79"><a style="outline: none; text-decoration:none; color:inherit" href="#79"> 79</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="80"><a style="outline: none; text-decoration:none; color:inherit" href="#80"> 80</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="81"><a style="outline: none; text-decoration:none; color:inherit" href="#81"> 81</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="82"><a style="outline: none; text-decoration:none; color:inherit" href="#82"> 82</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="83"><a style="outline: none; text-decoration:none; color:inherit" href="#83"> 83</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="84"><a style="outline: none; text-decoration:none; color:inherit" href="#84"> 84</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="85"><a style="outline: none; text-decoration:none; color:inherit" href="#85"> 85</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="86"><a style="outline: none; text-decoration:none; color:inherit" href="#86"> 86</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="87"><a style="outline: none; text-decoration:none; color:inherit" href="#87"> 87</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="88"><a style="outline: none; text-decoration:none; color:inherit" href="#88"> 88</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="89"><a style="outline: none; text-decoration:none; color:inherit" href="#89"> 89</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="90"><a style="outline: none; text-decoration:none; color:inherit" href="#90"> 90</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="91"><a style="outline: none; text-decoration:none; color:inherit" href="#91"> 91</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="92"><a style="outline: none; text-decoration:none; color:inherit" href="#92"> 92</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="93"><a style="outline: none; text-decoration:none; color:inherit" href="#93"> 93</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="94"><a style="outline: none; text-decoration:none; color:inherit" href="#94"> 94</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="95"><a style="outline: none; text-decoration:none; color:inherit" href="#95"> 95</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="96"><a style="outline: none; text-decoration:none; color:inherit" href="#96"> 96</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="97"><a style="outline: none; text-decoration:none; color:inherit" href="#97"> 97</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="98"><a style="outline: none; text-decoration:none; color:inherit" href="#98"> 98</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="99"><a style="outline: none; text-decoration:none; color:inherit" href="#99"> 99</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="100"><a style="outline: none; text-decoration:none; color:inherit" href="#100">100</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="101"><a style="outline: none; text-decoration:none; color:inherit" href="#101">101</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="102"><a style="outline: none; text-decoration:none; color:inherit" href="#102">102</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="103"><a style="outline: none; text-decoration:none; color:inherit" href="#103">103</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="104"><a style="outline: none; text-decoration:none; color:inherit" href="#104">104</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="105"><a style="outline: none; text-decoration:none; color:inherit" href="#105">105</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="106"><a style="outline: none; text-decoration:none; color:inherit" href="#106">106</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="107"><a style="outline: none; text-decoration:none; color:inherit" href="#107">107</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="108"><a style="outline: none; text-decoration:none; color:inherit" href="#108">108</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="109"><a style="outline: none; text-decoration:none; color:inherit" href="#109">109</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="110"><a style="outline: none; text-decoration:none; color:inherit" href="#110">110</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="111"><a style="outline: none; text-decoration:none; color:inherit" href="#111">111</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="112"><a style="outline: none; text-decoration:none; color:inherit" href="#112">112</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="113"><a style="outline: none; text-decoration:none; color:inherit" href="#113">113</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="114"><a style="outline: none; text-decoration:none; color:inherit" href="#114">114</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="115"><a style="outline: none; text-decoration:none; color:inherit" href="#115">115</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="116"><a style="outline: none; text-decoration:none; color:inherit" href="#116">116</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="117"><a style="outline: none; text-decoration:none; color:inherit" href="#117">117</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="118"><a style="outline: none; text-decoration:none; color:inherit" href="#118">118</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="119"><a style="outline: none; text-decoration:none; color:inherit" href="#119">119</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="120"><a style="outline: none; text-decoration:none; color:inherit" href="#120">120</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="121"><a style="outline: none; text-decoration:none; color:inherit" href="#121">121</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="122"><a style="outline: none; text-decoration:none; color:inherit" href="#122">122</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="123"><a style="outline: none; text-decoration:none; color:inherit" href="#123">123</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="124"><a style="outline: none; text-decoration:none; color:inherit" href="#124">124</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="125"><a style="outline: none; text-decoration:none; color:inherit" href="#125">125</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="126"><a style="outline: none; text-decoration:none; color:inherit" href="#126">126</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="127"><a style="outline: none; text-decoration:none; color:inherit" href="#127">127</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="128"><a style="outline: none; text-decoration:none; color:inherit" href="#128">128</a>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44">44</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45">45</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46">46</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47">47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48">48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49">49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62">62</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63">63</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64">64</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65">65</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66">66</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67">67</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68">68</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69">69</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70">70</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71">71</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72">72</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="73"><a style="outline: none; text-decoration:none; color:inherit" href="#73">73</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]:</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">get_table</span><span style="color:#111">(</span><span style="color:#111">library</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;djones&#39;</span><span style="color:#111">,</span> <span style="color:#111">table</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;djdaily&#39;</span><span style="color:#111">,</span> <span style="color:#111">columns</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;dji&#39;</span><span style="color:#111">],</span> <span style="color:#111">obs</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span>
@@ -644,62 +598,7 @@
 <span style="color:#ae81ff">0</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1962</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">2112.301</span>     <span style="color:#ae81ff">731.700</span>  <span style="color:#ae81ff">389.999567</span>       <span style="color:#111">NaN</span>
 <span style="color:#ae81ff">1</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1963</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">2373.857</span>     <span style="color:#ae81ff">782.119</span>  <span style="color:#ae81ff">506.999353</span>       <span style="color:#111">NaN</span>
 <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1964</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">3309.152</span>    <span style="color:#ae81ff">1055.072</span>  <span style="color:#ae81ff">409.499496</span>       <span style="color:#111">NaN</span>
-<span style="color:#ae81ff">3</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1965</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">3744.917</span>    <span style="color:#ae81ff">1166.771</span>  <span style="color:#ae81ff">498.999146</span>       <span style="color:#111">NaN</span>
-<span style="color:#ae81ff">4</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1966</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">4660.777</span>    <span style="color:#ae81ff">1338.149</span>  <span style="color:#ae81ff">371.499662</span>       <span style="color:#111">NaN</span>
-<span style="color:#ae81ff">5</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1967</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">5598.668</span>    <span style="color:#ae81ff">1767.067</span>  <span style="color:#ae81ff">626.999512</span>       <span style="color:#111">NaN</span>
-<span style="color:#ae81ff">6</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1968</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">6743.430</span>    <span style="color:#ae81ff">2174.291</span>  <span style="color:#ae81ff">314.999847</span>       <span style="color:#111">NaN</span>
-<span style="color:#ae81ff">7</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1969</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">7389.957</span>    <span style="color:#ae81ff">2112.967</span>  <span style="color:#ae81ff">364.499359</span>   <span style="color:#ae81ff">113.717</span>
-<span style="color:#ae81ff">8</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1970</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">8539.047</span>    <span style="color:#ae81ff">2591.909</span>  <span style="color:#ae81ff">317.749634</span>   <span style="color:#ae81ff">114.587</span>
-<span style="color:#ae81ff">9</span>   <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1971</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>    <span style="color:#ae81ff">9576.219</span>    <span style="color:#ae81ff">2933.837</span>  <span style="color:#ae81ff">336.499634</span>   <span style="color:#ae81ff">115.534</span>
-<span style="color:#ae81ff">10</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1972</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">10792.398</span>    <span style="color:#ae81ff">3226.508</span>  <span style="color:#ae81ff">401.999512</span>   <span style="color:#ae81ff">116.399</span>
-<span style="color:#ae81ff">11</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1973</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">12289.500</span>    <span style="color:#ae81ff">3477.465</span>  <span style="color:#ae81ff">246.749878</span>   <span style="color:#ae81ff">146.713</span>
-<span style="color:#ae81ff">12</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1974</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">14027.098</span>    <span style="color:#ae81ff">3916.766</span>  <span style="color:#ae81ff">167.999878</span>   <span style="color:#ae81ff">148.259</span>
-<span style="color:#ae81ff">13</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1975</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">15530.504</span>    <span style="color:#ae81ff">4114.705</span>  <span style="color:#ae81ff">224.249878</span>   <span style="color:#ae81ff">149.845</span>
-<span style="color:#ae81ff">14</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1976</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">17723.203</span>    <span style="color:#ae81ff">4974.035</span>  <span style="color:#ae81ff">279.124756</span>   <span style="color:#ae81ff">150.695</span>
-<span style="color:#ae81ff">15</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1977</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">18978.402</span>    <span style="color:#ae81ff">6359.965</span>  <span style="color:#ae81ff">273.499756</span>   <span style="color:#ae81ff">147.471</span>
-<span style="color:#ae81ff">16</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1978</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">20771.406</span>    <span style="color:#ae81ff">7277.759</span>  <span style="color:#ae81ff">298.499878</span>   <span style="color:#ae81ff">145.810</span>
-<span style="color:#ae81ff">17</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1979</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">24530.004</span>    <span style="color:#ae81ff">9568.734</span>   <span style="color:#ae81ff">64.374969</span>   <span style="color:#ae81ff">583.595</span>
-<span style="color:#ae81ff">18</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1980</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">26703.008</span>   <span style="color:#ae81ff">10250.000</span>   <span style="color:#ae81ff">67.874939</span>   <span style="color:#ae81ff">583.807</span>
-<span style="color:#ae81ff">19</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1981</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">29586.008</span>   <span style="color:#ae81ff">11425.000</span>   <span style="color:#ae81ff">56.874969</span>   <span style="color:#ae81ff">592.294</span>
-<span style="color:#ae81ff">20</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1982</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">32541.008</span>   <span style="color:#ae81ff">12581.000</span>   <span style="color:#ae81ff">96.250000</span>   <span style="color:#ae81ff">602.406</span>
-<span style="color:#ae81ff">21</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1983</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">37243.008</span>   <span style="color:#ae81ff">14024.000</span>  <span style="color:#ae81ff">122.000000</span>   <span style="color:#ae81ff">610.725</span>
-<span style="color:#ae81ff">22</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1984</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">42808.012</span>   <span style="color:#ae81ff">16319.000</span>  <span style="color:#ae81ff">123.125000</span>   <span style="color:#ae81ff">612.685</span>
-<span style="color:#ae81ff">23</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1985</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">52634.016</span>   <span style="color:#ae81ff">20644.000</span>  <span style="color:#ae81ff">155.500000</span>   <span style="color:#ae81ff">615.418</span>
-<span style="color:#ae81ff">24</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1986</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">57814.016</span>   <span style="color:#ae81ff">23440.000</span>  <span style="color:#ae81ff">120.000000</span>   <span style="color:#ae81ff">605.923</span>
-<span style="color:#ae81ff">25</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1987</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">63688.000</span>   <span style="color:#ae81ff">25425.000</span>  <span style="color:#ae81ff">115.500000</span>   <span style="color:#ae81ff">597.052</span>
-<span style="color:#ae81ff">26</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1988</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">73037.000</span>   <span style="color:#ae81ff">33528.000</span>  <span style="color:#ae81ff">121.875000</span>   <span style="color:#ae81ff">589.741</span>
-<span style="color:#ae81ff">27</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1989</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">77734.000</span>   <span style="color:#ae81ff">39225.000</span>   <span style="color:#ae81ff">94.125000</span>   <span style="color:#ae81ff">574.700</span>
-<span style="color:#ae81ff">28</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1990</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">87568.000</span>   <span style="color:#ae81ff">44736.000</span>  <span style="color:#ae81ff">113.000000</span>   <span style="color:#ae81ff">571.391</span>
-<span style="color:#ae81ff">29</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1991</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">92473.000</span>   <span style="color:#ae81ff">55467.000</span>   <span style="color:#ae81ff">89.000000</span>   <span style="color:#ae81ff">571.018</span>
-<span style="color:#ae81ff">30</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1992</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">86705.000</span>   <span style="color:#ae81ff">59081.000</span>   <span style="color:#ae81ff">50.375000</span>   <span style="color:#ae81ff">571.436</span>
-<span style="color:#ae81ff">31</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1993</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81113.000</span>   <span style="color:#ae81ff">61375.000</span>   <span style="color:#ae81ff">56.500000</span>   <span style="color:#ae81ff">581.386</span>
-<span style="color:#ae81ff">32</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1994</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81091.000</span>   <span style="color:#ae81ff">57678.000</span>   <span style="color:#ae81ff">73.500000</span>   <span style="color:#ae81ff">587.710</span>
-<span style="color:#ae81ff">33</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1995</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">80292.000</span>   <span style="color:#ae81ff">57869.000</span>   <span style="color:#ae81ff">91.375000</span>   <span style="color:#ae81ff">547.774</span>
-<span style="color:#ae81ff">34</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1996</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81132.000</span>   <span style="color:#ae81ff">59504.000</span>  <span style="color:#ae81ff">151.500000</span>   <span style="color:#ae81ff">507.981</span>
-<span style="color:#ae81ff">35</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1997</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">81499.000</span>   <span style="color:#ae81ff">61683.000</span>  <span style="color:#ae81ff">104.625000</span>   <span style="color:#ae81ff">958.091</span>
-<span style="color:#ae81ff">36</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1998</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">86100.000</span>   <span style="color:#ae81ff">66667.000</span>  <span style="color:#ae81ff">184.375000</span>   <span style="color:#ae81ff">915.907</span>
-<span style="color:#ae81ff">37</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">1999</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">87495.000</span>   <span style="color:#ae81ff">66984.000</span>  <span style="color:#ae81ff">107.875000</span>  <span style="color:#ae81ff">1784.216</span>
-<span style="color:#ae81ff">38</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2000</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">88349.000</span>   <span style="color:#ae81ff">67725.000</span>   <span style="color:#ae81ff">85.000000</span>  <span style="color:#ae81ff">1742.900</span>
-<span style="color:#ae81ff">39</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2001</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">88313.000</span>   <span style="color:#ae81ff">64699.000</span>  <span style="color:#ae81ff">120.960000</span>  <span style="color:#ae81ff">1723.194</span>
-<span style="color:#ae81ff">40</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2002</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>   <span style="color:#ae81ff">96484.000</span>   <span style="color:#ae81ff">73702.000</span>   <span style="color:#ae81ff">77.500000</span>  <span style="color:#ae81ff">1722.367</span>
-<span style="color:#ae81ff">41</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2003</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">104457.000</span>   <span style="color:#ae81ff">76593.000</span>   <span style="color:#ae81ff">92.680000</span>  <span style="color:#ae81ff">1694.509</span>
-<span style="color:#ae81ff">42</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2004</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">109183.000</span>   <span style="color:#ae81ff">79436.000</span>   <span style="color:#ae81ff">98.580000</span>  <span style="color:#ae81ff">1645.592</span>
-<span style="color:#ae81ff">43</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2005</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">105748.000</span>   <span style="color:#ae81ff">72650.000</span>   <span style="color:#ae81ff">82.200000</span>  <span style="color:#ae81ff">1573.980</span>
-<span style="color:#ae81ff">44</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2006</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">103234.000</span>   <span style="color:#ae81ff">74728.000</span>   <span style="color:#ae81ff">97.150000</span>  <span style="color:#ae81ff">1506.483</span>
-<span style="color:#ae81ff">45</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2007</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">120431.000</span>   <span style="color:#ae81ff">91961.000</span>  <span style="color:#ae81ff">108.100000</span>  <span style="color:#ae81ff">1385.234</span>
-<span style="color:#ae81ff">46</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2008</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">109524.000</span>   <span style="color:#ae81ff">96059.000</span>   <span style="color:#ae81ff">84.160000</span>  <span style="color:#ae81ff">1339.096</span>
-<span style="color:#ae81ff">47</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2009</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">109022.000</span>   <span style="color:#ae81ff">86267.000</span>  <span style="color:#ae81ff">130.900000</span>  <span style="color:#ae81ff">1305.337</span>
-<span style="color:#ae81ff">48</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2010</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">113452.000</span>   <span style="color:#ae81ff">90280.000</span>  <span style="color:#ae81ff">146.760000</span>  <span style="color:#ae81ff">1227.993</span>
-<span style="color:#ae81ff">49</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2011</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">116433.000</span>   <span style="color:#ae81ff">96197.000</span>  <span style="color:#ae81ff">183.880000</span>  <span style="color:#ae81ff">1163.183</span>
-<span style="color:#ae81ff">50</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2012</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">119213.000</span>  <span style="color:#ae81ff">100229.000</span>  <span style="color:#ae81ff">191.550000</span>  <span style="color:#ae81ff">1117.368</span>
-<span style="color:#ae81ff">51</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2013</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">126223.000</span>  <span style="color:#ae81ff">103294.000</span>  <span style="color:#ae81ff">187.570000</span>  <span style="color:#ae81ff">1054.391</span>
-<span style="color:#ae81ff">52</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2014</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">117532.000</span>  <span style="color:#ae81ff">105518.000</span>  <span style="color:#ae81ff">160.440000</span>   <span style="color:#ae81ff">990.524</span>
-<span style="color:#ae81ff">53</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">110495.000</span>   <span style="color:#ae81ff">96071.000</span>  <span style="color:#ae81ff">137.620000</span>   <span style="color:#ae81ff">965.729</span>
-<span style="color:#ae81ff">54</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2016</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">117470.000</span>   <span style="color:#ae81ff">99078.000</span>  <span style="color:#ae81ff">165.990000</span>   <span style="color:#ae81ff">945.867</span>
-<span style="color:#ae81ff">55</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">125356.000</span>  <span style="color:#ae81ff">107631.000</span>  <span style="color:#ae81ff">153.420000</span>   <span style="color:#ae81ff">922.179</span>
-<span style="color:#ae81ff">56</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2018</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">123382.000</span>  <span style="color:#ae81ff">106453.000</span>  <span style="color:#ae81ff">113.670000</span>   <span style="color:#ae81ff">892.479</span>
-<span style="color:#ae81ff">57</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2019</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">152186.000</span>  <span style="color:#ae81ff">131201.000</span>  <span style="color:#ae81ff">134.040000</span>   <span style="color:#ae81ff">887.110</span>
-<span style="color:#ae81ff">58</span>  <span style="color:#ae81ff">006066</span>  <span style="color:#ae81ff">2020</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">31</span>  <span style="color:#111">IBM</span>  <span style="color:#111">INTL</span> <span style="color:#111">BUSINESS</span> <span style="color:#111">MACHINES</span> <span style="color:#111">CORP</span>  <span style="color:#ae81ff">155971.000</span>  <span style="color:#ae81ff">135244.000</span>  <span style="color:#ae81ff">125.880000</span>   <span style="color:#ae81ff">892.653</span>
+<span style="color:#f92672">....</span>
 <span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">42</span><span style="color:#111">]:</span> <span style="color:#111">data</span><span style="color:#f92672">=</span><span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">raw_sql</span><span style="color:#111">(</span><span style="color:#d88200">&#34;SELECT * FROM taqmsec.cqm_20170829 WHERE sym_root = &#39;A</span>
     <span style="color:#f92672">...</span><span style="color:#111">:</span> <span style="color:#111">APL</span><span style="color:#d88200">&#39; AND time_m&gt;=&#39;</span><span style="color:#ae81ff">04</span><span style="color:#111">:</span><span style="color:#ae81ff">00</span><span style="color:#111">:</span><span style="color:#ae81ff">00.084000</span><span style="color:#d88200">&#39; and time_m &lt;= &#39;</span><span style="color:#ae81ff">04</span><span style="color:#111">:</span><span style="color:#ae81ff">01</span><span style="color:#111">:</span><span style="color:#ae81ff">00.084000</span><span style="color:#d88200">&#39;&#34;)</span>
 
@@ -723,7 +622,9 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="transfer-data-through-dropbox">Transfer Data through Dropbox</h2>
-<p>Insert <code>ls</code> in your ssh command line, you will find the files you&rsquo;ve saved in your wrds cloud. Apparently, how to transfer files with the wrds cloud is an issue you cannot sidestep. After tests, I personally found linking WRDS with Dropbox is the most efficient way to do this job.</p>
+<h3 id="files-in-your-wrds-cloud">Files in your WRDS Cloud</h3>
+<p>Insert <code>ls</code> in your ssh command line, you will find the files you&rsquo;ve saved in your Wrds Cloud. Seems that you have got the files you desire but the files are stored in WRDS Cloud. The next step is to determine how to exchange files between your personal computer and the WRDS Cloud.</p>
+<p>After testing several alternatives (e.g., adopt an FTP server Cyberduck), I personally found linking WRDS with Dropbox is the most efficient way to do this job. <a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/accessing-wrds-remotely-scp/">Transferring files using SCP</a> is also a good idea but it doesn&rsquo;t automatically backup your workflows as Dropbox does.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -738,7 +639,72 @@
 <span style="color:#111">myProgram</span><span style="color:#f92672">.</span><span style="color:#111">csv</span>     <span style="color:#111">WRDS_batch_ticker_cqm</span><span style="color:#f92672">.</span><span style="color:#111">sas</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>WRDS provides the <code>dbxcli</code> command on the WRDS cloud login nodes to transfer data directly between WRDS and your dropbox shares. <code>dbxcli</code> is a simple, ftp like transfer client; it only transfers files between dropbox and clients.</p>
+</div><h3 id="data-storage-locations">Data Storage Locations</h3>
+<p>Having a big picture about how WRDS Cloud stores our files can make our file transferring job more intuitive. As the WRDS Cloud is a shared resource, with many hundreds of users accessing at any one time, this storage space is managed by a <em>quota</em>. Typically, there are two separate quota for your, depending on the storage locations and how long the WRDS Cloud keeps the data for you. Type <code>quota</code> in your command line, you will find how much storage you&rsquo;ve used.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>xumj2019@wrds-cloud-login2-w xmj<span style="color:#f92672">]</span>$ quota
+Current disk usage <span style="color:#00a8c8">for</span> xumj2019 <span style="color:#f92672">(</span>frankfurt<span style="color:#f92672">)</span>:
+
+DIRECTORY  USED / LIMIT
+    Home:  548KB / 10GB
+ Scratch:  220KB / 500GB
+
+** Remember that the Scratch directory quota is shared **
+** with all other members of your subscribing institution **
+
+NOTE: Quota usage is updated every <span style="color:#ae81ff">30</span> minutes.
+Last updated: 10/13/21 at 05:00 EDT
+
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="permanent-storage---home-directory">Permanent Storage - Home Directory</h4>
+<p>All users are given 10 GB dedicated permanent storage in their home directory in the WRDS Cloud.</p>
+<p>Your home directory is located at:</p>
+<p><strong>/home/[group name]/[username]</strong></p>
+<ul>
+<li>You may store up to <strong>10GB</strong> of data in this directory.</li>
+<li>Files in this directory are <strong>never deleted</strong> by WRDS.</li>
+<li>Files in this directory are <strong>backed up via</strong> <strong>snapshots</strong> created on a regular basis (see the <em>File Recovery</em> section, below)</li>
+</ul>
+<p><strong>Note:</strong> To determine your <em>group name</em>, use the <code>id</code> command on the WRDS Cloud: the name in the second set or parenthesis is your group name.  From my case below, it&rsquo;s easy to find my <strong>group name</strong> in WRDS is <code>frankfurt</code></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>xumj2019@wrds-cloud-login2-w xmj<span style="color:#f92672">]</span>$ id
+<span style="color:#111">uid</span><span style="color:#f92672">=</span>323854<span style="color:#f92672">(</span>xumj2019<span style="color:#f92672">)</span> <span style="color:#111">gid</span><span style="color:#f92672">=</span>60052<span style="color:#f92672">(</span>frankfurt<span style="color:#f92672">)</span> <span style="color:#111">group</span><span style="color:#f92672">=</span>60052<span style="color:#f92672">(</span>frankfurt<span style="color:#f92672">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="temporary-storage---scratch-directory">Temporary Storage - Scratch Directory</h4>
+<p>All subscribing institutions are given 500 GB shared temporary storage in the scratch directory. Generally, users should direct your larger output result data to this directory for staging before downloading, or before loading into subsequent programs. The scratch directory is located at:</p>
+<p><strong>/scratch/[group name]</strong></p>
+<ul>
+<li>Members of your institution may store up to <strong>500GB</strong> of data in this directory, shared between all members.</li>
+<li>Files in your shared scratch directory are <strong>deleted after one week (168 hours)</strong>.</li>
+<li>Files in this directory are <strong>not backed up anywhere</strong>, and should be downloaded shortly after being generated by your programs.</li>
+</ul>
+<h3 id="link-wrds-with-dropbox">Link WRDS with Dropbox</h3>
+<p>WRDS provides the <code>dbxcli</code> command on the WRDS cloud login nodes to transfer data directly between WRDS and your dropbox shares. <code>dbxcli</code> is a simple, ftp like transfer client; it only transfers files between dropbox and clients.</p>
 <p>To do this, you need:</p>
 <ul>
 <li>
@@ -799,6 +765,157 @@
 <p>If you successfully logged in the command should print your dropbox account information. You may run <code>dbxcli account</code> again to confirm if your account is connected, if it prints your account information it is connected.</p>
 </li>
 </ul>
+<p>Once you&rsquo;ve successfully link the wrds with your Dropbpox account, you could create a new folder in the Dropbox, say <code>testdir1013</code></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#f92672">~</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">dbxcli</span> <span style="color:#111">mkdir</span> <span style="color:#111">testdir1013</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>At the same time, you could also create a directory in your institution&rsquo;s scratch volume with a unique name. I would use <code>xmj</code></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#f92672">~</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">mkdir</span> <span style="color:#f92672">/</span><span style="color:#111">scratch</span><span style="color:#f92672">/</span><span style="color:#111">frankfurt</span><span style="color:#f92672">/</span><span style="color:#111">xmj</span><span style="color:#f92672">/</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="transfer-files-from-wrds-to-dropbox">Transfer Files From WRDS to Dropbox</h3>
+<p>Files can be transferred to Dropbox with the <code>put</code> subcommand.</p>
+<ol>
+<li>
+<p>Make a directory in your institution&rsquo;s <a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/">scratch volume</a> with a unique name, such as your username. (I&rsquo;ve introduced this part in <strong>Data Storage Locations section</strong>)</p>
+</li>
+<li>
+<p>Run your job and save your output to this directory. For example, I save a csv file <code>test1013.csv</code> and a graph file <code>testgraph1013.png</code> into the scratch direcory I&rsquo;ve created before <strong>/scratch/frankfurt/xmj/</strong></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">7</span><span style="color:#111">]:</span> <span style="color:#f92672">import</span> <span style="color:#111">matplotlib.pyplot</span> <span style="color:#f92672">as</span> <span style="color:#111">plt</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">8</span><span style="color:#111">]:</span> <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#111">db</span><span style="color:#f92672">.</span><span style="color:#111">raw_sql</span><span style="color:#111">(</span><span style="color:#d88200">&#34;select date,dji from djones.djdaily&#34;</span><span style="color:#111">,</span> <span style="color:#111">date_cols</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;dat</span>
+   <span style="color:#f92672">...</span><span style="color:#111">:</span> <span style="color:#111">e</span><span style="color:#d88200">&#39;], index_col=[&#39;</span><span style="color:#111">date</span><span style="color:#d88200">&#39;])</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">]:</span> <span style="color:#111">plt</span><span style="color:#f92672">.</span><span style="color:#111">plot</span><span style="color:#111">(</span><span style="color:#111">data</span><span style="color:#111">)</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">9</span><span style="color:#111">]:</span> <span style="color:#111">[</span><span style="color:#f92672">&lt;</span><span style="color:#111">matplotlib</span><span style="color:#f92672">.</span><span style="color:#111">lines</span><span style="color:#f92672">.</span><span style="color:#111">Line2D</span> <span style="color:#111">at</span> <span style="color:#ae81ff">0x2ba61364ad90</span><span style="color:#f92672">&gt;</span><span style="color:#111">]</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]:</span> <span style="color:#111">plt</span><span style="color:#f92672">.</span><span style="color:#111">xlabel</span><span style="color:#111">(</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">)</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]:</span> <span style="color:#111">Text</span><span style="color:#111">(</span><span style="color:#ae81ff">0.5</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">)</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">11</span><span style="color:#111">]:</span> <span style="color:#111">plt</span><span style="color:#f92672">.</span><span style="color:#111">ylabel</span><span style="color:#111">(</span><span style="color:#d88200">&#39;dji&#39;</span><span style="color:#111">)</span>
+<span style="color:#111">Out</span><span style="color:#111">[</span><span style="color:#ae81ff">11</span><span style="color:#111">]:</span> <span style="color:#111">Text</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">,</span> <span style="color:#ae81ff">0.5</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;dji&#39;</span><span style="color:#111">)</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">12</span><span style="color:#111">]:</span> <span style="color:#111">plt</span><span style="color:#f92672">.</span><span style="color:#111">show</span><span style="color:#111">()</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">13</span><span style="color:#111">]:</span> <span style="color:#111">plt</span><span style="color:#f92672">.</span><span style="color:#111">show</span><span style="color:#111">()</span>
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">14</span><span style="color:#111">]:</span> <span style="color:#111">plt</span><span style="color:#f92672">.</span><span style="color:#111">savefig</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/scratch/frankfurt/xmj/testgraph1013.png&#39;</span><span style="color:#111">)</span> 
+
+<span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">14</span><span style="color:#111">]:</span> <span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#111">to_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/scratch/frankfurt/xmj/test1013.csv&#34;</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>When you are done go to the login node and <code>cd</code> to your scratch directory.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">15</span><span style="color:#111">]:</span> <span style="color:#111">quit</span><span style="color:#111">()</span>
+<span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">sas5</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#f92672">~</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">logout</span>
+<span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#111">xmj</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">cd</span> <span style="color:#f92672">/</span><span style="color:#111">scratch</span><span style="color:#f92672">/</span><span style="color:#111">frankfurt</span><span style="color:#f92672">/</span><span style="color:#111">xmj</span><span style="color:#f92672">/</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Once here transfer your file(s) from WRDS to Dropbox with <code>dbxcli put</code>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#111">xmj</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">dbxcli</span> <span style="color:#111">put</span> <span style="color:#111">test1013</span><span style="color:#f92672">.</span><span style="color:#111">csv</span> <span style="color:#f92672">/</span><span style="color:#111">testdir1013</span><span style="color:#f92672">/</span><span style="color:#111">test1013</span><span style="color:#f92672">.</span><span style="color:#111">csv</span>
+<span style="color:#111">Uploading</span> <span style="color:#ae81ff">25</span> <span style="color:#111">KiB</span><span style="color:#f92672">/</span><span style="color:#ae81ff">25</span> <span style="color:#111">KiB</span>
+<span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#111">xmj</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">dbxcli</span> <span style="color:#111">put</span> <span style="color:#111">testgraph1013</span><span style="color:#f92672">.</span><span style="color:#111">png</span> <span style="color:#f92672">/</span><span style="color:#111">testdir1013</span><span style="color:#f92672">/</span><span style="color:#111">testgraph1013</span><span style="color:#f92672">.</span><span style="color:#111">png</span>
+<span style="color:#111">Uploading</span> <span style="color:#ae81ff">21</span> <span style="color:#111">KiB</span><span style="color:#f92672">/</span><span style="color:#ae81ff">21</span> <span style="color:#111">KiB</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Then you will find the files show up in your Dropbox</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/%E6%88%AA%E5%B1%8F2021-10-13%20%E4%B8%8A%E5%8D%8810.48.20.png" width=500 height=100>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 5: Transfer Files From WRDS to Dropbox</div>
+</center>
+</li>
+</ol>
+<h3 id="transfer-files-from-dropbox-to-wrds">Transfer Files From Dropbox to WRDS</h3>
+<p>Files can be transferred to WRDS Cloud with the <code>get</code> subcommand.</p>
+<ol>
+<li>
+<p><code>cd</code> to your scratch directory or home directory, depending on whether you want the files to be stored permanently or temporarily in the Cloud.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#111">xmj</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">cd</span> <span style="color:#f92672">/</span><span style="color:#111">scratch</span><span style="color:#f92672">/</span><span style="color:#111">frankfurt</span><span style="color:#f92672">/</span><span style="color:#111">xmj</span><span style="color:#f92672">/</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Once here transfer your file(s) to WRDS with <code>dbxcli get</code>. With the following code, I can transfer the <code>test.csv</code> located in my Dropbox root folder to the scratch volume. Type <code>ls</code> in the WRDS command line,  and one will find the <code>test.csv</code> have been successfully listed in my scatch directory.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PYTHON" data-lang="PYTHON"><span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#111">xmj</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">dbxcli</span> <span style="color:#111">get</span> <span style="color:#111">test</span><span style="color:#f92672">.</span><span style="color:#111">csv</span> <span style="color:#f92672">.</span>
+<span style="color:#111">Downloading</span> <span style="color:#ae81ff">93</span> <span style="color:#111">KiB</span><span style="color:#f92672">/</span><span style="color:#ae81ff">93</span> <span style="color:#111">KiB</span> 
+<span style="color:#111">[</span><span style="color:#111">xumj2019</span><span style="color:#75af00">@wrds</span><span style="color:#f92672">-</span><span style="color:#111">cloud</span><span style="color:#f92672">-</span><span style="color:#111">login2</span><span style="color:#f92672">-</span><span style="color:#111">w</span> <span style="color:#111">xmj</span><span style="color:#111">]</span><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#111">ls</span>
+<span style="color:#111">test1013</span><span style="color:#f92672">.</span><span style="color:#111">csv</span>  <span style="color:#111">test</span><span style="color:#f92672">.</span><span style="color:#111">csv</span>  <span style="color:#111">testgraph1013</span><span style="color:#f92672">.</span><span style="color:#111">png</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-wrds-cloud/">PYTHON: On the WRDS Cloud</a></li>
@@ -809,6 +926,9 @@
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/python-example-data-workflow/">Example Python Data Workflow</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/">Storing Your Data on the WRDS Cloud</a></li>
 <li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/transfering-data-with-dropbox/">Transfering Data with Dropbox</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/storing-your-data-wrds-cloud/">Storing Your Data on the WRDS Cloud</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/programming-wrds/programming-python/graphing-data-python/">Graphing Data using Python</a></li>
+<li><a href="https://wrds-www.wharton.upenn.edu/pages/support/the-wrds-cloud/managing-data/accessing-wrds-remotely-scp/">Transferring Files using SCP</a></li>
 </ul>
 
 
