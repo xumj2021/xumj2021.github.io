@@ -53,8 +53,9 @@ MacOS computers come with a utility called *Terminal* that has SSH functionality
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 2: Bloomberg Add-in in Excel</div>
+    padding: 2px;">Figure 2: Connect to WRDS Cloud via SSH</div>
 </center>
+
 
 
 ### Windows
