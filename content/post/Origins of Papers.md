@@ -36,7 +36,7 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 ## 2. Credit Crunch and Social Unrest
 
-### Paper: Braggion, Manconi, and Zhu (2019, JFE)
+### Paper: Braggion, Manconi, and Zhu (2020, JFE)
 
 Employing the **1933 U.S. Silver Purchase program acts** as a shock to Chinese bank lending, this paper got a pretty exogenous setting for credit crunch. Empirical results suggest that the exogenous credit crunch could lead to material social unrest. Specifically, firms borrowing from banks with higher exposure to the Silver Purchase shock and thus more reluctant to issue debts are more likely to **experience labor unrests and anti-regime political penetration among their workers**.
 
