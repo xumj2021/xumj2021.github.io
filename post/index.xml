@@ -45,5 +45,14 @@ Deploy Operation Enviornment Bloomberg Access   Get a Bloomberg Terminal and of 
       <description>Motivation The motivation to clean this dataset is from Mukherjee et al. (2021, JFE). In this paper, the authors documented that one can get ahead-of-announcement estimation about the storage hubs for crude oil in the US from satellite images and trade on it. This will decrease the market reaction around the release of official figures because the oil storage information has been partially revealed during the traders&#39; arbitrage before announcement due to traders&#39; use of satellite images.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://xumj2021.github.io/post/origins-of-papers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/origins-of-papers/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14  --- title: &amp;#34;Origins of Papers&amp;#34; subtitle: &amp;#34;&amp;#34; description: &amp;#34;Information sources that might have inspired nice economic papers&amp;#34; date: 2021-10-20 author: &amp;#34;Mengjie Xu&amp;#34; toc: true image: &amp;#34;https://assets.bbhub.io/image/v1/convert?type=auto&amp;amp;amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2FSS5_header2-800x412.jpg&amp;#34; tags: [&amp;#34;Literature&amp;#34;, &amp;#34;Economy&amp;#34;] categories: [&amp;#34;Anecdotes&amp;#34; ] ---   Recently, I came up with several unexpected links between the books or newspapers I am (or have been) exposed to and some fascinating papers published in top economic journals.</description>
+    </item>
+    
   </channel>
 </rss>
