@@ -16,7 +16,7 @@ Recently, I came up with several unexpected links between the books or newspaper
 
 By summarizing the information sources which might motivate or inspire top journal articles, one might learn not only how to discover innovative research topics but also how to transfer his/her eureka moment to a solid economic paper. 
 
-Please note that the so-called "origins" in this blogpost is not necessarily the actual sources that motivated the papers. What I am trying to do is just to summarize sources which has conveyed a similar idea as the papers' before the papers are published. 
+Please note that the so-called "origins" in this blogpost is not necessarily the actual sources that motivated the papers. What I am trying to do is just to find out the link between the papers and alternative information sources which have conveyed similar insights before the papers are published.
 
 
 
