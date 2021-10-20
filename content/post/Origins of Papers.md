@@ -1,4 +1,3 @@
-```
 ---
 
 title:       "Origins of Papers"
@@ -11,9 +10,7 @@ image:    "https://assets.bbhub.io/image/v1/convert?type=auto&amp;url=https%3A%2
 tags:        ["Literature", "Economy"]
 categories:  ["Anecdotes" ]
 
-
 ---
-```
 
 Recently, I came up with several unexpected links between the books or newspapers I am (or have been) exposed to and some fascinating papers published in top economic journals. In this blogpost, I will record the main ideas of those economic papers and their respect highly relevant alternative information sources. As such links will definitely accumulate as time goes, this blogpost will be updated now and then.
 
