@@ -24,7 +24,7 @@ By summarizing the information sources which might motivate or inspire top journ
 
 This paper studies how the abolition of an elite recruitment system - China's civil exam system that lasted over 1,300 years - affects political stability. The authors found the revolution participation probability is higher in prefectures with higher quotas on the entry-level exam candidates. Patterns in the data appear most consistent with the interpretation that in regions with higher quotas per capita under the exam system, more would-be elites were negatively affected by the abolition. These would-be elites could have been negatively affected in two major ways: **abolition changed their prospect of upward mobility and/or gave them more time to rebel** (e.g., decreased their opportunity costs). Although both channels could be at work, **analysis of the variation in prefecture-specific returns from the exam** suggests that the impact of quotas post abolition was amplified when these returns were higher, which **is more consistent with the prospects channel**. 
 
-### Origin: The May Fourth Movement (Tse-tsung Chow, 1960)
+### Origin: The May Fourth Movement (Chow, 1960)
 
 "The abolition of the traditional civil service examination system in 1905 left the youth uncertain regarding their postgraduate professional prospects of which the major goal had been and still was conventionally, to enter government as officials. **The fact that this personal frustration was offset by the opportunity of being powerful as leaders of mass action tended to make Chinese students, as Bertrand Russell observed, reformers or revolutionaries** instead of, as was the case with some highly educated youths of the West, cynics".[^1]
 
