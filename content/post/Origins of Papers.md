@@ -16,6 +16,8 @@ Recently, I came up with several unexpected links between the books or newspaper
 
 By summarizing the information sources which might motivate or inspire top journal articles, one might learn not only how to discover innovative research topics but also how to transfer his/her eureka moment to a solid economic paper. 
 
+Please note that the so-called "origins" in this blogpost is not necessarily the actual sources that motivated the papers. What I am trying to do is just to summarize sources which has conveyed a similar idea as the papers' before the papers are published. 
+
 
 
 ## 1. Shrink of Upward Mobility and Would-be Elites' Revolution Participation
@@ -38,7 +40,7 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 Employing the **1933 U.S. Silver Purchase program acts** as a shock to Chinese bank lending, this paper got a pretty exogenous setting for credit crunch. Empirical results suggest that the exogenous credit crunch could lead to material social unrest. Specifically, firms borrowing from banks with higher exposure to the Silver Purchase shock and thus more reluctant to issue debts are more likely to **experience labor unrests and anti-regime political penetration among their workers**.
 
-### Origins: China during the Great Depression (Shiroyama, 2008)
+### Origin: China during the Great Depression (Shiroyama, 2008)
 
 " The Great Depression (1929-1933) was a watershed in modern China. China was the only country on the silver standard in an international monetary system dominated by the gold standard. Fluctuations in international silver prices undermined China’s monetary system and destabilized its economy. "
 
@@ -59,7 +61,7 @@ The main argument is that strong FTR languages induce people to feel more distan
 - Higher discount rates
 - and Less precise beliefs about the profits of saving
 
-### Origins: The Willpower Instinct (McGonigal, 2011)
+### Origin: The Willpower Instinct (McGonigal, 2011)
 
 "To what extent current happiness is more important than future happiness for you? **People who discount more on their future rewards are more likely to encompass problems with self-control.** They are more likely to smoke, drink, consume drugs, have drunk driving, but less likely to save for retirement. They also have a higher tendency to procrastinate. **They seem to care more about the present - if the present is more important than the future, there is no need to delay gratification**."
 
