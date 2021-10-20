@@ -72,10 +72,15 @@ The main argument is that strong FTR languages induce people to feel more distan
 ## References
 
 Bai, Y., Jia, R. (2016). Elite recruitment and political stability: the impact of the abolition of China's civil service exam. *Econometrica*, *84*(2), 677-733.
+
 Braggion, F., Manconi, A., Zhu, H. (2020). Credit and social unrest: Evidence from 1930s China. *Journal of Financial Economics*, *138*(2), 295-315.
+
 Chen, M. K. (2013). The effect of language on economic behavior: Evidence from savings rates, health behaviors, and retirement assets. *American Economic Review*, *103*(2), 690-731.
+
 Chow, Tse-Tung.  (1960). *The May Fourth Movement: Intellectual Revolution in Modern China*. Harvard University Press.
+
 McGonigal, K. (2011). *The willpower instinct: How self-control works, why it matters, and what you can do to get more of it*. Penguin.
+
 Shiroyama, T. (2008). *China During the Great Depression: Market, State, and the World Economy*, 1929–1937.
 
 
