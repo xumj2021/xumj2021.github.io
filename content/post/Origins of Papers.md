@@ -18,7 +18,7 @@ By summarizing the information sources which might motivate or inspire top journ
 
 
 
-## Shrink of Upward Mobility and Would-be Elites' Revolution Participation
+## 1. Shrink of Upward Mobility and Would-be Elites' Revolution Participation
 
 ### Paper: Bai and Jia (2016, Econometrica)
 
@@ -32,7 +32,7 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 
 
-## Credit Crunch and Social Unrest
+## 2. Credit Crunch and Social Unrest
 
 ### Paper: Braggion, Manconi, and Zhu (2019, JFE)
 
@@ -46,7 +46,7 @@ In her book,  Shiroyama firstly explains the intricacies of **the silver standar
 
 
 
-## Culture and Self-Control
+## 3. Culture and Self-Control
 
 ### Paper: Chen (2013, AER)
 
