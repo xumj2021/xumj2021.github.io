@@ -28,7 +28,7 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 "The abolition of the traditional civil service examination system in 1905 left the youth uncertain regarding their postgraduate professional prospects of which the major goal had been and still was conventionally, to enter government as officials. **The fact that this personal frustration was offset by the opportunity of being powerful as leaders of mass action tended to make Chinese students, as Bertrand Russell observed, reformers or revolutionaries** instead of, as was the case with some highly educated youths of the West, cynics".[^1]
 
-> [^1]: "Throughout the East", said Russell, "the university student can hope for more influence upon public opinion than he can have in the modern West, but he has much less opportunity than in the West of securing a substantial income. But, neither powerless nor comfortable, he becomes a reformer or a revolutionary, not a cynic. The happiness of the reformer or revolutionary depends upon the course of public affairs, but probably even while he is being executed he enjoys more real happiness than is possible for the comfortable cynic. I remember a young Chinese visitor to my school who was going home to found a similar school in a reactionary part of China. He expected the result to be that his head would be cut off. Nevertheless he enjoyed a quiet happiness that I could only envy."
+[^1]: "Throughout the East", said Russell, "the university student can hope for more influence upon public opinion than he can have in the modern West, but he has much less opportunity than in the West of securing a substantial income. But, neither powerless nor comfortable, he becomes a reformer or a revolutionary, not a cynic. The happiness of the reformer or revolutionary depends upon the course of public affairs, but probably even while he is being executed he enjoys more real happiness than is possible for the comfortable cynic. I remember a young Chinese visitor to my school who was going home to found a similar school in a reactionary part of China. He expected the result to be that his head would be cut off. Nevertheless he enjoyed a quiet happiness that I could only envy."
 
 
 
@@ -52,7 +52,7 @@ In her book,  Shiroyama firstly explains the intricacies of **the silver standar
 
 Based on whether a language grammatically mark future events, the author classify world languages into two categories: *weak-FTR* and *strong-FTR*. FTR refers to future-time reference. 
 
-This paper documents that people speaking in a distinct way about future events from present ones (proxied by the grammar of people's native language) are less likely to take future-oriented actions (e.g., save more, retire with more wealth, smoke less, less obese, etc).
+This paper documents that **people speaking in a distinct way about future events from present ones (proxied by the grammar of people's native language) are less likely to take future-oriented actions (e.g., save more, retire with more wealth, smoke less, less obese, etc).**
 
 The main argument is that strong FTR languages induce people to feel more distant about the future and thus have bigger discount rates, which makes them to place more weights on their current utility rather the future utility. Using the economic language, the author phrases the above idea as strong FTR languages leads to:
 
@@ -61,13 +61,13 @@ The main argument is that strong FTR languages induce people to feel more distan
 
 ### Origins: The Willpower Instinct (McGonigal, 2011)
 
-"To what extent current happiness is more important than future happiness for you? People who discount more on their future rewards are more likely to encompass problems with self-control. They are more likely to smoke, drink, consume drugs, have drunk driving, but less likely to save for retirement. They also have a higher tendency to procrastinate. They seem to care more about the present - if the present is more important than the future, there is no need to delay gratification."
+"To what extent current happiness is more important than future happiness for you? **People who discount more on their future rewards are more likely to encompass problems with self-control.** They are more likely to smoke, drink, consume drugs, have drunk driving, but less likely to save for retirement. They also have a higher tendency to procrastinate. **They seem to care more about the present - if the present is more important than the future, there is no need to delay gratification**."
 
 
 
 *To be continued*
 
-## References:
+## References
 
 Bai, Y., Jia, R. (2016). Elite recruitment and political stability: the impact of the abolition of China's civil service exam. *Econometrica*, *84*(2), 677-733.
 
