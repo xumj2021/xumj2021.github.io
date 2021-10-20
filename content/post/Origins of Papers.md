@@ -18,13 +18,13 @@ By summarizing the information sources which might motivate or inspire top journ
 
 
 
-### Shrink of Upward Mobility and Would-be Elites' Revolution Participation
+## Shrink of Upward Mobility and Would-be Elites' Revolution Participation
 
-#### Paper: Bai and Jia (2016, Econometrica)
+### Paper: Bai and Jia (2016, Econometrica)
 
 This paper studies how the abolition of an elite recruitment system - China's civil exam system that lasted over 1,300 years - affects political stability. The authors found the revolution participation probability is higher in prefectures with higher quotas on the entry-level exam candidates. Patterns in the data appear most consistent with the interpretation that in regions with higher quotas per capita under the exam system, more would-be elites were negatively affected by the abolition. These would-be elites could have been negatively affected in two major ways: **abolition changed their prospect of upward mobility and/or gave them more time to rebel** (e.g., decreased their opportunity costs). Although both channels could be at work, **analysis of the variation in prefecture-specific returns from the exam** suggests that the impact of quotas post abolition was amplified when these returns were higher, which **is more consistent with the prospects channel**. 
 
-#### Origin: The May Fourth Movement (Tse-tsung Chow, 1960)
+### Origin: The May Fourth Movement (Tse-tsung Chow, 1960)
 
 "The abolition of the traditional civil service examination system in 1905 left the youth uncertain regarding their postgraduate professional prospects of which the major goal had been and still was conventionally, to enter government as officials. **The fact that this personal frustration was offset by the opportunity of being powerful as leaders of mass action tended to make Chinese students, as Bertrand Russell observed, reformers or revolutionaries** instead of, as was the case with some highly educated youths of the West, cynics".[^1]
 
@@ -32,13 +32,13 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 
 
-### Credit Crunch and Social Unrest
+## Credit Crunch and Social Unrest
 
-#### Paper: Braggion, Manconi, and Zhu (2019, JFE)
+### Paper: Braggion, Manconi, and Zhu (2019, JFE)
 
 Employing the **1933 U.S. Silver Purchase program acts** as a shock to Chinese bank lending, this paper got a pretty exogenous setting for credit crunch. Empirical results suggest that the exogenous credit crunch could lead to material social unrest. Specifically, firms borrowing from banks with higher exposure to the Silver Purchase shock and thus more reluctant to issue debts are more likely to **experience labor unrests and anti-regime political penetration among their workers**.
 
-#### Origins: China during the Great Depression (Shiroyama, 2008)
+### Origins: China during the Great Depression (Shiroyama, 2008)
 
 " The Great Depression (1929-1933) was a watershed in modern China. China was the only country on the silver standard in an international monetary system dominated by the gold standard. Fluctuations in international silver prices undermined China’s monetary system and destabilized its economy. "
 
@@ -46,9 +46,9 @@ In her book,  Shiroyama firstly explains the intricacies of **the silver standar
 
 
 
-### Culture and Self-Control
+## Culture and Self-Control
 
-#### Paper: Chen (2013, AER)
+### Paper: Chen (2013, AER)
 
 Based on whether a language grammatically mark future events, the author classify world languages into two categories: *weak-FTR* and *strong-FTR*. FTR refers to future-time reference. 
 
@@ -59,13 +59,15 @@ The main argument is that strong FTR languages induce people to feel more distan
 - Higher discount rates
 - and Less precise beliefs about the profits of saving
 
-#### Origins: The Willpower Instinct (McGonigal, 2011)
+### Origins: The Willpower Instinct (McGonigal, 2011)
 
 "To what extent current happiness is more important than future happiness for you? People who discount more on their future rewards are more likely to encompass problems with self-control. They are more likely to smoke, drink, consume drugs, have drunk driving, but less likely to save for retirement. They also have a higher tendency to procrastinate. They seem to care more about the present - if the present is more important than the future, there is no need to delay gratification."
 
 
 
-### References:
+*To be continued*
+
+## References:
 
 Bai, Y., Jia, R. (2016). Elite recruitment and political stability: the impact of the abolition of China's civil service exam. *Econometrica*, *84*(2), 677-733.
 
