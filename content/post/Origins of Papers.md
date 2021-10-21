@@ -12,11 +12,11 @@ categories:  ["Anecdotes" ]
 
 ---
 
-Recently, I came up with several unexpected links between the books or newspapers I am (or have been) exposed to and some fascinating papers published in top economic journals. In this blogpost, I will record the main ideas of those economic papers and their respect highly relevant alternative information sources. As such links will definitely accumulate as time goes, this blogpost will be updated now and then.
+Recently, I came up with several unexpected links between the books or newspapers I am (or have been) exposed to and some fascinating papers published in top economic journals. In this blogpost, I will record the main ideas of those economic papers and their respect highly relevant alternative information sources. As such links are highly likely to accumulate in the future, this blogpost will be updated now and then.
 
 By summarizing the information sources which might motivate or inspire top journal articles, one might learn not only how to discover innovative research topics but also how to transfer his/her eureka moment to a solid economic paper. 
 
-Please note that the so-called "origins" in this blogpost is not necessarily the actual sources that motivated the papers. What I am trying to do is just to find out the link between the papers and alternative information sources which have conveyed similar insights before the papers are published.
+Please note that the so-called "origin" in this blogpost is not necessarily the actual sources that motivated the papers. What I am trying to do is just to find out the link between the papers and alternative information sources which have conveyed similar insights before the papers are published.
 
 
 
@@ -32,6 +32,17 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 [^1]: "Throughout the East", said Russell, "the university student can hope for more influence upon public opinion than he can have in the modern West, but he has much less opportunity than in the West of securing a substantial income. But, neither powerless nor comfortable, he becomes a reformer or a revolutionary, not a cynic. The happiness of the reformer or revolutionary depends upon the course of public affairs, but probably even while he is being executed he enjoys more real happiness than is possible for the comfortable cynic. I remember a young Chinese visitor to my school who was going home to found a similar school in a reactionary part of China. He expected the result to be that his head would be cut off. Nevertheless he enjoyed a quiet happiness that I could only envy."
 
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/chow.png" width=800 height=400>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: The May Fourth Movement (Chow, 1960)</div>
+</center>
+
 
 
 ## 2. Credit Crunch and Social Unrest
@@ -40,11 +51,22 @@ This paper studies how the abolition of an elite recruitment system - China's ci
 
 Employing the **1933 U.S. Silver Purchase program acts** as a shock to Chinese bank lending, this paper got a pretty exogenous setting for credit crunch. Empirical results suggest that the exogenous credit crunch could lead to material social unrest. Specifically, firms borrowing from banks with higher exposure to the Silver Purchase shock and thus more reluctant to issue debts are more likely to **experience labor unrests and anti-regime political penetration among their workers**.
 
-### Origin: China during the Great Depression (Shiroyama, 2008)
+### Origin: China during the Great Depression (Shiroyama, 2009)
 
 " The Great Depression (1929-1933) was a watershed in modern China. China was the only country on the silver standard in an international monetary system dominated by the gold standard. Fluctuations in international silver prices undermined China’s monetary system and destabilized its economy. "
 
 In her book,  Shiroyama firstly explains the intricacies of **the silver standard, which China did not abandon until late 1935**, whereas other Asian countries had switched to gold-based currencies by the 1910s. Shiroyama then argues persuasively that the depreciation of world silver prices during the 1920s greatly improved China's terms of trade and was a boon to its farmers and emergent industrialists. However, **the price of silver** began to appreciate on world commodity markets as of 1931, and **spiked up sharply in the lead-up to Roosevelt's Silver Purchase Act in 1934**. By then, dearer silver and slumping demand in the West had hit Chinese exports and dampened the price of domestic produce. The skyrocketed silver price is the direct driving force for the situation where **Chinese banks continuingly lose silver reserves and thus become significantly more conservative to issue credits**.
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/bank.png" width=800 height=420>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: China during the Great Depression (Shiroyama, 2009)</div>
+</center>
 
 
 
@@ -65,9 +87,22 @@ The main argument is that strong FTR languages induce people to feel more distan
 
 "To what extent current happiness is more important than future happiness for you? **People who discount more on their future rewards are more likely to encompass problems with self-control.** They are more likely to smoke, drink, consume drugs, have drunk driving, but less likely to save for retirement. They also have a higher tendency to procrastinate. **They seem to care more about the present - if the present is more important than the future, there is no need to delay gratification**."
 
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/willpower.png" width=800 height=420>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 3: The Willpower Instinct (McGonigal, 2011)</div>
+</center>
+
 
 
 *To be continued*
+
+
 
 ## References
 
@@ -81,7 +116,7 @@ Chow, Tse-Tung.  (1960). *The May Fourth Movement: Intellectual Revolution in Mo
 
 McGonigal, K. (2011). *The willpower instinct: How self-control works, why it matters, and what you can do to get more of it*. Penguin.
 
-Shiroyama, T. (2008). *China During the Great Depression: Market, State, and the World Economy*, 1929–1937.
+Shiroyama, T. (2009). *China During the Great Depression: Market, State, and the World Economy*, 1929–1937.
 
 
 
