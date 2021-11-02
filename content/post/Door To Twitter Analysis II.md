@@ -366,7 +366,7 @@ if __name__ == "__main__":
 
 ## Summary and Upcoming Posts
 
-In this blogpost, I replicated the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR). But retreiving the tweets archive is just a very small part of the Twitter API's functions. *<u>In the next blogpost, I will introduce how to request the detailed user account information as well as how to check the bi-direction links between two Twitter accounts.</u>*
+In this blogpost, I replicated the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR). But retreiving the tweets archive is just a very small part of the Twitter API's functions. *<u>In the next blogpost, I will introduce how to request the detailed user account information as well as how to check the bi-direction links among multiple Twitter accounts.</u>*
 
 
 
