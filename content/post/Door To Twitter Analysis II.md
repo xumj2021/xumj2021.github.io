@@ -247,7 +247,7 @@ Recall a typical returned data for each tweet is as follows. suppose the root js
 }
 ```
 
-For each firm, there are following column:
+For each firm, there are following columns:
 
 - Release time stamp `tw['created_at']`
 - Tweet ID  `tw['id']`
