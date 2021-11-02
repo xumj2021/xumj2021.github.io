@@ -1,6 +1,6 @@
 ---
 
-title:       "Twitter API: Door To Twitter Analysis I"
+title:       "Twitter API: Door To Social Media Analysis I"
 subtitle:    ""
 description: "Introduction to Twitter API 2.0"
 date:        2021-11-01
