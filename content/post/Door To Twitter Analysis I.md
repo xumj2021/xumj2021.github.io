@@ -14,25 +14,25 @@ categories:  ["Data" ]
 
 ## Motivation
 
-In the last few decades, a series of papers published in top accounting journals have repeatedly proved that Twitter data could empower very fascinating research ideas. To give readers an intuition about the potential of Twitter data, I would roughly show three directions and their relative examples which I have deepest impression through my limited personal reading experience.
+In the last few decades, a series of papers published in top accounting journals have repeatedly proved that **Twitter data could empower very fascinating research ideas**. To give readers an **intuition about the potential of Twitter data**, I would roughly show three directions and their relative examples which I have deepest impression through my limited personal reading experience.
 
-- Wisdom of crowds
+- **Wisdom of crowds**
 
   Bartov, Faurel, and Mohanram (2018, TAR) found opinions of individuals tweeted just prior to a firm’s earnings announcement can predict its earnings and announcement returns. Similarly, Tang (2018, JAR) showed the customer responses towards a firm's products in Twitter obtain a siginificant predictive power for the upcoming firm sales.
 
-- Information dissemination
+- **Information dissemination**
 
   Blankespoor, Miller, and White (2013, TAR) illustrated that firms who disseminate their earnings announcements via Twitter besides traditional dissemination channels (e.g., SEC EDGAR, business press, firm websites, etc) have higher maket visibility (e.g., bigger liquidity around earnings announcements, greater market depths, etc), which is especially crucial for samll and medium enterprises. Based on this idea, Jung, Naughton, Tahoun, and Wang (2018, TAR) showed that firms strategically use social media like Twitter as an extra information dissemination channel. Specifically, they found firms are less likely to disseminate their earnings in Twitter if they are underperforming.
 
-- Risk management
+- **Risk management**
 
   Lee, Hutton, and Shu (2015, JAR) noticed that the very special feature of Twitter, compared to traditional information dissemination intermediaries, is that firms can communicate quickly and directly with their stakeholders via their Twitter accounts. Utilizing this interactive feature, the authors found that firms who directly communicate with stakeholders in Twitter after the outbreak of crisis (e.g., product recall) experience attenuated negative market reaction.
 
-Having made clear about the potential of Twitter data, in this blogpost I will briefly introduce some necesary background information which lays a base for efficiently obtaining a tailored dataset using [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api). A sample project which replicates the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) will be discussed in the next blogpost.
+Having made clear about the potential of Twitter data, in this blogpost I will briefly **introduce some necesary background information which lays a base for efficiently obtaining a tailored dataset** using [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api). A sample project which replicates the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) will be discussed in the next blogpost.
 
 ## Get Access To Twitter API v2
 
-To make any request to the Twitter API, you must first apply for a developer account and have your use case approved. Twitter offers generous free academic developer accounts which provides qualified academic researchers access to elevated access and enhanced functionality (compared to [standard version](https://developer.twitter.com/en/apply-for-access)), including access to the [full-archive search endpoint](https://developer.twitter.com/en/docs/twitter-api/tweets/search), a higher monthly [Tweet cap](https://developer.twitter.com/en/docs/projects/overview#tweet-cap) (e.g., **10,000,000** tweets per month), and enhanced filtering capabilities with the filtered stream and recent search endpoint. One can apply for an academic developer account via this [link](https://developer.twitter.com/en/portal/petition/academic/is-it-right-for-you.html). To make sure the account will be properly used, Twitter might require you to porvide the following information:
+To make any request to the Twitter API, you must first apply for a developer account and have your use case approved. **Twitter offers generous free academic developer accounts** which provides qualified academic researchers access to elevated access and enhanced functionality (compared to [standard version](https://developer.twitter.com/en/apply-for-access)), including access to the [full-archive search endpoint](https://developer.twitter.com/en/docs/twitter-api/tweets/search), a higher monthly [Tweet cap](https://developer.twitter.com/en/docs/projects/overview#tweet-cap) (e.g., 10,000,000 tweets per month), and enhanced filtering capabilities with the filtered stream and recent search endpoint. One can apply for an academic developer account via this [link](https://developer.twitter.com/en/portal/petition/academic/is-it-right-for-you.html). To make sure the account will be properly used, Twitter might require you to porvide the following information:
 
 > - Your full name as it is appears on your institution’s documentation
 > - Links to webpages that help establish your identity; provide one or more of the following:
@@ -115,7 +115,7 @@ Twitter also provides a series of sample codes to realize those functions using 
 
 ## Data Objects
 
-Before we move to searching, it's necessary to make clear which data is available. According to the [official manual](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet), there are three primary types (`Tweet`, `User`, `Space`) of objects and three expanded ones (`Media`, `Place`, `Poll`). Each of them has a series of fields ready for requests.
+Before we move to the sample project, it's necessary to make clear which data is available. According to the [official manual](https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet), there are three primary types (`Tweet`, `User`, `Space`) of objects and three expanded ones (`Media`, `Place`, `Poll`). Each of them has a series of fields ready for requests.
 
 Those objects are:
 
