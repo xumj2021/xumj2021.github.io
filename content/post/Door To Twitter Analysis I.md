@@ -78,7 +78,7 @@ Twitter defines the different tokens as following:
     padding: 2px;">Figure 2: Generate Access Token</div>
 </center>
 
-For the safety of your developer account, you might not want to have the tokens explicitly displayed in your codes. In such a case, you could basically [set the tokens as the enviornment variables](https://stackoverflow.com/questions/7501678/set-environment-variables-on-mac-os-x-lion) in your terminal and just cite the environment variables when writing codes. 
+For the safety of your developer account, you might not want to have the tokens explicitly displayed in your codes. In such case, you could basically [set the tokens as the enviornment variables](https://stackoverflow.com/questions/7501678/set-environment-variables-on-mac-os-x-lion) in your terminal and just cite the environment variables when writing codes. 
 
 ```shell
 (base) mengjiexu@MacBook-von-mengjie ~ % vim ~/.zsh_profile
