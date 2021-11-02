@@ -6,7 +6,7 @@ description: "Introduction to Twitter API 2.0"
 date:        2021-11-01
 author:      "Mengjie Xu"
 toc:         true
-image:    "https://gratisography.com/wp-content/uploads/2020/04/gratisography-curved-brick-building-free-stock-photo-1170x780.jpg"
+image:    "https://gratisography.com/wp-content/uploads/2018/05/gratisography-88H-free-stock-photo-800x525.jpg"
 tags:        ["Twitter API", "Social Media"]
 categories:  ["Data" ]
 
