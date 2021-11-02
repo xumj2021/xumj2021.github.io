@@ -6,7 +6,7 @@ description: "Introduction to Twitter API 2.0"
 date:        2021-11-01
 author:      "Mengjie Xu"
 toc:         true
-image:    "https://data.bloomberglp.com/company/sites/2/2013/10/potash-mine_Berezniki_Russia-586x397.jpg"
+image:    "https://data.bloomberglp.com/company/sites/2/2013/10/potash-mine_Berezniki_Russia.jpg"
 tags:        ["Twitter API", "Social Media"]
 categories:  ["Data" ]
 
