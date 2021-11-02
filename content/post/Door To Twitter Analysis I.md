@@ -28,7 +28,7 @@ In the last few decades, a series of papers published in top accounting journals
 
   Lee, Hutton, and Shu (2015, JAR) noticed that the very special feature of Twitter, compared to traditional information dissemination intermediaries, is that firms can communicate quickly and directly with their stakeholders via their Twitter accounts. Utilizing this interactive feature, the authors found that firms who directly communicate with stakeholders in Twitter after the outbreak of crisis (e.g., product recall) experience attenuated negative market reaction.
 
-Having made clear about the potential of Twitter data, in this blogpost I will briefly **introduce some necesary background information which lays a base for efficiently obtaining a tailored dataset** using [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api). *<u>A sample project which replicates the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) will be discussed in the next blogpost.</u>*
+Having made clear about the potential of Twitter data, in this blogpost I will briefly **introduce some necesary background information which lays a base for efficiently obtaining a tailored dataset** using [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api). *<u>A sample project which replicates the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) will be discussed in [the next blogpost](https://mengjiexu.com/post/door-to-twitter-analysis-ii/).</u>*
 
 ## Get Access To Twitter API v2
 
@@ -174,7 +174,7 @@ For research purposes, the most frequently used objects are `Tweet object` and `
 
 ## Summary and Upcoming Posts
 
-In this blogpost, I have introduced the necessary background information about Twitter API v2. To give the readers a big picture about how Twitter API can serve for one's research project, I will replicate the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) aforementioned in the next blogpost. 
+In this blogpost, I have introduced the necessary background information about Twitter API v2. To give the readers a big picture about how Twitter API can serve for one's research project, I will replicate the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) aforementioned in [the next blogpost](https://mengjiexu.com/post/door-to-twitter-analysis-ii/). 
 
 
 

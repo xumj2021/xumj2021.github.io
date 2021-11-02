@@ -234,17 +234,17 @@ All th extracted tweets for a given firm are saved in a same csv file named by t
 Recall a typical returned data for each tweet is as follows. suppose the root json node for a given tweet is `tw`.
 
 ```json
- 					{	
-            "author_id": "215869072",
-            "created_at": "2012-03-21T00:18:35.000Z",
-            "id": "182259875408121856",
-            "lang": "en",
-            "public_metrics": {
-                "like_count": 0,
-                "quote_count": 0,
-                "reply_count": 0,
-                "retweet_count": 1
-            }
+{	
+    "author_id": "215869072",
+    "created_at": "2012-03-21T00:18:35.000Z",
+    "id": "182259875408121856",
+    "lang": "en",
+    "public_metrics": {
+    "like_count": 0,
+    "quote_count": 0,
+    "reply_count": 0,
+    "retweet_count": 1
+}
 ```
 
 For each firm, there are following column:
@@ -346,7 +346,7 @@ def dealjson(firm, start_time, end_time, json_response):
     next_token = csvjson(firm, start_time, end_time, json_response)
     
     while next_token:
-      	# If the 'next_token' is not empty, add it to the search parameters and 		submit a new query
+      	# If the 'next_token' is not empty, add it to the search parameters and submit a new query
         newpara = updatepara(setpara(firm,start_time,end_time), next_token)
         time.sleep(3)
         json_response = connect_to_endpoint(search_url, headers, newpara)
@@ -360,13 +360,13 @@ def mainparse(firm,start_time,end_time):
 
 if __name__ == "__main__":
 		for ticker in tqdm(tickerlist):
-        mainparse('$%s'%ticker.strip(),'2006-03-21T00:00:00Z','2012-12-31T23:59:59Z')
-        time.sleep(1)
+            mainparse('$%s'%ticker.strip(),'2006-03-21T00:00:00Z','2012-12-31T23:59:59Z')
+            time.sleep(1)
 ```
 
 ## Summary and Upcoming Posts
 
-In this blogpost, I replicated the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR). But retreiving the tweets archive is just a very small part of the Twitter API's functions. In the next blogpost, I will introduce how to request the detailed user account information as well as how to check the bi-direction links between two Twitter accounts.
+In this blogpost, I replicated the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR). But retreiving the tweets archive is just a very small part of the Twitter API's functions. *<u>In the next blogpost, I will introduce how to request the detailed user account information as well as how to check the bi-direction links between two Twitter accounts.</u>*
 
 
 
