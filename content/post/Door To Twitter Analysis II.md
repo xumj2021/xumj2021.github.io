@@ -1,5 +1,5 @@
 ---
-title:       "Twitter API: Door To Twitter Analysis II"
+title:       "Twitter API: Door To Social Media Analysis II"
 subtitle:    ""
 description: "Replicate Tweets Archive Search of Bartov, Faurel, and Mohanram (2018, TAR)"
 date:        2021-11-01
