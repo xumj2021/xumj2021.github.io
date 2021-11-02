@@ -240,24 +240,24 @@
 </nav>
                 
                 <h2 id="motivation">Motivation</h2>
-<p>In the last few decades, a series of papers published in top accounting journals have repeatedly proved that Twitter data could empower very fascinating research ideas. To give readers an intuition about the potential of Twitter data, I would roughly show three directions and their relative examples which I have deepest impression through my limited personal reading experience.</p>
+<p>In the last few decades, a series of papers published in top accounting journals have repeatedly proved that <strong>Twitter data could empower very fascinating research ideas</strong>. To give readers an <strong>intuition about the potential of Twitter data</strong>, I would roughly show three directions and their relative examples which I have deepest impression through my limited personal reading experience.</p>
 <ul>
 <li>
-<p>Wisdom of crowds</p>
+<p><strong>Wisdom of crowds</strong></p>
 <p>Bartov, Faurel, and Mohanram (2018, TAR) found opinions of individuals tweeted just prior to a firm’s earnings announcement can predict its earnings and announcement returns. Similarly, Tang (2018, JAR) showed the customer responses towards a firm&rsquo;s products in Twitter obtain a siginificant predictive power for the upcoming firm sales.</p>
 </li>
 <li>
-<p>Information dissemination</p>
+<p><strong>Information dissemination</strong></p>
 <p>Blankespoor, Miller, and White (2013, TAR) illustrated that firms who disseminate their earnings announcements via Twitter besides traditional dissemination channels (e.g., SEC EDGAR, business press, firm websites, etc) have higher maket visibility (e.g., bigger liquidity around earnings announcements, greater market depths, etc), which is especially crucial for samll and medium enterprises. Based on this idea, Jung, Naughton, Tahoun, and Wang (2018, TAR) showed that firms strategically use social media like Twitter as an extra information dissemination channel. Specifically, they found firms are less likely to disseminate their earnings in Twitter if they are underperforming.</p>
 </li>
 <li>
-<p>Risk management</p>
+<p><strong>Risk management</strong></p>
 <p>Lee, Hutton, and Shu (2015, JAR) noticed that the very special feature of Twitter, compared to traditional information dissemination intermediaries, is that firms can communicate quickly and directly with their stakeholders via their Twitter accounts. Utilizing this interactive feature, the authors found that firms who directly communicate with stakeholders in Twitter after the outbreak of crisis (e.g., product recall) experience attenuated negative market reaction.</p>
 </li>
 </ul>
-<p>Having made clear about the potential of Twitter data, in this blogpost I will briefly introduce some necesary background information which lays a base for efficiently obtaining a tailored dataset using <a href="https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api">Twitter API v2</a>. A sample project which replicates the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) will be discussed in the next blogpost.</p>
+<p>Having made clear about the potential of Twitter data, in this blogpost I will briefly <strong>introduce some necesary background information which lays a base for efficiently obtaining a tailored dataset</strong> using <a href="https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api">Twitter API v2</a>. A sample project which replicates the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR) will be discussed in the next blogpost.</p>
 <h2 id="get-access-to-twitter-api-v2">Get Access To Twitter API v2</h2>
-<p>To make any request to the Twitter API, you must first apply for a developer account and have your use case approved. Twitter offers generous free academic developer accounts which provides qualified academic researchers access to elevated access and enhanced functionality (compared to <a href="https://developer.twitter.com/en/apply-for-access">standard version</a>), including access to the <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/search">full-archive search endpoint</a>, a higher monthly <a href="https://developer.twitter.com/en/docs/projects/overview#tweet-cap">Tweet cap</a> (e.g., <strong>10,000,000</strong> tweets per month), and enhanced filtering capabilities with the filtered stream and recent search endpoint. One can apply for an academic developer account via this <a href="https://developer.twitter.com/en/portal/petition/academic/is-it-right-for-you.html">link</a>. To make sure the account will be properly used, Twitter might require you to porvide the following information:</p>
+<p>To make any request to the Twitter API, you must first apply for a developer account and have your use case approved. <strong>Twitter offers generous free academic developer accounts</strong> which provides qualified academic researchers access to elevated access and enhanced functionality (compared to <a href="https://developer.twitter.com/en/apply-for-access">standard version</a>), including access to the <a href="https://developer.twitter.com/en/docs/twitter-api/tweets/search">full-archive search endpoint</a>, a higher monthly <a href="https://developer.twitter.com/en/docs/projects/overview#tweet-cap">Tweet cap</a> (e.g., 10,000,000 tweets per month), and enhanced filtering capabilities with the filtered stream and recent search endpoint. One can apply for an academic developer account via this <a href="https://developer.twitter.com/en/portal/petition/academic/is-it-right-for-you.html">link</a>. To make sure the account will be properly used, Twitter might require you to porvide the following information:</p>
 <blockquote>
 <ul>
 <li>Your full name as it is appears on your institution’s documentation</li>
@@ -426,7 +426,7 @@
 </table>
 <p>Twitter also provides a series of sample codes to realize those functions using various programming languages (e.g., Java, Node.js, Python, R, Ruby). The codes are public available at <a href="https://github.com/twitterdev/Twitter-API-v2-sample-code">Twitter Developer&rsquo;s Github Repositories</a>. I will introduce the most frequently used functions that researchers would use in the subsequent blogposts.</p>
 <h2 id="data-objects">Data Objects</h2>
-<p>Before we move to searching, it&rsquo;s necessary to make clear which data is available. According to the <a href="https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet">official manual</a>, there are three primary types (<code>Tweet</code>, <code>User</code>, <code>Space</code>) of objects and three expanded ones (<code>Media</code>, <code>Place</code>, <code>Poll</code>). Each of them has a series of fields ready for requests.</p>
+<p>Before we move to the sample project, it&rsquo;s necessary to make clear which data is available. According to the <a href="https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet">official manual</a>, there are three primary types (<code>Tweet</code>, <code>User</code>, <code>Space</code>) of objects and three expanded ones (<code>Media</code>, <code>Place</code>, <code>Poll</code>). Each of them has a series of fields ready for requests.</p>
 <p>Those objects are:</p>
 <ul>
 <li><a href="https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/tweet">Tweet object</a> - Tweets are the basic building block of all things Twitter. The Tweet object has a long list of ‘root-level’ fields, such as <code>id</code>, <code>text</code>, and <code>created_at</code>. Tweet objects are also the ‘parent’ object to several child objects including <code>user</code>, <code>media</code>, <code>poll</code>, and <code>place</code>. Use the field parameter <code>tweet.fields</code> when requesting these root-level fields on the Tweet object.</li>
