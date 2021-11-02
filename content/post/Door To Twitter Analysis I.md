@@ -1,7 +1,7 @@
 ---
 
 title:       "Twitter API: Door To Twitter Analysis I"
-subtitle:    "An Introduction To Twitter API"
+subtitle:    ""
 description: "Introduction to Twitter API 2.0"
 date:        2021-11-01
 author:      "Mengjie Xu"
