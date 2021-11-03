@@ -14,7 +14,7 @@ categories:  ["Data" ]
 
 ## Introduction
 
-Please see the background information about Twitter API v2 in my last blogpost [Twitter API: Door To Twitter Analysis I](https://mengjiexu.com/post/door-to-twitter-analysis-i/). In this blogpost, I will replicate the Tweets extraction porcess of Bartov, Faurel, and Mohanram (2018, TAR), which found that opinions of individuals tweeted just prior to a firm’s earnings announcement can predict its earnings and announcement returns. 
+Please see the background information about Twitter API v2 in my last blogpost [Twitter API: Door To Social Media Analysis I](https://mengjiexu.com/post/door-to-twitter-analysis-i/). In this blogpost, I will replicate the Tweets extraction porcess of Bartov, Faurel, and Mohanram (2018, TAR), which found that opinions of individuals tweeted just prior to a firm’s earnings announcement can predict its earnings and announcement returns. 
 
 From a perspective of implementation, we need to get all the tweets which mentioned a given firm in a specified time range. Consistent to the paper's definition, the targeted tweets should:
 
