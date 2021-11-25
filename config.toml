@@ -43,7 +43,7 @@ paginate = 20 #frontpage pagination
   PygmentsStyle = "monokailight"
  
   # Sidebar settings
-  sidebar_about_description = "A Third-Year Phd Student at Frankfurt School of Finance and Mangement. I write the blogs because I believe data should not be the barrier for the production of fascinating insights which benefit everyone."
+  sidebar_about_description = "A Third-Year Phd Student at Frankfurt School of Finance and Mangement."
   sidebar_avatar = "https://img-blog.csdnimg.cn/2021061422202497.jpg"
   about_me = true
 
