@@ -24,7 +24,7 @@ Either way, there are two things that can be assured.
 1. HFTs have played a big part in today's capital market.
 2. To cope with today's high-frequency capital market,  scholars need to grapple with high-frequency trading data (typically in second-level before 2014 and millisecond level after 2014) to unravel the latest market micro-structure.
 
-In this blogpost, I will introduce how to extract second/millisecond-level trade and quotes data from the WRDS-TAQ database. Such data is typically used for intra-day event study (e.g., Rogers et al., 2016 RAS; Rogers et al., 2017 JAR).
+In this blogpost, I will introduce how to extract second/millisecond-level trade and quotes data from the WRDS-TAQ database. Such data is typically used for intra-day event study (e.g., Rogers et al., 2016 RAS; Rogers et al., 2017 JAR). For people who are familar with the WRDS data structure, you can directly access the SAS code via [this link ](https://mengjiexu.com/post/deal-with-high-frequency-data/#sas-code).
 
 ## Project Description
 
