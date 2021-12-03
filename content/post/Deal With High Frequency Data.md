@@ -3,7 +3,7 @@
 title:       "Extract High-frequency Data via PC SAS"
 subtitle:    ""
 description: "Request trade and quotes data from WRDS-TAQ database for intra-day event study"
-date:        2021-11-28
+date:        2021-12-03
 author:      "Mengjie Xu"
 toc:         true
 image:       "https://www.mckinsey.com/~/media/mckinsey/business%20functions/mckinsey%20analytics/our%20insights/confronting%20the%20risks%20of%20artificial%20intelligence/confonting-the-risks-of-ai-1536x1536-200.jpg"
