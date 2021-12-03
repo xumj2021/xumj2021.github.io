@@ -13,7 +13,7 @@ categories:  ["Data" ]
 
 ---
 
-## Motivation
+## I. Motivation
 
 High-frequency traders (HFTs) are market participants that are characterized by the high speed (typically in milliseconds level) with which they react to incoming news, the low inventory on their books, and the large number of trades they execute (SEC, 2010). According to Breckenfelder (2019, WP), The high-frequency trading industry grew rapidly since its inception in the mid-2000s and has represented about 50% of trading in US equity markets by 2017 (down from a 2009 peak, when it topped 60%). 
 
@@ -26,7 +26,7 @@ Either way, there are two things that can be assured.
 
 In this blogpost, I will introduce how to extract second/millisecond-level trade and quotes data from the WRDS-TAQ database. Such data is typically used for intra-day event studies (e.g., Rogers et al., 2016 RAS; Rogers et al., 2017 JAR). For people who are familar with the WRDS data structure, you can directly access the SAS code via [this link ](https://mengjiexu.com/post/deal-with-high-frequency-data/#sas-code).
 
-## Project Description
+## II. Project Description
 
 ### Project Purpose
 
@@ -55,9 +55,9 @@ NOTE: There were 13197152 observations read from the data set TAQ.CT_20141205.
       and time<='16:00:59'T));
 ```
 
-## Data Source: WRDS-TAQ database
+## III. Data Source: WRDS-TAQ database
 
-Daily TAQ (Trade and Quote) provides users with access to all trades and quotes for all issues traded on NYSE, Nasdaq and the regional exchanges for the previous trading day. It’s a comprehensive history of daily activity from NYSE markets and the U.S. Consolidated Tape covering all U.S. Equities instruments (including all CTA and UTP participating markets). One can find more details about the WRDS-TAQ database in [WRDS-TAQ User Guide](https://wrds-www.wharton.upenn.edu/documents/774/Daily_TAQ_Client_Spec_v2.2a.pdf).
+Daily TAQ (Trade and Quote) provides users with access to all trades and quotes for all issues traded on NYSE, Nasdaq and the regional exchanges for the previous trading day. It’s a comprehensive history of daily activity from NYSE markets and the U.S. Consolidated Tape covering all U.S. Equities instruments (including all CTA and UTP participating markets). One can find more details about the WRDS-TAQ database in [WRDS-TAQ User Guide](https://wrds-www.wharton.upenn.edu/documents/774/Daily_TAQ_Client_Spec_v2.2a.pdf). For those who are familiar with the TAQ database, you can jump via [this link](https://mengjiexu.com/post/deal-with-high-frequency-data/#road-map).
 
 ### Markets Covered
 
@@ -224,14 +224,14 @@ NOTE: PROCEDURE SQL used (Total process time):
 
 To efficiently implement this procedure, I wrote three macros
 
-- %getdict(yyyymmdd, type); 
+1. **%getdict(yyyymmdd, type);** 
 
-  - The purpose of this macro is to get the table name `dataset` that should be requested (e.g., TAQ.CQ_20130305) in the WRDS server based on the event date `yyyymmdd` (e.g., 20130305) and table type `type` (ct or cq). The name of the respect output table `outname` will also be determined (e.g., taqout_cq_29130305)
+- The purpose of this macro is to get the table name `dataset` that should be requested (e.g., TAQ.CQ_20130305) in the WRDS server based on the event date `yyyymmdd` (e.g., 20130305) and table type `type` (ct or cq). The name of the respect output table `outname` will also be determined (e.g., taqout_cq_29130305)
 
-  - This is because apart from the exact trading date, there are two extra parameters to decide when picking the exact table that we request data from:
-    - The library name - `TAQ` if the trading date is before 2014.12.31, and `TAQMSEC`otherwise
-    - The table name - `CT` (in `TAQ`) or `CTM` (in `TAQMSEC`) for trades data; `CQ` (in `TAQ`) or `CQM` (in `TAQMSEC`) for quotes data
-  - To make sure the table name `dataset` (which we request data from) and the table name `outname` (which we save output data) can be referenced by other macros, I define those two variables as global macro variables. 
+- This is because apart from the exact trading date, there are two extra parameters to decide when picking the exact table that we request data from:
+  - The library name - `TAQ` if the trading date is before 2014.12.31, and `TAQMSEC`otherwise
+  - The table name - `CT` (in `TAQ`) or `CTM` (in `TAQMSEC`) for trades data; `CQ` (in `TAQ`) or `CQM` (in `TAQMSEC`) for quotes data
+- To make sure the table name `dataset` (which we request data from) and the table name `outname` (which we save output data) can be referenced by other macros, I define those two variables as global macro variables. 
 
 ```sas
 705  %macro getdict(yyyymmdd, type);
@@ -264,12 +264,13 @@ taq.ct_20130305
 taqout_ct_20130305
 ```
 
-- %getdaily(date, dataset, outname, start, end);
-  - The idea is to 
-    - select out all the events that happened in a specified date `date` from the whole sample,
-    - submit query to the table whose name `dataset` has been decided by the first macro `%getdict(yyyymmdd, type)`, 
-    - require that the trading time should no earlier than the event time minus `start` number of seconds and no later than the event time plus `end` number of seconds,
-    - Download the query results and save the output data as `outname`, which is also determined by the previous macro `%getdict(yyyymmdd, type)`
+2. **%getdaily(date, dataset, outname, start, end);**
+
+- The idea is to 
+  - select out all the events that happened in a specified date `date` from the whole sample,
+  - submit query to the table whose name `dataset` has been decided by the first macro `%getdict(yyyymmdd, type)`, 
+  - require that the trading time should no earlier than the event time minus `start` number of seconds and no later than the event time plus `end` number of seconds,
+  - Download the query results and save the output data as `outname`, which is also determined by the previous macro `%getdict(yyyymmdd, type)`
 
 ```sas
 746  rsubmit;
@@ -324,13 +325,14 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
       cpu time            0.08 seconds
 ```
 
-- %iterate(type, start, end);
-  - With the previous two macros, we have finished the query for a single date. The only left thing is to iterate the query over all the unique days in our sample.
-  - This step is like a wrapper for our single-date query and thus needs to utilize the previous two queries.
-  - The three parameters in this macro are the very input parameters for our little high-frequency query project
-    - Type - `ct`for trades data query, `cq`for quotes data query
-    - Start - The `Start `number of seconds before the event time would be the beginning of the window. For example, I assign `Start`as 900 because I want the query window starts at 15 minutes before the event time.
-    - End - The `End ` number of seconds after the event time would be the beginning of the window. For example, I assign `Start`as 900 because I want the query window ends at 15 minutes after the event time.
+3. **%iterate(type, start, end);**
+
+- With the previous two macros, we have finished the query for a single date. The only left thing is to iterate the query over all the unique days in our sample.
+- This step is like a wrapper for our single-date query and thus needs to utilize the previous two queries.
+- The three parameters in this macro are the very input parameters for our little high-frequency query project
+  - Type - `ct`for trades data query, `cq`for quotes data query
+  - Start - The `Start `number of seconds before the event time would be the beginning of the window. For example, I assign `Start`as 900 because I want the query window starts at 15 minutes before the event time.
+  - End - The `End ` number of seconds after the event time would be the beginning of the window. For example, I assign `Start`as 900 because I want the query window ends at 15 minutes after the event time.
 
 ```sas
 336  %macro iterate(type, start, end);
