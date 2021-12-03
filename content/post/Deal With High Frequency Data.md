@@ -380,6 +380,8 @@ The dataset looks like as following.
     color: #999;
     padding: 2px;">Figure 6: Sample Output Dataset</div>
 </center>
+
+
 ## VI. SAS Code
 
 ```SAS
