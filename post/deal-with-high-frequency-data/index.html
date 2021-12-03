@@ -233,14 +233,14 @@
                 </header>
                 <nav id="TableOfContents">
   <ul>
-    <li><a href="#motivation">Motivation</a></li>
-    <li><a href="#project-description">Project Description</a>
+    <li><a href="#i-motivation">I. Motivation</a></li>
+    <li><a href="#ii-project-description">II. Project Description</a>
       <ul>
         <li><a href="#project-purpose">Project Purpose</a></li>
         <li><a href="#challenges">Challenges</a></li>
       </ul>
     </li>
-    <li><a href="#data-source-wrds-taq-database">Data Source: WRDS-TAQ database</a>
+    <li><a href="#iii-data-source-wrds-taq-database">III. Data Source: WRDS-TAQ database</a>
       <ul>
         <li><a href="#markets-covered">Markets Covered</a></li>
         <li><a href="#dataset-description">Dataset Description</a></li>
@@ -261,7 +261,7 @@
   </ul>
 </nav>
                 
-                <h2 id="motivation">Motivation</h2>
+                <h2 id="i-motivation">I. Motivation</h2>
 <p>High-frequency traders (HFTs) are market participants that are characterized by the high speed (typically in milliseconds level) with which they react to incoming news, the low inventory on their books, and the large number of trades they execute (SEC, 2010). According to Breckenfelder (2019, WP), The high-frequency trading industry grew rapidly since its inception in the mid-2000s and has represented about 50% of trading in US equity markets by 2017 (down from a 2009 peak, when it topped 60%).</p>
 <p>In academia, there is a decade-long debate regarding whether HFTs benefit or harm market quality. Some argues that HFTs increase price discovery by systematically correcting the in-attention of human traders and inducing the public information to be incorporated into the stock prices more promptly (e.g., Chordia and Miao, 2020 JAE; Bhattacharya et al., 2020 RAS). Others believe that the predatory behaviour of HFTs, which dampens other market participants' information acquisition incentives, must have harmed market effieciency (e.g., Ahmed et al., 2020 JAR; Lee and Watts, 2021 TAR).</p>
 <p>Either way, there are two things that can be assured.</p>
@@ -270,7 +270,7 @@
 <li>To cope with today&rsquo;s high-frequency capital market,  scholars need to grapple with high-frequency trading data (typically in second-level before 2014 and millisecond level after 2014) to unravel the latest market micro-structure.</li>
 </ol>
 <p>In this blogpost, I will introduce how to extract second/millisecond-level trade and quotes data from the WRDS-TAQ database. Such data is typically used for intra-day event studies (e.g., Rogers et al., 2016 RAS; Rogers et al., 2017 JAR). For people who are familar with the WRDS data structure, you can directly access the SAS code via <a href="https://mengjiexu.com/post/deal-with-high-frequency-data/#sas-code">this link </a>.</p>
-<h2 id="project-description">Project Description</h2>
+<h2 id="ii-project-description">II. Project Description</h2>
 <h3 id="project-purpose">Project Purpose</h3>
 <p>I got time stamps for firm-related events and want to get all the trade and quotes records 15 miniutes before and after the event time. Like any other event studies, the events happened in different days.</p>
 <center>
@@ -298,8 +298,8 @@
       <span style="color:#00a8c8">and</span> time&lt;=<span style="color:#d88200">&#39;16:00:59&#39;</span>T));
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="data-source-wrds-taq-database">Data Source: WRDS-TAQ database</h2>
-<p>Daily TAQ (Trade and Quote) provides users with access to all trades and quotes for all issues traded on NYSE, Nasdaq and the regional exchanges for the previous trading day. It’s a comprehensive history of daily activity from NYSE markets and the U.S. Consolidated Tape covering all U.S. Equities instruments (including all CTA and UTP participating markets). One can find more details about the WRDS-TAQ database in <a href="https://wrds-www.wharton.upenn.edu/documents/774/Daily_TAQ_Client_Spec_v2.2a.pdf">WRDS-TAQ User Guide</a>.</p>
+</div><h2 id="iii-data-source-wrds-taq-database">III. Data Source: WRDS-TAQ database</h2>
+<p>Daily TAQ (Trade and Quote) provides users with access to all trades and quotes for all issues traded on NYSE, Nasdaq and the regional exchanges for the previous trading day. It’s a comprehensive history of daily activity from NYSE markets and the U.S. Consolidated Tape covering all U.S. Equities instruments (including all CTA and UTP participating markets). One can find more details about the WRDS-TAQ database in <a href="https://wrds-www.wharton.upenn.edu/documents/774/Daily_TAQ_Client_Spec_v2.2a.pdf">WRDS-TAQ User Guide</a>. For those who are familiar with the TAQ database, you can jump via <a href="https://mengjiexu.com/post/deal-with-high-frequency-data/#road-map">this link</a>.</p>
 <h3 id="markets-covered">Markets Covered</h3>
 <p>The Daily TAQ database covers:</p>
 <ul>
@@ -530,9 +530,9 @@ NOTE: PROCEDURE SQL used (Total process time):
 </div>
 </div><h3 id="step-3-request-trade-and-quotes-data-from-wrds-server">Step 3: Request trade and quotes data from WRDS server</h3>
 <p>To efficiently implement this procedure, I wrote three macros</p>
-<ul>
-<li>
-<p>%getdict(yyyymmdd, type);</p>
+<ol>
+<li><strong>%getdict(yyyymmdd, type);</strong></li>
+</ol>
 <ul>
 <li>
 <p>The purpose of this macro is to get the table name <code>dataset</code> that should be requested (e.g., TAQ.CQ_20130305) in the WRDS server based on the event date <code>yyyymmdd</code> (e.g., 20130305) and table type <code>type</code> (ct or cq). The name of the respect output table <code>outname</code> will also be determined (e.g., taqout_cq_29130305)</p>
@@ -546,8 +546,6 @@ NOTE: PROCEDURE SQL used (Total process time):
 </li>
 <li>
 <p>To make sure the table name <code>dataset</code> (which we request data from) and the table name <code>outname</code> (which we save output data) can be referenced by other macros, I define those two variables as global macro variables.</p>
-</li>
-</ul>
 </li>
 </ul>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -612,8 +610,9 @@ taq<span style="color:#ae81ff">.</span>ct_20130305
 taqout_ct_20130305
 </code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>%getdaily(date, dataset, outname, start, end);
+</div><ol start="2">
+<li><strong>%getdaily(date, dataset, outname, start, end);</strong></li>
+</ol>
 <ul>
 <li>The idea is to
 <ul>
@@ -621,8 +620,6 @@ taqout_ct_20130305
 <li>submit query to the table whose name <code>dataset</code> has been decided by the first macro <code>%getdict(yyyymmdd, type)</code>,</li>
 <li>require that the trading time should no earlier than the event time minus <code>start</code> number of seconds and no later than the event time plus <code>end</code> number of seconds,</li>
 <li>Download the query results and save the output data as <code>outname</code>, which is also determined by the previous macro <code>%getdict(yyyymmdd, type)</code></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -732,8 +729,9 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
       cpu time            <span style="color:#ae81ff">0.08</span> seconds
 </code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>%iterate(type, start, end);
+</div><ol start="3">
+<li><strong>%iterate(type, start, end);</strong></li>
+</ol>
 <ul>
 <li>With the previous two macros, we have finished the query for a single date. The only left thing is to iterate the query over all the unique days in our sample.</li>
 <li>This step is like a wrapper for our single-date query and thus needs to utilize the previous two queries.</li>
@@ -742,8 +740,6 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 <li>Type - <code>ct</code>for trades data query, <code>cq</code>for quotes data query</li>
 <li>Start - The <code>Start </code>number of seconds before the event time would be the beginning of the window. For example, I assign <code>Start</code>as 900 because I want the query window starts at 15 minutes before the event time.</li>
 <li>End - The <code>End </code> number of seconds after the event time would be the beginning of the window. For example, I assign <code>Start</code>as 900 because I want the query window ends at 15 minutes after the event time.</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
