@@ -251,8 +251,8 @@
       <ul>
         <li><a href="#step-0-connect-to-wrds-server-via-pc-sas">Step 0. Connect to WRDS server via PC SAS</a></li>
         <li><a href="#step-1-import-the-events-into-sas-work-library">Step 1. Import the events into SAS work library</a></li>
-        <li><a href="#step-3-put-all-the-unique-dates-into-a-macro-variable">Step 3. Put all the unique dates into a Macro variable</a></li>
-        <li><a href="#step-2-request-trade-and-quotes-data-from-wrds-server">Step 2: Request trade and quotes data from WRDS server</a></li>
+        <li><a href="#step-2-put-all-the-unique-dates-into-a-macro-variable">Step 2. Put all the unique dates into a Macro variable</a></li>
+        <li><a href="#step-3-request-trade-and-quotes-data-from-wrds-server">Step 3: Request trade and quotes data from WRDS server</a></li>
       </ul>
     </li>
     <li><a href="#output">Output</a></li>
@@ -464,7 +464,7 @@ NOTE: PROCEDURE IMPORT used (Total process time):
 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="step-3-put-all-the-unique-dates-into-a-macro-variable">Step 3. Put all the unique dates into a Macro variable</h3>
+</div><h3 id="step-2-put-all-the-unique-dates-into-a-macro-variable">Step 2. Put all the unique dates into a Macro variable</h3>
 <p>Let&rsquo;s name the macro variable as <strong>datesValsM</strong>. This step prepares for the later loop procedure.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -528,7 +528,7 @@ NOTE: PROCEDURE SQL used (Total process time):
 <span style="color:#ae81ff">20130320</span> <span style="color:#ae81ff">20130321</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="step-2-request-trade-and-quotes-data-from-wrds-server">Step 2: Request trade and quotes data from WRDS server</h3>
+</div><h3 id="step-3-request-trade-and-quotes-data-from-wrds-server">Step 3: Request trade and quotes data from WRDS server</h3>
 <p>To efficiently implement this procedure, I wrote three macros</p>
 <ul>
 <li>
