@@ -137,7 +137,7 @@ The Daily TAQ database covers:
   - The time precision is improved from second-level (07:25:39) to millisecond-level (07:25:39.105) 
   - Each order is assigned with an tracking-ID, which lends significant convenience for identifying the subsequent activities (e.g., whether the order is cancelled later) after the order is placed. 
 
-## Road Map
+## IV. Road Map
 
 ### Step 0. Connect to WRDS server via PC SAS
 
@@ -353,7 +353,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 350  %iterate(ct, 900, 900);
 ```
 
-## Output
+## V. Output
 
 The output dataset are saved separately for each date, named as the way we have determined with the macro `%getdict(yyyymmdd, type)`.
 
@@ -381,7 +381,7 @@ The dataset looks like as following.
     padding: 2px;">Figure 6: Sample Output Dataset</div>
 </center>
 
-## Sas Code
+## VI. Sas Code
 
 ```SAS
 libname home 'C:\Users\xu-m\Documents\wrdsas\';
