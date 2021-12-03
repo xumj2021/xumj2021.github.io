@@ -376,7 +376,7 @@ The dataset looks like as following.
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 6: Sample output dataset</div>
+    padding: 2px;">Figure 6: Sample Output Dataset</div>
 </center>
 
 ## Sas Code
