@@ -332,7 +332,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 - The three parameters in this macro are the very input parameters for our little high-frequency query project
   - Type - `ct`for trades data query, `cq`for quotes data query
   - Start - The `Start `number of seconds before the event time would be the beginning of the window. For example, I assign `Start`as 900 because I want the query window starts at 15 minutes before the event time.
-  - End - The `End ` number of seconds after the event time would be the beginning of the window. For example, I assign `Start`as 900 because I want the query window ends at 15 minutes after the event time.
+  - End - The `End ` number of seconds after the event time would be the beginning of the window. For example, I assign `End` as 900 because I want the query window ends at 15 minutes after the event time.
 
 ```sas
 336  %macro iterate(type, start, end);
