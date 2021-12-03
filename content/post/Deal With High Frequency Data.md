@@ -47,7 +47,7 @@ I got time stamps for firm-related events and want to get all the trade and quot
 
 Due to the huge size of the everyday market order flows, WRDS-TAQ database saves the daily trade and quotes data separately for each day. That means if the events in our sample happened in 2000 unique trading days, we have to query 2000 different trade datasets and another 2000 different quote datasets in the WRDS-TAQ database. 
 
-To help the readers get an intuition about the size of the trade and quotes data, I extracted the trade records in two trading hours on December 5th, 2014. It appears that 13,197,152 trades were executed in that just two trading hours, not to mention the even (sometimes much more) bigger quote records.
+To help the readers get an intuition about the size of the trade and quotes data, I extracted the trade records during two trading hours on December 5th, 2014. It appears that 13,197,152 trades were executed in that just two trading hours, not to mention the even (sometimes much more) bigger quote records.
 
 ```SAS
 NOTE: There were 13197152 observations read from the data set TAQ.CT_20141205.
@@ -124,7 +124,7 @@ The Daily TAQ database covers:
     <center>
         <img style="border-radius: 0.3125em;
         box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-        src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/cqmsample.png" width=800 height=400>
+        src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/cqmsample.png" width=800 height=450>
         <br>
         <div style="color:orange; border-bottom: 1px solid #d9d9d9;
         display: inline-block;
@@ -358,12 +358,12 @@ The output dataset are saved separately for each date, named as the way we have 
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/out.PNG" width=800 height=400>
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/hftout2.PNG" width=800 height=400>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 4: Millisecond-level TAQ Quotes Sample Data (TAQMSEC.CQM_20150305)</div>
+    padding: 2px;">Figure 5: Output Files</div>
 </center>
 
 The dataset looks like as following.
@@ -371,12 +371,12 @@ The dataset looks like as following.
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/outsample.PNG" width=800 height=450>
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/hftout1.PNG" width=800 height=450>
     <br>
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 4: Millisecond-level TAQ Quotes Sample Data (TAQMSEC.CQM_20150305)</div>
+    padding: 2px;">Figure 6: Sample output dataset</div>
 </center>
 
 ## Sas Code
@@ -456,8 +456,6 @@ quit;
 
 endrsubmit;
 ```
-
-
 
 ## Main References
 
