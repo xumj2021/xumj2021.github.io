@@ -141,7 +141,7 @@ The Daily TAQ database covers:
 
 ### Step 0. Connect to WRDS server via PC SAS
 
-In this blog post, I connect the WRDS server via the PC SAS because it helps to monitor the output from the server and finetune the codes more efficiently. One can also find how to access the WRDS server via SSH and submit the batched job in my previous blog post [Exploit WRDS Cloud via Python](https://mengjiexu.com/post/connect-to-wrds-via-python/). One is required to enter the username and password of WRDS to connect the server.
+In this blog post, I connect the WRDS server via the PC SAS because it helps to monitor the output from the server and finetune the codes more efficiently. One can also find how to access the WRDS server via SSH and submit the batched job in my previous blog post [Exploit WRDS Cloud via Python](https://mengjiexu.com/post/connect-to-wrds-via-python/). 
 
 ```sas
 %let wrds = wrds.wharton.upenn.edu 4016;
