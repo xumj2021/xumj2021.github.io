@@ -185,7 +185,7 @@ NOTE: PROCEDURE IMPORT used (Total process time):
 
 ```
 
-### Step 3. Put all the unique dates into a Macro variable
+### Step 2. Put all the unique dates into a Macro variable
 
 Let's name the macro variable as **datesValsM**. This step prepares for the later loop procedure.
 
@@ -220,7 +220,7 @@ NOTE: PROCEDURE SQL used (Total process time):
 20130320 20130321
 ```
 
-### Step 2: Request trade and quotes data from WRDS server
+### Step 3: Request trade and quotes data from WRDS server
 
 To efficiently implement this procedure, I wrote three macros
 
