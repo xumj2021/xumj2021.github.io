@@ -471,6 +471,10 @@ Charles M. C. Lee, Edward M. Watts; Tick Size Tolls: Can a Trading Slowdown Impr
 
 Chordia, T., Miao, B. (2020). Market efficiency in real time: Evidence from low latency activity around earnings announcements. Journal of Accounting and Economics, 70(2-3), 101335.
 
+Rogers, J. L., Skinner, D. J., Zechman, S. L. (2016). The role of the media in disseminating insider-trading news. *Review of Accounting Studies*, *21*(3), 711-739.
+
+Rogers, J. L., Skinner, D. J., Zechman, S. L. (2017). Run EDGAR run: SEC dissemination in a high‐frequency world. *Journal of Accounting Research*, *55*(2), 459-505.
+
 SEC (2010). Concept release on equity market structure. concept release 34-61358, FileNo, 17 CFR Part 242 RIN 3235–AK47.
 
 https://wrds-www.wharton.upenn.edu/documents/774/Daily_TAQ_Client_Spec_v2.2a.pdf
