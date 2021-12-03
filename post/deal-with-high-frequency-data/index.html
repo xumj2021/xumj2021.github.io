@@ -247,7 +247,7 @@
         <li><a href="#library-and-table-names-in-wrds">Library and table names in WRDS</a></li>
       </ul>
     </li>
-    <li><a href="#road-map">Road Map</a>
+    <li><a href="#iv-road-map">IV. Road Map</a>
       <ul>
         <li><a href="#step-0-connect-to-wrds-server-via-pc-sas">Step 0. Connect to WRDS server via PC SAS</a></li>
         <li><a href="#step-1-import-the-events-into-sas-work-library">Step 1. Import the events into SAS work library</a></li>
@@ -255,8 +255,8 @@
         <li><a href="#step-3-request-trade-and-quotes-data-from-wrds-server">Step 3: Request trade and quotes data from WRDS server</a></li>
       </ul>
     </li>
-    <li><a href="#output">Output</a></li>
-    <li><a href="#sas-code">Sas Code</a></li>
+    <li><a href="#v-output">V. Output</a></li>
+    <li><a href="#vi-sas-code">VI. Sas Code</a></li>
     <li><a href="#main-references">Main References</a></li>
   </ul>
 </nav>
@@ -389,7 +389,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="road-map">Road Map</h2>
+<h2 id="iv-road-map">IV. Road Map</h2>
 <h3 id="step-0-connect-to-wrds-server-via-pc-sas">Step 0. Connect to WRDS server via PC SAS</h3>
 <p>In this blog post, I connect the WRDS server via the PC SAS because it helps to monitor the output from the server and finetune the codes more efficiently. One can also find how to access the WRDS server via SSH and submit the batched job in my previous blog post <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/">Exploit WRDS Cloud via Python</a>. One is required to enter the username and password of WRDS to connect the server.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -781,7 +781,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 <span style="color:#ae81ff">350</span>  <span style="color:#75af00">%iterate</span>(ct, <span style="color:#ae81ff">900</span>, <span style="color:#ae81ff">900</span>);
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="output">Output</h2>
+</div><h2 id="v-output">V. Output</h2>
 <p>The output dataset are saved separately for each date, named as the way we have determined with the macro <code>%getdict(yyyymmdd, type)</code>.</p>
 <center>
     <img style="border-radius: 0.3125em;
@@ -804,7 +804,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
     color: #999;
     padding: 2px;">Figure 6: Sample Output Dataset</div>
 </center>
-<h2 id="sas-code">Sas Code</h2>
+<h2 id="vi-sas-code">VI. Sas Code</h2>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
