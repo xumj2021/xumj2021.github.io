@@ -53,6 +53,8 @@ Till now we have finished the initialization of the browser. This step returns a
     color: #999;
     padding: 2px;">Figure 2: Normalize the Search Box</div>
 </center>
+
+
 **Code**
 
 ```python
