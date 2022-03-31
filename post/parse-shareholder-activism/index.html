@@ -52,7 +52,7 @@
     <link rel="canonical" href="/post/parse-shareholder-activism/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
+  
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -83,8 +83,6 @@
 
 </head>
 
-
-
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         
@@ -107,6 +105,18 @@
                         <a href="/">Home</a>
                     </li>
                     
+                        
+                        <li>
+                            <a href="/categories/anecdotes">anecdotes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/crawler">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data">data</a>
+                        </li>
                         
                         <li>
                             <a href="/categories/tech">tech</a>
@@ -160,7 +170,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://images.unsplash.com/photo-1427751840561-9852520f8ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80')
+        background-image: url('/static/shareholder.png')
     }
 </style>
 <header class="intro-header">
@@ -233,7 +243,7 @@
 <p>代码</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -266,7 +276,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">selenium</span> <span style="color:#f92672">import</span> <span style="color:#111">webdriver</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">selenium</span> <span style="color:#f92672">import</span> <span style="color:#111">webdriver</span>
 <span style="color:#f92672">import</span> <span style="color:#111">time</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
 
@@ -289,7 +299,7 @@
 
 <span style="color:#75715e"># 记录 cookies 并写入 txt 文件中</span>
 <span style="color:#111">orcookies</span> <span style="color:#f92672">=</span> <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">get_cookies</span><span style="color:#111">()</span>
-<span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#111">orcookies</span><span style="color:#111">)</span>
+<span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">orcookies</span><span style="color:#111">)</span>
 <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">{}</span>
 <span style="color:#00a8c8">for</span> <span style="color:#111">item</span> <span style="color:#f92672">in</span> <span style="color:#111">orcookies</span><span style="color:#111">:</span>
     <span style="color:#111">cookies</span><span style="color:#111">[</span><span style="color:#111">item</span><span style="color:#111">[</span><span style="color:#d88200">&#39;name&#39;</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">item</span><span style="color:#111">[</span><span style="color:#d88200">&#39;value&#39;</span><span style="color:#111">]</span>
@@ -308,7 +318,7 @@
 <p>翻到第二页，Fetch 得到 post 的参数信息，这里关键是是 headers 和 body</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -323,7 +333,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">await fetch(&#34;https://efts.sec.gov/LATEST/search-index&#34;, {
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">await fetch(&#34;https://efts.sec.gov/LATEST/search-index&#34;, {
     &#34;credentials&#34;: &#34;omit&#34;,
     &#34;headers&#34;: {
         &#34;User-Agent&#34;: &#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0&#34;,
@@ -377,7 +387,7 @@
 <h4 id="爬取文件列表代码">爬取文件列表代码</h4>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -446,7 +456,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67">67</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 <span style="color:#f92672">import</span> <span style="color:#111">math</span>
@@ -508,9 +518,9 @@
 
 <span style="color:#00a8c8">for</span> <span style="color:#111">year</span> <span style="color:#f92672">in</span> <span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">2001</span><span style="color:#111">,</span> <span style="color:#ae81ff">2022</span><span style="color:#111">):</span>
     <span style="color:#111">totalnum</span> <span style="color:#f92672">=</span> <span style="color:#111">getinfo</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
-    <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#111">totalnum</span><span style="color:#111">)</span>
+    <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">totalnum</span><span style="color:#111">)</span>
     <span style="color:#111">pagenum</span> <span style="color:#f92672">=</span> <span style="color:#111">math</span><span style="color:#f92672">.</span><span style="color:#111">ceil</span><span style="color:#111">(</span><span style="color:#111">totalnum</span><span style="color:#f92672">/</span><span style="color:#ae81ff">100</span><span style="color:#111">)</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
-    <span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200"> </span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span><span style="color:#111">pagenum</span><span style="color:#111">))</span>
+    <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200"> </span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span><span style="color:#111">pagenum</span><span style="color:#111">))</span>
     <span style="color:#00a8c8">for</span> <span style="color:#111">page</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span><span style="color:#111">pagenum</span><span style="color:#111">)):</span>
         <span style="color:#111">getinfo</span><span style="color:#111">(</span><span style="color:#111">year</span><span style="color:#111">,</span><span style="color:#111">page</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
@@ -540,7 +550,7 @@
 <h4 id="爬取对应-edgar-文件代码">爬取对应 EDGAR 文件代码</h4>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -573,8 +583,8 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
-<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 <span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
@@ -723,7 +733,7 @@
             
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Mengjie Xu 2021
+                    Copyright &copy; Mengjie Xu 2022
                 </p>
             </div>
         </div>

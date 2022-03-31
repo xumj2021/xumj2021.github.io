@@ -4,13 +4,13 @@
     
 
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0Z7HYL5YW"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      gtag('config', 'G-Q0Z7HYL5YW');
+    gtag('config', 'UA-177198277-1');
     </script>
 
 
@@ -52,7 +52,7 @@
     <link rel="canonical" href="/post/parse-wsj-archive/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
+  
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -82,8 +82,6 @@
     
 
 </head>
-
-
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -118,6 +116,10 @@
                         
                         <li>
                             <a href="/categories/data">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
                         </li>
                         
                     
@@ -382,7 +384,7 @@
 <h3 id="code-i-get-cookies">Code I: Get Cookies</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -420,7 +422,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">selenium</span> <span style="color:#f92672">import</span> <span style="color:#111">webdriver</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">selenium</span> <span style="color:#f92672">import</span> <span style="color:#111">webdriver</span>
 <span style="color:#f92672">import</span> <span style="color:#111">time</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
 
@@ -450,7 +452,7 @@
 
 <span style="color:#75715e"># Save Cookies</span>
 <span style="color:#111">orcookies</span> <span style="color:#f92672">=</span> <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">get_cookies</span><span style="color:#111">()</span>
-<span style="color:#00a8c8">print</span><span style="color:#111">(</span><span style="color:#111">orcookies</span><span style="color:#111">)</span>
+<span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">orcookies</span><span style="color:#111">)</span>
 <span style="color:#111">cookies</span> <span style="color:#f92672">=</span> <span style="color:#111">{}</span>
 <span style="color:#00a8c8">for</span> <span style="color:#111">item</span> <span style="color:#f92672">in</span> <span style="color:#111">orcookies</span><span style="color:#111">:</span>
     <span style="color:#111">cookies</span><span style="color:#111">[</span><span style="color:#111">item</span><span style="color:#111">[</span><span style="color:#d88200">&#39;name&#39;</span><span style="color:#111">]]</span> <span style="color:#f92672">=</span> <span style="color:#111">item</span><span style="color:#111">[</span><span style="color:#d88200">&#39;value&#39;</span><span style="color:#111">]</span>
@@ -461,7 +463,7 @@
 </div><h3 id="code-ii-get-article-list">Code II: Get Article List</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -535,7 +537,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72">72</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">json</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">json</span>
 <span style="color:#f92672">import</span> <span style="color:#111">requests</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 <span style="color:#f92672">import</span> <span style="color:#111">unicodedata</span>
@@ -612,7 +614,7 @@
 </div><h3 id="code-iii-get-article-info-and-write-into-article-list">Code III: Get Article Info and Write Into Article List</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -686,18 +688,18 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72">72</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
 <span style="color:#f92672">import</span> <span style="color:#111">requests</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 <span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
 <span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
-<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">import</span> <span style="color:#111">unicodedata</span>
 <span style="color:#f92672">from</span> <span style="color:#111">datetime</span> <span style="color:#f92672">import</span> <span style="color:#111">datetime</span>
 
 <span style="color:#75715e"># Read the article ids from the article list obtained from last step</span>
-<span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;reslist_twitter.csv&#34;</span><span style="color:#111">,</span> <span style="color:#111">header</span> <span style="color:#f92672">=</span> <span style="color:#111">None</span><span style="color:#111">)</span>
+<span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;reslist_twitter.csv&#34;</span><span style="color:#111">,</span> <span style="color:#111">header</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">None</span><span style="color:#111">)</span>
 
 <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#34;User-Agent&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:88.0) Gecko/20100101 Firefox/88.0&#39;&#34;</span><span style="color:#111">,</span>
         <span style="color:#d88200">&#34;Accept&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;*/*&#34;</span><span style="color:#111">,</span>
@@ -763,7 +765,7 @@
 </div><h3 id="code-iv-extract-article-contents">Code IV: Extract Article Contents</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -826,14 +828,14 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">time</span>
 <span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
 <span style="color:#f92672">import</span> <span style="color:#111">re</span>
 <span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
 <span style="color:#f92672">import</span> <span style="color:#111">requests</span>
 <span style="color:#f92672">import</span> <span style="color:#111">json</span>
-<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">import</span> <span style="color:#111">unicodedata</span>
 <span style="color:#f92672">from</span> <span style="color:#111">string</span> <span style="color:#f92672">import</span> <span style="color:#111">punctuation</span>
 
@@ -1044,7 +1046,7 @@
             
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Mengjie Xu 2021
+                    Copyright &copy; Mengjie Xu 2022
                 </p>
             </div>
         </div>

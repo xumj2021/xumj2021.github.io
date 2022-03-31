@@ -4,13 +4,13 @@
     
 
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0Z7HYL5YW"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      gtag('config', 'G-Q0Z7HYL5YW');
+    gtag('config', 'UA-177198277-1');
     </script>
 
 
@@ -52,7 +52,7 @@
     <link rel="canonical" href="/post/bloomberg-api/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
+  
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -82,8 +82,6 @@
     
 
 </head>
-
-
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -118,6 +116,10 @@
                         
                         <li>
                             <a href="/categories/data">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
                         </li>
                         
                     
@@ -321,10 +323,10 @@
 <p>Install Bloomberg official Python API</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install blpapi --index-url<span style="color:#f92672">=</span>https://bcms.bloomberg.com/pip/simple/
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install blpapi --index-url<span style="color:#f92672">=</span>https://bcms.bloomberg.com/pip/simple/
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -332,11 +334,11 @@
 <p>Install <code>numpy</code>, <code>pandas</code>, <code>ruamel.yaml</code> and <code>payarrow</code>. As Anaconda has integrated <code>numpy</code> and <code>pandas</code>, we only need to install the last two packages.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#111">conda</span> <span style="color:#111">install</span> <span style="color:#111">ruamel</span><span style="color:#111">.</span><span style="color:#111">yaml</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#111">conda</span> <span style="color:#111">install</span> <span style="color:#111">ruamel</span><span style="color:#111">.</span><span style="color:#111">yaml</span>
 <span style="color:#111">conda</span> <span style="color:#111">install</span> <span style="color:#111">pyarrow</span>
 </code></pre></td></tr></table>
 </div>
@@ -345,10 +347,10 @@
 <p>Install a third-party package that enables better data extracting experience <code>xbbg</code></p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#111">pip</span> <span style="color:#111">install</span> <span style="color:#111">xbbg</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#111">pip</span> <span style="color:#111">install</span> <span style="color:#111">xbbg</span>
 </code></pre></td></tr></table>
 </div>
 </div></li>
@@ -359,29 +361,29 @@
 <p>Type <code>python</code> in the <code>cmd</code> window, you will enter the Python enviornment. If you enter the following code and get the same result as mine, that means you&rsquo;ve deployed the operation enviornment for Bloomberg API successfully. All of the following examples are obtained from the <a href="https://github.com/alpha-xone/xbbg">Github Page of <code>xbbg</code></a>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">]:</span> <span style="color:#f92672">from</span> <span style="color:#111">xbbg</span> <span style="color:#f92672">import</span> <span style="color:#111">blp</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">1</span><span style="color:#111">]:</span> <span style="color:#f92672">from</span> <span style="color:#111">xbbg</span> <span style="color:#f92672">import</span> <span style="color:#111">blp</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><code>BDP</code> example:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">2</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdp</span><span style="color:#111">(</span><span style="color:#111">tickers</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;NVDA US Equity&#39;</span><span style="color:#111">,</span> <span style="color:#111">flds</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;Security_Name&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;GICS_Sector_Name&#39;</span><span style="color:#111">])</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">2</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdp</span><span style="color:#111">(</span><span style="color:#111">tickers</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;NVDA US Equity&#39;</span><span style="color:#111">,</span> <span style="color:#111">flds</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;Security_Name&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;GICS_Sector_Name&#39;</span><span style="color:#111">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[2]:
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[2]:
                security_name        gics_sector_name
 NVDA US Equity   NVIDIA Corp  Information Technology
 </code></pre></td></tr></table>
@@ -389,20 +391,20 @@ NVDA US Equity   NVIDIA Corp  Information Technology
 </div><p><code>BDP</code> with overrides:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">3</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdp</span><span style="color:#111">(</span><span style="color:#d88200">&#39;AAPL US Equity&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;Eqy_Weighted_Avg_Px&#39;</span><span style="color:#111">,</span> <span style="color:#111">VWAP_Dt</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;20181224&#39;</span><span style="color:#111">)</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">3</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdp</span><span style="color:#111">(</span><span style="color:#d88200">&#39;AAPL US Equity&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;Eqy_Weighted_Avg_Px&#39;</span><span style="color:#111">,</span> <span style="color:#111">VWAP_Dt</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;20181224&#39;</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[3]:
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[3]:
                 eqy_weighted_avg_px
 AAPL US Equity               148.75
 </code></pre></td></tr></table>
@@ -410,13 +412,13 @@ AAPL US Equity               148.75
 </div><p><code>BDH</code> example:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">4</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdh</span><span style="color:#111">(</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">4</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdh</span><span style="color:#111">(</span>
    <span style="color:#f92672">...</span><span style="color:#111">:</span>     <span style="color:#111">tickers</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;SPX Index&#39;</span><span style="color:#111">,</span> <span style="color:#111">flds</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;high&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;low&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;last_price&#39;</span><span style="color:#111">],</span>
    <span style="color:#f92672">...</span><span style="color:#111">:</span>     <span style="color:#111">start_date</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;2018-10-10&#39;</span><span style="color:#111">,</span> <span style="color:#111">end_date</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;2018-10-20&#39;</span><span style="color:#111">,</span>
    <span style="color:#f92672">...</span><span style="color:#111">:</span> <span style="color:#111">)</span>
@@ -424,7 +426,7 @@ AAPL US Equity               148.75
 </div>
 </div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -437,7 +439,7 @@ AAPL US Equity               148.75
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[4]:
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[4]:
            SPX Index
                 high      low last_price
 2018-10-10  2,874.02 2,784.86   2,785.68
@@ -453,14 +455,14 @@ AAPL US Equity               148.75
 </div><p><code>BDH</code> example with Excel compatible inputs:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">5</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdh</span><span style="color:#111">(</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">In</span> <span style="color:#111">[</span><span style="color:#ae81ff">5</span><span style="color:#111">]:</span> <span style="color:#111">blp</span><span style="color:#f92672">.</span><span style="color:#111">bdh</span><span style="color:#111">(</span>
    <span style="color:#f92672">...</span><span style="color:#111">:</span>     <span style="color:#111">tickers</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;SHCOMP Index&#39;</span><span style="color:#111">,</span> <span style="color:#111">flds</span><span style="color:#f92672">=</span><span style="color:#111">[</span><span style="color:#d88200">&#39;high&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;low&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;last_price&#39;</span><span style="color:#111">],</span>
    <span style="color:#f92672">...</span><span style="color:#111">:</span>     <span style="color:#111">start_date</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;2018-09-26&#39;</span><span style="color:#111">,</span> <span style="color:#111">end_date</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;2018-10-20&#39;</span><span style="color:#111">,</span>
    <span style="color:#f92672">...</span><span style="color:#111">:</span>     <span style="color:#111">Per</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;W&#39;</span><span style="color:#111">,</span> <span style="color:#111">Fill</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;P&#39;</span><span style="color:#111">,</span> <span style="color:#111">Days</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;A&#39;</span><span style="color:#111">,</span>
@@ -469,7 +471,7 @@ AAPL US Equity               148.75
 </div>
 </div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
@@ -478,7 +480,7 @@ AAPL US Equity               148.75
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[5]:
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Out[5]:
            SHCOMP Index
                    high      low last_price
 2018-09-28     2,827.34 2,771.16   2,821.35
@@ -558,7 +560,7 @@ AAPL US Equity               148.75
 </ul>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -574,7 +576,7 @@ AAPL US Equity               148.75
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Py" data-lang="Py"><span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Py" data-lang="Py"><span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">from</span> <span style="color:#111">xbbg</span> <span style="color:#f92672">import</span> <span style="color:#111">blp</span>
 <span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
 
@@ -603,7 +605,7 @@ AAPL US Equity               148.75
 </ul>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -659,7 +661,7 @@ AAPL US Equity               148.75
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#f92672">as</span> <span style="color:#111">pd</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
 <span style="color:#f92672">from</span> <span style="color:#111">xbbg</span> <span style="color:#f92672">import</span> <span style="color:#111">blp</span>
 <span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
 <span style="color:#f92672">import</span> <span style="color:#111">csv</span>
@@ -853,7 +855,7 @@ AAPL US Equity               148.75
             
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Mengjie Xu 2021
+                    Copyright &copy; Mengjie Xu 2022
                 </p>
             </div>
         </div>

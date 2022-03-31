@@ -4,13 +4,13 @@
     
 
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0Z7HYL5YW"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      gtag('config', 'G-Q0Z7HYL5YW');
+    gtag('config', 'UA-177198277-1');
     </script>
 
 
@@ -52,7 +52,7 @@
     <link rel="canonical" href="/post/deal-with-high-frequency-data/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
-	
+  
     
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -82,8 +82,6 @@
     
 
 </head>
-
-
 
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -118,6 +116,10 @@
                         
                         <li>
                             <a href="/categories/data">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
                         </li>
                         
                     
@@ -288,12 +290,12 @@
 <p>To help the readers get an intuition about the size of the trade and quotes data, I extracted the trade records during two trading hours on December 5th, 2014. It appears that 13,197,152 trades were executed in that just two trading hours, not to mention the even (sometimes much more) bigger quote records.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SAS" data-lang="SAS">NOTE: There were <span style="color:#ae81ff">13197152</span> observations read <span style="color:#00a8c8">from</span> the data <span style="color:#00a8c8">set</span> TAQ<span style="color:#ae81ff">.</span>CT_20141205.
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SAS" data-lang="SAS">NOTE: There were <span style="color:#ae81ff">13197152</span> observations read <span style="color:#00a8c8">from</span> the data <span style="color:#00a8c8">set</span> TAQ<span style="color:#ae81ff">.</span>CT_20141205.
       <span style="color:#00a8c8">WHERE</span> ((time&gt;=<span style="color:#d88200">&#39; 9:30:00&#39;</span>T <span style="color:#00a8c8">and</span> time&lt;=<span style="color:#d88200">&#39;10:30:00&#39;</span>T) <span style="color:#00a8c8">or</span> (time&gt;=<span style="color:#d88200">&#39;15:00:00&#39;</span>T 
       <span style="color:#00a8c8">and</span> time&lt;=<span style="color:#d88200">&#39;16:00:59&#39;</span>T));
 </code></pre></td></tr></table>
@@ -394,13 +396,13 @@
 <p>In this blog post, I connect the WRDS server via the PC SAS because it helps to monitor the output from the server and finetune the codes more efficiently. One can also find how to access the WRDS server via SSH and submit the batched job in my previous blog post <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/">Exploit WRDS Cloud via Python</a>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#111">%let</span> wrds = wrds<span style="color:#ae81ff">.</span>wharton<span style="color:#ae81ff">.</span>upenn<span style="color:#ae81ff">.</span>edu <span style="color:#ae81ff">4016</span>;
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#111">%let</span> wrds = wrds<span style="color:#ae81ff">.</span>wharton<span style="color:#ae81ff">.</span>upenn<span style="color:#ae81ff">.</span>edu <span style="color:#ae81ff">4016</span>;
 <span style="color:#00a8c8">options</span> comamid=TCP remote=WRDS;
 signon username=_prompt_<span style="color:#00a8c8">;
 </span><span style="color:#00a8c8">run;</span>
@@ -411,7 +413,7 @@ signon username=_prompt_<span style="color:#00a8c8">;
 <p>Code</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
@@ -421,7 +423,7 @@ signon username=_prompt_<span style="color:#00a8c8">;
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#00a8c8">libname</span> home <span style="color:#d88200">&#39;C:\Users\xu-m\Documents\wrdsas\&#39;</span>;
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#00a8c8">libname</span> home <span style="color:#d88200">&#39;C:\Users\xu-m\Documents\wrdsas\&#39;</span>;
 <span style="color:#00a8c8">libname</span> outdir <span style="color:#d88200">&#39;C:\Users\xu-m\Documents\wrdsas\taqoutput&#39;</span><span style="color:#00a8c8">;
 </span><span style="color:#00a8c8">
 </span><span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;requestsample.csv&#34;&#34;
@@ -434,7 +436,7 @@ signon username=_prompt_<span style="color:#00a8c8">;
 </div><p>Output</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -449,7 +451,7 @@ signon username=_prompt_<span style="color:#00a8c8">;
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas">NOTE: The data <span style="color:#00a8c8">set</span> WORK<span style="color:#ae81ff">.</span>RVSAMPLE has <span style="color:#ae81ff">999</span> observations <span style="color:#00a8c8">and</span> <span style="color:#ae81ff">18</span> variables.
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas">NOTE: The data <span style="color:#00a8c8">set</span> WORK<span style="color:#ae81ff">.</span>RVSAMPLE has <span style="color:#ae81ff">999</span> observations <span style="color:#00a8c8">and</span> <span style="color:#ae81ff">18</span> variables.
 NOTE: DATA statement used (Total process time):
       real time           <span style="color:#ae81ff">0.04</span> seconds
       cpu time            <span style="color:#ae81ff">0.04</span> seconds
@@ -468,7 +470,7 @@ NOTE: PROCEDURE IMPORT used (Total process time):
 <p>Let&rsquo;s name the macro variable as <strong>datesValsM</strong>. This step prepares for the later loop procedure.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -498,7 +500,7 @@ NOTE: PROCEDURE IMPORT used (Total process time):
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">671</span>  rsubmit;
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">671</span>  rsubmit;
 NOTE: Remote submit to WRDS commencing.
 <span style="color:#ae81ff">296</span>  proc upload data=rvsample <span style="color:#00a8c8">out</span>=rvsample;
 <span style="color:#ae81ff">297</span>  run;
@@ -550,7 +552,7 @@ NOTE: PROCEDURE SQL used (Total process time):
 </ul>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -580,7 +582,7 @@ NOTE: PROCEDURE SQL used (Total process time):
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">705</span>  <span style="color:#111">%macro</span> getdict(yyyymmdd, type);
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">705</span>  <span style="color:#111">%macro</span> getdict(yyyymmdd, type);
 <span style="color:#ae81ff">706</span>
 <span style="color:#ae81ff">707</span>      <span style="color:#111">%global</span> dataset dataset;
 <span style="color:#ae81ff">708</span>      <span style="color:#111">%global</span> outname outname;
@@ -625,7 +627,7 @@ taqout_ct_20130305
 </ul>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -677,7 +679,7 @@ taqout_ct_20130305
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">746</span>  rsubmit;
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">746</span>  rsubmit;
 NOTE: Remote submit to WRDS commencing.   
 <span style="color:#ae81ff">87</span>
 <span style="color:#ae81ff">88</span>   <span style="color:#111">%macro</span> getdaily(date, dataset, outname, start, <span style="color:#00a8c8">end</span>);
@@ -745,7 +747,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 </ul>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -763,7 +765,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">336</span>  <span style="color:#111">%macro</span> iterate(type, start, <span style="color:#00a8c8">end</span>);
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#ae81ff">336</span>  <span style="color:#111">%macro</span> iterate(type, start, <span style="color:#00a8c8">end</span>);
 <span style="color:#ae81ff">337</span>
 <span style="color:#ae81ff">338</span>      <span style="color:#111">%let</span> i=<span style="color:#ae81ff">1</span>;
 <span style="color:#ae81ff">339</span>      <span style="color:#111">%let</span> yyyymmdd=<span style="color:#111">%scan</span>(<span style="color:#111">&amp;datesValsM</span>,<span style="color:#111">&amp;i</span>);
@@ -807,7 +809,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 <h2 id="vi-sas-code">VI. SAS Code</h2>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
@@ -882,7 +884,7 @@ NOTE: PROCEDURE DOWNLOAD used (Total process time):
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="73"><a style="outline: none; text-decoration:none; color:inherit" href="#73">73</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SAS" data-lang="SAS"><span style="color:#00a8c8">libname</span> home <span style="color:#d88200">&#39;C:\Users\xu-m\Documents\wrdsas\&#39;</span>;
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SAS" data-lang="SAS"><span style="color:#00a8c8">libname</span> home <span style="color:#d88200">&#39;C:\Users\xu-m\Documents\wrdsas\&#39;</span>;
 <span style="color:#00a8c8">libname</span> outdir <span style="color:#d88200">&#39;C:\Users\xu-m\Documents\wrdsas\1203test&#39;</span>;
 
 <span style="color:#111">%let</span> wrds = wrds<span style="color:#ae81ff">.</span>wharton<span style="color:#ae81ff">.</span>upenn<span style="color:#ae81ff">.</span>edu <span style="color:#ae81ff">4016</span>;
@@ -979,6 +981,11 @@ endrsubmit;
                             Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/post/utilize-google-search/" data-toggle="tooltip" data-placement="top" title="Utilize Google Search as an Integrated Data Source">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -1084,7 +1091,7 @@ endrsubmit;
             
                 </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Mengjie Xu 2021
+                    Copyright &copy; Mengjie Xu 2022
                 </p>
             </div>
         </div>

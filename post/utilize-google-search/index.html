@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177198277-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177198277-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962">
+    <meta property="twitter:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962" />
+    
+
+    
+    <meta name="title" content="Utilize Google Search as an Integrated Data Source" />
+    <meta property="og:title" content="Utilize Google Search as an Integrated Data Source" />
+    <meta property="twitter:title" content="Utilize Google Search as an Integrated Data Source" />
+    
+
+    
+    <meta name="description" content="A standardized approach for unformatted data collecction">
+    <meta property="og:description" content="A standardized approach for unformatted data collecction" />
+    <meta property="twitter:description" content="A standardized approach for unformatted data collecction" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Utilize Google Search as an Integrated Data Source-Mengjie&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/utilize-google-search/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+  
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/anecdotes">anecdotes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/crawler">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/"></a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://assets.bbhub.io/image/v1/resize?type=auto&url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2F313803655.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/google-search" title="Google Search">
+                            Google Search
+                        </a>
+                        
+                        <a class="tag" href="/tags/unformatted-data" title="Unformatted Data">
+                            Unformatted Data
+                        </a>
+                        
+                    </div>
+                    <h1>Utilize Google Search as an Integrated Data Source</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Mengjie Xu
+                         
+                        on 
+                        Thursday, March 31, 2022
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#step-1-initialize-an-browser">Step 1: Initialize an browser</a></li>
+    <li><a href="#step-2-submit-search-words">Step 2: Submit Search Words</a></li>
+    <li><a href="#step-3-analyze-and-save-search-results">Step 3: Analyze and Save Search Results</a></li>
+    <li><a href="#step-4-iterate-over-the-search-list">Step 4: Iterate over the Search List</a></li>
+    <li><a href="#sample-results">Sample Results</a></li>
+    <li><a href="#codes">Codes</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="introduction">Introduction</h2>
+<p>I find Google Search is a fairly nice platform as an integrated information source, especially when the information that you want has not been collected by the existed database, or - you think it&rsquo;s not worthwhile to pay for it.</p>
+<p>For example, in my last project, I need to collect firms' Twitter account for 3000+ different companies. However, there is no established database which I have access to.</p>
+<p>The solution I found is to submit firm name or firm Ticker plus &lsquo;Twitter Account&rsquo; to Google search, record the most relevant search results, and write them into my excel sheet - That is basically what I would do if I am hand-collecting the data and means  huge workload if I actually do it. But if I can write a script to automate this procedure and let the computer repeat this procedure for 3000+ times, things would be much easier.</p>
+<p>The most exciting part of this little idea is that it has great ability to be transplanted into another project. This year when I wanted to collect some firms' domain (most of them are not listed and thus not available in popular databases) and connect it to the IP range database, I just took out the script that was written for the aforementioned Twitter account searching from my code warehouse, changed two parameters, and immediately get the data.</p>
+<p>In this blog, I will introduce how to write this script to utilize Google Search as an integrated information source.</p>
+<h2 id="step-1-initialize-an-browser">Step 1: Initialize an browser</h2>
+<p>Firstly, we need to open a headless browser, jump to the google search page, and click whatever the Google requests to proceed with the searching. In my case, I need to agree with the cookies settings.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/gb0.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Agree the Cookie Policy</div>
+</center>
+<p>Next, we search a random thing (here I use ‘test’) to enter the normal search page, rather than the start page.  If necessary, you may want to have your results displayed in English.</p>
+<p>Till now we have finished the initialization of the browser. This step returns an initialized `driver' for later use.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/gb1.png" width=800 height=550>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: Normalize the Search Box</div>
+</center>
+**Code**
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">openbrowser</span><span style="color:#111">():</span>
+    <span style="color:#111">options</span> <span style="color:#f92672">=</span> <span style="color:#111">Options</span><span style="color:#111">()</span>
+    <span style="color:#111">options</span><span style="color:#f92672">.</span><span style="color:#111">binary_location</span> <span style="color:#f92672">=</span> <span style="color:#d88200">r</span><span style="color:#d88200">&#39;C:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">Program Files</span><span style="color:#8045ff">\\</span><span style="color:#d88200">Mozilla Firefox</span><span style="color:#8045ff">\\</span><span style="color:#d88200">firefox.exe&#39;</span>
+    <span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">webdriver</span><span style="color:#f92672">.</span><span style="color:#111">Firefox</span><span style="color:#111">(</span><span style="color:#111">executable_path</span><span style="color:#f92672">=</span><span style="color:#d88200">r</span><span style="color:#d88200">&#39;D:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">geck</span><span style="color:#8045ff">\\</span><span style="color:#d88200">geckodriver.exe&#39;</span><span style="color:#111">,</span> <span style="color:#111">options</span><span style="color:#f92672">=</span><span style="color:#111">options</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;&lt;https://www.google.com/webhp&gt;&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">execute_script</span><span style="color:#111">(</span><span style="color:#d88200">&#34;window.scrollTo(0,1000)&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[contains(text(),&#39;Ich stimme zu&#39;)]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">click</span><span style="color:#111">()</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@title=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#d88200">&#39;test&#39;</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@title=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">Keys</span><span style="color:#f92672">.</span><span style="color:#111">ENTER</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+		<span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//a[contains(text(), &#39;Change to English&#39;)]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">Keys</span><span style="color:#f92672">.</span><span style="color:#111">ENTER</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">driver</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-2-submit-search-words">Step 2: Submit Search Words</h2>
+<p>As the search box has been occupied by the word we inserted before, we need to delete it first and then insert new search word. The search word will be composed of two parts:</p>
+<ul>
+<li>The `item' we need to iterate over the list</li>
+<li>The `keyword' we need to make sure the search results are relevant for our purpose</li>
+</ul>
+<p>For example, when I want to search the domain of a series of firms, <code>item</code> is the firm&rsquo;s name (e.g., BlackRock Inc.) and <code>keyword</code> is &ldquo;website&rdquo; or &quot; domain&quot;  or whatever you think would be relevant.</p>
+<p>This step returns the element tree of the webpage which includes the search results, `html', ready for the further analyzing.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">parseweb</span><span style="color:#111">(</span><span style="color:#111">driver</span><span style="color:#111">,</span> <span style="color:#111">item</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">):</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[@aria-label=&#39;Löschen&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">click</span><span style="color:#111">()</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@aria-label=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#d88200">%s</span><span style="color:#d88200"> </span><span style="color:#d88200">%s</span><span style="color:#d88200">&#39;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">item</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">))</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@aria-label=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">Keys</span><span style="color:#f92672">.</span><span style="color:#111">ENTER</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">HtmlElement</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">page_source</span><span style="color:#111">)</span>
+    <span style="color:#111">HtmlStr</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">tostring</span><span style="color:#111">(</span><span style="color:#111">HtmlElement</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;utf-8&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">()</span>
+    <span style="color:#111">html</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">HtmlStr</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#111">html</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-3-analyze-and-save-search-results">Step 3: Analyze and Save Search Results</h2>
+<p>With the webpage containing search results in hand, we just need pick out the elements we need from the element tree `html'. Typically, you could first get the link and title for each result and then select out what you think would be the most relevant.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/gb2.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 3: Analyze Search Results</div>
+</center>
+<p>For example, I assume that the first non-advertisement search result is the most relevant one, so I just pick it out and write it into my sheet, whose name is defined by the parameter `savefile'.</p>
+<p>The <code>identifier</code> here is to make sure you can easily attach the search results with the existed information. Here I use [<code>itemid</code>,<code>item</code>], which could uniquely identify each observation in my before-search sheet.</p>
+<p><strong>Code</strong></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">analyseres</span><span style="color:#111">(</span><span style="color:#111">html</span><span style="color:#111">,</span> <span style="color:#111">identifier</span><span style="color:#111">,</span> <span style="color:#111">savefile</span><span style="color:#111">):</span>
+		<span style="color:#111">webname</span> <span style="color:#f92672">=</span> <span style="color:#111">html</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//h3[@class=&#39;LC20lb MBeuO DKV0Md&#39;]/text()&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">weburl</span> <span style="color:#f92672">=</span> <span style="color:#111">html</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//cite[@class=&#39;iUh30 tjvcx&#39;]/text()&#34;</span><span style="color:#111">)</span>
+		<span style="color:#111">webdesc</span> <span style="color:#f92672">=</span> <span style="color:#111">html</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[@class=&#39;VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf&#39;]//text()&#34;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">savefile</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+        <span style="color:#111">w</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span>
+        <span style="color:#111">w</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">identifier</span> <span style="color:#f92672">+</span> <span style="color:#111">[</span><span style="color:#111">weburl</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">],</span> <span style="color:#111">webname</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Sometimes, you may get multiple results you desire in the same page. In such case,  just iterate over each of them and write into the spreadsheet one by one. Of course, filtering the search results using your personalized rule is perfectly possible.</p>
+<p>Apparently, you need further check with the above fuzzy search. But apparently, you may ask Google in a more precise way 😈.</p>
+<p>For example, when checking TESLA’s official Twitter account, you can just put `what is TSLA&rsquo;s official twitter account' in the search box. Whenever she has a clear-cut answer, the nice Google will return it to you on the top of the searched results.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/gb3.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Ask Google Precisely</div>
+</center>
+<h2 id="step-4-iterate-over-the-search-list">Step 4: Iterate over the Search List</h2>
+<p>Typically my search lists have item id and item name in the first and second column respectively. I iterate each line of my search list, put item id and item name as my identifier, and execute Step 1 - Step 3 for each line. If there is any exceptions, I pass the line and put the error line into a separated file for later check.</p>
+<p>The definitions of main parameters are as following.</p>
+<ul>
+<li><code>basefile</code>: the search list, typically contains the search it and its id</li>
+<li><code>savefile</code>: the spreadsheet that stores the search results, typically in `csv' format</li>
+<li><code>errorfile</code>: the file that you store items which aren&rsquo;t successfully searched</li>
+<li><code>keyword</code>: the word you add after the search item to make the search results relevant</li>
+</ul>
+<p><strong>Code</strong></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00a8c8">def</span> <span style="color:#75af00">getinfo</span><span style="color:#111">(</span><span style="color:#111">basefile</span><span style="color:#111">,</span> <span style="color:#111">savefile</span><span style="color:#111">,</span> <span style="color:#111">errorfile</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">):</span>
+    <span style="color:#111">itemlist</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">basefile</span><span style="color:#111">,</span><span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">openbrowser</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">itemlist</span><span style="color:#f92672">.</span><span style="color:#111">readlines</span><span style="color:#111">()):</span>
+        <span style="color:#111">itemid</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span>
+        <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span>
+				<span style="color:#111">identifier</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">itemid</span><span style="color:#111">,</span> <span style="color:#111">item</span><span style="color:#111">]</span>
+        <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+            <span style="color:#111">html</span> <span style="color:#f92672">=</span> <span style="color:#111">parseweb</span><span style="color:#111">(</span><span style="color:#111">driver</span><span style="color:#111">,</span> <span style="color:#111">item</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">)</span>
+						<span style="color:#111">analyseres</span><span style="color:#111">(</span><span style="color:#111">html</span><span style="color:#111">,</span> <span style="color:#111">identifier</span><span style="color:#111">,</span> <span style="color:#111">savefile</span><span style="color:#111">)</span>
+						<span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">errorfile</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+                <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#111">line</span><span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="sample-results">Sample Results</h2>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/gb4.png" width=600 height=800>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 4: Sample Results</div>
+</center>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44">44</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45">45</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46">46</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47">47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48">48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49">49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62">62</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">selenium</span> <span style="color:#f92672">import</span> <span style="color:#111">webdriver</span>
+<span style="color:#f92672">from</span> <span style="color:#111">selenium.webdriver.firefox.options</span> <span style="color:#f92672">import</span> <span style="color:#111">Options</span>
+<span style="color:#f92672">import</span> <span style="color:#111">time</span>
+<span style="color:#f92672">from</span> <span style="color:#111">lxml</span> <span style="color:#f92672">import</span> <span style="color:#111">etree</span>
+<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
+<span style="color:#f92672">import</span> <span style="color:#111">re</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">openbrowser</span><span style="color:#111">():</span>
+    <span style="color:#111">options</span> <span style="color:#f92672">=</span> <span style="color:#111">Options</span><span style="color:#111">()</span>
+    <span style="color:#111">options</span><span style="color:#f92672">.</span><span style="color:#111">binary_location</span> <span style="color:#f92672">=</span> <span style="color:#d88200">r</span><span style="color:#d88200">&#39;C:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">Program Files</span><span style="color:#8045ff">\\</span><span style="color:#d88200">Mozilla Firefox</span><span style="color:#8045ff">\\</span><span style="color:#d88200">firefox.exe&#39;</span>
+    <span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">webdriver</span><span style="color:#f92672">.</span><span style="color:#111">Firefox</span><span style="color:#111">(</span><span style="color:#111">executable_path</span><span style="color:#f92672">=</span><span style="color:#d88200">r</span><span style="color:#d88200">&#39;D:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">geck</span><span style="color:#8045ff">\\</span><span style="color:#d88200">geckodriver.exe&#39;</span><span style="color:#111">,</span> <span style="color:#111">options</span><span style="color:#f92672">=</span><span style="color:#111">options</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;&lt;https://www.google.com/webhp&gt;&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">execute_script</span><span style="color:#111">(</span><span style="color:#d88200">&#34;window.scrollTo(0,1000)&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[contains(text(),&#39;Ich stimme zu&#39;)]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">click</span><span style="color:#111">()</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@title=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#d88200">&#39;test&#39;</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@title=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">Keys</span><span style="color:#f92672">.</span><span style="color:#111">ENTER</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+		<span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//a[contains(text(), &#39;Change to English&#39;)]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">Keys</span><span style="color:#f92672">.</span><span style="color:#111">ENTER</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">driver</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">parseweb</span><span style="color:#111">(</span><span style="color:#111">driver</span><span style="color:#111">,</span> <span style="color:#111">item</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">):</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[@aria-label=&#39;Löschen&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">click</span><span style="color:#111">()</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@aria-label=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#d88200">&#39;</span><span style="color:#d88200">%s</span><span style="color:#d88200"> </span><span style="color:#d88200">%s</span><span style="color:#d88200">&#39;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">item</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">))</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">find_element_by_xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//input[@aria-label=&#39;Suche&#39;]&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">send_keys</span><span style="color:#111">(</span><span style="color:#111">Keys</span><span style="color:#f92672">.</span><span style="color:#111">ENTER</span><span style="color:#111">)</span>
+    <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+    <span style="color:#111">HtmlElement</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">driver</span><span style="color:#f92672">.</span><span style="color:#111">page_source</span><span style="color:#111">)</span>
+    <span style="color:#111">HtmlStr</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">tostring</span><span style="color:#111">(</span><span style="color:#111">HtmlElement</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;utf-8&#34;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">()</span>
+    <span style="color:#111">html</span> <span style="color:#f92672">=</span> <span style="color:#111">etree</span><span style="color:#f92672">.</span><span style="color:#111">HTML</span><span style="color:#111">(</span><span style="color:#111">HtmlStr</span><span style="color:#111">)</span>
+		<span style="color:#00a8c8">return</span> <span style="color:#111">html</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">analyseres</span><span style="color:#111">(</span><span style="color:#111">html</span><span style="color:#111">,</span> <span style="color:#111">identifier</span><span style="color:#111">,</span> <span style="color:#111">savefile</span><span style="color:#111">):</span>
+		<span style="color:#111">webname</span> <span style="color:#f92672">=</span> <span style="color:#111">html</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//h3[@class=&#39;LC20lb MBeuO DKV0Md&#39;]/text()&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">weburl</span> <span style="color:#f92672">=</span> <span style="color:#111">html</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//cite[@class=&#39;iUh30 tjvcx&#39;]/text()&#34;</span><span style="color:#111">)</span>
+		<span style="color:#111">webdesc</span> <span style="color:#f92672">=</span> <span style="color:#111">html</span><span style="color:#f92672">.</span><span style="color:#111">xpath</span><span style="color:#111">(</span><span style="color:#d88200">&#34;//div[@class=&#39;VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf&#39;]//text()&#34;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">savefile</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+        <span style="color:#111">w</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span>
+        <span style="color:#111">w</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">identifier</span> <span style="color:#f92672">+</span> <span style="color:#111">[</span><span style="color:#111">weburl</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">],</span> <span style="color:#111">webname</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]])</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getinfo</span><span style="color:#111">(</span><span style="color:#111">basefile</span><span style="color:#111">,</span> <span style="color:#111">savefile</span><span style="color:#111">,</span> <span style="color:#111">errorfile</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">):</span>
+    <span style="color:#111">itemlist</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">basefile</span><span style="color:#111">,</span><span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">)</span>
+    <span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">openbrowser</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">itemlist</span><span style="color:#f92672">.</span><span style="color:#111">readlines</span><span style="color:#111">()):</span>
+        <span style="color:#111">itemid</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span>
+        <span style="color:#111">item</span> <span style="color:#f92672">=</span> <span style="color:#111">line</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;,&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span>
+				<span style="color:#111">identifier</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">itemid</span><span style="color:#111">,</span> <span style="color:#111">item</span><span style="color:#111">]</span>
+        <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+            <span style="color:#111">html</span> <span style="color:#f92672">=</span> <span style="color:#111">parseweb</span><span style="color:#111">(</span><span style="color:#111">driver</span><span style="color:#111">,</span> <span style="color:#111">item</span><span style="color:#111">,</span> <span style="color:#111">keyword</span><span style="color:#111">)</span>
+						<span style="color:#111">analyseres</span><span style="color:#111">(</span><span style="color:#111">html</span><span style="color:#111">,</span> <span style="color:#111">identifier</span><span style="color:#111">,</span> <span style="color:#111">savefile</span><span style="color:#111">)</span>
+						<span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">errorfile</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+                <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#111">line</span><span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">)</span>
+
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;__main__&#34;</span><span style="color:#111">:</span>
+    <span style="color:#111">getinfo</span><span style="color:#111">(</span><span style="color:#d88200">&#34;basefile.txt&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;savefile.csv&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;errofile.txt&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;test keyword&#34;</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/deal-with-high-frequency-data/" data-toggle="tooltip" data-placement="top" title="Extract High-frequency Data via PC SAS">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="hyvor-talk-view"></div>
+<script type="text/javascript">
+    var HYVOR_TALK_WEBSITE = 4329; 
+    var HYVOR_TALK_CONFIG = {
+        url: false,
+        id: false
+};
+</script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
