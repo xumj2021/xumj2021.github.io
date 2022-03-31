@@ -35,4 +35,5 @@ echo ""
 echo "Committing changes to $(pwd)"
 git add .
 git commit -m "$msg"
+# git push https://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@github.com/xumj2021/myblog.dev.repo.git
 git push origin master
