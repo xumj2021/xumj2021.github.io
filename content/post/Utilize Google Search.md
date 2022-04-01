@@ -134,7 +134,7 @@ def analyseres(html, identifier, savefile):
 
 Sometimes, you may get multiple results you desire in the same page. In such case,  just iterate over each of them and write into the spreadsheet one by one. Of course, filtering the search results using your personalized rule is perfectly possible.
 
-Apparently, you need further check with the above fuzzy search. But on the hand, you may ask Google in a more precise way 😈. 
+Apparently, you need further check with the above fuzzy search. But on the other hand, you may ask Google in a more precise way 😈. 
 
 For example, when checking TESLA’s official Twitter account, you can just put `what is TSLA's official twitter account' in the search box. Whenever she has a clear-cut answer, the nice Google will return it to you on the top of the searched results.
 
