@@ -41,7 +41,7 @@ Firstly, we need to open a headless browser, jump to the google search page, and
 
 Next, we search a random thing (here I use "test") to enter the normal search page, rather than the start page.  If necessary, you may want to have your results displayed in English.
 
-Till now we have finished the initialization of the browser. This step returns an initialized `driver' for later use.
+Till now we have finished the initialization of the browser. This step returns an initialized `driver` for later use.
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -124,9 +124,9 @@ The `identifier` here is to make sure you can easily attach the search results w
 
 ```python
 def analyseres(html, identifier, savefile):
-		webname = html.xpath("//h3[@class='LC20lb MBeuO DKV0Md']/text()")
+	webname = html.xpath("//h3[@class='LC20lb MBeuO DKV0Md']/text()")
     weburl = html.xpath("//cite[@class='iUh30 tjvcx']/text()")
-		webdesc = html.xpath("//div[@class='VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf']//text()")
+    webdesc = html.xpath("//div[@class='VwiC3b yXK7lf MUxGbd yDYNvb lyLwlc lEBKkf']//text()")
     with open(savefile,'a') as f:
         w = csv.writer(f)
         w.writerow(identifier + [weburl[0], webname[0]])
