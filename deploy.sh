@@ -27,8 +27,8 @@ echo "Committing changes to $(pwd)"
 git add .
 # git commit -m "test"
 git commit -m "$msg"
-# git push origin master
-git push https://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@github.com/xumj2021/xumj2021.github.io.git
+git push origin master
+# git push https://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@github.com/xumj2021/xumj2021.github.io.git
 
 # Add this repos changes to git and commit/push. First 'cd' out of public
 cd ..
@@ -38,11 +38,12 @@ echo "Committing changes to $(pwd)"
 git add .
 git commit -m "$msg"
 # git push https://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@github.com/xumj2021/myblog.dev.repo.git
-
+# git remote set-url origin https://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@github.com/xumj2021/myblog.dev.repo.git
+# git remote set-url origin https://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@github.com/xumj2021/xumj2021.github.io.git
 <<<<<<< HEAD
 >>>>>>> 451657b65a0442b21a3da12a3b5b429cc8cd4a90
-# git push origin master
+git push origin master
 =======
-git push https://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@github.com/xumj2021/myblog.dev.repo.git
+# git push https://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@github.com/xumj2021/myblog.dev.repo.git
 git push origin master
 >>>>>>> 451657b65a0442b21a3da12a3b5b429cc8cd4a90
