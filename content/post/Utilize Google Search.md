@@ -39,7 +39,7 @@ Firstly, we need to open a headless browser, jump to the google search page, and
     padding: 2px;">Figure 1: Agree the Cookie Policy</div>
 </center>
 
-Next, we search a random thing (here I use ‘test’) to enter the normal search page, rather than the start page.  If necessary, you may want to have your results displayed in English.
+Next, we search a random thing (here I use "test") to enter the normal search page, rather than the start page.  If necessary, you may want to have your results displayed in English.
 
 Till now we have finished the initialization of the browser. This step returns an initialized `driver' for later use.
 
@@ -80,12 +80,12 @@ def openbrowser():
 
 As the search box has been occupied by the word we inserted before, we need to delete it first and then insert new search word. The search word will be composed of two parts:
 
-- The `item' we need to iterate over the list
-- The `keyword' we need to make sure the search results are relevant for our purpose
+- The `item` we need to iterate over the list
+- The `keyword` we need to make sure the search results are relevant for our purpose
 
 For example, when I want to search the domain of a series of firms, `item` is the firm's name (e.g., BlackRock Inc.) and `keyword` is "website" or " domain"  or whatever you think would be relevant.
 
-This step returns the element tree of the webpage which includes the search results, `html', ready for the further analyzing.
+This step returns the element tree of the webpage which includes the search results, `html`, ready for the further analyzing.
 
 ```python
 def parseweb(driver, item, keyword):
@@ -103,7 +103,7 @@ def parseweb(driver, item, keyword):
 
 ## Step 3: Analyze and Save Search Results
 
-With the webpage containing search results in hand, we just need pick out the elements we need from the element tree `html'. Typically, you could first get the link and title for each result and then select out what you think would be the most relevant.
+With the webpage containing search results in hand, we just need pick out the elements we need from the element tree `html`. Typically, you could first get the link and title for each result and then select out what you think would be the most relevant.
 
 <center>
     <img style="border-radius: 0.3125em;
@@ -116,7 +116,7 @@ With the webpage containing search results in hand, we just need pick out the el
     padding: 2px;">Figure 3: Analyze Search Results</div>
 </center>
 
-For example, I assume that the first non-advertisement search result is the most relevant one, so I just pick it out and write it into my sheet, whose name is defined by the parameter `savefile'.
+For example, I assume that the first non-advertisement search result is the most relevant one, so I just pick it out and write it into my sheet, whose name is defined by the parameter `savefile`.
 
 The `identifier` here is to make sure you can easily attach the search results with the existed information. Here I use [`itemid`,`item`], which could uniquely identify each observation in my before-search sheet.
 
@@ -136,7 +136,7 @@ Sometimes, you may get multiple results you desire in the same page. In such cas
 
 Apparently, you need further check with the above fuzzy search. But on the other hand, you may ask Google in a more precise way 😈. 
 
-For example, when checking TESLA’s official Twitter account, you can just put `what is TSLA's official twitter account' in the search box. Whenever she has a clear-cut answer, the nice Google will return it to you on the top of the searched results.
+For example, when checking TESLA’s official Twitter account, you can just put `what is TSLA's official twitter account` in the search box. Whenever she has a clear-cut answer, the nice Google will return it to you on the top of the searched results.
 
 <center>
     <img style="border-radius: 0.3125em;
