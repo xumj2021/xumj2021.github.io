@@ -251,7 +251,7 @@
     color: #999;
     padding: 2px;">Figure 1: Agree the Cookie Policy</div>
 </center>
-<p>Next, we search a random thing (here I use ‘test’) to enter the normal search page, rather than the start page.  If necessary, you may want to have your results displayed in English.</p>
+<p>Next, we search a random thing (here I use &ldquo;test&rdquo;) to enter the normal search page, rather than the start page.  If necessary, you may want to have your results displayed in English.</p>
 <p>Till now we have finished the initialization of the browser. This step returns an initialized `driver' for later use.</p>
 <center>
     <img style="border-radius: 0.3125em;
@@ -305,11 +305,11 @@
 </div><h2 id="step-2-submit-search-words">Step 2: Submit Search Words</h2>
 <p>As the search box has been occupied by the word we inserted before, we need to delete it first and then insert new search word. The search word will be composed of two parts:</p>
 <ul>
-<li>The `item' we need to iterate over the list</li>
-<li>The `keyword' we need to make sure the search results are relevant for our purpose</li>
+<li>The <code>item</code> we need to iterate over the list</li>
+<li>The <code>keyword</code> we need to make sure the search results are relevant for our purpose</li>
 </ul>
 <p>For example, when I want to search the domain of a series of firms, <code>item</code> is the firm&rsquo;s name (e.g., BlackRock Inc.) and <code>keyword</code> is &ldquo;website&rdquo; or &quot; domain&quot;  or whatever you think would be relevant.</p>
-<p>This step returns the element tree of the webpage which includes the search results, `html', ready for the further analyzing.</p>
+<p>This step returns the element tree of the webpage which includes the search results, <code>html</code>, ready for the further analyzing.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -339,7 +339,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="step-3-analyze-and-save-search-results">Step 3: Analyze and Save Search Results</h2>
-<p>With the webpage containing search results in hand, we just need pick out the elements we need from the element tree `html'. Typically, you could first get the link and title for each result and then select out what you think would be the most relevant.</p>
+<p>With the webpage containing search results in hand, we just need pick out the elements we need from the element tree <code>html</code>. Typically, you could first get the link and title for each result and then select out what you think would be the most relevant.</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -350,7 +350,7 @@
     color: #999;
     padding: 2px;">Figure 3: Analyze Search Results</div>
 </center>
-<p>For example, I assume that the first non-advertisement search result is the most relevant one, so I just pick it out and write it into my sheet, whose name is defined by the parameter `savefile'.</p>
+<p>For example, I assume that the first non-advertisement search result is the most relevant one, so I just pick it out and write it into my sheet, whose name is defined by the parameter <code>savefile</code>.</p>
 <p>The <code>identifier</code> here is to make sure you can easily attach the search results with the existed information. Here I use [<code>itemid</code>,<code>item</code>], which could uniquely identify each observation in my before-search sheet.</p>
 <p><strong>Code</strong></p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -375,7 +375,7 @@
 </div>
 </div><p>Sometimes, you may get multiple results you desire in the same page. In such case,  just iterate over each of them and write into the spreadsheet one by one. Of course, filtering the search results using your personalized rule is perfectly possible.</p>
 <p>Apparently, you need further check with the above fuzzy search. But on the other hand, you may ask Google in a more precise way 😈.</p>
-<p>For example, when checking TESLA’s official Twitter account, you can just put `what is TSLA&rsquo;s official twitter account' in the search box. Whenever she has a clear-cut answer, the nice Google will return it to you on the top of the searched results.</p>
+<p>For example, when checking TESLA’s official Twitter account, you can just put <code>what is TSLA's official twitter account</code> in the search box. Whenever she has a clear-cut answer, the nice Google will return it to you on the top of the searched results.</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
