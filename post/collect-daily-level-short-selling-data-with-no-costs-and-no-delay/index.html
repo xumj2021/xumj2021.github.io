@@ -28,15 +28,15 @@
     
 
     
-    <meta name="title" content="Collect Daily Level Short Selling Data From FINRA With Low Costs and Low Delay" />
-    <meta property="og:title" content="Collect Daily Level Short Selling Data From FINRA With Low Costs and Low Delay" />
-    <meta property="twitter:title" content="Collect Daily Level Short Selling Data From FINRA With Low Costs and Low Delay" />
+    <meta name="title" content="Collect Daily Level Short Sale Data From FINRA With Low Costs and Low Delay" />
+    <meta property="og:title" content="Collect Daily Level Short Sale Data From FINRA With Low Costs and Low Delay" />
+    <meta property="twitter:title" content="Collect Daily Level Short Sale Data From FINRA With Low Costs and Low Delay" />
     
 
     
-    <meta name="description" content="Affordable and high-quality short selling data collection">
-    <meta property="og:description" content="Affordable and high-quality short selling data collection" />
-    <meta property="twitter:description" content="Affordable and high-quality short selling data collection" />
+    <meta name="description" content="Affordable and high-quality daily-level short selling data collection">
+    <meta property="og:description" content="Affordable and high-quality daily-level short selling data collection" />
+    <meta property="twitter:description" content="Affordable and high-quality daily-level short selling data collection" />
     
 
     
@@ -47,7 +47,7 @@
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Collect Daily Level Short Selling Data From FINRA With Low Costs and Low Delay-Mengjie&#39;s Blog</title>
+    <title>Collect Daily Level Short Sale Data From FINRA With Low Costs and Low Delay-Mengjie&#39;s Blog</title>
 
     <link rel="canonical" href="/post/collect-daily-level-short-selling-data-with-no-costs-and-no-delay/">
 
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>Collect Daily Level Short Selling Data From FINRA With Low Costs and Low Delay</h1>
+                    <h1>Collect Daily Level Short Sale Data From FINRA With Low Costs and Low Delay</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
@@ -228,10 +228,11 @@
     <li><a href="#acquire-daily-summarized-short-sale-data-from-finra">Acquire Daily Summarized Short Sale Data From FINRA</a>
       <ul>
         <li><a href="#analyze-website">Analyze Website</a></li>
+        <li><a href="#parsing-the-data">Parsing the data</a></li>
       </ul>
     </li>
-    <li><a href="#parsing-the-data">Parsing the data</a></li>
     <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#summary">Summary</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -240,12 +241,12 @@
 <p>Short selling, by definition, occurs when an investor borrows a security and sells it on the open market, planning to buy it back later for less money. Short-sellers bet on, and profit from, a drop in a security&rsquo;s price.</p>
 <p>Being timely informed about equities' short-selling status is of interests to broad market participants. For investors, short-selling is a power signal indicating the existed or sometimes, upcoming market sentiment, both matter a lot when making the trading decisions. For firms, the level of short-selling is a highly relevant indicator for market monitoring.</p>
 <p>Given the broad market interests about the timely short-selling data, several self-regulatory organizations (SROs) are providing on their websites daily aggregate short selling volume information for individual equity securities. The SROs are also providing website disclosure on a one-month delayed basis of information regarding individual short sale transactions in all exchange-listed equity securities.</p>
-<p>In this blog, I will summarize the available sources of short sale data at various granularities and introduce how to approach the updated daily-summarized short sale dataset from FINRA.</p>
+<p>In this blog, I will summarize the available sources of short sale data at various granularity and introduce how to approach the updated daily-summarized short sale dataset from FINRA.</p>
 <h2 id="challenges-in-approaching-affordable-short-sale-data">Challenges in Approaching Affordable Short Sale Data</h2>
 <p>As the disclosure of short-selling data is out of self-regulatory purposes, the disclosure platforms and prices are not uniform for different trading market.</p>
 <p>For exchanges, NASDAQ sells trade-by-trade short sale information for subscription fees $1,250 per firm per month, and similar for NYSE. CBOE, as the 3rd largest exchange group releases shorting data every night on [its website][https://www.cboe.com/us/equities/market_statistics/short_sale/].</p>
 <p>In terms of dark pools and OTC market, FINRA posts on its website a summary for each ticker symbol of the total reported off-exchange trading volume that day and the number of those reported shares that were sold by a short seller by the start of the next trading day. There is no transaction-by-transaction short sale information included in these daily summaries. Two weeks or so after the end of each month, FINRA posts all off-exchange transactions for that month that involve a short seller, and this trade-by-trade short sale dataset, which is similar to the CBOE dataset, is the one that we use.</p>
-<p>As a consequence, the challenges in collecting short sale data mainly originate from the by nature non-integrated data sources, some of which may not necessarily be free or at low price. That is why many existed literature seeks for professional data vendors, such as DataExplorers used by Massa et al. (2015, RFS) and S3 Paterners employed by Gargano (2020, WP),  to approach the short sale dataset.</p>
+<p>As a consequence, the challenges in collecting short sale data mainly originate from the by nature non-integrated data sources, some of which may not necessarily be free or at low price. That is why many existed literature seeks for help from professional data vendors, such as DataExplorers used by Massa et al. (2015, RFS) and S3 Paterners employed by Gargano (2020, WP),  to approach the short sale dataset.</p>
 <p>For those who want to acquire the affordable integrated short sale data, the following data sources may be at your disposal, depending on your requirement in granularity.</p>
 <ol>
 <li>
@@ -361,7 +362,7 @@
 <p>Given that FINRA updates data every trading day 2009-08-03, one only needs to iterate all the possible calendar dates thereafter and keep all existed filing-date matches. Of course there are dates where there are no FINRA updates at all. Just ignore them and continue the iteration.</p>
 </li>
 </ol>
-<h2 id="parsing-the-data">Parsing the data</h2>
+<h3 id="parsing-the-data">Parsing the data</h3>
 <p>With the above summarized features of FINRA&rsquo;s website, I wrote two simple functions.</p>
 <p><code>getdatelist()</code> : return the list of all possible calendar dates from 2009-08-01 to 2022-05-13, <code>datelist</code></p>
 <p><code>getfile(tabletype, date)</code>:</p>
@@ -490,6 +491,8 @@
     color: #999;
     padding: 2px;">Figure 5: Output: An Example File</div>
 </center>
+<h2 id="summary">Summary</h2>
+<p>This blog posts introduces the sources from which one can collect short sale dataset with various granularity and shows the data collection procedures with FINRA as the data source. If necessary, one may easily collect trade-by-trade short sale dataset from [CBOE - Transaction Level Dataset][https://www.cboe.com/us/equities/market_statistics/short_sale/] and [FINRA - Transaction Level Dataset][https://www.finra.org/finra-data/browse-catalog/short-sale-volume-data/monthly-short-sale-volume-files] following the spirit of this blogpost.</p>
 <h2 id="references">References</h2>
 <p>Engelberg, Joseph E., Adam V. Reed, and Matthew C. Ringgenberg. &ldquo;How are shorts informed?: Short sellers, news, and information processing.&rdquo; <em>Journal of Financial Economics</em> 105, no. 2 (2012): 260-278.</p>
 <p>Gargano, Antonio. &ldquo;Short Selling Activity and Future Returns: Evidence from FinTech Data.&rdquo; <em>Available at SSRN 3775338</em> (2020).</p>
