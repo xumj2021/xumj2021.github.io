@@ -224,7 +224,7 @@
                 <nav id="TableOfContents">
   <ul>
     <li><a href="#short-sale-data-matters">Short Sale Data Matters</a></li>
-    <li><a href="#challenges-in-approaching-affordable-short-sale-data">Challenges in Approaching Affordable Short Sale Data</a></li>
+    <li><a href="#challenges-in-getting-affordable-short-sale-data">Challenges in Getting Affordable Short Sale Data</a></li>
     <li><a href="#acquire-daily-summarized-short-sale-data-from-finra">Acquire Daily Summarized Short Sale Data From FINRA</a>
       <ul>
         <li><a href="#analyze-website">Analyze Website</a></li>
@@ -242,7 +242,7 @@
 <p>Being timely informed about equities' short-selling status is of interests to broad market participants. For investors, short-selling is a power signal indicating the existed or sometimes, upcoming market sentiment, both matter a lot when making the trading decisions. For firms, the level of short-selling is a highly relevant indicator for market monitoring.</p>
 <p>Given the broad market interests about the timely short-selling data, several self-regulatory organizations (SROs) are providing on their websites daily aggregate short selling volume information for individual equity securities. The SROs are also providing website disclosure on a one-month delayed basis of information regarding individual short sale transactions in all exchange-listed equity securities.</p>
 <p>In this blog, I will summarize the available sources of short sale data at various granularity and introduce how to approach the updated daily-summarized short sale dataset from FINRA.</p>
-<h2 id="challenges-in-approaching-affordable-short-sale-data">Challenges in Approaching Affordable Short Sale Data</h2>
+<h2 id="challenges-in-getting-affordable-short-sale-data">Challenges in Getting Affordable Short Sale Data</h2>
 <p>As the disclosure of short-selling data is out of self-regulatory purposes, the disclosure platforms and prices are not uniform for different trading market.</p>
 <p>For exchanges, NASDAQ sells trade-by-trade short sale information for subscription fees $1,250 per firm per month, and similar for NYSE. CBOE, as the 3rd largest exchange group releases shorting data every night on <a href="https://www.cboe.com/us/equities/market_statistics/short_sale/">its website</a>.</p>
 <p>In terms of dark pools and OTC market, FINRA posts on its website a summary for each ticker symbol of the total reported off-exchange trading volume that day and the number of those reported shares that were sold by a short seller by the start of the next trading day. There is no transaction-by-transaction short sale information included in these daily summaries. Two weeks or so after the end of each month, FINRA posts all off-exchange transactions for that month that involve a short seller, and this trade-by-trade short sale dataset, which is similar to the CBOE dataset, is the one that we use.</p>
@@ -364,7 +364,7 @@
 </ol>
 <h3 id="parsing-the-data">Parsing the data</h3>
 <p>With the above summarized features of FINRA&rsquo;s website, I wrote two simple functions.</p>
-<p><code>getdatelist()</code> : return the list of all possible calendar dates from 2009-08-01 to 2022-05-13, <code>datelist</code></p>
+<p><code>getdatelist()</code> : return the list of all possible calendar dates from 2009-08-01 to 2022-05-13.</p>
 <p><code>getfile(tabletype, date)</code>:</p>
 <ol>
 <li>
