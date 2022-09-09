@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-309KENXF47');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962">
+    <meta property="twitter:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962" />
+    
+
+    
+    <meta name="title" content="Twitter API: Door To Social Media Analysis II" />
+    <meta property="og:title" content="Twitter API: Door To Social Media Analysis II" />
+    <meta property="twitter:title" content="Twitter API: Door To Social Media Analysis II" />
+    
+
+    
+    <meta name="description" content="Replicate Tweets Archive Search of Bartov, Faurel, and Mohanram (2018, TAR)">
+    <meta property="og:description" content="Replicate Tweets Archive Search of Bartov, Faurel, and Mohanram (2018, TAR)" />
+    <meta property="twitter:description" content="Replicate Tweets Archive Search of Bartov, Faurel, and Mohanram (2018, TAR)" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Twitter API: Door To Social Media Analysis II-Mengjie&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/door-to-twitter-analysis-ii/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+  
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/anecdotes">anecdotes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/crawler">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data">data</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/"></a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://assets.bbhub.io/company/sites/51/2021/10/clean-energy-index-image-1024x683.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/twitter-api" title="Twitter API">
+                            Twitter API
+                        </a>
+                        
+                        <a class="tag" href="/tags/social-media" title="Social Media">
+                            Social Media
+                        </a>
+                        
+                    </div>
+                    <h1>Twitter API: Door To Social Media Analysis II</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Mengjie Xu
+                         
+                        on 
+                        Monday, November 1, 2021
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#roadmap">RoadMap</a></li>
+    <li><a href="#sample-results">Sample Results</a></li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#summary-and-upcoming-posts">Summary and Upcoming Posts</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="introduction">Introduction</h2>
+<p>Please see the background information about Twitter API v2 in my last blogpost <a href="https://mengjiexu.com/post/door-to-twitter-analysis-i/">Twitter API: Door To Social Media Analysis I</a>. In this blogpost, I will replicate the Tweets extraction porcess of Bartov, Faurel, and Mohanram (2018, TAR), which found that opinions of individuals tweeted just prior to a firm’s earnings announcement can predict its earnings and announcement returns.</p>
+<p>From a perspective of implementation, we need to get all the tweets which mentioned a given firm in a specified time range. Consistent to the paper&rsquo;s definition, the targeted tweets should:</p>
+<ul>
+<li>Include stock symbols preceded by the dollar sign (e.g., $AAPL for Apple Inc.; $PEP for PepsiCo Inc.)
+<ul>
+<li>In which the stock symbols belong to Russell 3000 firms</li>
+</ul>
+</li>
+<li>Be released between March 21, 2006 and December 31, 2012</li>
+</ul>
+<h2 id="roadmap">RoadMap</h2>
+<ol>
+<li>
+<p><strong>Import access token from the environment variables</strong> and put the token into the headers. Regarding how to get access token and make it an environment variable, please check <a href="https://mengjiexu.com/post/door-to-twitter-analysis-i/#get-access-to-twitter-api-v2">Get Access to Twitter API</a>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#111">bearer_token</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">environ</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;BEARER_TOKEN&#34;</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#34;Authorization&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Bearer </span><span style="color:#d88200">{}</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">.</span><span style="color:#111">format</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">headers</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>Set parameters for queries.</strong> Regarding the available fields and their usages for Tweet object, please check <a href="https://mengjiexu.com/post/door-to-twitter-analysis-i/#fields-of-tweet-object">Fields of Tweet Object</a>.</p>
+<p>By specifying <code>start_time</code>, <code>end_time</code>, and <code>query</code>, I require the returned tweets:</p>
+<ul>
+<li>Is released no earlier than <code>start_time</code> and no later than <code>end_time</code></li>
+<li>Contain the ticker of a firm <code>firm</code> preceded by the dollar sign</li>
+</ul>
+<p>By specifying <code>tweet.fields</code>, I expect the following information for each tweet is returned:</p>
+<ul>
+<li><code>created_at</code>, <code>public_metrics</code>, <code>author_id</code>, <code>lang</code></li>
+</ul>
+<p>By specifying <code>max_results</code>, one can get 10 tweets for each request. This figure could be changed.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Input filter parameters: firm tickers, start time stamp, end time stamp</span>
+<span style="color:#75715e"># Optional params: start_time,end_time,since_id,until_id,max_results,next_token,</span>
+<span style="color:#75715e"># expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">query_params</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;start_time&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;end_time&#39;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;query&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;$</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;tweet.fields&#39;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;created_at,public_metrics,author_id,lang&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;max_results&#39;</span><span style="color:#111">:</span> <span style="color:#ae81ff">10</span><span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">query_params</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>Submit a query and check the returned data</strong></p>
+<p>For now, we have obtained the necessary elements for submitting a query:</p>
+<ul>
+<li>Access token <code>bearer_token</code></li>
+<li>Query parameters <code>start_time</code>, <code>end_time</code>, and <code>query</code></li>
+<li>Returned fields <code>created_at</code>, <code>public_metrics</code>, <code>author_id</code>, <code>lang</code></li>
+<li>Parameter for page splitting <code>max_results</code></li>
+</ul>
+<p>With those elements, we can submit our very first query and analyse the returned data to decide on how to clean it.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">requests</span><span style="color:#f92672">,</span> <span style="color:#111">os</span><span style="color:#f92672">,</span> <span style="color:#111">json</span>
+
+<span style="color:#75715e"># To set your environment variables in your terminal run the following line:</span>
+<span style="color:#75715e"># export &#39;BEARER_TOKEN&#39;=&#39;&lt;your_bearer_token&gt;&#39;</span>
+<span style="color:#111">bearer_token</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">environ</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;BEARER_TOKEN&#34;</span><span style="color:#111">)</span>
+
+<span style="color:#111">search_url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;https://api.twitter.com/2/tweets/search/all&#34;</span>
+
+<span style="color:#75715e"># Optional params: start_time,end_time,since_id,until_id,max_results,next_token,</span>
+<span style="color:#75715e"># expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">query_params</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;start_time&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;end_time&#39;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;query&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;$</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;tweet.fields&#39;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;created_at,public_metrics,author_id,lang&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;max_results&#39;</span><span style="color:#111">:</span> <span style="color:#ae81ff">10</span><span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">query_params</span><span style="color:#111">)</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#34;Authorization&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Bearer </span><span style="color:#d88200">{}</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">.</span><span style="color:#111">format</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">headers</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">url</span><span style="color:#111">,</span> <span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">response</span> <span style="color:#f92672">=</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">request</span><span style="color:#111">(</span><span style="color:#d88200">&#34;GET&#34;</span><span style="color:#111">,</span> <span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">),</span> <span style="color:#111">params</span><span style="color:#f92672">=</span><span style="color:#111">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">))</span>
+    <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">status_code</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">status_code</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">raise</span> <span style="color:#75af00">Exception</span><span style="color:#111">(</span><span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">status_code</span><span style="color:#111">,</span> <span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">text</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">json</span><span style="color:#111">()</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">search</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">json_response</span> <span style="color:#f92672">=</span> <span style="color:#111">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">)</span>
+    <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">dumps</span><span style="color:#111">(</span><span style="color:#111">json_response</span><span style="color:#111">,</span> <span style="color:#111">indent</span><span style="color:#f92672">=</span><span style="color:#ae81ff">4</span><span style="color:#111">,</span> <span style="color:#111">sort_keys</span><span style="color:#f92672">=</span><span style="color:#00a8c8">True</span><span style="color:#111">))</span>
+
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;__main__&#34;</span><span style="color:#111">:</span>
+    <span style="color:#111">search</span><span style="color:#111">(</span><span style="color:#d88200">&#34;AAPL&#34;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;2012-03-21T00:00:00Z&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;2012-03-21T00:20:00Z&#39;</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If the code is executed successfully, we will get response displayed as follows (To save the space, I removed the 2nd to 9th tweets returned).</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">200</span>
+<span style="color:#111">{</span>
+    <span style="color:#d88200">&#34;data&#34;</span><span style="color:#111">:</span> <span style="color:#111">[</span>
+        <span style="color:#111">{</span>
+            <span style="color:#d88200">&#34;author_id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;215869072&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;created_at&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;2012-03-21T00:18:35.000Z&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;182259875408121856&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;lang&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;en&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;public_metrics&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+                <span style="color:#d88200">&#34;like_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+                <span style="color:#d88200">&#34;quote_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+                <span style="color:#d88200">&#34;reply_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+                <span style="color:#d88200">&#34;retweet_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#111">},</span>
+            <span style="color:#d88200">&#34;text&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;@FortuneMagazine Can #Apple&#39;s stock reach $1,368? http://t.co/wJlWogk1 $AAPL  @albertosrt&#34;</span>
+        <span style="color:#111">},</span>
+        <span style="color:#f92672">...</span>
+        <span style="color:#111">{</span>
+            <span style="color:#d88200">&#34;author_id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;341817759&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;created_at&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;2012-03-21T00:06:37.000Z&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;182256865110003712&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;lang&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;en&#34;</span><span style="color:#111">,</span>
+            <span style="color:#d88200">&#34;public_metrics&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+                <span style="color:#d88200">&#34;like_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+                <span style="color:#d88200">&#34;quote_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+                <span style="color:#d88200">&#34;reply_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+                <span style="color:#d88200">&#34;retweet_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span>
+            <span style="color:#111">},</span>
+            <span style="color:#d88200">&#34;text&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;was forced to buy a small position in $aapl today to offset shorts in other names, in at 594 with $3 trailing&#34;</span>
+        <span style="color:#111">}</span>
+    <span style="color:#111">],</span>
+    <span style="color:#d88200">&#34;meta&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+        <span style="color:#d88200">&#34;newest_id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;182259875408121856&#34;</span><span style="color:#111">,</span>
+        <span style="color:#d88200">&#34;next_token&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;1jzu9lk96gu5npvzel7a7nb3ogobtgzn9360fuunqj5p&#34;</span><span style="color:#111">,</span>
+        <span style="color:#d88200">&#34;oldest_id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;182256865110003712&#34;</span><span style="color:#111">,</span>
+        <span style="color:#d88200">&#34;result_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">10</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>Update query paramters</strong> with <code>next_token</code> to get the returned data of the next page</p>
+<p>Clearly, the tweets are returned in a json format. Different from the fields we have requested (<code>created_at</code>, <code>public_metrics</code>, <code>author_id</code>, <code>lang</code>), the <code>meta</code> part is the key for jumping to the next page. If the meta has the element <code>next_token</code>, that means there are more pages contained in your submitted query and we need to add the value of <code>next_token</code> into the query parameters to get the returned data in the next page. Apparently, we need to repeat this procedure until the value of <code>next_token</code> is empty.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Add the &#39;next_token&#39; returned in the search result into the parameters for the subsequent query for the next page</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">updatepara</span><span style="color:#111">(</span><span style="color:#111">oldpara</span><span style="color:#111">,</span> <span style="color:#111">next_token</span><span style="color:#111">):</span>
+    <span style="color:#111">newpara</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#f92672">**</span><span style="color:#111">oldpara</span><span style="color:#111">,</span><span style="color:#f92672">**</span><span style="color:#111">{</span><span style="color:#d88200">&#39;next_token&#39;</span><span style="color:#111">:</span><span style="color:#111">next_token</span><span style="color:#111">}}</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">newpara</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Request the content of next page with updated parameters</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">dealjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)</span>
+
+    <span style="color:#75715e"># Retrieve the &#39;next_token&#39; from the returned json</span>
+    <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#111">csvjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">)</span>
+
+    <span style="color:#00a8c8">while</span> <span style="color:#111">next_token</span><span style="color:#111">:</span>
+      	<span style="color:#75715e"># If the &#39;next_token&#39; is not empty, add it to the search parameters and 		submit a new query</span>
+        <span style="color:#111">newpara</span> <span style="color:#f92672">=</span> <span style="color:#111">updatepara</span><span style="color:#111">(</span><span style="color:#111">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">),</span> <span style="color:#111">next_token</span><span style="color:#111">)</span>
+        <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span>
+        <span style="color:#111">json_response</span> <span style="color:#f92672">=</span> <span style="color:#111">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">newpara</span><span style="color:#111">)</span>
+        <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#111">csvjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>Record the request history and transfer the received data to csv format.</strong></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Clean data received and export in csv format</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">csvjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">):</span>
+
+    <span style="color:#75715e"># Record meta data of request history</span>
+    <span style="color:#111">meta</span> <span style="color:#f92672">=</span> <span style="color:#111">json_response</span><span style="color:#111">[</span><span style="color:#d88200">&#39;meta&#39;</span><span style="color:#111">]</span>
+    <span style="color:#111">callnum</span> <span style="color:#f92672">=</span> <span style="color:#111">meta</span><span style="color:#111">[</span><span style="color:#d88200">&#39;result_count&#39;</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+        <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#111">meta</span><span style="color:#111">[</span><span style="color:#d88200">&#39;next_token&#39;</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+        <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">False</span>
+    <span style="color:#111">empty</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">callnum</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/xx/meta.csv&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+        <span style="color:#111">now</span> <span style="color:#f92672">=</span> <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">strftime</span><span style="color:#111">(</span><span style="color:#d88200">&#39;%Y-%m-</span><span style="color:#d88200">%d</span><span style="color:#d88200"> %H:%M:%S&#39;</span><span style="color:#111">,</span><span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">localtime</span><span style="color:#111">(</span><span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">time</span><span style="color:#111">()))</span>
+        <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#d88200">&#34;,&#34;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">([</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span><span style="color:#111">now</span><span style="color:#111">,</span> <span style="color:#111">repr</span><span style="color:#111">(</span><span style="color:#111">callnum</span><span style="color:#111">),</span> <span style="color:#111">str</span><span style="color:#111">(</span><span style="color:#111">next_token</span><span style="color:#111">)])</span><span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">)</span>
+
+    <span style="color:#75715e"># Clean received json-formatted tweets and export in csv format</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">empty</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/xx/</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#34;</span><span style="color:#f92672">%</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+            <span style="color:#111">w</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span>
+            <span style="color:#111">tweets</span> <span style="color:#f92672">=</span> <span style="color:#111">json_response</span><span style="color:#111">[</span><span style="color:#d88200">&#39;data&#39;</span><span style="color:#111">]</span>
+            <span style="color:#00a8c8">for</span> <span style="color:#111">tw</span> <span style="color:#f92672">in</span> <span style="color:#111">tweets</span><span style="color:#111">:</span>
+                <span style="color:#111">list</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_at&#39;</span><span style="color:#111">],</span> <span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">],</span> <span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;text&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;retweet_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;reply_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;like_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;retweet_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;author_id&#39;</span><span style="color:#111">],</span> <span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;lang&#39;</span><span style="color:#111">]]</span>
+                <span style="color:#111">w</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">list</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">next_token</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>Iterate the above steps through the pre-specified ticker list.</strong></p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Input the ticker list</span>
+<span style="color:#111">tickerlist</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/xx/code/tickerlist.txt&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">)</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">mainparse</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)</span>
+    <span style="color:#111">json_response</span> <span style="color:#f92672">=</span> <span style="color:#111">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">))</span>
+    <span style="color:#111">dealjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">)</span> 
+
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;__main__&#34;</span><span style="color:#111">:</span>
+		<span style="color:#00a8c8">for</span> <span style="color:#111">ticker</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">tickerlist</span><span style="color:#111">):</span>
+        <span style="color:#111">mainparse</span><span style="color:#111">(</span><span style="color:#d88200">&#39;$</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#39;</span><span style="color:#f92672">%</span><span style="color:#111">ticker</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">(),</span><span style="color:#d88200">&#39;2006-03-21T00:00:00Z&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;2012-12-31T23:59:59Z&#39;</span><span style="color:#111">)</span>
+        <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="sample-results">Sample Results</h2>
+<p>All th extracted tweets for a given firm are saved in a same csv file named by the firm&rsquo;s ticker.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/sample.png" width=600 height=350>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Sample File List</div>
+</center>
+<p>Recall a typical returned data for each tweet is as follows. suppose the root json node for a given tweet is <code>tw</code>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#111">{</span>	
+    <span style="color:#f92672">&#34;author_id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;215869072&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;created_at&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;2012-03-21T00:18:35.000Z&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;id&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;182259875408121856&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;lang&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;en&#34;</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;public_metrics&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
+    <span style="color:#f92672">&#34;like_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;quote_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;reply_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>
+    <span style="color:#f92672">&#34;retweet_count&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">1</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>For each firm, there are following columns:</p>
+<ul>
+<li>Release time stamp <code>tw['created_at']</code></li>
+<li>Tweet ID  <code>tw['id']</code></li>
+<li>Tweet text  <code>tw['text']</code></li>
+<li>retweet_count <code>tw['public_metrics']['retweet_count']</code></li>
+<li>reply_count <code>tw['public_metrics']['reply_count']</code></li>
+<li>like_count <code>tw['public_metrics']['like_count']</code></li>
+<li>Author ID <code>tw['author_id']</code></li>
+<li>Language of Tweet <code>tw['lang']</code></li>
+</ul>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/sample2.png" width=800 height=350>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: Sample Tweets List</div>
+</center>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43">43</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44">44</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45">45</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46">46</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47">47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48">48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49">49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50">50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51">51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52">52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53">53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54">54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55">55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56">56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57">57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58">58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59">59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60">60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61">61</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62">62</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63">63</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64">64</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65">65</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66">66</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67">67</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68">68</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69">69</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70">70</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71">71</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72">72</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="73"><a style="outline: none; text-decoration:none; color:inherit" href="#73">73</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="74"><a style="outline: none; text-decoration:none; color:inherit" href="#74">74</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="75"><a style="outline: none; text-decoration:none; color:inherit" href="#75">75</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="76"><a style="outline: none; text-decoration:none; color:inherit" href="#76">76</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="77"><a style="outline: none; text-decoration:none; color:inherit" href="#77">77</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="78"><a style="outline: none; text-decoration:none; color:inherit" href="#78">78</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="79"><a style="outline: none; text-decoration:none; color:inherit" href="#79">79</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="80"><a style="outline: none; text-decoration:none; color:inherit" href="#80">80</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="81"><a style="outline: none; text-decoration:none; color:inherit" href="#81">81</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="82"><a style="outline: none; text-decoration:none; color:inherit" href="#82">82</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="83"><a style="outline: none; text-decoration:none; color:inherit" href="#83">83</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="84"><a style="outline: none; text-decoration:none; color:inherit" href="#84">84</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="85"><a style="outline: none; text-decoration:none; color:inherit" href="#85">85</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="86"><a style="outline: none; text-decoration:none; color:inherit" href="#86">86</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="87"><a style="outline: none; text-decoration:none; color:inherit" href="#87">87</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="88"><a style="outline: none; text-decoration:none; color:inherit" href="#88">88</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="89"><a style="outline: none; text-decoration:none; color:inherit" href="#89">89</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="90"><a style="outline: none; text-decoration:none; color:inherit" href="#90">90</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">requests</span><span style="color:#f92672">,</span> <span style="color:#111">time</span>
+<span style="color:#f92672">import</span> <span style="color:#111">os</span><span style="color:#f92672">,</span> <span style="color:#111">json</span><span style="color:#f92672">,</span> <span style="color:#111">csv</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+
+<span style="color:#75715e"># To set your environment variables in your terminal run the following line:</span>
+<span style="color:#75715e"># export &#39;BEARER_TOKEN&#39;=&#39;&lt;your_bearer_token&gt;&#39;</span>
+<span style="color:#75715e"># If you don&#39;t successfully set the token as an enviornment variable, please use the following line instead:</span>
+<span style="color:#75715e"># bearer_token = &#39;&lt;Your Bearer Token&gt;&#39;</span>
+<span style="color:#111">bearer_token</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">environ</span><span style="color:#f92672">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#d88200">&#34;BEARER_TOKEN&#34;</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Request url</span>
+<span style="color:#111">search_url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;https://api.twitter.com/2/tweets/search/all&#34;</span>
+
+<span style="color:#75715e"># Input the ticker list</span>
+<span style="color:#111">tickerlist</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/xx/code/tickerlist.txt&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Verify your developer access to Twitter </span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#34;Authorization&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Bearer </span><span style="color:#d88200">{}</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">.</span><span style="color:#111">format</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">headers</span>
+
+<span style="color:#75715e"># Input filter parameters: firm tickers, start time stamp, end time stamp</span>
+<span style="color:#75715e"># Optional params: start_time,end_time,since_id,until_id,max_results,next_token,</span>
+<span style="color:#75715e"># expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">query_params</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#d88200">&#39;start_time&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;end_time&#39;</span><span style="color:#111">:</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">end_time</span><span style="color:#111">,</span>
+    <span style="color:#d88200">&#39;query&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#34;</span><span style="color:#f92672">%</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;tweet.fields&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;created_at,public_metrics,author_id,geo,lang,non_public_metrics,promoted_metrics&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;max_results&#39;</span><span style="color:#111">:</span> <span style="color:#ae81ff">10</span><span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">query_params</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Get response for the server and return in json format</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">params</span><span style="color:#111">):</span>
+    <span style="color:#111">response</span> <span style="color:#f92672">=</span> <span style="color:#111">requests</span><span style="color:#f92672">.</span><span style="color:#111">request</span><span style="color:#111">(</span><span style="color:#d88200">&#34;GET&#34;</span><span style="color:#111">,</span> <span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#f92672">=</span><span style="color:#111">headers</span><span style="color:#111">,</span><span style="color:#111">params</span><span style="color:#f92672">=</span><span style="color:#111">params</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">status_code</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">raise</span> <span style="color:#75af00">Exception</span><span style="color:#111">(</span><span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">status_code</span><span style="color:#111">,</span> <span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">text</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">response</span><span style="color:#f92672">.</span><span style="color:#111">json</span><span style="color:#111">()</span>
+
+<span style="color:#75715e"># Add the &#39;next_token&#39; returned in the search result into the parameters for the subsequent query for the next page</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">updatepara</span><span style="color:#111">(</span><span style="color:#111">oldpara</span><span style="color:#111">,</span> <span style="color:#111">next_token</span><span style="color:#111">):</span>
+    <span style="color:#111">newpara</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#f92672">**</span><span style="color:#111">oldpara</span><span style="color:#111">,</span><span style="color:#f92672">**</span><span style="color:#111">{</span><span style="color:#d88200">&#39;next_token&#39;</span><span style="color:#111">:</span><span style="color:#111">next_token</span><span style="color:#111">}}</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">newpara</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Clean data received and export in csv format</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">csvjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">):</span>
+  	
+    <span style="color:#75715e"># Record meta data of request history</span>
+    <span style="color:#111">meta</span> <span style="color:#f92672">=</span> <span style="color:#111">json_response</span><span style="color:#111">[</span><span style="color:#d88200">&#39;meta&#39;</span><span style="color:#111">]</span>
+    <span style="color:#111">callnum</span> <span style="color:#f92672">=</span> <span style="color:#111">meta</span><span style="color:#111">[</span><span style="color:#d88200">&#39;result_count&#39;</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+        <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#111">meta</span><span style="color:#111">[</span><span style="color:#d88200">&#39;next_token&#39;</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+        <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">False</span>
+    <span style="color:#111">empty</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">callnum</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/xx/meta.csv&#34;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">g</span><span style="color:#111">:</span>
+        <span style="color:#111">now</span> <span style="color:#f92672">=</span> <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">strftime</span><span style="color:#111">(</span><span style="color:#d88200">&#39;%Y-%m-</span><span style="color:#d88200">%d</span><span style="color:#d88200"> %H:%M:%S&#39;</span><span style="color:#111">,</span><span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">localtime</span><span style="color:#111">(</span><span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">time</span><span style="color:#111">()))</span>
+        <span style="color:#111">g</span><span style="color:#f92672">.</span><span style="color:#111">write</span><span style="color:#111">(</span><span style="color:#d88200">&#34;,&#34;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">([</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span><span style="color:#111">now</span><span style="color:#111">,</span> <span style="color:#111">repr</span><span style="color:#111">(</span><span style="color:#111">callnum</span><span style="color:#111">),</span> <span style="color:#111">str</span><span style="color:#111">(</span><span style="color:#111">next_token</span><span style="color:#111">)])</span><span style="color:#f92672">+</span><span style="color:#d88200">&#39;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">)</span>
+    
+    <span style="color:#75715e"># Clean received json-formatted tweets and export in csv format</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">empty</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/xx/</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#34;</span><span style="color:#f92672">%</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+            <span style="color:#111">w</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">f</span><span style="color:#111">)</span>
+            <span style="color:#111">tweets</span> <span style="color:#f92672">=</span> <span style="color:#111">json_response</span><span style="color:#111">[</span><span style="color:#d88200">&#39;data&#39;</span><span style="color:#111">]</span>
+            <span style="color:#00a8c8">for</span> <span style="color:#111">tw</span> <span style="color:#f92672">in</span> <span style="color:#111">tweets</span><span style="color:#111">:</span>
+                <span style="color:#111">list</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_at&#39;</span><span style="color:#111">],</span> <span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">],</span> <span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;text&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;retweet_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;reply_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;like_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;public_metrics&#39;</span><span style="color:#111">][</span><span style="color:#d88200">&#39;retweet_count&#39;</span><span style="color:#111">],</span><span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;author_id&#39;</span><span style="color:#111">],</span> <span style="color:#111">tw</span><span style="color:#111">[</span><span style="color:#d88200">&#39;lang&#39;</span><span style="color:#111">]]</span>
+                <span style="color:#111">w</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">list</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span><span style="color:#111">(</span><span style="color:#111">next_token</span><span style="color:#111">)</span>
+
+<span style="color:#75715e"># Request the content of next page with updated parameters</span>
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">dealjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)</span>
+    
+    <span style="color:#75715e"># Retrieve the &#39;next_token&#39; from the returned json</span>
+    <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#111">csvjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">)</span>
+    
+    <span style="color:#00a8c8">while</span> <span style="color:#111">next_token</span><span style="color:#111">:</span>
+      	<span style="color:#75715e"># If the &#39;next_token&#39; is not empty, add it to the search parameters and submit a new query</span>
+        <span style="color:#111">newpara</span> <span style="color:#f92672">=</span> <span style="color:#111">updatepara</span><span style="color:#111">(</span><span style="color:#111">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">),</span> <span style="color:#111">next_token</span><span style="color:#111">)</span>
+        <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span>
+        <span style="color:#111">json_response</span> <span style="color:#f92672">=</span> <span style="color:#111">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">newpara</span><span style="color:#111">)</span>
+        <span style="color:#111">next_token</span> <span style="color:#f92672">=</span> <span style="color:#111">csvjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">)</span>
+        <span style="color:#111">print</span><span style="color:#111">(</span><span style="color:#111">next_token</span><span style="color:#111">)</span>
+
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">mainparse</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">):</span>
+    <span style="color:#111">headers</span> <span style="color:#f92672">=</span> <span style="color:#111">create_headers</span><span style="color:#111">(</span><span style="color:#111">bearer_token</span><span style="color:#111">)</span>
+    <span style="color:#111">json_response</span> <span style="color:#f92672">=</span> <span style="color:#111">connect_to_endpoint</span><span style="color:#111">(</span><span style="color:#111">search_url</span><span style="color:#111">,</span> <span style="color:#111">headers</span><span style="color:#111">,</span> <span style="color:#111">setpara</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span><span style="color:#111">start_time</span><span style="color:#111">,</span><span style="color:#111">end_time</span><span style="color:#111">))</span>
+    <span style="color:#111">dealjson</span><span style="color:#111">(</span><span style="color:#111">firm</span><span style="color:#111">,</span> <span style="color:#111">start_time</span><span style="color:#111">,</span> <span style="color:#111">end_time</span><span style="color:#111">,</span> <span style="color:#111">json_response</span><span style="color:#111">)</span> 
+
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;__main__&#34;</span><span style="color:#111">:</span>
+		<span style="color:#00a8c8">for</span> <span style="color:#111">ticker</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">tickerlist</span><span style="color:#111">):</span>
+            <span style="color:#111">mainparse</span><span style="color:#111">(</span><span style="color:#d88200">&#39;$</span><span style="color:#d88200">%s</span><span style="color:#d88200">&#39;</span><span style="color:#f92672">%</span><span style="color:#111">ticker</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">(),</span><span style="color:#d88200">&#39;2006-03-21T00:00:00Z&#39;</span><span style="color:#111">,</span><span style="color:#d88200">&#39;2012-12-31T23:59:59Z&#39;</span><span style="color:#111">)</span>
+            <span style="color:#111">time</span><span style="color:#f92672">.</span><span style="color:#111">sleep</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="summary-and-upcoming-posts">Summary and Upcoming Posts</h2>
+<p>In this blogpost, I replicated the Tweets extraction process of Bartov, Faurel, and Mohanram (2018, TAR). But retreiving the tweets archive is just a very small part of the Twitter API&rsquo;s functions. <em><u>In the next blogpost, I will introduce how to request the detailed user account information as well as how to check the bi-direction links among multiple Twitter accounts.</u></em></p>
+<h2 id="references">References</h2>
+<p><a href="https://github.com/twitterdev/Twitter-API-v2-sample-code">https://github.com/twitterdev/Twitter-API-v2-sample-code</a></p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/origins-of-papers/" data-toggle="tooltip" data-placement="top" title="Origins of Papers">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/door-to-twitter-analysis-i/" data-toggle="tooltip" data-placement="top" title="Twitter API: Door To Social Media Analysis I">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="hyvor-talk-view"></div>
+<script type="text/javascript">
+    var HYVOR_TALK_WEBSITE = 4329; 
+    var HYVOR_TALK_CONFIG = {
+        url: false,
+        id: false
+};
+</script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
