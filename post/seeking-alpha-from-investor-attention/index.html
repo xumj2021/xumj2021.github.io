@@ -27,15 +27,15 @@
     
 
     
-    <meta name="title" content="Seeking Alpha From Investor Attention" />
-    <meta property="og:title" content="Seeking Alpha From Investor Attention" />
-    <meta property="twitter:title" content="Seeking Alpha From Investor Attention" />
+    <meta name="title" content="Seeking Alpha From Market Participants&#39; Inoformation Acquisition Actions" />
+    <meta property="og:title" content="Seeking Alpha From Market Participants&#39; Inoformation Acquisition Actions" />
+    <meta property="twitter:title" content="Seeking Alpha From Market Participants&#39; Inoformation Acquisition Actions" />
     
 
     
-    <meta name="description" content="Formulate well-recognized proxies for both retail and institutional Attention">
-    <meta property="og:description" content="Formulate well-recognized proxies for both retail and institutional Attention" />
-    <meta property="twitter:description" content="Formulate well-recognized proxies for both retail and institutional Attention" />
+    <meta name="description" content="Trace informtaion acquisition actions of both retail and institutional investors">
+    <meta property="og:description" content="Trace informtaion acquisition actions of both retail and institutional investors" />
+    <meta property="twitter:description" content="Trace informtaion acquisition actions of both retail and institutional investors" />
     
 
     
@@ -46,7 +46,7 @@
     <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Seeking Alpha From Investor Attention-Mengjie&#39;s Blog</title>
+    <title>Seeking Alpha From Market Participants&#39; Inoformation Acquisition Actions-Mengjie&#39;s Blog</title>
 
     <link rel="canonical" href="/post/seeking-alpha-from-investor-attention/">
 
@@ -175,20 +175,20 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/google" title="Google">
-                            Google
+                        <a class="tag" href="/tags/information-acquisition" title="Information Acquisition">
+                            Information Acquisition
                         </a>
                         
-                        <a class="tag" href="/tags/search-trend" title="Search Trend">
-                            Search Trend
+                        <a class="tag" href="/tags/google-search-volume" title="Google Search Volume">
+                            Google Search Volume
                         </a>
                         
-                        <a class="tag" href="/tags/api" title="API">
-                            API
+                        <a class="tag" href="/tags/bloomberg" title="Bloomberg">
+                            Bloomberg
                         </a>
                         
                     </div>
-                    <h1>Seeking Alpha From Investor Attention</h1>
+                    <h1>Seeking Alpha From Market Participants&#39; Inoformation Acquisition Actions</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
@@ -227,7 +227,7 @@
                 <nav id="TableOfContents">
   <ul>
     <li><a href="#motivation">Motivation</a></li>
-    <li><a href="#formulate-retail-attention-measure-svi">Formulate Retail Attention Measure (SVI)</a>
+    <li><a href="#formulate-retail-information-acquisition-measure-svi">Formulate Retail Information Acquisition Measure (SVI)</a>
       <ul>
         <li><a href="#analyse-google-trends-website">Analyse Google Trends Website</a></li>
         <li><a href="#algorithm">Algorithm</a></li>
@@ -246,17 +246,17 @@
 </nav>
                 
                 <h2 id="motivation">Motivation</h2>
-<p>Just like the trading imbalance could be a powerful signal for upcoming stock price movement, investors' information acquisition actions are also indicative for future security returns. Intuitively, acquiring information is costly for investors and thus they only do so when the expected profits can cover the relative costs. Ceteris paribus, securities which attract more investor attention may have a higher likelihood of experiencing abnormal stock volatility from which a sophisticated investor can cultivate Alphas.</p>
-<p>The information content of investors' information acquisition actions has been well validated by a series of papers. For example, Da, Engelberg, and Gao (2011, JF) utilizes search frequency in Google (Search Volume Index (SVI)) as a proxy for investor attention and show that firms with abnormally bigger Google search volume are more likely to have a higher stock price in the next 2 weeks and an eventual price reversal within the year, suggesting that the Google search volume may mainly capture the less sophisticated retail investors' attention. Similarly, Drake, Johnson, Roulstone, and Thornock (2020, TAR) find that downloads number of a firm&rsquo;s company filings filed in the EDGAR is significantly predictive of its subsequent performance and the predictive power is mainly driven by downloads from institutional investors' IP address.</p>
-<p>Employing news searching and news reading intensity for specific stocks on Bloomberg terminals as a new proxy for institutional investor attention, Ben-Rephael, Da, Israelsen (2017, RFS) and Easton, Ben-Repahael, Da, Israelsen (2021, TAR) more explicitly illustrate the lead-lag relationship between retail attention and institutional attention, suggesting that institutional investors are typically aware of the material firm-specific information earlier than retail investors and tend to take advantage of their information advantage by opportunistically providing liquidity when price pressure induced by retail investors arrives.</p>
-<p>The take away is that by observing different market participants' information acquisition actions in time-series, one can not only trace back how  the current stock price was previously formulated, but also gain insights about how the stock price will evolve in the future.</p>
-<p>In this blog, I will introduce how to collect data and formulate the weekly measure for retail/institutional attention. In particular, following Ben-Rephael, Da, Israelsen (2017, RFS) and Easton, Ben-Repahael, Da, Israelsen (2021, TAR), I will use Google Search Volume Index (SVI) to capture retail attention and Bloomberg abnormal institutional investor read heat to capture institutional attention.</p>
-<h2 id="formulate-retail-attention-measure-svi">Formulate Retail Attention Measure (SVI)</h2>
-<p>As far as I know, the Google Search Volume Index (SVI) started to be recognized as a reasonable proxy for retail investors' attention/information acquisition intensity in accounting and finance literature after the publication of Da, Engelberg, and Gao (2011, JF). The idea is that while more resourced institutional investors have more advanced platforms to gather information (e.g., Bloomberg, Reuters, etc), the Google search engine is the dominant information acquisition tool for retail investors. Actually, the authors did find &ldquo;a strong and direct link&rdquo; between Google Search Volume Index (SVI) and retail order execution.</p>
+<p>Just like the trading imbalance could be a powerful signal for upcoming stock price movement, investors' information acquisition actions are also indicative for future security returns. According to Lee and So (2015), acquiring information is costly for investors and thus they only do so when the expected profits can cover the relative costs. Ceteris paribus, securities which attract more investor attention may have a higher likelihood of experiencing abnormal stock volatility from which a sophisticated investor can cultivate Alphas.</p>
+<p>The information content of investors' information acquisition actions has been well validated by a series of papers. For example, Da, Engelberg, and Gao (2011, JF) utilize search frequency in Google (Search Volume Index (SVI)) as a proxy for investor attention and show that firms with abnormally bigger Google search volume are more likely to have a higher stock price in the next 2 weeks and an eventual price reversal within the year, suggesting that the Google search volume may mainly capture the less sophisticated retail investors' attention. Similarly, Drake, Johnson, Roulstone, and Thornock (2020, TAR) find that downloads number of a firm&rsquo;s company filings filed in the EDGAR is significantly predictive of its subsequent performance and the predictive power is mainly driven by downloads from institutional investors' IP address.</p>
+<p>Employing news searching and news reading intensity for specific stocks on Bloomberg terminals as a new proxy for institutional investor attention, Ben-Rephael, Da, Israelsen (2017, RFS) and Easton, Ben-Repahael, Da, Israelsen (2021, TAR) more explicitly illustrated the lead-lag relationship between retail attention and institutional attention, suggesting that institutional investors are typically aware of the material firm-specific information earlier than retail investors and tend to make use of their information advantage by opportunistically providing liquidity when price pressure induced by retail investors arrives.</p>
+<p>The take away is that by observing different market participants' information acquisition actions in time-series, one can not only trace back how  the current stock price was previously formulated, but also gain insights about how the stock price will evolve in the future. The idea is fascinating: even though you have no idea about what exactly has happened to a specific firm, you could still get sense that there must be something abnormal when observing some unsual information acquisition actions targeted toward this firm in the market. From this perspective, approachable records of market participants' information acquisition actions per se may facilitate the implicit dissemination of non-public material information in the market.</p>
+<p>In this blog, I will introduce how to collect data and formulate the weekly measure for retail/institutional information acquisition actions. In particular, following Ben-Rephael, Da, Israelsen (2017, RFS) and Easton, Ben-Repahael, Da, Israelsen (2021, TAR), I will use Google Search Volume Index (SVI) to capture retail attention and Bloomberg institutional investors' read heat to capture institutional information acquisition actions.</p>
+<h2 id="formulate-retail-information-acquisition-measure-svi">Formulate Retail Information Acquisition Measure (SVI)</h2>
+<p>As far as I know, the Google Search Volume Index (SVI) started to be recognized as a reasonable proxy for retail investors' attention/information acquisition intensity in accounting and finance literature after the publication of Da, Engelberg, and Gao (2011, JF). The idea is that while institutional investors have more advanced platforms to gather information (e.g., Bloomberg, Reuters, etc), the majority of retail investors have to count on the Google search engine for information acquisition. Actually, the authors did find &ldquo;a strong and direct link&rdquo; between Google Search Volume Index (SVI) and retail order execution.</p>
 <p>Following Da, Engelberg, and Gao (2011, JF), I will collect the weekly Google Search Volume Index (SVI) for each stock symbol, which could be then used for calculating the abnormal retail attention ASVI by substracting the rolling-average in the past 8 weeks from the current-week Google Search Volume Index (SVI).</p>
 <h3 id="analyse-google-trends-website">Analyse Google Trends Website</h3>
 <h4 id="manual-search">Manual Search</h4>
-<p>Firstly, let&rsquo;s randomly post two stock symbols and a date range and analyze how does the Google Trends API reacts to our post. Here I use tickers of Apple and Amazon, AAPL and AMZN, as search keywords. The date range is randomly specified as &ldquo;2021-08-08 2022-08-08&rdquo;.</p>
+<p>Firstly, let&rsquo;s randomly post two stock symbols and a date range and analyze how Google Trends API reacts to our post. Here I use tickers of Apple and Amazon, AAPL and AMZN, as search keywords. The date range is randomly specified as &ldquo;2021-08-08 2022-08-08&rdquo;.</p>
 <center>
       <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -267,8 +267,8 @@
       color: #999;
       padding: 2px;">Figure 1: Analysis Webpage</div>
   </center>
-<p>Figure 1 shows that the time series of the Search Volume Index is returned with json format and should contain ingredients when requesting as follows. In addition, one can also easily find out the cookies in the rendering results of the same reuqest.</p>
-<p>Request method: GET</p>
+<p>Figure 1 shows that the time series of the Search Volume Index is returned with <code>json</code> format and should contain ingredients when requesting as follows. In addition, one can also easily find out the cookies in the rendering results of the same reuqest.</p>
+<p>Request method: <code>GET</code></p>
 <p>Base url: <code>https://trends.google.com/trends/api/widgetdata/multiline</code></p>
 <p>Request parameters:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -414,7 +414,7 @@ tz<span style="color:#f92672">[</span>...<span style="color:#f92672">]</span>
 <p><code>time</code>: time frame for search, in our sample case is <code>2021-08-08 2022-08-08</code></p>
 </li>
 <li>
-<p><code>resolution</code>: frequency of returned time series, in our sample case is <code>WEEK</code>, could also be &ldquo;HOUR&rdquo; or &ldquo;DAY&rdquo; or &ldquo;MONTH&rdquo;. There are different limitations for the span of the date range under different resolution levels.</p>
+<p><code>resolution</code>: frequency of returned time series, in our sample case is <code>WEEK</code>, could also be <code>HOUR</code>, <code>DAY</code> or <code>MONTH</code>. There are different limitations for the span of the date range under different resolution levels.</p>
 </li>
 <li>
 <p><code>locale</code>: <code>en-US</code>, same as <code>hl</code></p>
@@ -1455,9 +1455,10 @@ tz<span style="color:#f92672">[</span>...<span style="color:#f92672">]</span>
 </div><h2 id="summary">Summary</h2>
 <p>In this paper, I showed the value of investors' attention (or information acquisition actions) and introduced how to collect data for the purpose of formulating the proxies of retail attention and institutional attention respectively. Following Ben-Rephael, Da, Israelsen (2017, RFS)  and Ben-Repahael, Da, Israelsen (2021, TAR) , I use Google Search Volume Index (SVI) to capture retail attention and news reading intensity for specific stocks on Bloomberg terminals as a new proxy for institutional investor attention.</p>
 <h2 id="references">References</h2>
+<p>Ben-Rephael, Azi, Zhi Da, and Ryan D. Israelsen. &ldquo;It depends on where you search: Institutional investor attention and underreaction to news.&rdquo; <em>The Review of Financial Studies</em> 30, no. 9 (2017): 3009-3047.</p>
 <p>Da, Zhi, Joseph Engelberg, and Pengjie Gao. &ldquo;In search of attention.&rdquo; <em>The Journal of Finance</em> 66, no. 5 (2011): 1461-1499.</p>
 <p>Drake, Michael S., Bret A. Johnson, Darren T. Roulstone, and Jacob R. Thornock. &ldquo;Is there information content in information acquisition?.&rdquo; <em>The Accounting Review</em> 95, no. 2 (2020): 113-139.</p>
-<p>Ben-Rephael, Azi, Zhi Da, and Ryan D. Israelsen. &ldquo;It depends on where you search: Institutional investor attention and underreaction to news.&rdquo; <em>The Review of Financial Studies</em> 30, no. 9 (2017): 3009-3047.</p>
+<p>Lee, Charles MC, and Eric C. So. &ldquo;Alphanomics: The informational underpinnings of market efficiency.&rdquo; <em>Foundations and Trends® in Accounting</em> 9.2–3 (2015): 59-258.</p>
 <p>Peter Easton, Azi Ben-Repahael, Zhi Da, Ryan Israelsen. &ldquo;Who Pays Attention to SEC Form 8-K?.&rdquo; <em>The Accounting Review</em> (2021)</p>
 
 
