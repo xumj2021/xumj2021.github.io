@@ -249,7 +249,19 @@
 <p>Just like the trading imbalance could be a powerful signal for upcoming stock price movement, investors' information acquisition actions are also indicative for future security returns. According to Lee and So (2015), acquiring information is costly for investors and thus they only do so when the expected profits can cover the relative costs. Ceteris paribus, securities which attract more investor attention may have a higher likelihood of experiencing abnormal stock volatility from which a sophisticated investor can cultivate Alphas.</p>
 <p>The information content of investors' information acquisition actions has been well validated by a series of papers. For example, Da, Engelberg, and Gao (2011, JF) utilize search frequency in Google (Search Volume Index (SVI)) as a proxy for investor attention and show that firms with abnormally bigger Google search volume are more likely to have a higher stock price in the next 2 weeks and an eventual price reversal within the year, suggesting that the Google search volume may mainly capture the less sophisticated retail investors' attention. Similarly, Drake, Johnson, Roulstone, and Thornock (2020, TAR) find that downloads number of a firm&rsquo;s company filings filed in the EDGAR is significantly predictive of its subsequent performance and the predictive power is mainly driven by downloads from institutional investors' IP address.</p>
 <p>Employing news searching and news reading intensity for specific stocks on Bloomberg terminals as a new proxy for institutional investor attention, Ben-Rephael, Da, Israelsen (2017, RFS) and Easton, Ben-Repahael, Da, Israelsen (2021, TAR) more explicitly illustrated the lead-lag relationship between retail attention and institutional attention, suggesting that institutional investors are typically aware of the material firm-specific information earlier than retail investors and tend to make use of their information advantage by opportunistically providing liquidity when price pressure induced by retail investors arrives.</p>
-<p>The take away is that by observing different market participants' information acquisition actions in time-series, one can not only trace back how  the current stock price was previously formulated, but also gain insights about how the stock price will evolve in the future. The idea is fascinating: even though you have no idea about what exactly has happened to a specific firm, you could still get sense that there must be something abnormal when observing some unsual information acquisition actions targeted toward this firm in the market. From this perspective, approachable records of market participants' information acquisition actions per se may facilitate the implicit dissemination of non-public material information in the market.</p>
+<p>The take away is that by observing different market participants' information acquisition actions in time-series, one can not only trace back how  the current stock price was previously formulated, but also gain insights about how the stock price will evolve in the future.</p>
+<p>The idea that predicting the stock movement from current market participants' information acquisition actions is especially fascinating: even though you have no idea about what exactly has happened to a specific firm, you could still get sense that there must be something abnormal when observing some unsual information acquisition actions targeted toward this firm in the market. From this perspective, approachable records of market participants' information acquisition actions per se may facilitate the implicit dissemination of non-public material information in the market.</p>
+<p>Take the stylized facts documented by Easton, Ben-Repahael, Da, Israelsen (2021, TAR) as an example. Figure 1 shows that when something material happens and a firm is obliged to file a 8-K to the SEC, one can always get informed days earlier than the publication of the 8-K filing by observing the abnormal Bloomberg Read Heat, depsite that he/she has no idea about what exactly has happened to the firm. Given the significant price pressure after the publication of 8-Ks, the information advantage means (potentially huge) trading profits.</p>
+<center>
+      <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/AIA.png" width=1000 height=500>
+      <br>
+      <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+      display: inline-block;
+      color: #999;
+      padding: 2px;">Figure 1: Alphas From Abnormal Information Acquisition</div>
+  </center>
 <p>In this blog, I will introduce how to collect data and formulate the weekly measure for retail/institutional information acquisition actions. In particular, following Ben-Rephael, Da, Israelsen (2017, RFS) and Easton, Ben-Repahael, Da, Israelsen (2021, TAR), I will use Google Search Volume Index (SVI) to capture retail attention and Bloomberg institutional investors' read heat to capture institutional information acquisition actions.</p>
 <h2 id="formulate-retail-information-acquisition-measure-svi">Formulate Retail Information Acquisition Measure (SVI)</h2>
 <p>As far as I know, the Google Search Volume Index (SVI) started to be recognized as a reasonable proxy for retail investors' attention/information acquisition intensity in accounting and finance literature after the publication of Da, Engelberg, and Gao (2011, JF). The idea is that while institutional investors have more advanced platforms to gather information (e.g., Bloomberg, Reuters, etc), the majority of retail investors have to count on the Google search engine for information acquisition. Actually, the authors did find &ldquo;a strong and direct link&rdquo; between Google Search Volume Index (SVI) and retail order execution.</p>
@@ -265,9 +277,9 @@
       <div style="color:orange; border-bottom: 1px solid #d9d9d9;
       display: inline-block;
       color: #999;
-      padding: 2px;">Figure 1: Analysis Webpage</div>
+      padding: 2px;">Figure 2: Analysis Webpage</div>
   </center>
-<p>Figure 1 shows that the time series of the Search Volume Index is returned with <code>json</code> format and should contain ingredients when requesting as follows. In addition, one can also easily find out the cookies in the rendering results of the same reuqest.</p>
+<p>Figure 2 shows that the time series of the Search Volume Index is returned with 2<code>json</code> format and should contain ingredients when requesting as follows. In addition, one can also easily find out the cookies in the rendering results of the same reuqest.</p>
 <p>Request method: <code>GET</code></p>
 <p>Base url: <code>https://trends.google.com/trends/api/widgetdata/multiline</code></p>
 <p>Request parameters:</p>
@@ -466,7 +478,7 @@ tz<span style="color:#f92672">[</span>...<span style="color:#f92672">]</span>
       <div style="color:orange; border-bottom: 1px solid #d9d9d9;
       display: inline-block;
       color: #999;
-      padding: 2px;">Figure 2: Find Out Tokens</div>
+      padding: 2px;">Figure 3: Find Out Tokens</div>
   </center>
 <p>With the similar procedures as those in the previous subsection. I find the parameter structure for this request is as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
