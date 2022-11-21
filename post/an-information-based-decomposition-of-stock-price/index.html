@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-309KENXF47');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962">
+    <meta property="twitter:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962" />
+    
+
+    
+    <meta name="title" content="Theory for the information-based decomposition of stock price" />
+    <meta property="og:title" content="Theory for the information-based decomposition of stock price" />
+    <meta property="twitter:title" content="Theory for the information-based decomposition of stock price" />
+    
+
+    
+    <meta name="description" content="Theoretical techniques in variance decomposition method proposed by Brogaard et al. (2022, RFS)">
+    <meta property="og:description" content="Theoretical techniques in variance decomposition method proposed by Brogaard et al. (2022, RFS)" />
+    <meta property="twitter:description" content="Theoretical techniques in variance decomposition method proposed by Brogaard et al. (2022, RFS)" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Theory for the information-based decomposition of stock price-Mengjie&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/an-information-based-decomposition-of-stock-price/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+  
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/anecdotes">anecdotes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/crawler">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/theory">theory</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/"></a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://assets.bbhub.io/image/v1/convert?type=auto&amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2Frsz_221005188_mini-Price-Evaluation1.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/market-mirco-structure" title="Market Mirco-structure">
+                            Market Mirco-structure
+                        </a>
+                        
+                        <a class="tag" href="/tags/price-informativeness" title="Price Informativeness">
+                            Price Informativeness
+                        </a>
+                        
+                        <a class="tag" href="/tags/impulse-response" title="Impulse Response">
+                            Impulse Response
+                        </a>
+                        
+                    </div>
+                    <h1>Theory for the information-based decomposition of stock price</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Mengjie Xu
+                         
+                        on 
+                        Monday, November 21, 2022
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#the-potential-of-brogaard-decomposition">The potential of Brogaard Decomposition</a></li>
+    <li><a href="#intuitions-for-brogaard-decomposition">Intuitions for Brogaard decomposition</a></li>
+    <li><a href="#technique-details-in-brogaard-decomposition">Technique details in Brogaard decomposition</a>
+      <ul>
+        <li><a href="#define-the-system-of-brogaard-decomposition">Define the system of Brogaard decomposition</a></li>
+        <li><a href="#identify-the-system-of-brogaard-decomposition">Identify the system of Brogaard decomposition</a></li>
+        <li><a href="#variance-decomposition-of-brogaard-decomposition">Variance decomposition of Brogaard decomposition</a></li>
+      </ul>
+    </li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#appendix-background-knowledge-on-var-impulse-reaction-and-variance-decomposition">Appendix: Background knowledge on VAR, Impulse Reaction, and Variance Decomposition</a>
+      <ul>
+        <li><a href="#var-in-structural-and-reduced-form">VAR in structural and reduced form</a></li>
+        <li><a href="#identification-logic">Identification logic</a></li>
+        <li><a href="#identification-techniques">Identification Techniques</a></li>
+        <li><a href="#impulse-response">Impulse response</a></li>
+        <li><a href="#variance-decomposition">Variance decomposition</a></li>
+      </ul>
+    </li>
+    <li><a href="#main-references">Main References</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="motivation">Motivation</h2>
+<p>Brogaard et al. (2022, RFS) proposed a new  variance decomposition method (hereafter I call it Brogaard decomposition) for stock price volatility, which might be a powerful tool for both accounting and market micro-structure scholars to evaluate the impacts of informatinonal shocks on stock price informativeness. In this blog, I will introduce the potential and intuition of Brogaard decomposition, as well as the theory techniques embedded in this decomposition method. In the next blog, I will show how to implement the Brogaard decomposition.</p>
+<h2 id="the-potential-of-brogaard-decomposition">The potential of Brogaard Decomposition</h2>
+<p>The method of Brogaard Decomposition provides a novel way to distinguish the roles of different types of information (e.g., market-wide information, firm-specific private information, firm-specific public information) and noise in stock price movements. This could be relevant for both accounting scholars, who focus on the micro firm-specific movements, and market micro-structure scholars, who have apparent interests in analyzing how do different informational arrangements in the market affect the price informativeness. Beyond that, one can even aggregate the model outputs both in cross section and in time series, cultivating more macro insights on how does the overall market efficiency evolve over time.</p>
+<p>Actually, Brogaard et al. (2022, RFS) has illustrated its potential through various tests. For example, by analyzing the time trend of the noise proportion in stock return variance, they show that market efficiency is dynamic, and is heavily influenced by the environment/market structure. Specifically, they find that the proportion of noise part in stock return movement is significantly responsive to a list of material changes in market microstructure like such as the exogenous decreases in tick size. Similarly, the proportion of firm-specific information part significantly increased after the implementation of Reg Fair Disclosure (2000) and Sarbanes-Oxley Act (2022), both having increased the quality and quantity of corporate disclosure.</p>
+<p>Moreover, as a powerful response to the recent concern that the prevalence of high-frequency trading and passive investment may dampen the degree of which firms' prices reflect their idiosyncratic information, Brogaard et al. (2022, RFS) show that the proportion of firm-specific information accounts in stock volatility didn&rsquo;t see a significant decay in the last decade, when the concerning high-frequency trading as well as passive investment became prevalent.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Brogaard_trend.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Trend of Various Information Parts in Stock Volatility</div>
+</center>
+<h2 id="intuitions-for-brogaard-decomposition">Intuitions for Brogaard decomposition</h2>
+<p>Following the spirit of Beveridge and Nelson (1991), Brogaard et al. (2022, RFS) perceive that an informational shock should cause the stock price to adjust both permanently and transiently. For example, a sudden burst of unexpected buying of a stock, which is perceived as a shock to firm-specific private information by Brogaard et al. (2022, RFS), typically causes the stock price to temporarily overreact and then subsequently revert to a new equilibrium level through time. Suppose it takes 10 period for the stock price to adjust to a new equilibrium price, then the difference between the 10-step-forward price and the price just before the informational shock arrives should be the permanent price adjustment attributed to the informational shock. Correspondingly, the difference between the temporary price and the new equilibrium price is the transient noise part. Brogaard et al. (2022, RFS) showed that such intuition also applies to price underreaction, arrivals of concurrent informational shocks, as well as dynamically arrived informational shocks.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Brogaard_impulse.png" width=800 height=400>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: Intuition for Brogaard Decomposition (Overreaction)</div>
+</center>     
+<p>Having established the idea to identify the impact of informational shocks on stock price adjustment, Brogaard et al. (2022, RFS) partitioned the information impounded into stock prices into three sources, and anything left over is called pricing error and is attributed to noises.</p>
+<ul>
+<li>market-wide information, with the corresponding innovation term $\varepsilon_{r_m, t}$</li>
+<li>private firm-specific information incorporated through trading, with the corresponding innovation term $\varepsilon_{x, t}$</li>
+<li>and public firm-specific information such as firm-specific news disseminated in company announcements and by the media, with the corresponding innovation term $\varepsilon_{r, t}$</li>
+</ul>
+<p>By doing this, Brogaard et al. (2022, RFS)  decompose the stock returns into four parts</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Brogaard_decompose.png" width=500 height=100>
+    <br>
+</center>  
+<p>where $\theta_{r_m} \varepsilon_{r_m, t}$ captures the market-wide information incorporated into stock prices, $\theta_x \varepsilon_{x, t}$ captures the firm-specific private information revealed through submitted orders, and $\theta_r \varepsilon_{r, t}$ is the remaining part of firm-specific information that is not captured by trading on private information. $\Delta s_t$ represents changes in the pricing errors.</p>
+<center>
+      <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Brogaard_bp.png" width=800 height=300>
+      <br>
+      <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+      display: inline-block;
+      color: #999;
+      padding: 2px;">Figure 3: Decision Tree of Brogaard Decomposition</div>
+  </center>
+<p>Correspondingly, the variance of the realized stock returns $\sigma_r^2$ is composed of the following four parts:
+$$
+\begin{aligned} \text { MktInfo } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 \ \text { PrivateInfo } &amp;=\theta_x^2 \sigma_{\varepsilon_x}^2 \ \text { PublicInfo } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 \ \text { Noise } &amp;=\sigma_s^2 . \end{aligned}\notag
+$$
+Normalizing these variance components to sum to 100% gives variance shares:
+$$
+\begin{aligned}
+\text { MktInfoShare } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 /\sigma_r^2 \
+\text { PrivateInfoShare } &amp;=\theta_{x}^2 \sigma_{\varepsilon_x}^2 /\sigma_r^2 \
+\text { PublicInfoShare } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 /\sigma_r^2 \
+\text { NoiseShare } &amp;=\sigma_s^2 /\sigma_r^2 .
+\end{aligned} \notag
+$$
+where the variance of the realized stock returns $\sigma_r^2$ is the combination of the variance induced by informational shocks $\sigma_w^2$ and the variance attributed by noises $\sigma_s^2$.
+$$
+\sigma_r^2 = \sigma_w^2+\sigma_s^2 \notag
+$$</p>
+<h2 id="technique-details-in-brogaard-decomposition">Technique details in Brogaard decomposition</h2>
+<h3 id="define-the-system-of-brogaard-decomposition">Define the system of Brogaard decomposition</h3>
+<p>The system in Brogaard et al. (2022, RFS) is defined by a structural VAR with 3 variables and 5 lags</p>
+<p>$$
+\begin{aligned} r_{m, t} &amp;=\sum_{l=1}^5 a_{1, l} r_{m, t-l}+\sum_{l=1}^5 a_{2, l} x_{t-l}+\sum_{l=1}^5 a_{3, l} r_{t-l}+\varepsilon_{r_m, t} \ x_t &amp;=\sum_{l=0}^5 b_{1, l} r_{m, t-l}+\sum_{l=1}^5 b_{2, l} x_{t-l}+\sum_{l=1}^5 b_{3, l} r_{t-l}+\varepsilon_{x, t} \ r_t &amp;=\sum_{l=0}^5 c_{1, l} r_{m, t-l}+\sum_{l=0}^5 c_{2, l} x_{t-l}+\sum_{l=1}^5 c_{3, l} r_{t-l}+\varepsilon_{r, t} \end{aligned}\tag{B1}
+$$</p>
+<p>where</p>
+<ul>
+<li>$r_{m,t}$ is the market return, the corresponding innovation $\varepsilon_{r_{m,t}}$ represents innovations in market-wide information</li>
+<li>$x_t$ is the signed dollar volume of trading in the given stock, the corresponding innovation $\varepsilon_{x,t}$ represents innovations in firm-specific private information</li>
+<li>$r_t$ is the stock return, the corresponding innovation $\varepsilon_{r,t}$ represents innovations in firm-specific public information</li>
+<li>the authors assume that $\left{\varepsilon_{r_m, t}, \varepsilon_{x, t}, \varepsilon_{r, t}\right}$ are contemporaneously uncorrelated</li>
+</ul>
+<h3 id="identify-the-system-of-brogaard-decomposition">Identify the system of Brogaard decomposition</h3>
+<ul>
+<li>
+<p>first estimate the reduced-form version of the VAR model</p>
+<p>$$
+\begin{aligned}&amp;r_{m, t}=a_0^<em>+\sum_{l=1}^5 a_{1, l}^</em> r_{m, t-l}+\sum_{l=1}^5 a_{2, l}^* x_{t-l}+\sum_{l=1}^5 a_{3, l}^* r_{t-l}+e_{r_m, t} \&amp;x_t=b_0^<em>+\sum_{l=1}^5 b_{1, l}^</em> r_{m, t-l}+\sum_{l=1}^5 b_{2, l}^* x_{t-l}+\sum_{l=1}^5 b_{3, l}^* r_{t-l}+e_{x, t} \&amp;r_t=c_0^<em>+\sum_{l=1}^5 c_{1, l}^</em> r_{m, t-l}+\sum_{l=1}^5 c_{2, l}^* x_{t-l}+\sum_{l=1}^5 c_{3, l}^* r_{t-l}+e_{r, t}, \&amp;\end{aligned} \tag{B2}
+$$</p>
+</li>
+<li>
+<p>impose Cholesky decomposition, forcing all elements above the principal diagonal of $B^{-1}$ to be 0 so that the system can be exactly identified</p>
+<p>$$
+\left[\begin{array}{l}e_{r_m, t} \e_{x, t}\e_{r, t}\end{array}\right] = \left[\begin{array}{lll}1 &amp; 0&amp;0 \b_{1,0}&amp;1&amp;0\b_{2,0}&amp;b_{2,1}&amp;1\end{array}\right]\left[\begin{array}{l}\varepsilon_{r_m, t} \\varepsilon_{x, t}\\varepsilon_{r, t}\end{array}\right] \tag{B3}
+$$</p>
+</li>
+<li>
+<p>these imposed restrictions imply</p>
+<ul>
+<li>the market return $r_m$ is not contemporaneously affected by innovations in individual returns $\varepsilon_{r,t}$ or individual order imbalance/trading volume $\varepsilon_{x,t}$</li>
+<li>the individual order imbalance/trading volume is not contemporaneously affected by innovations in individual stock return $\varepsilon_{r,t}$</li>
+</ul>
+</li>
+<li>
+<p>the equation (B3) implies</p>
+<p>$$
+e_{r_m,t} = \varepsilon_{r_m,t}\e_{x,t} = \varepsilon_{x,t}+b_{1,0}\varepsilon_{r_m,t} =\varepsilon_{x,t}+b_{1,0} e_{r_m,t}  \tag{B4}
+$$</p>
+</li>
+<li>
+<p>for ease of estimation, to write $e_{r,t}$ as the function of $e_{r_m,t}$ and $e_{x,t}$</p>
+<p>$$
+e_{r,t}=c_{1,0} e_{r_m, t}+c_{2,0} e_{x, t}+\varepsilon_{r, t} \tag{B5}
+$$</p>
+</li>
+<li>
+<p>plug (B4) into (B5) and get</p>
+<p>$$
+e_{r,t}=\varepsilon_{r, t}+\left(c_{1,0}+c_{2,0} b_{1,0}\right) \varepsilon_{r_m, t}+c_{2,0} \varepsilon_{x, t} \tag{B6}
+$$</p>
+</li>
+<li>
+<p>thus</p>
+<ul>
+<li>regress the estimated reduced-form residual $e_{x,t}$ on $e_{r_m,t}$, one can get $b_{1,0}$</li>
+<li>regress the estimated reduced-form residual $e_{r,t}$ on $e_{r_m,t}$, one can get $c_{1,0}$</li>
+<li>regress the estimated reduced-form residual $e_{r,t}$ on $e_{x,t}$, one can get $c_{2,0}$</li>
+</ul>
+</li>
+<li>
+<p>with the estimated parameters $b_{1,0}, c_{1,0},c_{2,0}$ and the estimated variances of the reduced-form residuals $\left(\sigma_{e_{r_m}}^2, \sigma_{e_x}^2, \text { and } \sigma_{e_r}^2\right)$, one can obtain the variances of the innovation terms based on equation (B4) and (B6)</p>
+<p>$$
+\begin{aligned}\sigma_{\varepsilon_{r_m}}^2 &amp;=\sigma_{e_{r_m}}^2 \\sigma_{\varepsilon_x}^2 &amp;=\sigma_{e_x}^2-b_{1,0}^2 \sigma_{e_{r_m}}^2 \\sigma_{\varepsilon_r}^2 &amp;=\sigma_{e_r}^2-\left(c_{1,0}^2+2 c_{1,0} c_{2,0} b_{1,0}\right) \sigma_{e_{r_m}}^2-c_{2,0}^2 \sigma_{e_x}^2 .\end{aligned} \tag{B7}
+$$</p>
+<p>where</p>
+<p>$$
+\sigma_{\varepsilon_r}^2=\sigma_{e_r}^2-\left(c_{1,0}+c_{2,0} b_{1,0}\right)^2\sigma_{e_{r_m}}^2-c_{2,0}^2(\sigma_{e_x}^2-b_{1,0}^2 \sigma_{e_{r_m}}^2)
+$$</p>
+</li>
+<li>
+<p>the impulse response can be generically conducted with the exactly identified VAR system</p>
+</li>
+</ul>
+<h3 id="variance-decomposition-of-brogaard-decomposition">Variance decomposition of Brogaard decomposition</h3>
+<ul>
+<li>
+<p>the cumulative return response to each of the innovations $\left{\varepsilon_{r_m, t}, \varepsilon_{x, t}, \varepsilon_{r, t}\right}$ at $t$ =15 (point at which the authors believe the responses are generally stable) gives estimates of $\theta_{r_m}, \theta_x, \theta_r$ respectively</p>
+</li>
+<li>
+<p>in particular, the 15-step-ahead forecast error for stock return is</p>
+<p>$$
+\begin{aligned}r_{t+15}- E_t r_{t+15}&amp;=\phi_{31}(0) \varepsilon_{r_m t+15}+\phi_{31}(1) \varepsilon_{r_m t+15-1}+\cdots+\phi_{31}(14) \varepsilon_{r_m t+1} \&amp;+\phi_{32}(0) \varepsilon_{xt+15}+\phi_{32}(1) \varepsilon_{xt+15-1}+\cdots+\phi_{32}(14) \varepsilon_{xt+1} \&amp;+\phi_{33}(0) \varepsilon_{rt+15}+\phi_{33}(1) \varepsilon_{rt+15-1}+\cdots+\phi_{33}(14) \varepsilon_{rt+1} \end{aligned}
+$$</p>
+</li>
+<li>
+<p>the 15-step-ahead forecast error variance of $r_{t+15}$ should contain</p>
+</li>
+</ul>
+<p>$$
+\begin{aligned}\theta_{r_m}\sigma_{\varepsilon_{r_m}}^2+\theta_{x}\sigma_{\varepsilon_{x}}^2+\theta_{r}\sigma_{\varepsilon_{r}}^2&amp;=\sigma_{\varepsilon_{r_m}}^2\left[\phi_{31}(0)^2+\phi_{31}(1)^2+\cdots+\phi_{31}(14)^2\right]\&amp;+\sigma_{\varepsilon_x}^2\left[\phi_{32}(0)^2+\phi_{32}(1)^2+\cdots+\phi_{32}(14)^2\right]\&amp;+\sigma_{\varepsilon_r}^2\left[\phi_{31}(0)^2+\phi_{31}(1)^2+\cdots+\phi_{31}(14)^2\right]\end{aligned}
+$$</p>
+<ul>
+<li>anything left in $\sigma_r^2 (15)$ is attributed to noises</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>In this blog, I firstly discussed the potential of the variance decomposition method developed by Brogaard et al. (2022, RFS). Then I illustrate the intuition as well as the theoretical techniques employed by the Brogaard decomposition. In the next blog, I will show how to implement the Brogaard decomposition and use it to empower your own research. I put some necessary background knowledge which facilitates the better understanding the technique details of Brogaard decomposition for readers in need.</p>
+<h2 id="appendix-background-knowledge-on-var-impulse-reaction-and-variance-decomposition">Appendix: Background knowledge on VAR, Impulse Reaction, and Variance Decomposition</h2>
+<p>To help the readers (and also my self) better understand the technique details about the Brogaard decomposition, I summarized the background knowledge on the logics of VAR, Impulse Reaction, and Variance Decomposition. The following summary is based on P.264-P.311 of Enders (2004).</p>
+<h3 id="var-in-structural-and-reduced-form">VAR in structural and reduced form</h3>
+<p>Consider <em>a bivariate structural VAR system</em> composed by two $I(0)$ series ${y_{t}}$ and ${z_{t}}$</p>
+<p>$$
+\begin{aligned}&amp;y_t=b_{10}-b_{12} z_t+\gamma_{11} y_{t-1}+\gamma_{12} z_{t-1}+\epsilon_{y t} \&amp;z_t=b_{20}-b_{21} y_t+\gamma_{21} y_{t-1}+\gamma_{22} z_{t-1}+\epsilon_{z t}\end{aligned} \tag{1}
+$$</p>
+<p>where ${\epsilon_{y t}}$ and ${\epsilon_{z t}}$ are uncorrelated white-noise disturbances.</p>
+<p><em>This is not a VAR in reduced form since $y_{t}$  and $z_{t}$ has a contemporaneous effect on each other</em>.</p>
+<p>Represent Equation (1) in a compact form</p>
+<p>$$
+B x_t=\Gamma_0+\Gamma_1 x_{t-1}+\epsilon_t \tag{2}
+$$</p>
+<p>where</p>
+<p>$$
+\begin{aligned}&amp;B=\left[\begin{array}{cc}1 &amp; b_{12} \b_{21} &amp; 1\end{array}\right], \quad x_t=\left[\begin{array}{l}y_t \z_1\end{array}\right], \quad \Gamma_0=\left[\begin{array}{l}b_{10} \b_{20}\end{array}\right] \&amp;\Gamma_1=\left[\begin{array}{ll}\gamma_{11} &amp; \gamma_{12} \\gamma_{21} &amp; \gamma_{22}\end{array}\right], \quad \epsilon_t=\left[\begin{array}{l}\epsilon_{y t} \\epsilon_{z t}\end{array}\right] \&amp;\end{aligned}
+$$</p>
+<p><em>Pre-multiply $B^{-1}$ to obtain VAR model in standard (reduced) form</em></p>
+<p>$$
+x_t=A_0+A_1 x_{r-1}+e_t \tag{3}
+$$</p>
+<p>where</p>
+<p>$$
+\begin{aligned}&amp;A_0=B^{-1} \Gamma_0 \&amp;A_1=B^{-1} \Gamma_1 \&amp;e_1=B^{-1} \epsilon_1\end{aligned}
+$$</p>
+<p>in this special case</p>
+<p>$$
+B^{-1}=\frac{1}{1-b_{12}b_{21}}\left[\begin{array}{cc}1 &amp; -b_{12} \-b_{21} &amp; 1\end{array}\right]
+$$</p>
+<p>and thus</p>
+<p>$$
+\left[\begin{array}{l}e_{y t} \e_{z t}\end{array}\right] = B^{-1}\left[\begin{array}{l}\epsilon_{y t} \\epsilon_{z t}\end{array}\right]=\left[\begin{array}{l}\left(\epsilon_{y t}-b_{12} \epsilon_{2 t}\right) /\left(1-b_{12} b_{21}\right) \\left(\epsilon_{z t}-b_{21} \epsilon_{y t}\right) /\left(1-b_{12} b_{21}\right)\end{array}\right]  \tag{4}
+$$</p>
+<h3 id="identification-logic">Identification logic</h3>
+<ul>
+<li>as in the reduced form, the right hand side only contains predetermined variables and the error terms are assumed to be serially uncorrelated with constant variance, <em>each equation in the reduced-form system can be estimated using OLS.</em>
+<ul>
+<li>
+<p>the latter feature is obtained because the disturbance terms are assumed to be uncorrelated white noise series, which results</p>
+<p>$$
+E e_{1t} e_{1 t-i}=E\frac{\left[\left(\epsilon_{y t}-b_{12} \epsilon_{2 t}\right)\left(\epsilon_{y t-i}-b_{12} \epsilon_{z t-i}\right)\right]}{\left(1-b_{12} b_{21}\right)^2}=0,
+\forall i \neq 0
+$$</p>
+</li>
+<li>
+<p>the OLS estimation is proved to be consistent and asymptotically efficient in reduced form</p>
+</li>
+</ul>
+</li>
+<li>however, we care about how does the innovations cause contemporaneous changes in focal variables</li>
+<li>thus, the typical logic of VAR estimation is to employ OLS to <em>estimate the reduced-form VAR first</em>, and then <em>back out the coefficients in the structural VAR using the parameters estimated in the reduced-form VAR</em></li>
+</ul>
+<h3 id="identification-techniques">Identification Techniques</h3>
+<h4 id="necessity-of-adding-restrictions-for-identification">Necessity of adding restrictions for identification</h4>
+<p>Consider a first-order VAR model with $n$ variables <em>(the identification procedure is invariant to lag length)</em>.</p>
+<p>$$
+\left[\begin{array}{ccccc}1 &amp; b_{12} &amp; b_{13} &amp; \ldots &amp; b_{1 n} \b_{21} &amp; 1 &amp; b_{23} &amp; \ldots &amp; b_{2 n} \\cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \b_{n 1} &amp; b_{n 2} &amp; b_{n 3} &amp; \ldots &amp; 1\end{array}\right]\left[\begin{array}{c}x_{11} \x_{2 t} \\ldots \x_{n t}\end{array}\right]=\left[\begin{array}{c}b_{10} \b_{20} \\ldots \b_{n 0}\end{array}\right]+\left[\begin{array}{ccccc}
+\gamma_{11} &amp; \gamma_{12} &amp; \gamma_{13} &amp; \ldots &amp; \gamma_{1 n} \
+\gamma_{21} &amp; \gamma_{22} &amp; \gamma_{23} &amp; \ldots &amp; \gamma_{2 n} \
+\cdot &amp; \cdot &amp; \cdot &amp; . &amp; \cdot \
+\gamma_{n 1} &amp; \gamma_{n 2} &amp; \gamma_{n 3} &amp; \ldots &amp; \gamma_{n n}
+\end{array}\right]\left[\begin{array}{c}
+x_{1 t-1} \
+x_{2 t-1} \
+\ldots \
+x_{n t-1}
+\end{array}\right]+\left[\begin{array}{c}
+\epsilon_{1 t} \
+\epsilon_{2 t} \
+\ldots \
+\epsilon_{n t}
+\end{array}\right] \tag{5}
+$$</p>
+<p>or in compact form</p>
+<p>$$
+B x_t=\Gamma_0+\Gamma_1 x_{t-1}+\epsilon_t \tag{6}
+$$</p>
+<p>pre-multiply (5) with $B^{-1}$ and get the reduced form</p>
+<p>$$
+x_t=B^{-1} \Gamma_0+B^{-1} \Gamma_1 x_{t-1}+B^{-1} \epsilon_t \tag{7}
+$$</p>
+<p>in practice, we use OLS to estimate each regression in system $(6)$ and get the variance-covariance matrix $\Sigma$</p>
+<p>$$
+\Sigma=\left[\begin{array}{cccc}\sigma_1^2 &amp; \sigma_{12} &amp; \ldots &amp; \sigma_{1 n} \\sigma_{21} &amp; \sigma_2^2 &amp; \ldots &amp; \sigma_{2 n} \\cdot &amp; \cdot &amp; . &amp; . \\sigma_{n 1} &amp; \sigma_{n 2} &amp; \ldots &amp; \sigma_n^2\end{array}\right]
+$$</p>
+<p>since $\Sigma$ is symmetric, we can only get $(n^2+n)/2$ distinct equations for identification.</p>
+<p>however, the identification of $B$ needs $n^2$ conditions.</p>
+<p>Thus, <em>we need to impose $n^2-(n^2+n)/2=(n^2-n)/2$ restrictions to matrix $B$  to exactly identify the structural model from an estimation of the reduce-form VAR.</em></p>
+<p>The way of adding restrictions can differ with economic contexts, but there are mainly two prevalent procedures in use.</p>
+<h4 id="sims-bernanke-procedure">Sims-Bernanke procedure</h4>
+<ul>
+<li>
+<p>this procedure is represented by Sims (1986) and Bernanke (1986).</p>
+</li>
+<li>
+<p><em>in this procedure, the scholars force all elements above the principal diagonal of $B^{-1}$ to be 0, which is also called <strong>Cholesky decomposition</strong></em></p>
+<p>$$
+\begin{aligned}b_{12}=b_{13}=b_{14}=\cdots &amp;=b_{1 n}=0 \b_{23}=b_{24}=\cdots &amp;=b_{2 n}=0 \b_{34}=\cdots &amp;=b_{3 n}=0 \&amp; \cdots \b_{n-1 n} &amp;=0\end{aligned}
+$$</p>
+</li>
+<li>
+<p>by doing this, there are $(n^2-n)/2$ restrictions manually imposed to the matrix $B$, which facilitates the exact identification of $B$</p>
+</li>
+</ul>
+<h4 id="blanchard-quach-procedure">Blanchard-Quach procedure</h4>
+<ul>
+<li>this procedure is represented by Blanchard and Quach (1989), which reconsidered the Beveridge and Nelson (1981) decomposition of real GNP into its temporary and permanent components
+<ul>
+<li>an especially useful feature of the technique is that it provides a unique <em>decomposition of an economic time series into its temporary and permanent components</em></li>
+</ul>
+</li>
+<li>differences from Sims-Bernanke procedure
+<ul>
+<li>at least one variables to be nonstationary since $I(0)$ do not have a permanent component</li>
+<li>do not directly associate the ${\varepsilon_{1t}}$ and ${\varepsilon_{2t}}$ shocks with the ${y_t}$ and ${z_t}$ variables</li>
+</ul>
+</li>
+<li><em>the key to decomposing the ${y_t}$ sequence (or other non-stationary sequences in the VAR system) into its permanent and stationary components is to assume that at least one of the shocks has a temporary effect on the ${y_t}$ sequence, which allows the identification of the structural VAR</em></li>
+</ul>
+<h5 id="example">Example</h5>
+<ul>
+<li>
+<p>to illustrate the idea better, consider a bivariate VAR system with ${y_t}$  being a $I(1)$ series. write it into a VMA form as follows.</p>
+<p>$$
+\begin{gathered}\Delta y_t=\sum_{k=0}^{\infty} c_{11}(k) \epsilon_{1 t-k}+\sum_{k=0}^{\infty} c_{12}(k) \epsilon_{2 t-k} \z_t=\sum_{k=0}^{\infty} c_{21}(k) \epsilon_{1 t-k}+\sum_{k=0}^{\infty} c_{22}(k) \epsilon_{2 t-k}\end{gathered}
+$$</p>
+</li>
+<li>
+<p>the key assumption of Blanchard-Quach procedure is that <em>the cumulated effect of the shock ${\varepsilon_{1t}}$ on the $\Delta y_t$ sequence must be equal to zero</em>, for any possible realization of the ${\varepsilon_{1t}}$ sequence</p>
+<p>$$
+\sum_{k=0}^{\infty} c_{11}(k) \epsilon_{1 t-k}=0
+$$</p>
+</li>
+<li>
+<p>this restrictions combined with the three distinct variance-covariance parameters $var(e_1), var(e_2), cov(e_1,e_2)$  estimated from the reduced-form VAR can achieve the exact identification of the $2\times2$ matrix $B$  in this bivariate VAR system</p>
+</li>
+</ul>
+<h3 id="impulse-response">Impulse response</h3>
+<h4 id="logic-of-impulse-response">Logic of impulse response</h4>
+<ul>
+<li>the idea of impulse response is to <em>trace the effects of a one-unit shock in $\epsilon_{y t}$ and $\epsilon_{z t}$ on the time paths of the ${y_{t}}$ and ${z_{t}}$ sequences</em></li>
+<li>to achieve this goal, it would be more convenient to represent ${y_{t}}$ and ${z_{t}}$ sequences using the ${\epsilon_{y t}}$ and ${\epsilon_{z t}}$ sequences, which means <em>transferring VAR to a VMA model</em></li>
+<li>to illustrate the intuition better, the derivation of the impulse response function will still be based on the bivariate VAR system</li>
+</ul>
+<h4 id="from-var-to-vma">From VAR to VMA</h4>
+<ul>
+<li>
+<p>start from the reduced-form VAR represented by equation (3)</p>
+<p>$$
+x_t=A_0+A_1 x_{r-1}+e_t
+$$</p>
+</li>
+<li>
+<p>iterate the above equation to obtain</p>
+<p>$$
+\begin{aligned}x_t &amp;=A_0+A_1\left(A_0+A_1 x_{t-2}+e_{t-1}\right)+e_t \&amp;=\left(I+A_1\right) A_0+A_1^2 x_{t-2}+A_1 e_{t-1}+e_t\end{aligned}
+$$</p>
+</li>
+<li>
+<p>after $n$ iterations</p>
+<p>$$
+x_t=\left(I+A_1+\cdots+A_1^n\right) A_0+\sum_{i=0}^n A_1^i e_{t-i}+A_1^{n+1} x_{t-n-1}
+$$</p>
+</li>
+<li>
+<p>if $x_t$ should converge, then the term $A^n$ needs to vanish as $n$ approaches infinity</p>
+</li>
+<li>
+<p>assume the stability condition is met, we can write the VAR model in a VMA form</p>
+<p>$$
+x_t=\mu+\sum_{i=0}^{\infty} A_1^i e_{t-i} \tag{8}
+$$</p>
+<p>where $\mu=\left[\begin{array}{ll}\bar{y} &amp; \bar{z}\end{array}\right]^{\prime}$</p>
+<p>and</p>
+<p>$$
+\begin{aligned}&amp;\bar{y}=\left[a_{10}\left(1-a_{22}\right)+a_{12} a_{20}\right] / \Delta, \quad \bar{z}=\left[a_{20}\left(1-a_{11}\right)+a_{21} a_{10}\right] / \Delta \&amp;\Delta=\left(1-a_{11}\right)\left(1-a_{22}\right)-a_{12} a_{21}\end{aligned}
+$$</p>
+<p>note that $\mu$ can be calculated by applying the following formula</p>
+<p>$$
+I+A_1+&hellip;+A_1^n = [I-A_1]^{-1}
+$$</p>
+</li>
+</ul>
+<h4 id="from-vma-to-impulse-response-function">From VMA to impulse response function</h4>
+<ul>
+<li>
+<p>start from equation (8), which is the VMA representation of VAR model</p>
+<p>$$
+x_t=\mu+\sum_{i=0}^{\infty} A_1^i e_{t-i}
+$$</p>
+</li>
+<li>
+<p>write in a loose form</p>
+<p>$$
+\left[\begin{array}{l}y_t \z_t\end{array}\right]=\left[\begin{array}{l}\bar{y} \\bar{z}\end{array}\right]+\sum_{i=0}^{\infty}\left[\begin{array}{ll}a_{11} &amp; a_{12} \a_{21} &amp; a_{22}\end{array}\right]^i\left[\begin{array}{l}e_{1 t-i} \e_{2 t-i}\end{array}\right]
+$$</p>
+</li>
+<li>
+<p>recall from equation (4) the relationship between reduced-form error term and the innovations</p>
+<p>$$
+\left[\begin{array}{l}e_{1 t} \e_{2 t}\end{array}\right] = B^{-1}\left[\begin{array}{l}\epsilon_{y t} \\epsilon_{z t}\end{array}\right]=\frac{1}{1-b_{12}b_{21}}\left[\begin{array}{cc}1 &amp; -b_{12} \-b_{21} &amp; 1\end{array}\right] \left[\begin{array}{l}\epsilon_{y t} \\epsilon_{z t}\end{array}\right]
+$$</p>
+</li>
+<li>
+<p>the VMA representation of VAR model can be rewritten in terms of ${\epsilon_{y t}}$ and ${\epsilon_{z t}}$ sequences</p>
+<p>$$
+\left[\begin{array}{l}y_t \z_t\end{array}\right]=\left[\begin{array}{l}\bar{y}<em>t \\bar{z}<em>t\end{array}\right]+\frac{1}{1-b</em>{12} b</em>{21}}\sum_{i=0}^{\infty}\left[\begin{array}{ll}a_{11} &amp; a_{12} \a_{21} &amp; a_{22}\end{array}\right]^i\left[\begin{array}{cc}1 &amp; -b_{12} \-b_{21} &amp; 1\end{array}\right]\left[\begin{array}{l}\epsilon_{y t-i} \\epsilon_{z t-i}\end{array}\right]
+$$</p>
+</li>
+<li>
+<p>use $\phi_{ij}(k)$ to represent the impulse response coefficients</p>
+<p>$$
+\left[\begin{array}{l}y_t \z_t\end{array}\right]=\left[\begin{array}{l}\bar{y} \\bar{z}\end{array}\right]+\sum_{i=0}^{\infty}\left[\begin{array}{ll}\phi_{11}(i) &amp; \phi_{12}(i) \\phi_{21}(i) &amp; \phi_{22}(i)\end{array}\right]\left[\begin{array}{l}\epsilon_{y t-i} \\epsilon_{z t-i}\end{array}\right]
+$$</p>
+</li>
+<li>
+<p>in a compact format</p>
+<p>$$
+x_t=\mu+\sum_{i=0}^{\infty} \phi_i \epsilon_{t-i} \tag{9}
+$$</p>
+</li>
+<li>
+<p>the accumulated effects of unit impulses in **$\epsilon_{y t}$ and $<em>\epsilon_{z t}$</em> can be obtained by appropriate summation of the coefficients of the impulse response functions</p>
+<ul>
+<li>
+<p>for example, after $n$ periods, the cumulated sum of effects of $\epsilon_{zt}$ on the ${y_t}$ sequence is</p>
+<p>$$
+\sum_{i=0}^n \phi_{12}(i)
+$$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="confidence-intervals-of-impulse-response-coefficients">Confidence intervals of impulse response coefficients</h4>
+<ul>
+<li>draw $T$, which is the sample size, random numbers so as to represent ${\epsilon}$ sequence and then use it combined with the naive estimation of reduced-form VAR to construct ${\hat{x}}$ series, then estimate the impulse response function</li>
+<li>repeat the above procedure for 1000 times or more and use the realized impulse response coefficients to get bootstrap confidence intervals</li>
+</ul>
+<h3 id="variance-decomposition">Variance decomposition</h3>
+<ul>
+<li>
+<p>start from equation (9), which is the impulse response equations</p>
+<p>$$
+x_t=\mu+\sum_{i=0}^{\infty} \phi_i \epsilon_{t-i}
+$$</p>
+</li>
+<li>
+<p>suppose now we are forecast the $n$ periods after $t$</p>
+<p>$$
+x_{t+n}=\mu+\sum_{i=0}^{\infty} \phi_i \epsilon_{t+n-i}
+$$</p>
+</li>
+<li>
+<p>as both ${\epsilon_{y t}}$ and ${\epsilon_{z t}}$ are white-noise disturbances, the $n$-period forecast error is</p>
+<p>$$
+x_{t+n}-E_t x_{t+n}=\sum_{i=0}^{n-1} \phi_i \epsilon_{t+n-i} \tag{10}
+$$</p>
+</li>
+<li>
+<p>take the ${y_t}$ sequence as an example, the $n$-period forecast error is</p>
+<p>$$
+\begin{aligned}y_{t+n}-&amp; E_t y_{t+n}=\phi_{11}(0) \epsilon_{y t+n}+\phi_{11}(1) \epsilon_{y t+n-1}+\cdots+\phi_{11}(n-1) \epsilon_{y t+1} \&amp;+\phi_{12}(0) \epsilon_{z t+n}+\phi_{12}(1) \epsilon_{z t+n-1}+\cdots+\phi_{12}(n-1) \epsilon_{z t+1}\end{aligned}
+$$</p>
+</li>
+<li>
+<p>denote the $n$-step-ahead forecast error variance of $y_{t+n}$ as $\sigma_y(n)^2$</p>
+<p>$$
+\sigma_y(n)^2=\sigma_y^2\left[\phi_{11}(0)^2+\phi_{11}(1)^2+\cdots+\phi_{11}(n-1)^2\right]+\sigma_z^2\left[\phi_{12}(0)^2+\phi_{12}(1)^2+\cdots+\phi_{12}(n-1)^2\right]
+$$</p>
+</li>
+<li>
+<p>thus, it’s possible to decompose the $n$-step-ahead forecast error variance into proportions due to innovations in ${\epsilon_{y t}}$ and ${\epsilon_{z t}}$ respectively</p>
+<p>$$
+\begin{gathered}\frac{\sigma_y^2\left[\phi_{11}(0)^2+\phi_{11}(1)^2+\cdots+\phi_{11}(n-1)^2\right]}{\sigma_y(n)^2} \\frac{\sigma_z^2\left[\phi_{12}(0)^2+\phi_{12}(1)^2+\cdots+\phi_{12}(n-1)^2\right]}{\sigma_y(n)^2}\end{gathered}
+$$</p>
+</li>
+</ul>
+<h2 id="main-references">Main References</h2>
+<ol>
+<li>Bernanke, Ben S. &ldquo;Alternative explanations of the money-income correlation.&rdquo; (1986).</li>
+<li>Beveridge, Stephen, and Charles R. Nelson. &ldquo;A new approach to decomposition of economic time series into permanent and transitory components with particular attention to measurement of the ‘business cycle’.&rdquo; <em>Journal of Monetary Economics</em> 7, no. 2 (1981): 151-174.</li>
+<li>Blanchard, Olivier J., and Danny Quah.  &ldquo;The Dynamic Effects of Aggregate Demand and Supply Disturbances.&rdquo; <em>The American Economic Review</em> 79, no. 4 (1989): 655-673.</li>
+<li>Enders, Walter. &ldquo;Applied Econometric Time Series.“2th ed”.&rdquo; <em>New York (US): University of Alabama</em> (2004).</li>
+<li>Sims, Christopher A. &ldquo;Macroeconomics and reality.&rdquo; <em>Econometrica</em> (1980): 1-48.</li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/seeking-alpha-from-investor-attention/" data-toggle="tooltip" data-placement="top" title="Seeking Alpha From Market Participants&#39; Information Acquisition Actions">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="hyvor-talk-view"></div>
+<script type="text/javascript">
+    var HYVOR_TALK_WEBSITE = 4329; 
+    var HYVOR_TALK_CONFIG = {
+        url: false,
+        id: false
+};
+</script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+</div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
