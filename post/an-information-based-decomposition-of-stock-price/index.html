@@ -78,7 +78,32 @@
     
     
 
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+    <script type="text/x-mathjax-config">
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  }
+</script>
     
+    <script>
+      renderMathInElement(
+          document.body,
+          {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+          }
+      );
+    </script>
+
     
     <script src="/js/jquery.min.js"></script>
     
@@ -90,6 +115,10 @@
 
     
     
+
+
+
+
 
 </head>
 
@@ -295,9 +324,9 @@
 </center>     
 <p>Having established the idea to identify the impact of informational shocks on stock price adjustment, Brogaard et al. (2022, RFS) partitioned the information impounded into stock prices into three sources, and anything left over is called pricing error and is attributed to noises.</p>
 <ul>
-<li>market-wide information, with the corresponding innovation term $\varepsilon_{r_m, t}$</li>
-<li>private firm-specific information incorporated through trading, with the corresponding innovation term $\varepsilon_{x, t}$</li>
-<li>and public firm-specific information such as firm-specific news disseminated in company announcements and by the media, with the corresponding innovation term $\varepsilon_{r, t}$</li>
+<li>market-wide information, with the corresponding innovation term \(\varepsilon_{r_m, t}\)</li>
+<li>private firm-specific information incorporated through trading, with the corresponding innovation term \(\varepsilon_{x, t}\)</li>
+<li>and public firm-specific information such as firm-specific news disseminated in company announcements and by the media, with the corresponding innovation term \(\varepsilon_{r, t}\)</li>
 </ul>
 <p>By doing this, Brogaard et al. (2022, RFS)  decompose the stock returns into four parts</p>
 <center>
@@ -306,7 +335,7 @@
     src="https://fig-lianxh.oss-cn-shenzhen.aliyuncs.com/Brogaard_decompose.png" width=500 height=100>
     <br>
 </center>  
-<p>where $\theta_{r_m} \varepsilon_{r_m, t}$ captures the market-wide information incorporated into stock prices, $\theta_x \varepsilon_{x, t}$ captures the firm-specific private information revealed through submitted orders, and $\theta_r \varepsilon_{r, t}$ is the remaining part of firm-specific information that is not captured by trading on private information. $\Delta s_t$ represents changes in the pricing errors.</p>
+<p>where \(\theta_{r_m} \varepsilon_{r_m, t}\) captures the market-wide information incorporated into stock prices,  \(\theta_x \varepsilon_{x, t}\)  captures the firm-specific private information revealed through submitted orders, and \(\theta_r \varepsilon_{r, t}\)  is the remaining part of firm-specific information that is not captured by trading on private information. \(\Delta s_t\) represents changes in the pricing errors.</p>
 <center>
       <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -317,20 +346,20 @@
       color: #999;
       padding: 2px;">Figure 3: Decision Tree of Brogaard Decomposition</div>
   </center>
-<p>Correspondingly, the variance of the realized stock returns $\sigma_r^2$ is composed of the following four parts:
+<p>Correspondingly, the variance of the realized stock returns \(\sigma_r^2\) is composed of the following four parts:
 $$
-\begin{aligned} \text { MktInfo } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 \ \text { PrivateInfo } &amp;=\theta_x^2 \sigma_{\varepsilon_x}^2 \ \text { PublicInfo } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 \ \text { Noise } &amp;=\sigma_s^2 . \end{aligned}\notag
+\begin{aligned} \text { MktInfo } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 \\\ \text { PrivateInfo } &amp;=\theta_x^2 \sigma_{\varepsilon_x}^2 \\\ \text { PublicInfo } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 \\\ \text { Noise } &amp;=\sigma_s^2 . \end{aligned}\notag
 $$
 Normalizing these variance components to sum to 100% gives variance shares:
 $$
 \begin{aligned}
-\text { MktInfoShare } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 /\sigma_r^2 \
-\text { PrivateInfoShare } &amp;=\theta_{x}^2 \sigma_{\varepsilon_x}^2 /\sigma_r^2 \
-\text { PublicInfoShare } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 /\sigma_r^2 \
+\text { MktInfoShare } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 /\sigma_r^2 \\\
+\text { PrivateInfoShare } &amp;=\theta_{x}^2 \sigma_{\varepsilon_x}^2 /\sigma_r^2 \\\
+\text { PublicInfoShare } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 /\sigma_r^2 \\\
 \text { NoiseShare } &amp;=\sigma_s^2 /\sigma_r^2 .
 \end{aligned} \notag
 $$
-where the variance of the realized stock returns $\sigma_r^2$ is the combination of the variance induced by informational shocks $\sigma_w^2$ and the variance attributed by noises $\sigma_s^2$.
+where the variance of the realized stock returns \(\sigma_r^2\) is the combination of the variance induced by informational shocks \(\sigma_w^2\) and the variance attributed by noises \(\sigma_s^2\).
 $$
 \sigma_r^2 = \sigma_w^2+\sigma_s^2 \notag
 $$</p>
@@ -338,14 +367,16 @@ $$</p>
 <h3 id="define-the-system-of-brogaard-decomposition">Define the system of Brogaard decomposition</h3>
 <p>The system in Brogaard et al. (2022, RFS) is defined by a structural VAR with 3 variables and 5 lags</p>
 <p>$$
-\begin{aligned} r_{m, t} &amp;=\sum_{l=1}^5 a_{1, l} r_{m, t-l}+\sum_{l=1}^5 a_{2, l} x_{t-l}+\sum_{l=1}^5 a_{3, l} r_{t-l}+\varepsilon_{r_m, t} \ x_t &amp;=\sum_{l=0}^5 b_{1, l} r_{m, t-l}+\sum_{l=1}^5 b_{2, l} x_{t-l}+\sum_{l=1}^5 b_{3, l} r_{t-l}+\varepsilon_{x, t} \ r_t &amp;=\sum_{l=0}^5 c_{1, l} r_{m, t-l}+\sum_{l=0}^5 c_{2, l} x_{t-l}+\sum_{l=1}^5 c_{3, l} r_{t-l}+\varepsilon_{r, t} \end{aligned}\tag{B1}
+r_{m, t} =\sum_{l=1}^5 a_{1, l} r_{m, t-l}+\sum_{l=1}^5 a_{2, l} x_{t-l}+\sum_{l=1}^5 a_{3, l} r_{t-l}+\varepsilon_{r_m, t}
 $$</p>
+<p>$$x_t =\sum_{l=0}^5 b_{1, l} r_{m, t-l}+\sum_{l=1}^5 b_{2, l} x_{t-l}+\sum_{l=1}^5 b_{3, l} r_{t-l}+\varepsilon_{x, t}$$</p>
+<p>$$r_t =\sum_{l=0}^5 c_{1, l} r_{m, t-l}+\sum_{l=0}^5 c_{2, l} x_{t-l}+\sum_{l=1}^5 c_{3, l} r_{t-l}+\varepsilon_{r, t}\tag{B1}$$</p>
 <p>where</p>
 <ul>
-<li>$r_{m,t}$ is the market return, the corresponding innovation $\varepsilon_{r_{m,t}}$ represents innovations in market-wide information</li>
-<li>$x_t$ is the signed dollar volume of trading in the given stock, the corresponding innovation $\varepsilon_{x,t}$ represents innovations in firm-specific private information</li>
-<li>$r_t$ is the stock return, the corresponding innovation $\varepsilon_{r,t}$ represents innovations in firm-specific public information</li>
-<li>the authors assume that $\left{\varepsilon_{r_m, t}, \varepsilon_{x, t}, \varepsilon_{r, t}\right}$ are contemporaneously uncorrelated</li>
+<li>\(r_{m,t}\) is the market return, the corresponding innovation \(\varepsilon_{r_{m,t}}\) represents innovations in market-wide information</li>
+<li>\(x_t\) is the signed dollar volume of trading in the given stock, the corresponding innovation \(\varepsilon_{x,t}\) represents innovations in firm-specific private information</li>
+<li>\(r_t\) is the stock return, the corresponding innovation \(\varepsilon_{r,t}\) represents innovations in firm-specific public information</li>
+<li>the authors assume that \(\{\varepsilon_{r_m, t}, \varepsilon_{x, t}, \varepsilon_{r, t}\}\) are contemporaneously uncorrelated</li>
 </ul>
 <h3 id="identify-the-system-of-brogaard-decomposition">Identify the system of Brogaard decomposition</h3>
 <ul>
@@ -882,6 +913,20 @@ $$</p>
 
 
 
+
+<script>
+      renderMathInElement(
+          document.body,
+          {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+          }
+      );
+    </script>
 
 
 
