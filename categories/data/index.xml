@@ -6,7 +6,16 @@
     <description>Recent content in Data on Mengjie Xu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/categories/data/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/categories/data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Estimations of VAR, IRFs, and Variance Decomposition in Stata</title>
+      <link>https://xumj2021.github.io/post/common-practice-of-var-estimation-in-stata/</link>
+      <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/common-practice-of-var-estimation-in-stata/</guid>
+      <description>Motivation In my last blog, I recognized the potential of the information-based variance decomposition method introduced by Brogaard et al. (2022, RFS) and showed interests of applying this method into my own research. As replicating Brogaard et al. (2022, RFS) requires some manipulations on the VAR estimation outputs, I took some time to figure out how Stata produced the reduced-form VAR coefficients, Impulse response functions (IRFs), structural IRFS, orthogonalized IRFs, and variance decomposition.</description>
+    </item>
+    
     <item>
       <title>Seeking Alpha From Market Participants&#39; Information Acquisition Actions</title>
       <link>https://xumj2021.github.io/post/seeking-alpha-from-investor-attention/</link>

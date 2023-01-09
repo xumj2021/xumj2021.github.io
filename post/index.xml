@@ -6,7 +6,26 @@
     <description>Recent content in Posts on Mengjie Xu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://xumj2021.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata</title>
+      <link>https://xumj2021.github.io/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/</link>
+      <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/</guid>
+      <description>Motivation While people can always use integrated commands in Stata (e.g., var and svar) to produce abundant outputs of VAR estimation, many can not confidently interpret these results without knowing how they are theoretically defined and practically calculated. Manually replicating the outputs of the Stata&amp;rsquo;s integrated commands for VAR estimation will be very helpful to resolve this issue.
+In this blog, I will firstly provide the theoretical calculation formulas of reduced-form coefficients, IRFs, Structural IRFs, Orthogonalized IRFs, and Forecast Error Variance Decomposition.</description>
+    </item>
+    
+    <item>
+      <title>Estimations of VAR, IRFs, and Variance Decomposition in Stata</title>
+      <link>https://xumj2021.github.io/post/common-practice-of-var-estimation-in-stata/</link>
+      <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumj2021.github.io/post/common-practice-of-var-estimation-in-stata/</guid>
+      <description>Motivation In my last blog, I recognized the potential of the information-based variance decomposition method introduced by Brogaard et al. (2022, RFS) and showed interests of applying this method into my own research. As replicating Brogaard et al. (2022, RFS) requires some manipulations on the VAR estimation outputs, I took some time to figure out how Stata produced the reduced-form VAR coefficients, Impulse response functions (IRFs), structural IRFS, orthogonalized IRFs, and variance decomposition.</description>
+    </item>
+    
     <item>
       <title>Theory for the information-based decomposition of stock price</title>
       <link>https://xumj2021.github.io/post/an-information-based-decomposition-of-stock-price/</link>

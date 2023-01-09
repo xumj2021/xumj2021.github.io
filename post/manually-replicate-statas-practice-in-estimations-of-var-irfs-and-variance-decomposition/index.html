@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+
+   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-309KENXF47');
+    </script>
+
+
+  
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Mengjie Xu">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962">
+    <meta property="twitter:image" content="https://xumj2021.github.io/https://img-blog.csdnimg.cn/cover1/256296177691263050.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,image_MjAyMDA3MTUxNjIxMDEzOC5wbmc=,size_16,color_FFFFFF,t_70,image/resize,m_lfit,w_962" />
+    
+
+    
+    <meta name="title" content="Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata" />
+    <meta property="og:title" content="Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata" />
+    <meta property="twitter:title" content="Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata" />
+    
+
+    
+    <meta name="description" content="Manually replicate all the major outputs of VAR estimation">
+    <meta property="og:description" content="Manually replicate all the major outputs of VAR estimation" />
+    <meta property="twitter:description" content="Manually replicate all the major outputs of VAR estimation" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata-Mengjie&#39;s Blog</title>
+
+    <link rel="canonical" href="/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+  
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+    <script type="text/x-mathjax-config">
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  }
+</script>
+    
+    <script>
+      renderMathInElement(
+          document.body,
+          {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+          }
+      );
+    </script>
+
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+
+
+
+
+</head>
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mengjie Xu</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/anecdotes">anecdotes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/crawler">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/theory">theory</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/"></a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://assets.bbhub.io/professional/sites/10/Rectangle-21.png')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/time-series" title="Time Series">
+                            Time Series
+                        </a>
+                        
+                        <a class="tag" href="/tags/var" title="VAR">
+                            VAR
+                        </a>
+                        
+                    </div>
+                    <h1>Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Mengjie Xu
+                         
+                        on 
+                        Monday, January 9, 2023
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>Contents</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#motivation">Motivation</a></li>
+    <li><a href="#theoretical-definitions-and-calculation-formulas">Theoretical Definitions and Calculation Formulas</a>
+      <ul>
+        <li><a href="#define-the-var-system">Define the VAR system</a></li>
+        <li><a href="#calculate-reduced-form-coefficients-a_ii12p">Calculate reduced-form coefficients $A_i(i=1,2,..,p)$</a></li>
+        <li><a href="#calculate-impulse-response-coefficients-phil">Calculate Impulse Response Coefficients $\Phi(L)$</a></li>
+        <li><a href="#calculate-orthogonalized-irfs-thetal-">Calculate Orthogonalized IRFs $\Theta(L) $</a></li>
+        <li><a href="#calculate-orthogonalized-structural-irfs-psil">Calculate (Orthogonalized) Structural IRFs $\Psi(L)$</a></li>
+        <li><a href="#calculate-forecast-error-variance-decomposition-fevd">Calculate Forecast Error Variance Decomposition (FEVD)</a></li>
+        <li><a href="#summary-of-formulas">Summary of formulas</a></li>
+      </ul>
+    </li>
+    <li><a href="#manually-compute-the-var-outputs-in-stata">Manually Compute the VAR outputs in Stata</a>
+      <ul>
+        <li><a href="#import-data-and-define-global-variables">Import Data and define global variables</a></li>
+        <li><a href="#compute-reduced-form-coefficients-a_ii12p">Compute reduced-form coefficients $A_i(i=1,2,..,p)$</a></li>
+        <li><a href="#compute-and-decompose-the-covariance-matrix-sigma_e-and-sigma_epsilon">Compute and decompose the covariance matrix $\Sigma_e$ and $\Sigma_\epsilon$</a></li>
+        <li><a href="#compute-the-contemporaneous-matrix-b">Compute the contemporaneous matrix $B$</a></li>
+        <li><a href="#compute-irfs-phil-orthogonalized-irfs-thetal-and-structural-irfs-psil">Compute IRFs $\Phi(L)$, Orthogonalized IRFs $\Theta(L)$, and Structural IRFs $\Psi(L)$</a></li>
+        <li><a href="#compute-the-forecast-error-variance-decomposition-fevd">Compute the Forecast Error Variance Decomposition (FEVD)</a></li>
+      </ul>
+    </li>
+    <li><a href="#generate-benchmark">Generate Benchmark</a></li>
+    <li><a href="#compare-manually-computed-results-with-benchmark">Compare Manually Computed Results with Benchmark</a>
+      <ul>
+        <li><a href="#check-reduced-form-coefficients">Check reduced-form coefficients</a></li>
+        <li><a href="#check-parameter-matrix-sigma_e-sigma_epsilon-and-b">Check parameter matrix $\Sigma_e$, $\Sigma_\epsilon$ and $B$</a></li>
+        <li><a href="#check-irf-oirf-and-sirf">Check IRF, OIRF, and SIRF</a></li>
+        <li><a href="#check-mse-and-fevd">Check MSE and FEVD</a></li>
+      </ul>
+    </li>
+    <li><a href="#integrated-codes">Integrated Codes</a></li>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="motivation">Motivation</h2>
+<p>While people can always use integrated commands in Stata (e.g., <code>var</code> and <code>svar</code>) to produce abundant outputs of VAR estimation, many can not confidently interpret these results without knowing how they are theoretically defined and practically calculated. Manually replicating the outputs of the Stata&rsquo;s integrated commands for VAR estimation will be very helpful to resolve this issue.</p>
+<p>In this blog, I will firstly provide the theoretical calculation formulas of reduced-form coefficients, IRFs, Structural IRFs, Orthogonalized IRFs, and Forecast Error Variance Decomposition. Then I will follow their theoretical definition to manually calculate these outputs in Stata. Finally, I will compare the manually computed results with the outputs generated from Stata&rsquo;s integrated commands (see in my last blog) and cross-check the precision of my manual computation.</p>
+<p>By doing so, I hope this blog can provide precise insights on how the VAR outputs are produced in Stata and help the readers confidently use them in their own research.</p>
+<h2 id="theoretical-definitions-and-calculation-formulas">Theoretical Definitions and Calculation Formulas</h2>
+<h3 id="define-the-var-system">Define the VAR system</h3>
+<p>The starting point is a structural VAR system with $k$ variables and $p$ lags.
+$$
+Bx_t=\kappa+\Sigma_{i=1}^{p}\Gamma_i x_{t-i}+\epsilon_t \tag{1}
+$$
+Premultiplying Equation (1) with matrix $B^{-1}$, one will get the reduced-form VAR. 
+$$
+x_t=\nu+\Sigma_{i=1}^{p}A_i x_{t-i}+e_t  \tag{2}
+$$</p>
+<h3 id="calculate-reduced-form-coefficients-a_ii12p">Calculate reduced-form coefficients $A_i(i=1,2,..,p)$</h3>
+<p>As the OLS estimation is proved to be consistent and asymptotically efficient in reduced form (e.g., Enders, 2004), the reduced-form coefficients $A_i(i=1,2,..,p)$ are estimated directly from the OLS.</p>
+<p>That said, if we put $x_t$ into a matrix $Y$ and put $x_{t-i} (i=1,2,..,p)$ in to a matrix $X$, the reduced-form coefficient matrix $A_i(i=1,2,..,p)$ can be generated from the OLS coefficients
+$$
+\beta = (X&rsquo;X)^{-1}(X&rsquo;Y) \tag{3}
+$$</p>
+<h3 id="calculate-impulse-response-coefficients-phil">Calculate Impulse Response Coefficients $\Phi(L)$</h3>
+<p>Following Lütkepohl (2007, p22-23), the reduced-form VAR system defined in Equation (2) could be written as the following Vector Moving Average (VMA) representation.
+$$
+x_t = \mu+\Phi(L)e_t = \mu+\sum_{i=0}^{\infty}\Phi_ie_{t-i} \tag{4}
+$$
+The tricks are as follows. Firstly you re-write the lag terms using lag operators $\left(A_1 L+\cdots+A_p L^p\right) x_t$, then you move them into the left hand side of the equation and get
+$$
+A(L)x_t = \nu+e_t \tag{5}
+$$
+where
+$$
+A(L)=I_K-A_1 L-\cdots-A_p L^p
+$$
+Let 
+$$
+\Phi(L)=\sum_{i=0}^{\infty} \Phi_i L^i
+$$
+be an operator such that 
+$$
+\Phi(L)A(L)=I_k
+$$
+where $k$ is the number of variables in the VAR system.</p>
+<p>Premultiply Equation (5) with $\Phi(L)$. Call the mean factor $\Phi(L)\nu$ as $\mu$, we get the VMA representation of the VAR system in Equation (6).
+$$
+x_t = \Phi(L)\nu+\Phi(L)e_t = \mu+\sum_{i=0}^{\infty}\Phi_ie_{t-i} \tag{6}
+$$
+Intuitively, the coefficients of the VMA representation $\Phi_i (i=1,2,&hellip;,\infty)$ captures how does a unit shock on $e_{t-i}$ influences the variables of interest $x_t$, which are the so-called Impulse Response Functions (IRFs) by definition.</p>
+<p>Lütkepohl (2007, p22-23) proves that the $\Phi_i$, or so-called IRFs, can be computed recursively using
+$$
+\Phi_0 = I_k\
+\Phi_i = \Sigma_{j=1}^{i}\Phi_{i-j}A_j \tag{7}
+$$
+where $A_j (j=1&hellip;p)$ are coefficients for $j$-lag variables of the reduced-form VAR system, which we have estimated through OLS.</p>
+<h3 id="calculate-orthogonalized-irfs-thetal-">Calculate Orthogonalized IRFs $\Theta(L) $</h3>
+<p>Typically, there are correlations among reduced-form innovations, which makes it hard to separate the impacts of one innovation from another. In such case, to better separate the effects of one innovation from another, people usually apply Cholesky factorization of the variance-covariance matrix $\Sigma_e$, which derives
+$$
+\Sigma_e = PP'
+$$
+where $P$ is a lower triangular matrix.</p>
+<p>Following  Lütkepohl (2007, p46), the VMA representation of VAR, Equation (6), can be re-written as 
+$$
+x_t=\mu+\sum_{i=0}^{\infty} \Phi_i P P^{-1} e_{t-i}=\mu+\sum_{i=0}^{\infty} \Theta_i w_{t-i} \tag{8}
+$$
+where $\Theta_i=\Phi_i P$ and $w_t=P^{-1} e_t$. The following equation proves that $w_t$ is white noise with covariance matrix of identity matrix $I_k$, which implies the innovations $w_t$ have uncorrelated components. Thus, $w_t$ are also called orthogonal innovations.
+$$
+\Sigma_w=P^{-1} \Sigma_e\left(P^{-1}\right)^{\prime}=I_K \tag{9}
+$$
+Correspondingly, the new IRF coefficients $\Theta_i=\Phi_i P$ which functions on the orthogonal innovations $w_t$ are called orthogonalized IRFs. In other words, the orthogonalized IRFs are given by the following Equation.
+$$
+\Theta_i=\Phi_i P \tag{10}
+$$
+where $\Phi_i(i=1,2,&hellip;,\infty)$ are the IRFs and $P$ is the Cholesky decomposition of the variance-covariance matrix $\Sigma_e$ such that $\Sigma_e = PP'$.</p>
+<p>Clearly, the calculation of $P$ needs the covariance matrix of residuals $\Sigma_e$.</p>
+<p>Recall that we&rsquo;ve put $x_t$ into a matrix $Y$ and put $x_{t-i} (i=1,2,..,p)$ in to a matrix $X$, the reduced-form coefficient matrix $A$ are the OLS coefficients, which we have estimated in Equation (3). Then the residuals of VAR estimation $e$ are by definition
+$$
+e = Y-XA \tag{11}
+$$
+The variance-covariance matrix of the residuals $\Sigma_e$ can be calculated with
+$$
+\Sigma_e =E[(e-\bar{e})(e-\bar{e})']\tag{12}
+$$</p>
+<h3 id="calculate-orthogonalized-structural-irfs-psil">Calculate (Orthogonalized) Structural IRFs $\Psi(L)$</h3>
+<p>The structural IRFs by definition captures the impacts of one-unit structural shock $\epsilon_t$ on the variables of interest $x_t$. Recall that $e_t = B^{-1}\epsilon_t$, one can conveniently compute the structural IRFs by plugging it into the Equation (6).
+$$
+x_t =\mu+\Phi(L)e_t =\mu+\Phi(L)B^{-1}\epsilon_t=\mu+\Lambda(L)\epsilon_t \tag{13}
+$$
+One can intuitively infer from the Equation (8) that the structural IRFs (SIRFs) should be the IRFs $\Phi_i$ postmultiplied by $B^{-1}$ as in Equation (9).
+$$
+\Lambda_i=\Phi_iB^{-1} 
+$$</p>
+<p>Clearly, the matrix $B$ is the prerequisite for estimating Structural IRFs $\Lambda(L)$.</p>
+<p>Given that Stata&rsquo;s <code>var</code> command by default assumes $B$ is a $k\times k$ lower triangular matrix with ones in the diagonal, we could figure out the unresovled elements $B_{ij}$ from the relations of the reduced-form residuals. 
+$$
+B=\left(\begin{array}{ccc}
+1 &amp; 0 &amp; 0&amp;&hellip;&amp;0 \
+B_{21} &amp; 1 &amp; 0&amp;&hellip;&amp;0 \
+B_{31} &amp; B_{32} &amp; 1&amp;&hellip;&amp;0\
+&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;\
+B_{k1}&amp;B_{k2}&amp;B_{k3}&amp;&hellip;&amp;1
+\end{array}\right)
+$$
+In particular, we could start from $\epsilon_t = Be_t$, which implies
+$$
+\left(\begin{array}{ccc}\epsilon_{1t}\\epsilon_{2t}\\epsilon_{3t}\&hellip;\\epsilon_{kt} \end{array}\right)=\left(\begin{array}{ccc}
+1 &amp; 0 &amp; 0&amp;&hellip;&amp;0 \
+B_{21} &amp; 1 &amp; 0&amp;&hellip;&amp;0 \
+B_{31} &amp; B_{32} &amp; 1&amp;&hellip;&amp;0\
+&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;\
+B_{k1}&amp;B_{k2}&amp;B_{k3}&amp;&hellip;&amp;1
+\end{array}\right)\left(\begin{array}{ccc}e_{1t}\e_{2t}\e_{3t}\&hellip;\e_{kt} \end{array}\right)
+$$
+Writing in a loose form 
+$$
+\begin{aligned}e_{1t} &amp;= \epsilon_{1t}\
+e_{2t} &amp;= \epsilon_{2t}- B_{21}e_{1t}\
+e_{3t} &amp;= \epsilon_{3t}- B_{31}e_{1t}-B_{32}e_{2t}\
+&hellip;\
+e_{kt}&amp; = \epsilon_{kt}-B_{k1}e_{1t}-B_{k2}e_{2t}-&hellip;-B_{kk-1}e_{k-1t}
+\end{aligned}
+$$
+Note that the $\epsilon_{it}$ are real numbers in the above regressions. That said by running the above $k$ regressions on the reduced-form residuals $e_{it}(i=1,&hellip;,k)$, one can obtain all the unresolved elements in the matrix $B$. For example, by regressing $e_{kt}$ on $e_{1t}$ to $e_{k-1}t$, one can get the coefficients $B_{k1}$ to $B_{kk-1}$, which are components of the last row in the matrix $B$.</p>
+<p>While people usually assume that the structural shocks $\epsilon_t$ are orthogonal unit impulse, it is not always the case in the dataset. Most of the time, while there are few contemporaneous correlations among different structural shocks, the structural shocks do have non-unit variance. In such case, people typically standardize structural IRFs into unit shocks by introducing a factorization of the covariance matrix of the structural shocks $\Sigma_\epsilon$, just like what we did to get the Orthogonalized IRFs in the last subsection.</p>
+<p>The covariance matrix of the structural shocks $\Sigma_\epsilon$ can be computed based on $e_t = B^{-1}\epsilon_t$.
+$$
+\Sigma_\epsilon = E(\epsilon\epsilon')=E(Be_tet&rsquo;B')=B\Sigma_eB'
+$$
+We decompose $\Sigma_\epsilon$ such that
+$$
+\Sigma_\epsilon = P_1P_1'
+$$
+The orthogonalized structural IRFs would be 
+$$
+\Psi_i=\Lambda_i P_1=\Phi_iB^{-1}P_1\tag{14}
+$$</p>
+<h3 id="calculate-forecast-error-variance-decomposition-fevd">Calculate Forecast Error Variance Decomposition (FEVD)</h3>
+<p>Following  Lütkepohl (2007, p63-64), the error in the optimal $h$-step forecast can be derived from the VMA representation in Equation (10).
+$$
+\begin{aligned}
+x_{t+h}-x_t(h) &amp; =\sum_{i=0}^{h-1} \Phi_i e_{t+h-i}=\sum_{i=0}^{h-1} \Phi_i P P^{-1} e_{t+h-i} \
+&amp; =\sum_{i=0}^{h-1} \Theta_i w_{t+h-i} .
+\end{aligned} \tag{15}
+$$
+As the $w_t$ is white noise with identity matrix $I_k$ as covariance matrix, the variance of each factor in $w_t$ is 1. Denote the $js$-th element of $i$-step orthogonalized IRFs $\Theta_i$ as $\theta_{js,i}$ , the  $h$-step forecast Mean Squared Error (MSE) of variable $j$ can be written as the sum of the squared orthogonalized IRFs.
+$$
+\operatorname{MSE}\left[x_{j, t}(h)\right]=\sum_{i=0}^{h-1} \sum_{s=1}^k \theta_{j s, i}^2 \tag{16}
+$$
+where $\theta_{js,i}$ is the orthogonalized IRF from innovation from variable $s$ to variable $j$ with $i$-step lag(s). $k$ is the variable numbers in the VAR system.</p>
+<p>The $h$-step variance contribution of innovations from variable $s$ to variable $j$ is by definition
+$$
+\Omega_{js,h} = \frac{\sum_{i=0}^{h-1} \theta_{j s, i}^2}{\sum_{i=0}^{h-1} \sum_{s=1}^k \theta_{j s, i}^2} \tag{17}
+$$</p>
+<h3 id="summary-of-formulas">Summary of formulas</h3>
+<p>For a structural VAR system with $k$ variables and $p$ lags.</p>
+<ul>
+<li>The reduced-form coefficients $A_i(i=1,2,..,p)$ are the coefficients of the OLS estimation for the reduced-form VAR</li>
+<li>The Impulse Response Coefficients $\Phi(L)$ can be estimated with Equation (7). The prerequisite is the  reduced-form coefficients $A_i(i=1,2,..,p)$</li>
+<li>The Orthogonalized IRFs $\Theta(L) $ can be obtained by postmultipling IRF matrix $\Phi(L)$ with $P$, where $\Sigma_e = PP'$. The prerequisites are the IRF $\Phi(L)$ and the variance-covariance matrix of residuals $\Sigma_e$</li>
+<li>The Structural IRFs $\Psi(L)$ can be obtained by postmultipling IRF matrix $\Phi(L)$ with $B^{-1}P_1$. The prerequisite are the IRF $\Phi(L)$, contemporaneous effect matrix $B$ , and covariance matrix of structural shocks $\Sigma_\epsilon$ such that $\Sigma_\epsilon=P_1P_1'$</li>
+<li>The Forecast Error Variance Decomposition $\Omega_{js,h}$ can be obtained by calculating the sum of the squared orthogonalized IRFs of impulse $s$ on equation $j$ from the 1st step to $h-1$ step standardized by the Mean Squared Forecast Error, which could also be calculated from the orthogonalized IRFs  $\Theta(L) $. The prerequisite is only the orthogonalized IRFs $\Theta(L)$</li>
+</ul>
+<p>​</p>
+<h2 id="manually-compute-the-var-outputs-in-stata">Manually Compute the VAR outputs in Stata</h2>
+<h3 id="import-data-and-define-global-variables">Import Data and define global variables</h3>
+<p>To keep consistent with the benchmark, where we produce all these outputs using integrated commands <code>var</code> in the last blog, I will use the same sample dataset and choose the same number of lag orders as 7.</p>
+<p>That said, the VAR system we will replicate has 3 variables and 7 lags. The model is as follows.
+$$
+\left[\begin{array}{c}
+\text { inflation }<em>t \
+\text { unrate }<em>t \
+\text{f f r}<em>t
+\end{array}\right]=\mathbf{A}<em>0+\mathbf{A}</em>{\mathbf{1}}\left[\begin{array}{c}
+\text { inflation }</em>{t-1} \
+\text { unrate }</em>{t-1} \
+\text{ffr}</em>{t-1}
+\end{array}\right]+\cdots+\mathbf{A}<em>{\mathbf{7}}\left[\begin{array}{c}
+\text { inflation }</em>{t-k} \
+\text { unrate }<em>{t-k} \
+\text{ffr}</em>{t-k}
+\end{array}\right]+\left[\begin{array}{c}
+e_{1, t} \
+e_{2, t} \
+e_{3, t}
+\end{array}\right]
+$$
+Please see codes for this step below.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* prepare data
+sysuse varsample.dta, clear
+tsset yq
+
+* define global variables
+global names &#34;inflation unrate ffr&#34;
+global lagorder 7
+global numnames 3
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="compute-reduced-form-coefficients-a_ii12p">Compute reduced-form coefficients $A_i(i=1,2,..,p)$</h3>
+<p>To compute reduced-form coefficients $A_i(i=1,2,..,p)$, we put $x_t$ into a matrix $Y$ and put $x_{t-i} (i=1,2,..,p)$ in to a matrix $X$, the reduced-form coefficient matrix $A$ can be generated from the OLS coefficients 
+$$
+\beta = (X&rsquo;X)^{-1}(X&rsquo;Y)
+$$
+The codes are as follows. I firstly generate the 1 to $p$ lag of each variable in the VAR system. And then put them all together into a matrix $X$, put the contemporaneous variables into a matrix $Y$. The coefficients of OLS estimation are stored in matrix <code>beta</code>, which is a $22\times3$ matrix.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* generate lag variables 
+foreach var in $names{
+	forvalues j = 1/$lagorder{
+		cap g l`j&#39;`var&#39; = l`j&#39;.&#34;`var&#39;&#34;
+	}
+}
+
+* put x and y of the reduced-form VAR into the matrix
+mkmat $names, matrix(Y)
+mat Y = Y[$lagorder+1..rowsof(y), 1..colsof(Y)]
+mkmat l*inflation l*unrate l*ffr, matrix(X) nomiss
+mat X = (X, J(rowsof(X), 1, 1))
+
+* estimate the OLS coefficients of the reduced-form VAR
+mat beta = inv(X&#39;*X)*(X&#39;*Y)
+</code></pre></td></tr></table>
+</div>
+</div><p>The manually computed reduce-form coefficient matrix $\beta$ is as follows.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. mat list beta
+
+beta[22,3]
+              inflation      unrate         ffr
+l1inflation   1.1624496  -1.2311559  -4.7074491
+l2inflation  -.38442299   3.4434416    14.62629
+l3inflation   .33067581  -.10661715  -13.797021
+l4inflation  -.19803137   1.2593467   18.506895
+l5inflation   .25709458  -2.6615204  -8.1949518
+l6inflation  -.08613706   .80816382   14.682903
+l7inflation  -.07969876  -1.4801693  -22.071136
+   l1unrate  -.00704289   1.3298207  -2.0448181
+   l2unrate   .00719199   .00238958   1.5423312
+   l3unrate   .00217432  -.34914135   .45998626
+   l4unrate   .00246865  -.18703379   .28127488
+   l5unrate  -.00964455   .26099715   .38580282
+   l6unrate   .00855645  -.08923544  -1.1106103
+   l7unrate  -.00384815   -.0158381   .44636919
+      l1ffr    .0000775    .0391868   .28705469
+      l2ffr   .00092119    .0133781   .17792134
+      l3ffr   .00073382   -.0020393   .44964119
+      l4ffr   .00051456  -.04211502    .2517726
+      l5ffr  -.00075606  -.01041068   .05375644
+      l6ffr  -.00027879  -.00274284  -.16801173
+      l7ffr  -.00085278   .01797453  -.22845819
+         c1   .00707448   .12277881   1.0777927
+</code></pre></td></tr></table>
+</div>
+</div><p>As we are estimating a VAR system with 3 variables and 7 lags, we need to derive coefficient matrix $A_i(i=1,2,..,p)$ from $\beta$. Each of the $A_i$ is a $3\times 3$ matrix. The $js$-th element of matrix $A_i$ denotes the IRFs of impulse $s$ on equation $j$ with $i$ lags.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* reshape beta to generate reduced-form VAR coefficient matrix a1-ap
+forvalues i=1/$lagorder{
+	mat A`i&#39; = (beta[&#34;l`i&#39;inflation&#34;, 1..3]\beta[&#34;l`i&#39;unrate&#34;, 1..3]\beta[&#34;l`i&#39;ffr&#34;, 1..3])&#39;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>I list the three-lag coefficient matrix $A_3$ as an example. One can easily find the consistency with the coefficient matrix $\beta$.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. mat list A3
+
+A3[3,3]
+           l3inflation     l3unrate        l3ffr
+inflation    .33067581    .00217432    .00073382
+   unrate   -.10661715   -.34914135    -.0020393
+      ffr   -13.797021    .45998626    .44964119
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="compute-and-decompose-the-covariance-matrix-sigma_e-and-sigma_epsilon">Compute and decompose the covariance matrix $\Sigma_e$ and $\Sigma_\epsilon$</h3>
+<p>The reduced-form residuals $e$ are given by
+$$
+e = Y-X\beta
+$$
+It&rsquo;s covariance matrix is 
+$$
+\Sigma_e =\frac{(e-\bar{e})(e-\bar{e})'}{n-p} \tag{14}
+$$
+where $n$ is the number of observations in the dataset and $p$ is the number of lag order specified.</p>
+<p>The covariance matrix of structural shock $\epsilon_t$ is 
+$$
+\Sigma_\epsilon = B\Sigma_eB'
+$$
+I decompose the covariance matrix $\Sigma_e$ and $\Sigma_\epsilon$ such that
+$$
+\Sigma_e=PP', \Sigma_\epsilon=P_1P_1'
+$$
+The codes are as follows. Note that I save the reduced-form residuals of <code>inflation</code>, <code>unrate</code>, and <code>ffr</code> equations as $e_1$, $e_2$, and $e_3$ respectively in this step.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* compute sigma_e
+mat e=Y-X*beta
+mat e=J($lagorder,$numnames,.) \ e
+svmat e
+mat accum sigma_e = e1 e2 e3, deviations noconstant
+mat sigma_e = sigma_e/(_N-$lagorder)
+mat list sigma_e
+
+* decompose sigma_e
+mat P = cholesky(sigma_e)
+mat list P
+
+* compute and decompose sigma_epsilon
+mat sigma_epsilon = B*sigma_e*B&#39;
+mat P1 = cholesky(sigma_epsilon)
+mat list P1
+</code></pre></td></tr></table>
+</div>
+</div><p>The decomposition results of $\Sigma_e$ and $\Sigma_\epsilon$ are as follows. As expected, both of them are lower triangular matrix.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. mat list P
+
+P[3,3]
+            e1          e2          e3
+e1   .00838539           0           0
+e2  -.02380259   .26616909           0
+e3   .29854297   -.4021685   1.4708232
+
+. mat list P1
+
+symmetric P1[3,3]
+            r1          r2          r3
+r1   .00838539
+r2   3.232e-18   .26616909
+r3  -5.172e-17   1.518e-16   1.4708232
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="compute-the-contemporaneous-matrix-b">Compute the contemporaneous matrix $B$</h3>
+<p>Note that $e_t = B^{-1}\epsilon_t$, that means we can estimate the unknown factors $B_{21}$, $B_{31}$, and $B_{32}$ from the relationships of residuals of the reduced-form.
+$$
+\left(\begin{array}{ccc}\epsilon_{1,t}\\epsilon_{2,t}\\epsilon_{3,t} \end{array}\right) =\left(\begin{array}{ccc}
+1 &amp; 0 &amp; 0 \
+B_{21} &amp; 1 &amp; 0 \
+B_{31} &amp; B_{32} &amp; 1
+\end{array}\right)\left(\begin{array}{ccc}e_{1,t}\e_{2,t}\e_{3,t} \end{array}\right)\tag{9}
+$$</p>
+<p>To be exact, the Equation (8) implies
+$$
+e_{2,t} = \epsilon_{2,t}-B_{21}\times e_{1,t}\
+e_{3,t} = \epsilon_{3,t} - B_{31}\times e_{1,t} - B_{32}\times e_{2,t} 
+\tag{10}
+$$
+That is to say, we can estimate $B_{21}$ by regressing the reduced-form residual $e_{2,t}$ on $e_{1,t}$, and we estimate $B_{31}$ and $B_{32}$ by regressing the reduced-form residual $e_{3,t}$ on $e_{1,t}$ and $e_{2,t} $.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* estimate inverse of B
+qui reg e2 e1
+global B21 = -e(b)[1,1]
+qui reg e3 e1 e2
+global B31 = -e(b)[1,1]
+global B32 = -e(b)[1,2]
+* construct matrix B
+mat B = (1,0,0 \ $B21,1,0 \ $B31,$B32,1)
+</code></pre></td></tr></table>
+</div>
+</div><p>The manually constructed matrix $B$ is as follows.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. mat list B
+
+B[3,3]
+            c1          c2          c3
+r1           1           0           0
+r2   2.8385778           1           0
+r3  -31.313795   1.5109512           1
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="compute-irfs-phil-orthogonalized-irfs-thetal-and-structural-irfs-psil">Compute IRFs $\Phi(L)$, Orthogonalized IRFs $\Theta(L)$, and Structural IRFs $\Psi(L)$</h3>
+<p>I follow formula from Lütkepohl (2007) to calculate the IRFs.
+$$
+\Phi_0 = I_k\
+\Phi_i = \Sigma_{j=1}^{i}\Phi_{i-j}A_j
+$$
+I post-multiply IRF $\Phi_i$ with $P$ to get orthogonalized IRFs $\Theta_i$.</p>
+<p>I post-multiply IRF $\Phi_i$ with $B^{-1}P_1$ to get (orthogonalized) structural IRFs $\Psi_i$.</p>
+<p>The number of forecast steps is set to be 15 in this blog.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* estimate IRFs, OIRFs, and SIRFs
+mat irf0 = I($numnames)
+mat sirf0 = irf0*inv(B)*P1
+mat oirf0 = irf0*P
+forvalues i=1/15{
+	mat irf`i&#39; = J($numnames,$numnames,0)
+	forvalues j = 1/$lagorder{
+	if `i&#39; &gt;= `j&#39;{
+	local temp = `i&#39;-`j&#39;
+	mat temp2 = irf`temp&#39;*A`j&#39;
+	mat irf`i&#39; = irf`i&#39;+ temp2
+}
+}
+	mat sirf`i&#39; = irf`i&#39;*inv(B)*P1
+	mat oirf`i&#39; = irf`i&#39;*P
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>To this stage, we&rsquo;ve got the IRF, OIRF, and SIRF matrix for each forward-look step. For ease of observing, I collect the outputs of all steps together and write them into a new dataset named <code>fullirfs.dta</code>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33">33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34">34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35">35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36">36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38">38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39">39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40">40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41">41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42">42</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* collect irf matrix into dataset
+cap program drop reshapemat 
+cap program define reshapemat
+cap mat drop c`1&#39;
+forvalues i=0/15{
+	mat colnames `1&#39;`i&#39; = $names
+	mat rownames `1&#39;`i&#39; = $names
+	mat temp1=vec(`1&#39;`i&#39;)
+	mat c`1&#39; = nullmat(c`1&#39;) \ temp1
+}
+mat colnames c`1&#39; = &#34;`1&#39;&#34;
+end
+
+* write identifiers
+local irfnames &#34;irf sirf oirf&#34;
+cap mat drop fullirfs
+foreach name in `irfnames&#39;{
+	reshapemat  `name&#39;
+	mat fullirfs = (nullmat(fullirfs), c`name&#39;)
+}
+mat list fullirfs
+
+* save matrix as dataset
+clear
+svmat fullirfs, names(col)
+g rownames = &#34;&#34;
+local rownames : rowfullnames coirf
+local c : word count `rownames&#39;
+forvalues i = 1/`c&#39; {
+    qui replace rownames = &#34;`:word `i&#39; of `rownames&#39;&#39;&#34; in `i&#39;
+}
+
+* get impulse and response
+split rownames, p(&#34;:&#34;)
+rename rownames2 response
+rename rownames1 impulse
+drop rownames
+
+* tag forward-looking steps
+g step = floor((_n-1)/9)
+
+save fullirfs, replace
+</code></pre></td></tr></table>
+</div>
+</div><p>Please see below the first 18 rows of this dataset <code>fullirfs.dta</code>, which contains all the manually collected IRFs.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. list impulse response step *irf in 1/18
+
+     +------------------------------------------------------------------+
+     |   impulse    response   step         irf        sirf        oirf |
+     |------------------------------------------------------------------|
+  1. | inflation   inflation      0           1    .0083854    .0083854 |
+  2. | inflation      unrate      0           0   -.0238026   -.0238026 |
+  3. | inflation         ffr      0           0     .298543     .298543 |
+  4. |    unrate   inflation      0           0           0           0 |
+  5. |    unrate      unrate      0           1    .2661691    .2661691 |
+     |------------------------------------------------------------------|
+  6. |    unrate         ffr      0           0   -.4021685   -.4021685 |
+  7. |       ffr   inflation      0           0           0           0 |
+  8. |       ffr      unrate      0           0           0           0 |
+  9. |       ffr         ffr      0           1    1.470823    1.470823 |
+ 10. | inflation   inflation      1     1.16245    .0099384    .0099384 |
+     |------------------------------------------------------------------|
+ 11. | inflation      unrate      1   -1.231156    -.030278    -.030278 |
+ 12. | inflation         ffr      1   -4.707449    .0948963    .0948963 |
+ 13. |    unrate   inflation      1   -.0070429   -.0019058   -.0019058 |
+ 14. |    unrate      unrate      1    1.329821    .3381975    .3381975 |
+ 15. |    unrate         ffr      1   -2.044818   -.6597117   -.6597117 |
+     |------------------------------------------------------------------|
+ 16. |       ffr   inflation      1    .0000775     .000114     .000114 |
+ 17. |       ffr      unrate      1    .0391868    .0576369    .0576369 |
+ 18. |       ffr         ffr      1    .2870547    .4222067    .4222067 |
+     +------------------------------------------------------------------+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="compute-the-forecast-error-variance-decomposition-fevd">Compute the Forecast Error Variance Decomposition (FEVD)</h3>
+<p>Based on the collected IRF dataset <code>fullirfs.dta</code>, I follow the following formula to decompose the mean squared forecast errors , where $\theta_{js,i}$ is the orthogonalized IRF from impulse of variable $s$ to variable $j$ with $i$-step lag(s). The results of each step&rsquo;s Mean Squared Error (MSE) and variance decomposition are saved into a new dataset <code>fevds.dta</code>.
+$$
+\Omega_{js,h} = \frac{\sum_{i=0}^{h-1} \theta_{j s, i}^2}{\sum_{i=0}^{h-1} \sum_{s=1}^k \theta_{j s, i}^2}
+$$</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* import oirfs
+use fullirfs, replace
+
+* calculate the sqaured irfs
+g sqoirf = oirf^2
+
+* calculate the MSE and variables&#39; variance contribution for each step
+sort step response impulse
+by step response: egen temp = sum(sqoirf)
+sort response impulse step
+by response impulse: g mse = sum(temp)
+by response impulse: g cvarcontri = sum(sqoirf)
+
+* calculate fevd
+g fevd_manual = cvarcontri/mse
+keep step response impulse mse fevd_manual
+
+* adjust forward-looking steps
+replace step = step +1 
+
+save fevds, replace
+</code></pre></td></tr></table>
+</div>
+</div><p>Please see below the first 18 rows of the dataset <code>fevds.dta</code>, which contains the MSE and variance decomposition results.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. list impulse response step fevd_manual mse in 1/18
+
+     +----------------------------------------------------+
+     |   impulse    response   step   fevd_m~l        mse |
+     |----------------------------------------------------|
+  1. | inflation   inflation      1          1   .0000703 |
+  2. |    unrate   inflation      1          0   .0000703 |
+  3. |       ffr   inflation      1          0   .0000703 |
+  4. | inflation      unrate      1   .0079337   .0714126 |
+  5. |    unrate      unrate      1   .9920663   .0714126 |
+     |----------------------------------------------------|
+  6. |       ffr      unrate      1          0   .0714126 |
+  7. | inflation         ffr      1   .0369184   2.414188 |
+  8. |    unrate         ffr      1   .0669954   2.414188 |
+  9. |       ffr         ffr      1   .8960862   2.414188 |
+ 10. | inflation   inflation      2   .9788982   .0001727 |
+     |----------------------------------------------------|
+ 11. |    unrate   inflation      2   .0210266   .0001727 |
+ 12. |       ffr   inflation      2   .0000752   .0001727 |
+ 13. | inflation      unrate      2   .0078057   .1900288 |
+ 14. |    unrate      unrate      2   .9747127   .1900288 |
+ 15. |       ffr      unrate      2   .0174816   .1900288 |
+     |----------------------------------------------------|
+ 16. | inflation         ffr      2    .032316   3.036672 |
+ 17. |    unrate         ffr      2   .1965833   3.036672 |
+ 18. |       ffr         ffr      2   .7711006   3.036672 |
+     +----------------------------------------------------+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="generate-benchmark">Generate Benchmark</h2>
+<p>To get reliable benchmarks, I use the integrated command <code>svar</code> to generate all the above outputs of the VAR estimation with the same dataset and lag orders.</p>
+<p>The codes for generating benchmarks are as follows. The readers can see more explanations about these commands in my last blog.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">**#  generate benchmark
+use varsample.dta, clear
+tsset yq
+matrix A1 = (1,0,0 \ .,1,0 \ .,.,1)
+matrix B1 = (.,0,0 \ 0,.,0 \ 0,0,.)
+svar $names, lags(1/7) aeq(A1) beq(B1)
+irf create forblog, step(15) set(myirf) replace
+mat sigma_e_bench = e(Sigma)
+mat B_bench = e(A)
+mat beta_bench = e(b_var)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="compare-manually-computed-results-with-benchmark">Compare Manually Computed Results with Benchmark</h2>
+<p>To check the validity of my manually computations, I list these computations and the benchmark together to see whether they are consistent.</p>
+<h3 id="check-reduced-form-coefficients">Check reduced-form coefficients</h3>
+<p>I firstly reshape the coefficient matrix of the benchmark to make sure it has the same shape as my manually computed $\beta$.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">9</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* reshape 
+mata
+	beta_bench = st_matrix(&#34;beta_bench&#34;)
+	beta_bench = rowshape(beta_bench, $numnames)&#39;
+	st_matrix(&#34;beta_bench&#34;, beta_bench)
+end
+
+mat betas = (beta, beta_bench)
+mat list betas
+</code></pre></td></tr></table>
+</div>
+</div><p>Then I put them into a same matrix called <code>betas</code>, where the first three columns are manually computed coefficients and the last three columns are coefficients produced by <code>svar</code>. The <code>betas</code> matrix is as follows. Clearly, they are exactly the same.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+betas[22,6]
+              inflation      unrate         ffr          c1          c2          c3
+l1inflation   1.1624496  -1.2311559  -4.7074491   1.1624496  -1.2311559  -4.7074491
+l2inflation  -.38442299   3.4434416    14.62629  -.38442299   3.4434415    14.62629
+l3inflation   .33067581  -.10661715  -13.797021   .33067581  -.10661715  -13.797021
+l4inflation  -.19803137   1.2593467   18.506895  -.19803137   1.2593467   18.506895
+l5inflation   .25709458  -2.6615204  -8.1949518   .25709458  -2.6615204  -8.1949518
+l6inflation  -.08613706   .80816382   14.682903  -.08613706   .80816382   14.682903
+l7inflation  -.07969876  -1.4801693  -22.071136  -.07969876  -1.4801693  -22.071136
+   l1unrate  -.00704289   1.3298207  -2.0448181  -.00704289   1.3298207  -2.0448181
+   l2unrate   .00719199   .00238958   1.5423312   .00719199   .00238958   1.5423312
+   l3unrate   .00217432  -.34914135   .45998626   .00217432  -.34914135   .45998626
+   l4unrate   .00246865  -.18703379   .28127488   .00246865  -.18703379   .28127488
+   l5unrate  -.00964455   .26099715   .38580282  -.00964455   .26099715   .38580282
+   l6unrate   .00855645  -.08923544  -1.1106103   .00855645  -.08923544  -1.1106103
+   l7unrate  -.00384815   -.0158381   .44636919  -.00384815   -.0158381   .44636919
+      l1ffr    .0000775    .0391868   .28705469    .0000775    .0391868   .28705469
+      l2ffr   .00092119    .0133781   .17792134   .00092119    .0133781   .17792134
+      l3ffr   .00073382   -.0020393   .44964119   .00073382   -.0020393   .44964119
+      l4ffr   .00051456  -.04211502    .2517726   .00051456  -.04211502    .2517726
+      l5ffr  -.00075606  -.01041068   .05375644  -.00075606  -.01041068   .05375644
+      l6ffr  -.00027879  -.00274284  -.16801173  -.00027879  -.00274284  -.16801173
+      l7ffr  -.00085278   .01797453  -.22845819  -.00085278   .01797453  -.22845819
+         c1   .00707448   .12277881   1.0777927   .00707448   .12277881   1.0777927
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="check-parameter-matrix-sigma_e-sigma_epsilon-and-b">Check parameter matrix $\Sigma_e$, $\Sigma_\epsilon$ and $B$</h3>
+<p>The codes and results are as follows. Clearly, they are exactly the same.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. * check variance-covariance matrix
+. mat list sigma_e
+symmetric sigma_e[3,3]
+            e1          e2          e3
+e1   .00007031
+e2  -.00019959   .07141255
+e3    .0025034  -.11415092   2.4141883
+
+. mat list sigma_e_bench
+symmetric sigma_e_bench[3,3]
+            inflation      unrate         ffr
+inflation   .00007031
+   unrate  -.00019959   .07141255
+      ffr    .0025034  -.11415092   2.4141882
+
+. * check matrix B
+. mat list B
+B[3,3]
+            c1          c2          c3
+r1           1           0           0
+r2   2.8385778           1           0
+r3  -31.313795   1.5109512           1
+. mat list B_bench
+B_bench[3,3]
+            inflation      unrate         ffr
+inflation           1           0           0
+   unrate   2.8385778           1           0
+      ffr  -31.313794   1.5109512           1
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="check-irf-oirf-and-sirf">Check IRF, OIRF, and SIRF</h3>
+<p>I merge my manually computed IRF dataset <code>fullirfs.dta</code> with the output dataset <code>myirf.irf</code> produced by <code>svar</code> command, with the joining keys of impulse name, response name, and forward-looking step.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* check irfs
+use myirf.irf, replace
+rename *irf b*irf
+joinby impulse response step using fullirfs
+order impulse response step birf irf boirf oirf bsirf sirf
+format *irf %6.0g
+list impulse response step birf irf boirf oirf bsirf sirf in 1/20
+</code></pre></td></tr></table>
+</div>
+</div><p>I add <code>b</code> to the name of all the IRFs in the benchmark dataset and list the first 18 rows of the comparison as follows. Clearly, they are exactly the same.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28">28</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. list impulse response step birf irf boirf oirf bsirf sirf in 1/18
+
+     +------------------------------------------------------------------------------------------+
+     |   impulse    response   step      birf       irf     boirf      oirf     bsirf      sirf |
+     |------------------------------------------------------------------------------------------|
+  1. | inflation   inflation      0         1         1     .0084     .0084     .0084     .0084 |
+  2. |    unrate   inflation      0         0         0         0         0         0         0 |
+  3. |       ffr   inflation      0         0         0         0         0         0         0 |
+  4. | inflation      unrate      0         0         0    -.0238    -.0238    -.0238    -.0238 |
+  5. |    unrate      unrate      0         1         1     .2662     .2662     .2662     .2662 |
+     |------------------------------------------------------------------------------------------|
+  6. |       ffr      unrate      0         0         0         0         0         0         0 |
+  7. | inflation         ffr      0         0         0     .2985     .2985     .2985     .2985 |
+  8. |    unrate         ffr      0         0         0    -.4022    -.4022    -.4022    -.4022 |
+  9. |       ffr         ffr      0         1         1     1.471     1.471     1.471     1.471 |
+ 10. | inflation   inflation      1     1.162     1.162     .0099     .0099     .0099     .0099 |
+     |------------------------------------------------------------------------------------------|
+ 11. |    unrate   inflation      1     -.007     -.007    -.0019    -.0019    -.0019    -.0019 |
+ 12. |       ffr   inflation      1   7.7e-05   7.7e-05   1.1e-04   1.1e-04   1.1e-04   1.1e-04 |
+ 13. | inflation      unrate      1    -1.231    -1.231    -.0303    -.0303    -.0303    -.0303 |
+ 14. |    unrate      unrate      1      1.33      1.33     .3382     .3382     .3382     .3382 |
+ 15. |       ffr      unrate      1     .0392     .0392     .0576     .0576     .0576     .0576 |
+     |------------------------------------------------------------------------------------------|
+ 16. | inflation         ffr      1    -4.707    -4.707     .0949     .0949     .0949     .0949 |
+ 17. |    unrate         ffr      1    -2.045    -2.045    -.6597    -.6597    -.6597    -.6597 |
+ 18. |       ffr         ffr      1     .2871     .2871     .4222     .4222     .4222     .4222 |
+     +------------------------------------------------------------------------------------------+
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="check-mse-and-fevd">Check MSE and FEVD</h3>
+<p>I merge my manually computed variance decomposition dataset <code>fevds.dta</code> with the output dataset <code>myirf.irf</code> produced by <code>svar</code> command, with the joining keys of impulse name, response name, and forward-looking step. Note that the Mean Squared Error stored in the <code>myirf.irf</code> dataset is actually the square root of MSE, I used its square as the benchmark for my manually computed MSE.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">8</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">* check fevd
+use myirf.irf, replace
+rename fevd bfevd
+g bmse = mse^2
+rename mse rmse
+joinby impulse response step using fevds
+order impulse response step bfevd fevd_manual bmse mse
+list impulse response step bfevd fevd_manual bmse mse in 1/18
+</code></pre></td></tr></table>
+</div>
+</div><p>I add <code>b</code> to the name of MSE and FEVD in the benchmark dataset and list the first 18 rows of the comparison as follows. Clearly, they are exactly the same.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11">11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12">12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13">13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14">14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15">15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17">17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18">18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19">19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20">20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21">21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22">22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27">27</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. list impulse response step bfevd fevd_manual bmse mse in 1/18
+
+     +---------------------------------------------------------------------------+
+     |   impulse    response   step       bfevd   fevd_m~l       bmse        mse |
+     |---------------------------------------------------------------------------|
+  1. | inflation   inflation      1           1          1   .0000703   .0000703 |
+  2. |    unrate   inflation      1           0          0   .0000703   .0000703 |
+  3. |       ffr   inflation      1           0          0   .0000703   .0000703 |
+  4. | inflation      unrate      1   .00793366   .0079337   .0714125   .0714126 |
+  5. |    unrate      unrate      1   .99206634   .9920663   .0714125   .0714126 |
+     |---------------------------------------------------------------------------|
+  6. |       ffr      unrate      1           0          0   .0714125   .0714126 |
+  7. | inflation         ffr      1   .03691837   .0369184   2.414188   2.414188 |
+  8. |    unrate         ffr      1    .0669954   .0669954   2.414188   2.414188 |
+  9. |       ffr         ffr      1   .89608622   .8960862   2.414188   2.414188 |
+ 10. | inflation   inflation      2   .97889819   .9788982   .0001727   .0001727 |
+     |---------------------------------------------------------------------------|
+ 11. |    unrate   inflation      2   .02102659   .0210266   .0001727   .0001727 |
+ 12. |       ffr   inflation      2   .00007522   .0000752   .0001727   .0001727 |
+ 13. | inflation      unrate      2   .00780575   .0078057   .1900288   .1900288 |
+ 14. |    unrate      unrate      2   .97471266   .9747127   .1900288   .1900288 |
+ 15. |       ffr      unrate      2   .01748159   .0174816   .1900288   .1900288 |
+     |---------------------------------------------------------------------------|
+ 16. | inflation         ffr      2   .03231605    .032316   3.036672   3.036672 |
+ 17. |    unrate         ffr      2   .19658335   .1965833   3.036672   3.036672 |
+ 18. |       ffr         ffr      2   .77110061   .7711006   3.036672   3.036672 |
+     +---------------------------------------------------------------------------+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="integrated-codes">Integrated Codes</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">  1</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2">  2</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3">  3</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4">  4</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5">  5</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6">  6</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7">  7</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8">  8</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9">  9</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10"> 10</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="11"><a style="outline: none; text-decoration:none; color:inherit" href="#11"> 11</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="12"><a style="outline: none; text-decoration:none; color:inherit" href="#12"> 12</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="13"><a style="outline: none; text-decoration:none; color:inherit" href="#13"> 13</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="14"><a style="outline: none; text-decoration:none; color:inherit" href="#14"> 14</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="15"><a style="outline: none; text-decoration:none; color:inherit" href="#15"> 15</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16"> 16</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="17"><a style="outline: none; text-decoration:none; color:inherit" href="#17"> 17</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="18"><a style="outline: none; text-decoration:none; color:inherit" href="#18"> 18</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="19"><a style="outline: none; text-decoration:none; color:inherit" href="#19"> 19</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="20"><a style="outline: none; text-decoration:none; color:inherit" href="#20"> 20</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="21"><a style="outline: none; text-decoration:none; color:inherit" href="#21"> 21</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="22"><a style="outline: none; text-decoration:none; color:inherit" href="#22"> 22</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23"> 23</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24"> 24</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25"> 25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26"> 26</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="27"><a style="outline: none; text-decoration:none; color:inherit" href="#27"> 27</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="28"><a style="outline: none; text-decoration:none; color:inherit" href="#28"> 28</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29"> 29</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30"> 30</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31"> 31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32"> 32</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="33"><a style="outline: none; text-decoration:none; color:inherit" href="#33"> 33</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="34"><a style="outline: none; text-decoration:none; color:inherit" href="#34"> 34</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="35"><a style="outline: none; text-decoration:none; color:inherit" href="#35"> 35</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="36"><a style="outline: none; text-decoration:none; color:inherit" href="#36"> 36</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37"> 37</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="38"><a style="outline: none; text-decoration:none; color:inherit" href="#38"> 38</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="39"><a style="outline: none; text-decoration:none; color:inherit" href="#39"> 39</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="40"><a style="outline: none; text-decoration:none; color:inherit" href="#40"> 40</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="41"><a style="outline: none; text-decoration:none; color:inherit" href="#41"> 41</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="42"><a style="outline: none; text-decoration:none; color:inherit" href="#42"> 42</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="43"><a style="outline: none; text-decoration:none; color:inherit" href="#43"> 43</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="44"><a style="outline: none; text-decoration:none; color:inherit" href="#44"> 44</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="45"><a style="outline: none; text-decoration:none; color:inherit" href="#45"> 45</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="46"><a style="outline: none; text-decoration:none; color:inherit" href="#46"> 46</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="47"><a style="outline: none; text-decoration:none; color:inherit" href="#47"> 47</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="48"><a style="outline: none; text-decoration:none; color:inherit" href="#48"> 48</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="49"><a style="outline: none; text-decoration:none; color:inherit" href="#49"> 49</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="50"><a style="outline: none; text-decoration:none; color:inherit" href="#50"> 50</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="51"><a style="outline: none; text-decoration:none; color:inherit" href="#51"> 51</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="52"><a style="outline: none; text-decoration:none; color:inherit" href="#52"> 52</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="53"><a style="outline: none; text-decoration:none; color:inherit" href="#53"> 53</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="54"><a style="outline: none; text-decoration:none; color:inherit" href="#54"> 54</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="55"><a style="outline: none; text-decoration:none; color:inherit" href="#55"> 55</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="56"><a style="outline: none; text-decoration:none; color:inherit" href="#56"> 56</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="57"><a style="outline: none; text-decoration:none; color:inherit" href="#57"> 57</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="58"><a style="outline: none; text-decoration:none; color:inherit" href="#58"> 58</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="59"><a style="outline: none; text-decoration:none; color:inherit" href="#59"> 59</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="60"><a style="outline: none; text-decoration:none; color:inherit" href="#60"> 60</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="61"><a style="outline: none; text-decoration:none; color:inherit" href="#61"> 61</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="62"><a style="outline: none; text-decoration:none; color:inherit" href="#62"> 62</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="63"><a style="outline: none; text-decoration:none; color:inherit" href="#63"> 63</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="64"><a style="outline: none; text-decoration:none; color:inherit" href="#64"> 64</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="65"><a style="outline: none; text-decoration:none; color:inherit" href="#65"> 65</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="66"><a style="outline: none; text-decoration:none; color:inherit" href="#66"> 66</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="67"><a style="outline: none; text-decoration:none; color:inherit" href="#67"> 67</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="68"><a style="outline: none; text-decoration:none; color:inherit" href="#68"> 68</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="69"><a style="outline: none; text-decoration:none; color:inherit" href="#69"> 69</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="70"><a style="outline: none; text-decoration:none; color:inherit" href="#70"> 70</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="71"><a style="outline: none; text-decoration:none; color:inherit" href="#71"> 71</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="72"><a style="outline: none; text-decoration:none; color:inherit" href="#72"> 72</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="73"><a style="outline: none; text-decoration:none; color:inherit" href="#73"> 73</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="74"><a style="outline: none; text-decoration:none; color:inherit" href="#74"> 74</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="75"><a style="outline: none; text-decoration:none; color:inherit" href="#75"> 75</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="76"><a style="outline: none; text-decoration:none; color:inherit" href="#76"> 76</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="77"><a style="outline: none; text-decoration:none; color:inherit" href="#77"> 77</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="78"><a style="outline: none; text-decoration:none; color:inherit" href="#78"> 78</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="79"><a style="outline: none; text-decoration:none; color:inherit" href="#79"> 79</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="80"><a style="outline: none; text-decoration:none; color:inherit" href="#80"> 80</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="81"><a style="outline: none; text-decoration:none; color:inherit" href="#81"> 81</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="82"><a style="outline: none; text-decoration:none; color:inherit" href="#82"> 82</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="83"><a style="outline: none; text-decoration:none; color:inherit" href="#83"> 83</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="84"><a style="outline: none; text-decoration:none; color:inherit" href="#84"> 84</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="85"><a style="outline: none; text-decoration:none; color:inherit" href="#85"> 85</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="86"><a style="outline: none; text-decoration:none; color:inherit" href="#86"> 86</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="87"><a style="outline: none; text-decoration:none; color:inherit" href="#87"> 87</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="88"><a style="outline: none; text-decoration:none; color:inherit" href="#88"> 88</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="89"><a style="outline: none; text-decoration:none; color:inherit" href="#89"> 89</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="90"><a style="outline: none; text-decoration:none; color:inherit" href="#90"> 90</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="91"><a style="outline: none; text-decoration:none; color:inherit" href="#91"> 91</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="92"><a style="outline: none; text-decoration:none; color:inherit" href="#92"> 92</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="93"><a style="outline: none; text-decoration:none; color:inherit" href="#93"> 93</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="94"><a style="outline: none; text-decoration:none; color:inherit" href="#94"> 94</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="95"><a style="outline: none; text-decoration:none; color:inherit" href="#95"> 95</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="96"><a style="outline: none; text-decoration:none; color:inherit" href="#96"> 96</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="97"><a style="outline: none; text-decoration:none; color:inherit" href="#97"> 97</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="98"><a style="outline: none; text-decoration:none; color:inherit" href="#98"> 98</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="99"><a style="outline: none; text-decoration:none; color:inherit" href="#99"> 99</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="100"><a style="outline: none; text-decoration:none; color:inherit" href="#100">100</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="101"><a style="outline: none; text-decoration:none; color:inherit" href="#101">101</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="102"><a style="outline: none; text-decoration:none; color:inherit" href="#102">102</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="103"><a style="outline: none; text-decoration:none; color:inherit" href="#103">103</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="104"><a style="outline: none; text-decoration:none; color:inherit" href="#104">104</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="105"><a style="outline: none; text-decoration:none; color:inherit" href="#105">105</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="106"><a style="outline: none; text-decoration:none; color:inherit" href="#106">106</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="107"><a style="outline: none; text-decoration:none; color:inherit" href="#107">107</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="108"><a style="outline: none; text-decoration:none; color:inherit" href="#108">108</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="109"><a style="outline: none; text-decoration:none; color:inherit" href="#109">109</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="110"><a style="outline: none; text-decoration:none; color:inherit" href="#110">110</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="111"><a style="outline: none; text-decoration:none; color:inherit" href="#111">111</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="112"><a style="outline: none; text-decoration:none; color:inherit" href="#112">112</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="113"><a style="outline: none; text-decoration:none; color:inherit" href="#113">113</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="114"><a style="outline: none; text-decoration:none; color:inherit" href="#114">114</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="115"><a style="outline: none; text-decoration:none; color:inherit" href="#115">115</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="116"><a style="outline: none; text-decoration:none; color:inherit" href="#116">116</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="117"><a style="outline: none; text-decoration:none; color:inherit" href="#117">117</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="118"><a style="outline: none; text-decoration:none; color:inherit" href="#118">118</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="119"><a style="outline: none; text-decoration:none; color:inherit" href="#119">119</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="120"><a style="outline: none; text-decoration:none; color:inherit" href="#120">120</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="121"><a style="outline: none; text-decoration:none; color:inherit" href="#121">121</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="122"><a style="outline: none; text-decoration:none; color:inherit" href="#122">122</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="123"><a style="outline: none; text-decoration:none; color:inherit" href="#123">123</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="124"><a style="outline: none; text-decoration:none; color:inherit" href="#124">124</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="125"><a style="outline: none; text-decoration:none; color:inherit" href="#125">125</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="126"><a style="outline: none; text-decoration:none; color:inherit" href="#126">126</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="127"><a style="outline: none; text-decoration:none; color:inherit" href="#127">127</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="128"><a style="outline: none; text-decoration:none; color:inherit" href="#128">128</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="129"><a style="outline: none; text-decoration:none; color:inherit" href="#129">129</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="130"><a style="outline: none; text-decoration:none; color:inherit" href="#130">130</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="131"><a style="outline: none; text-decoration:none; color:inherit" href="#131">131</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="132"><a style="outline: none; text-decoration:none; color:inherit" href="#132">132</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="133"><a style="outline: none; text-decoration:none; color:inherit" href="#133">133</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="134"><a style="outline: none; text-decoration:none; color:inherit" href="#134">134</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="135"><a style="outline: none; text-decoration:none; color:inherit" href="#135">135</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="136"><a style="outline: none; text-decoration:none; color:inherit" href="#136">136</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="137"><a style="outline: none; text-decoration:none; color:inherit" href="#137">137</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="138"><a style="outline: none; text-decoration:none; color:inherit" href="#138">138</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="139"><a style="outline: none; text-decoration:none; color:inherit" href="#139">139</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="140"><a style="outline: none; text-decoration:none; color:inherit" href="#140">140</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="141"><a style="outline: none; text-decoration:none; color:inherit" href="#141">141</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="142"><a style="outline: none; text-decoration:none; color:inherit" href="#142">142</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="143"><a style="outline: none; text-decoration:none; color:inherit" href="#143">143</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="144"><a style="outline: none; text-decoration:none; color:inherit" href="#144">144</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="145"><a style="outline: none; text-decoration:none; color:inherit" href="#145">145</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="146"><a style="outline: none; text-decoration:none; color:inherit" href="#146">146</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="147"><a style="outline: none; text-decoration:none; color:inherit" href="#147">147</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="148"><a style="outline: none; text-decoration:none; color:inherit" href="#148">148</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="149"><a style="outline: none; text-decoration:none; color:inherit" href="#149">149</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="150"><a style="outline: none; text-decoration:none; color:inherit" href="#150">150</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="151"><a style="outline: none; text-decoration:none; color:inherit" href="#151">151</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="152"><a style="outline: none; text-decoration:none; color:inherit" href="#152">152</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="153"><a style="outline: none; text-decoration:none; color:inherit" href="#153">153</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="154"><a style="outline: none; text-decoration:none; color:inherit" href="#154">154</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="155"><a style="outline: none; text-decoration:none; color:inherit" href="#155">155</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="156"><a style="outline: none; text-decoration:none; color:inherit" href="#156">156</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="157"><a style="outline: none; text-decoration:none; color:inherit" href="#157">157</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="158"><a style="outline: none; text-decoration:none; color:inherit" href="#158">158</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="159"><a style="outline: none; text-decoration:none; color:inherit" href="#159">159</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="160"><a style="outline: none; text-decoration:none; color:inherit" href="#160">160</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="161"><a style="outline: none; text-decoration:none; color:inherit" href="#161">161</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="162"><a style="outline: none; text-decoration:none; color:inherit" href="#162">162</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="163"><a style="outline: none; text-decoration:none; color:inherit" href="#163">163</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="164"><a style="outline: none; text-decoration:none; color:inherit" href="#164">164</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="165"><a style="outline: none; text-decoration:none; color:inherit" href="#165">165</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="166"><a style="outline: none; text-decoration:none; color:inherit" href="#166">166</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="167"><a style="outline: none; text-decoration:none; color:inherit" href="#167">167</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="168"><a style="outline: none; text-decoration:none; color:inherit" href="#168">168</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="169"><a style="outline: none; text-decoration:none; color:inherit" href="#169">169</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="170"><a style="outline: none; text-decoration:none; color:inherit" href="#170">170</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="171"><a style="outline: none; text-decoration:none; color:inherit" href="#171">171</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="172"><a style="outline: none; text-decoration:none; color:inherit" href="#172">172</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="173"><a style="outline: none; text-decoration:none; color:inherit" href="#173">173</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="174"><a style="outline: none; text-decoration:none; color:inherit" href="#174">174</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="175"><a style="outline: none; text-decoration:none; color:inherit" href="#175">175</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="176"><a style="outline: none; text-decoration:none; color:inherit" href="#176">176</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="177"><a style="outline: none; text-decoration:none; color:inherit" href="#177">177</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">**# Manually compute VAR
+* prepare data
+sysuse varsample.dta, clear
+
+* define global variables
+global names &#34;inflation unrate ffr&#34;
+global lagorder 7
+global numnames 3
+
+* generate lag variables 
+foreach var in $names{
+	forvalues j = 1/$lagorder{
+		cap g l`j&#39;`var&#39; = l`j&#39;.&#34;`var&#39;&#34;
+	}
+}
+
+* put x and y of the reduced-form VAR into the matrix
+mkmat $names, matrix(Y)
+mat Y = Y[$lagorder+1..rowsof(y), 1..colsof(Y)]
+mkmat l*inflation l*unrate l*ffr, matrix(X) nomiss
+mat X = (X, J(rowsof(X), 1, 1))
+
+* estimate the OLS coefficients of the reduced-form VAR
+mat beta = inv(X&#39;*X)*(X&#39;*Y)
+mat list beta
+
+* reshape generate reduced-form VAR coefficient matrix a1-ap
+forvalues i=1/$lagorder{
+	mat A`i&#39; = (beta[&#34;l`i&#39;inflation&#34;, 1..3]\beta[&#34;l`i&#39;unrate&#34;, 1..3]\beta[&#34;l`i&#39;ffr&#34;, 1..3])&#39;
+	mat list A`i&#39;
+}
+
+* compute sigma_e
+mat e=Y-X*beta
+mat e=J($lagorder,$numnames,.) \ e
+svmat e
+mat accum sigma_e = e1 e2 e3, deviations noconstant
+mat sigma_e = sigma_e/(_N-$lagorder)
+mat list sigma_e
+
+* decompose sigma_e
+mat P = cholesky(sigma_e)
+mat list P
+
+* compute and decompose sigma_epsilon
+mat sigma_epsilon = B*sigma_e*B&#39;
+mat P1 = cholesky(sigma_epsilon)
+mat list P1
+
+* estimate inverse of B
+qui reg e2 e1
+global B21 = -e(b)[1,1]
+qui reg e3 e1 e2
+global B31 = -e(b)[1,1]
+global B32 = -e(b)[1,2]
+* construct matrix B
+mat B = (1,0,0 \ $B21,1,0 \ $B31,$B32,1)
+mat list B
+
+
+* estimate IRFs, OIRFs, and SIRFs
+mat irf0 = I($numnames)
+mat sirf0 = irf0*inv(B)*P1
+mat oirf0 = irf0*P
+forvalues i=1/15{
+	mat irf`i&#39; = J($numnames,$numnames,0)
+	forvalues j = 1/$lagorder{
+	if `i&#39; &gt;= `j&#39;{
+	local temp = `i&#39;-`j&#39;
+	mat temp2 = irf`temp&#39;*A`j&#39;
+	mat irf`i&#39; = irf`i&#39;+ temp2
+}
+}
+	mat sirf`i&#39; = irf`i&#39;*inv(B)*P1
+	mat oirf`i&#39; = irf`i&#39;*P
+}
+
+
+* collect irf matrix into dataset fullirfs.dta
+cap program drop reshapemat 
+cap program define reshapemat
+cap mat drop c`1&#39;
+forvalues i=0/15{
+	mat colnames `1&#39;`i&#39; = $names
+	mat rownames `1&#39;`i&#39; = $names
+	mat temp1=vec(`1&#39;`i&#39;)
+	mat c`1&#39; = nullmat(c`1&#39;) \ temp1
+}
+mat colnames c`1&#39; = &#34;`1&#39;&#34;
+end
+
+local irfnames &#34;irf sirf oirf&#34;
+cap mat drop fullirfs
+foreach name in `irfnames&#39;{
+	reshapemat  `name&#39;
+	mat fullirfs = (nullmat(fullirfs), c`name&#39;)
+}
+mat list fullirfs
+
+clear
+svmat fullirfs, names(col)
+g rownames = &#34;&#34;
+local rownames : rowfullnames coirf
+local c : word count `rownames&#39;
+forvalues i = 1/`c&#39; {
+    qui replace rownames = &#34;`:word `i&#39; of `rownames&#39;&#39;&#34; in `i&#39;
+}
+
+split rownames, p(&#34;:&#34;)
+rename rownames2 response
+rename rownames1 impulse
+drop rownames
+
+g step = floor((_n-1)/9)
+save fullirfs, replace
+
+* calculate mse and fevd, save them into dataset fevds.dta
+use fullirfs, replace
+* calculate the sqaured irfs
+g sqoirf = oirf^2
+* calculate the MSE of each step
+sort step response impulse
+by step response: egen temp = sum(sqoirf)
+sort response impulse step
+by response impulse: g mse = sum(temp)
+by response impulse: g cvarcontri = sum(sqoirf)
+g fevd_manual = cvarcontri/mse
+keep step response impulse mse fevd_manual
+replace step = step +1 
+save fevds, replace
+
+**#  generate benchmark using `svar&#39; command
+use varsample.dta, clear
+tsset yq
+matrix A1 = (1,0,0 \ .,1,0 \ .,.,1)
+matrix B1 = (.,0,0 \ 0,.,0 \ 0,0,.)
+svar $names, lags(1/7) aeq(A1) beq(B1)
+irf create forblog, step(15) set(myirf) replace
+mat sigma_e_bench = e(Sigma)
+mat B_bench = e(A)
+mat beta_bench = e(b_var)
+
+**# Compare manually computed results with benchmark
+* check variance-covariance matrix
+mat list sigma_e
+mat list sigma_e_bench
+
+* check matrix B
+mat list B
+mat list B_bench
+
+* check reduced-form coefficients
+mata
+	beta_bench = st_matrix(&#34;beta_bench&#34;)
+	beta_bench = rowshape(beta_bench, $numnames)&#39;
+	st_matrix(&#34;beta_bench&#34;, beta_bench)
+end
+
+mat betas = (beta, beta_bench)
+mat list betas
+
+* check irfs
+use myirf.irf, replace
+rename *irf b*irf
+joinby impulse response step using fullirfs
+order impulse response step birf irf boirf oirf bsirf sirf
+format *irf %6.0g
+list impulse response step birf irf boirf oirf bsirf sirf in 1/18
+
+* check fevd
+use myirf.irf, replace
+rename fevd bfevd
+g bmse = mse^2
+rename mse rmse
+joinby impulse response step using fevds
+order impulse response step bfevd fevd_manual bmse mse
+list impulse response step bfevd fevd_manual bmse mse in 1/18
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="summary">Summary</h2>
+<p>In this blog, I firstly theoretically defined the computations of reduced-form coefficients, IRF, OIRF, SIRF, MSE, and FEVD of the VAR model. Then I manually computed all the above outputs in Stata following their theoretical definitions. Finally, I compare my manually computed outputs with the outcomes produced by the integrated command <code>svar</code> to check the validity of my calculations.</p>
+<p>While anyone can produce the above results with the integrated command <code>svar</code> in seconds, how are these results are produced is unclear for many people and deter them from confidently using the VAR outputs in their own research. I hope this blog can help to mitigate this issue and help my readers gain more thorough understanding about VAR estimation and more confidently use the outputs of VAR estimation.</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li>Ltkepohl, Helmut. &ldquo;New Introduction to Multiple Time Series Analysis.&rdquo; (2007).</li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/common-practice-of-var-estimation-in-stata/" data-toggle="tooltip" data-placement="top" title="Estimations of VAR, IRFs, and Variance Decomposition in Stata">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Mengjie Xu" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:m.xu@fs.de">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/mengjie-xu-37410712b/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+<script>
+      renderMathInElement(
+          document.body,
+          {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "\\[", right: "\\]", display: true},
+                  {left: "$", right: "$", display: false},
+                  {left: "\\(", right: "\\)", display: false}
+              ]
+          }
+      );
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
