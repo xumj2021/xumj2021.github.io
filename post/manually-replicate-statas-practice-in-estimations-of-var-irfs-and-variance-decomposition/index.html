@@ -270,10 +270,10 @@
     <li><a href="#theoretical-definitions-and-calculation-formulas">Theoretical Definitions and Calculation Formulas</a>
       <ul>
         <li><a href="#define-the-var-system">Define the VAR system</a></li>
-        <li><a href="#calculate-reduced-form-coefficients-a_ii12p">Calculate reduced-form coefficients $A_i(i=1,2,..,p)$</a></li>
-        <li><a href="#calculate-impulse-response-coefficients-phil">Calculate Impulse Response Coefficients $\Phi(L)$</a></li>
-        <li><a href="#calculate-orthogonalized-irfs-thetal-">Calculate Orthogonalized IRFs $\Theta(L) $</a></li>
-        <li><a href="#calculate-orthogonalized-structural-irfs-psil">Calculate (Orthogonalized) Structural IRFs $\Psi(L)$</a></li>
+        <li><a href="#calculate-reduced-form-coefficients-a_ii12p">Calculate reduced-form coefficients \(A_i(i=1,2,..,p)\)</a></li>
+        <li><a href="#calculate-impulse-response-coefficients-phil">Calculate Impulse Response Coefficients \(\Phi(L)\)</a></li>
+        <li><a href="#calculate-orthogonalized-irfs-thetal-">Calculate Orthogonalized IRFs \(\Theta(L) \)</a></li>
+        <li><a href="#calculate-orthogonalized-structural-irfs--psil">Calculate (Orthogonalized) Structural IRFs  \(\Psi(L)\)</a></li>
         <li><a href="#calculate-forecast-error-variance-decomposition-fevd">Calculate Forecast Error Variance Decomposition (FEVD)</a></li>
         <li><a href="#summary-of-formulas">Summary of formulas</a></li>
       </ul>
@@ -281,10 +281,10 @@
     <li><a href="#manually-compute-the-var-outputs-in-stata">Manually Compute the VAR outputs in Stata</a>
       <ul>
         <li><a href="#import-data-and-define-global-variables">Import Data and define global variables</a></li>
-        <li><a href="#compute-reduced-form-coefficients-a_ii12p">Compute reduced-form coefficients $A_i(i=1,2,..,p)$</a></li>
-        <li><a href="#compute-and-decompose-the-covariance-matrix-sigma_e-and-sigma_epsilon">Compute and decompose the covariance matrix $\Sigma_e$ and $\Sigma_\epsilon$</a></li>
-        <li><a href="#compute-the-contemporaneous-matrix-b">Compute the contemporaneous matrix $B$</a></li>
-        <li><a href="#compute-irfs-phil-orthogonalized-irfs-thetal-and-structural-irfs-psil">Compute IRFs $\Phi(L)$, Orthogonalized IRFs $\Theta(L)$, and Structural IRFs $\Psi(L)$</a></li>
+        <li><a href="#compute-reduced-form-coefficients-a_ii12p">Compute reduced-form coefficients \(A_i(i=1,2,..,p)\)</a></li>
+        <li><a href="#compute-and-decompose-the-covariance-matrix-sigma_e-and-sigma_epsilon">Compute and decompose the covariance matrix \(\Sigma_e\) and \(\Sigma_\epsilon\)</a></li>
+        <li><a href="#compute-the-contemporaneous-matrix-b">Compute the contemporaneous matrix \(B\)</a></li>
+        <li><a href="#compute-irfs-phil-orthogonalized-irfs-thetal--and-structural-irfs-psil">Compute IRFs \(\Phi(L)\), Orthogonalized IRFs \(\Theta(L)\) , and Structural IRFs \(\Psi(L)\)</a></li>
         <li><a href="#compute-the-forecast-error-variance-decomposition-fevd">Compute the Forecast Error Variance Decomposition (FEVD)</a></li>
       </ul>
     </li>
@@ -292,7 +292,7 @@
     <li><a href="#compare-manually-computed-results-with-benchmark">Compare Manually Computed Results with Benchmark</a>
       <ul>
         <li><a href="#check-reduced-form-coefficients">Check reduced-form coefficients</a></li>
-        <li><a href="#check-parameter-matrix-sigma_e-sigma_epsilon-and-b">Check parameter matrix $\Sigma_e$, $\Sigma_\epsilon$ and $B$</a></li>
+        <li><a href="#check-parameter-matrix-sigma_e-sigma_epsilon-and-b">Check parameter matrix \(\Sigma_e\), \(\Sigma_\epsilon\) and \(B\)</a></li>
         <li><a href="#check-irf-oirf-and-sirf">Check IRF, OIRF, and SIRF</a></li>
         <li><a href="#check-mse-and-fevd">Check MSE and FEVD</a></li>
       </ul>
@@ -305,30 +305,30 @@
                 
                 <h2 id="motivation">Motivation</h2>
 <p>While people can always use integrated commands in Stata (e.g., <code>var</code> and <code>svar</code>) to produce abundant outputs of VAR estimation, many can not confidently interpret these results without knowing how they are theoretically defined and practically calculated. Manually replicating the outputs of the Stata&rsquo;s integrated commands for VAR estimation will be very helpful to resolve this issue.</p>
-<p>In this blog, I will firstly provide the theoretical calculation formulas of reduced-form coefficients, IRFs, Structural IRFs, Orthogonalized IRFs, and Forecast Error Variance Decomposition. Then I will follow their theoretical definition to manually calculate these outputs in Stata. Finally, I will compare the manually computed results with the outputs generated from Stata&rsquo;s integrated commands (see in my last blog) and cross-check the precision of my manual computation.</p>
+<p>In this blog, I will firstly provide the theoretical calculation formulas of reduced-form coefficients, IRFs, Structural IRFs, Orthogonalized IRFs, and Forecast Error Variance Decomposition. Then I will follow their theoretical definition to manually calculate these outputs in Stata. Finally, I will compare the manually computed results with the outputs generated from Stata&rsquo;s integrated commands (see in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">my last blog</a>) and cross-check the precision of my manual computation.</p>
 <p>By doing so, I hope this blog can provide precise insights on how the VAR outputs are produced in Stata and help the readers confidently use them in their own research.</p>
 <h2 id="theoretical-definitions-and-calculation-formulas">Theoretical Definitions and Calculation Formulas</h2>
 <h3 id="define-the-var-system">Define the VAR system</h3>
-<p>The starting point is a structural VAR system with $k$ variables and $p$ lags.
+<p>The starting point is a structural VAR system with \(k\) variables and \(p\) lags.
 $$
 Bx_t=\kappa+\Sigma_{i=1}^{p}\Gamma_i x_{t-i}+\epsilon_t \tag{1}
 $$
-Premultiplying Equation (1) with matrix $B^{-1}$, one will get the reduced-form VAR. 
+Premultiplying Equation (1) with matrix \(B^{-1}\), one will get the reduced-form VAR. 
 $$
 x_t=\nu+\Sigma_{i=1}^{p}A_i x_{t-i}+e_t  \tag{2}
 $$</p>
-<h3 id="calculate-reduced-form-coefficients-a_ii12p">Calculate reduced-form coefficients $A_i(i=1,2,..,p)$</h3>
-<p>As the OLS estimation is proved to be consistent and asymptotically efficient in reduced form (e.g., Enders, 2004), the reduced-form coefficients $A_i(i=1,2,..,p)$ are estimated directly from the OLS.</p>
-<p>That said, if we put $x_t$ into a matrix $Y$ and put $x_{t-i} (i=1,2,..,p)$ in to a matrix $X$, the reduced-form coefficient matrix $A_i(i=1,2,..,p)$ can be generated from the OLS coefficients
+<h3 id="calculate-reduced-form-coefficients-a_ii12p">Calculate reduced-form coefficients \(A_i(i=1,2,..,p)\)</h3>
+<p>As the OLS estimation is proved to be consistent and asymptotically efficient in reduced form (e.g., Enders, 2004), the reduced-form coefficients  \(A_i(i=1,2,..,p)\) are estimated directly from the OLS.</p>
+<p>That said, if we put \(x_t\) into a matrix \(Y\) and put \(x_{t-i} (i=1,2,..,p)\) in to a matrix \(X\), the reduced-form coefficient matrix  can \(A_i(i=1,2,..,p)\) be generated from the OLS coefficients
 $$
 \beta = (X&rsquo;X)^{-1}(X&rsquo;Y) \tag{3}
 $$</p>
-<h3 id="calculate-impulse-response-coefficients-phil">Calculate Impulse Response Coefficients $\Phi(L)$</h3>
+<h3 id="calculate-impulse-response-coefficients-phil">Calculate Impulse Response Coefficients \(\Phi(L)\)</h3>
 <p>Following Lütkepohl (2007, p22-23), the reduced-form VAR system defined in Equation (2) could be written as the following Vector Moving Average (VMA) representation.
 $$
 x_t = \mu+\Phi(L)e_t = \mu+\sum_{i=0}^{\infty}\Phi_ie_{t-i} \tag{4}
 $$
-The tricks are as follows. Firstly you re-write the lag terms using lag operators $\left(A_1 L+\cdots+A_p L^p\right) x_t$, then you move them into the left hand side of the equation and get
+The tricks are as follows. Firstly you re-write the lag terms using lag operators \(\left(A_1 L+\cdots+A_p L^p\right) x_t\), then you move them into the left hand side of the equation and get
 $$
 A(L)x_t = \nu+e_t \tag{5}
 $$
@@ -344,92 +344,101 @@ be an operator such that
 $$
 \Phi(L)A(L)=I_k
 $$
-where $k$ is the number of variables in the VAR system.</p>
-<p>Premultiply Equation (5) with $\Phi(L)$. Call the mean factor $\Phi(L)\nu$ as $\mu$, we get the VMA representation of the VAR system in Equation (6).
+where \(k\) is the number of variables in the VAR system.</p>
+<p>Premultiply Equation (5) with \(\Phi(L)\). Call the mean factor \(\Phi(L)\nu\) as \(\mu\), we get the VMA representation of the VAR system in Equation (6).
 $$
 x_t = \Phi(L)\nu+\Phi(L)e_t = \mu+\sum_{i=0}^{\infty}\Phi_ie_{t-i} \tag{6}
 $$
-Intuitively, the coefficients of the VMA representation $\Phi_i (i=1,2,&hellip;,\infty)$ captures how does a unit shock on $e_{t-i}$ influences the variables of interest $x_t$, which are the so-called Impulse Response Functions (IRFs) by definition.</p>
-<p>Lütkepohl (2007, p22-23) proves that the $\Phi_i$, or so-called IRFs, can be computed recursively using
+Intuitively, the coefficients of the VMA representation \(\Phi_i (i=1,2,&hellip;,\infty)\) captures how does a unit shock on \(e_{t-i}\) influences the variables of interest \(x_t\), which are the so-called Impulse Response Functions (IRFs) by definition.</p>
+<p>Lütkepohl (2007, p22-23) proves that the \(\Phi_i\), or so-called IRFs, can be computed recursively using
 $$
-\Phi_0 = I_k\
+\Phi_0 = I_k\\\
 \Phi_i = \Sigma_{j=1}^{i}\Phi_{i-j}A_j \tag{7}
 $$
-where $A_j (j=1&hellip;p)$ are coefficients for $j$-lag variables of the reduced-form VAR system, which we have estimated through OLS.</p>
-<h3 id="calculate-orthogonalized-irfs-thetal-">Calculate Orthogonalized IRFs $\Theta(L) $</h3>
-<p>Typically, there are correlations among reduced-form innovations, which makes it hard to separate the impacts of one innovation from another. In such case, to better separate the effects of one innovation from another, people usually apply Cholesky factorization of the variance-covariance matrix $\Sigma_e$, which derives
+where \(A_j (j=1&hellip;p)\) are coefficients for \(j\)-lag variables of the reduced-form VAR system, which we have estimated through OLS.</p>
+<h3 id="calculate-orthogonalized-irfs-thetal-">Calculate Orthogonalized IRFs \(\Theta(L) \)</h3>
+<p>Typically, there are correlations among reduced-form innovations, which makes it hard to separate the impacts of one innovation from another. In such case, to better separate the effects of one innovation from another, people usually apply Cholesky factorization of the variance-covariance matrix \(\Sigma_e\), which derives
 $$
 \Sigma_e = PP'
 $$
-where $P$ is a lower triangular matrix.</p>
+where \(P\) is a lower triangular matrix.</p>
 <p>Following  Lütkepohl (2007, p46), the VMA representation of VAR, Equation (6), can be re-written as 
 $$
 x_t=\mu+\sum_{i=0}^{\infty} \Phi_i P P^{-1} e_{t-i}=\mu+\sum_{i=0}^{\infty} \Theta_i w_{t-i} \tag{8}
 $$
-where $\Theta_i=\Phi_i P$ and $w_t=P^{-1} e_t$. The following equation proves that $w_t$ is white noise with covariance matrix of identity matrix $I_k$, which implies the innovations $w_t$ have uncorrelated components. Thus, $w_t$ are also called orthogonal innovations.
+where \(\Theta_i=\Phi_i P\) and \(w_t=P^{-1} e_t\). The following equation proves that \(w_t\) is white noise with covariance matrix of identity matrix \(I_k\), which implies the innovations \(w_t\) have uncorrelated components. Thus,  \(w_t\)  are also called orthogonal innovations.
 $$
 \Sigma_w=P^{-1} \Sigma_e\left(P^{-1}\right)^{\prime}=I_K \tag{9}
 $$
-Correspondingly, the new IRF coefficients $\Theta_i=\Phi_i P$ which functions on the orthogonal innovations $w_t$ are called orthogonalized IRFs. In other words, the orthogonalized IRFs are given by the following Equation.
+Correspondingly, the new IRF coefficients \(\Theta_i=\Phi_i P\) which functions on the orthogonal innovations \(w_t\) are called orthogonalized IRFs. In other words, the orthogonalized IRFs are given by the following Equation.
 $$
 \Theta_i=\Phi_i P \tag{10}
 $$
-where $\Phi_i(i=1,2,&hellip;,\infty)$ are the IRFs and $P$ is the Cholesky decomposition of the variance-covariance matrix $\Sigma_e$ such that $\Sigma_e = PP'$.</p>
-<p>Clearly, the calculation of $P$ needs the covariance matrix of residuals $\Sigma_e$.</p>
-<p>Recall that we&rsquo;ve put $x_t$ into a matrix $Y$ and put $x_{t-i} (i=1,2,..,p)$ in to a matrix $X$, the reduced-form coefficient matrix $A$ are the OLS coefficients, which we have estimated in Equation (3). Then the residuals of VAR estimation $e$ are by definition
+where \(\Phi_i(i=1,2,&hellip;,\infty)\) are the IRFs and  \(P\)  is the Cholesky decomposition of the variance-covariance matrix  \(\Sigma_e\)  such that \(\Sigma_e = PP'\)</p>
+<p>Clearly, the calculation of  \(P\)  needs the covariance matrix of residuals  \(\Sigma_e\).</p>
+<p>Recall that we&rsquo;ve put \(x_t\) into a matrix  \(Y_t\)  and put \(x_{t-i} (i=1,2,..,p)\) in to a matrix  \(X\) , the reduced-form coefficient matrix  \(A\)  are the OLS coefficients, which we have estimated in Equation (3). Then the residuals of VAR estimation  \(e\)  are by definition
 $$
 e = Y-XA \tag{11}
 $$
-The variance-covariance matrix of the residuals $\Sigma_e$ can be calculated with
+The variance-covariance matrix of the residuals \(\Sigma_e\) can be calculated with
 $$
 \Sigma_e =E[(e-\bar{e})(e-\bar{e})']\tag{12}
 $$</p>
-<h3 id="calculate-orthogonalized-structural-irfs-psil">Calculate (Orthogonalized) Structural IRFs $\Psi(L)$</h3>
-<p>The structural IRFs by definition captures the impacts of one-unit structural shock $\epsilon_t$ on the variables of interest $x_t$. Recall that $e_t = B^{-1}\epsilon_t$, one can conveniently compute the structural IRFs by plugging it into the Equation (6).
+<h3 id="calculate-orthogonalized-structural-irfs--psil">Calculate (Orthogonalized) Structural IRFs  \(\Psi(L)\)</h3>
+<p>The structural IRFs by definition captures the impacts of one-unit structural shock \(\epsilon_t\) on the variables of interest \(x_t\). Recall that \(e_t = B^{-1}\epsilon_t\), one can conveniently compute the structural IRFs by plugging it into the Equation (6).
 $$
 x_t =\mu+\Phi(L)e_t =\mu+\Phi(L)B^{-1}\epsilon_t=\mu+\Lambda(L)\epsilon_t \tag{13}
 $$
-One can intuitively infer from the Equation (8) that the structural IRFs (SIRFs) should be the IRFs $\Phi_i$ postmultiplied by $B^{-1}$ as in Equation (9).
+One can intuitively infer from the Equation (8) that the structural IRFs (SIRFs) should be the IRFs \(\Phi_i\) postmultiplied by \(B^{-1}\) as in Equation (9).
 $$
 \Lambda_i=\Phi_iB^{-1} 
 $$</p>
-<p>Clearly, the matrix $B$ is the prerequisite for estimating Structural IRFs $\Lambda(L)$.</p>
-<p>Given that Stata&rsquo;s <code>var</code> command by default assumes $B$ is a $k\times k$ lower triangular matrix with ones in the diagonal, we could figure out the unresovled elements $B_{ij}$ from the relations of the reduced-form residuals. 
+<p>Clearly, the matrix \(B\) is the prerequisite for estimating Structural IRFs \(\Lambda(L)\).</p>
+<p>Given that Stata&rsquo;s <code>var</code> command by default assumes \(B\) is a \(k\times k\) lower triangular matrix with ones in the diagonal, we could figure out the unresovled elements \(B_{ij}\) from the relations of the reduced-form residuals. 
 $$
 B=\left(\begin{array}{ccc}
-1 &amp; 0 &amp; 0&amp;&hellip;&amp;0 \
-B_{21} &amp; 1 &amp; 0&amp;&hellip;&amp;0 \
-B_{31} &amp; B_{32} &amp; 1&amp;&hellip;&amp;0\
-&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;\
+1 &amp; 0 &amp; 0&amp;&hellip;&amp;0 \\\
+B_{21} &amp; 1 &amp; 0&amp;&hellip;&amp;0 \\\
+B_{31} &amp; B_{32} &amp; 1&amp;&hellip;&amp;0\\\
+&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;\\\
 B_{k1}&amp;B_{k2}&amp;B_{k3}&amp;&hellip;&amp;1
 \end{array}\right)
 $$
-In particular, we could start from $\epsilon_t = Be_t$, which implies
+In particular, we could start from \(\epsilon_t = Be_t\), which implies
 $$
-\left(\begin{array}{ccc}\epsilon_{1t}\\epsilon_{2t}\\epsilon_{3t}\&hellip;\\epsilon_{kt} \end{array}\right)=\left(\begin{array}{ccc}
-1 &amp; 0 &amp; 0&amp;&hellip;&amp;0 \
-B_{21} &amp; 1 &amp; 0&amp;&hellip;&amp;0 \
-B_{31} &amp; B_{32} &amp; 1&amp;&hellip;&amp;0\
-&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;\
+\left(\begin{array}{ccc}\epsilon_{1t}\\\
+\epsilon_{2t}\\\
+\epsilon_{3t}\\\
+&hellip;\\\
+\epsilon_{kt} \end{array}\right)=\left(\begin{array}{ccc}
+1 &amp; 0 &amp; 0&amp;&hellip;&amp;0 \\\
+B_{21} &amp; 1 &amp; 0&amp;&hellip;&amp;0 \\\
+B_{31} &amp; B_{32} &amp; 1&amp;&hellip;&amp;0\\\
+&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;&hellip;&amp;\\\
 B_{k1}&amp;B_{k2}&amp;B_{k3}&amp;&hellip;&amp;1
-\end{array}\right)\left(\begin{array}{ccc}e_{1t}\e_{2t}\e_{3t}\&hellip;\e_{kt} \end{array}\right)
+\end{array}\right)
+\left(\begin{array}{ccc}e_{1t}\\\
+e_{2t}\\\
+e_{3t}\\\
+&hellip;\\\
+e_{kt} \end{array}\right)
 $$
 Writing in a loose form 
 $$
-\begin{aligned}e_{1t} &amp;= \epsilon_{1t}\
-e_{2t} &amp;= \epsilon_{2t}- B_{21}e_{1t}\
-e_{3t} &amp;= \epsilon_{3t}- B_{31}e_{1t}-B_{32}e_{2t}\
-&hellip;\
+\begin{aligned}e_{1t} &amp;= \epsilon_{1t}\\\
+e_{2t} &amp;= \epsilon_{2t}- B_{21}e_{1t}\\\
+e_{3t} &amp;= \epsilon_{3t}- B_{31}e_{1t}-B_{32}e_{2t}\\\
+&hellip;\\\
 e_{kt}&amp; = \epsilon_{kt}-B_{k1}e_{1t}-B_{k2}e_{2t}-&hellip;-B_{kk-1}e_{k-1t}
 \end{aligned}
 $$
-Note that the $\epsilon_{it}$ are real numbers in the above regressions. That said by running the above $k$ regressions on the reduced-form residuals $e_{it}(i=1,&hellip;,k)$, one can obtain all the unresolved elements in the matrix $B$. For example, by regressing $e_{kt}$ on $e_{1t}$ to $e_{k-1}t$, one can get the coefficients $B_{k1}$ to $B_{kk-1}$, which are components of the last row in the matrix $B$.</p>
-<p>While people usually assume that the structural shocks $\epsilon_t$ are orthogonal unit impulse, it is not always the case in the dataset. Most of the time, while there are few contemporaneous correlations among different structural shocks, the structural shocks do have non-unit variance. In such case, people typically standardize structural IRFs into unit shocks by introducing a factorization of the covariance matrix of the structural shocks $\Sigma_\epsilon$, just like what we did to get the Orthogonalized IRFs in the last subsection.</p>
-<p>The covariance matrix of the structural shocks $\Sigma_\epsilon$ can be computed based on $e_t = B^{-1}\epsilon_t$.
+Note that the \(\epsilon_{it}\) are real numbers in the above regressions. That said by running the above \(k\) regressions on the reduced-form residuals \(e_{it}(i=1,&hellip;,k)\), one can obtain all the unresolved elements in the matrix \(B\). For example, by regressing \(e_{kt}\) on \(e_{1t}\) to \(e_{k-1t}\), one can get the coefficients \(B_{k1}\) to \(B_{kk-1}\), which are components of the last row in the matrix \(B\).</p>
+<p>While people usually assume that the structural shocks \(\epsilon_t\)  are orthogonal unit impulse, it is not always the case in the dataset. Most of the time, while there are few contemporaneous correlations among different structural shocks, the structural shocks do have non-unit variance. In such case, people typically standardize structural IRFs into unit shocks by introducing a factorization of the covariance matrix of the structural shocks \(\Sigma_\epsilon\) , just like what we did to get the Orthogonalized IRFs in the last subsection.</p>
+<p>The covariance matrix of the structural shocks \(\Sigma_\epsilon\) can be computed based on \(e_t = B^{-1}\epsilon_t\) .
 $$
 \Sigma_\epsilon = E(\epsilon\epsilon')=E(Be_tet&rsquo;B')=B\Sigma_eB'
 $$
-We decompose $\Sigma_\epsilon$ such that
+We decompose \(\Sigma_\epsilon\) such that
 $$
 \Sigma_\epsilon = P_1P_1'
 $$
@@ -438,54 +447,51 @@ $$
 \Psi_i=\Lambda_i P_1=\Phi_iB^{-1}P_1\tag{14}
 $$</p>
 <h3 id="calculate-forecast-error-variance-decomposition-fevd">Calculate Forecast Error Variance Decomposition (FEVD)</h3>
-<p>Following  Lütkepohl (2007, p63-64), the error in the optimal $h$-step forecast can be derived from the VMA representation in Equation (10).
+<p>Following  Lütkepohl (2007, p63-64), the error in the optimal \(h\) -step forecast can be derived from the VMA representation in Equation (10).
 $$
 \begin{aligned}
 x_{t+h}-x_t(h) &amp; =\sum_{i=0}^{h-1} \Phi_i e_{t+h-i}=\sum_{i=0}^{h-1} \Phi_i P P^{-1} e_{t+h-i} \
 &amp; =\sum_{i=0}^{h-1} \Theta_i w_{t+h-i} .
 \end{aligned} \tag{15}
 $$
-As the $w_t$ is white noise with identity matrix $I_k$ as covariance matrix, the variance of each factor in $w_t$ is 1. Denote the $js$-th element of $i$-step orthogonalized IRFs $\Theta_i$ as $\theta_{js,i}$ , the  $h$-step forecast Mean Squared Error (MSE) of variable $j$ can be written as the sum of the squared orthogonalized IRFs.
+As the \(w_t\) is white noise with identity matrix \(I_k\) as covariance matrix, the variance of each factor in \(w_t\) is 1. Denote the \(js\)-th element of \(i\)-step orthogonalized IRFs \(\Theta_i\)as \(\theta_{js,i}\) , the  \(h\)-step forecast Mean Squared Error (MSE) of variable \(j\) can be written as the sum of the squared orthogonalized IRFs.
 $$
 \operatorname{MSE}\left[x_{j, t}(h)\right]=\sum_{i=0}^{h-1} \sum_{s=1}^k \theta_{j s, i}^2 \tag{16}
 $$
-where $\theta_{js,i}$ is the orthogonalized IRF from innovation from variable $s$ to variable $j$ with $i$-step lag(s). $k$ is the variable numbers in the VAR system.</p>
-<p>The $h$-step variance contribution of innovations from variable $s$ to variable $j$ is by definition
+where \(\theta_{js,i}\) is the orthogonalized IRF from innovation from variable \(s\) to variable \(j\) with \(i\)-step lag(s). \(k\) is the variable numbers in the VAR system.</p>
+<p>The \(h\)-step variance contribution of innovations from variable \(s\) to variable \(j\) is by definition
 $$
 \Omega_{js,h} = \frac{\sum_{i=0}^{h-1} \theta_{j s, i}^2}{\sum_{i=0}^{h-1} \sum_{s=1}^k \theta_{j s, i}^2} \tag{17}
 $$</p>
 <h3 id="summary-of-formulas">Summary of formulas</h3>
-<p>For a structural VAR system with $k$ variables and $p$ lags.</p>
+<p>For a structural VAR system with \(k\) variables and \(p\) lags.</p>
 <ul>
-<li>The reduced-form coefficients $A_i(i=1,2,..,p)$ are the coefficients of the OLS estimation for the reduced-form VAR</li>
-<li>The Impulse Response Coefficients $\Phi(L)$ can be estimated with Equation (7). The prerequisite is the  reduced-form coefficients $A_i(i=1,2,..,p)$</li>
-<li>The Orthogonalized IRFs $\Theta(L) $ can be obtained by postmultipling IRF matrix $\Phi(L)$ with $P$, where $\Sigma_e = PP'$. The prerequisites are the IRF $\Phi(L)$ and the variance-covariance matrix of residuals $\Sigma_e$</li>
-<li>The Structural IRFs $\Psi(L)$ can be obtained by postmultipling IRF matrix $\Phi(L)$ with $B^{-1}P_1$. The prerequisite are the IRF $\Phi(L)$, contemporaneous effect matrix $B$ , and covariance matrix of structural shocks $\Sigma_\epsilon$ such that $\Sigma_\epsilon=P_1P_1'$</li>
-<li>The Forecast Error Variance Decomposition $\Omega_{js,h}$ can be obtained by calculating the sum of the squared orthogonalized IRFs of impulse $s$ on equation $j$ from the 1st step to $h-1$ step standardized by the Mean Squared Forecast Error, which could also be calculated from the orthogonalized IRFs  $\Theta(L) $. The prerequisite is only the orthogonalized IRFs $\Theta(L)$</li>
+<li>The reduced-form coefficients \(A_i(i=1,2,..,p)\) are the coefficients of the OLS estimation for the reduced-form VAR</li>
+<li>The Impulse Response Coefficients \(\Phi(L)\) can be estimated with Equation (7). The prerequisite is the  reduced-form coefficients \(A_i(i=1,2,..,p)\)</li>
+<li>The Orthogonalized IRFs \(\Theta(L)\) can be obtained by postmultipling IRF matrix \(\Phi(L)\) with \(P\), where \(\Sigma_e = PP'\). The prerequisites are the IRF \(\Phi(L)\) and the variance-covariance matrix of residuals \(\Sigma_e\)</li>
+<li>The Structural IRFs \(\Psi(L)\) can be obtained by postmultipling IRF matrix \(\Phi(L)\) with \(B^{-1}P_1\). The prerequisite are the IRF \(\Phi(L)\), contemporaneous effect matrix \(B\) , and covariance matrix of structural shocks \(\Sigma_\epsilon\) such that \(\Sigma_\epsilon=P_1P_1'\)</li>
+<li>The Forecast Error Variance Decomposition \(\Omega_{js,h}\) can be obtained by calculating the sum of the squared orthogonalized IRFs of impulse \(s\) on equation \(j\) from the 1st step to \(h-1\) step standardized by the Mean Squared Forecast Error, which could also be calculated from the orthogonalized IRFs  \(\Theta(L)\). The prerequisite is only the orthogonalized IRFs \(\Theta(L)\)</li>
 </ul>
-<p>​</p>
 <h2 id="manually-compute-the-var-outputs-in-stata">Manually Compute the VAR outputs in Stata</h2>
 <h3 id="import-data-and-define-global-variables">Import Data and define global variables</h3>
 <p>To keep consistent with the benchmark, where we produce all these outputs using integrated commands <code>var</code> in the last blog, I will use the same sample dataset and choose the same number of lag orders as 7.</p>
 <p>That said, the VAR system we will replicate has 3 variables and 7 lags. The model is as follows.
 $$
 \left[\begin{array}{c}
-\text { inflation }<em>t \
-\text { unrate }<em>t \
-\text{f f r}<em>t
-\end{array}\right]=\mathbf{A}<em>0+\mathbf{A}</em>{\mathbf{1}}\left[\begin{array}{c}
-\text { inflation }</em>{t-1} \
-\text { unrate }</em>{t-1} \
-\text{ffr}</em>{t-1}
-\end{array}\right]+\cdots+\mathbf{A}<em>{\mathbf{7}}\left[\begin{array}{c}
-\text { inflation }</em>{t-k} \
-\text { unrate }<em>{t-k} \
-\text{ffr}</em>{t-k}
-\end{array}\right]+\left[\begin{array}{c}
-e_{1, t} \
-e_{2, t} \
-e_{3, t}
-\end{array}\right]
+inflation_{t}\\\
+unrate_{t}\\\
+ffr_{t}
+\end{array}\right]=A_0+A_1
+\left[\begin{array}{c}
+inflation_{t-1}\\\
+unrate_{t-1}\\\
+ffr_{t-1}
+\end{array}\right]+\cdots+A_7
+\left[\begin{array}{c}
+inflation_{t-7}\\\
+unrate_{t-7}\\\
+ffr_{t-7}
+\end{array}\right]+e_t
 $$
 Please see codes for this step below.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -510,12 +516,12 @@ global lagorder 7
 global numnames 3
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="compute-reduced-form-coefficients-a_ii12p">Compute reduced-form coefficients $A_i(i=1,2,..,p)$</h3>
-<p>To compute reduced-form coefficients $A_i(i=1,2,..,p)$, we put $x_t$ into a matrix $Y$ and put $x_{t-i} (i=1,2,..,p)$ in to a matrix $X$, the reduced-form coefficient matrix $A$ can be generated from the OLS coefficients 
+</div><h3 id="compute-reduced-form-coefficients-a_ii12p">Compute reduced-form coefficients \(A_i(i=1,2,..,p)\)</h3>
+<p>To compute reduced-form coefficients \(A_i(i=1,2,..,p)\), we put \(x_t\) into a matrix \(Y\) and put \(x_{t-i} (i=1,2,..,p)\) in to a matrix \(X\), the reduced-form coefficient matrix \(A\) can be generated from the OLS coefficients 
 $$
 \beta = (X&rsquo;X)^{-1}(X&rsquo;Y)
 $$
-The codes are as follows. I firstly generate the 1 to $p$ lag of each variable in the VAR system. And then put them all together into a matrix $X$, put the contemporaneous variables into a matrix $Y$. The coefficients of OLS estimation are stored in matrix <code>beta</code>, which is a $22\times3$ matrix.</p>
+The codes are as follows. I firstly generate the 1 to \(p\) lag of each variable in the VAR system. And then put them all together into a matrix \(X\), put the contemporaneous variables into a matrix \(Y\). The coefficients of OLS estimation are stored in matrix <code>beta</code>, which is a \(22\times3\) matrix, where 22 = 3\(\times\)7+1.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -552,7 +558,7 @@ mat X = (X, J(rowsof(X), 1, 1))
 mat beta = inv(X&#39;*X)*(X&#39;*Y)
 </code></pre></td></tr></table>
 </div>
-</div><p>The manually computed reduce-form coefficient matrix $\beta$ is as follows.</p>
+</div><p>The manually computed reduce-form coefficient matrix <code>beta</code> is as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -611,7 +617,7 @@ l7inflation  -.07969876  -1.4801693  -22.071136
          c1   .00707448   .12277881   1.0777927
 </code></pre></td></tr></table>
 </div>
-</div><p>As we are estimating a VAR system with 3 variables and 7 lags, we need to derive coefficient matrix $A_i(i=1,2,..,p)$ from $\beta$. Each of the $A_i$ is a $3\times 3$ matrix. The $js$-th element of matrix $A_i$ denotes the IRFs of impulse $s$ on equation $j$ with $i$ lags.</p>
+</div><p>As we are estimating a VAR system with 3 variables and 7 lags, we need to derive coefficient matrix \(A_i(i=1,2,..,p)\) from \(\beta\). Each of the \(A_i\) is a \(3\times 3\) matrix. The \(js\)-th element of matrix \(A_i\) denotes the IRFs of impulse \(s\) on equation \(j\) with \(i\) lags.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -626,7 +632,7 @@ forvalues i=1/$lagorder{
 }
 </code></pre></td></tr></table>
 </div>
-</div><p>I list the three-lag coefficient matrix $A_3$ as an example. One can easily find the consistency with the coefficient matrix $\beta$.</p>
+</div><p>I list the three-lag coefficient matrix \(A_3\) as an example. One can easily find the consistency with the coefficient matrix <code>beta</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -647,25 +653,25 @@ inflation    .33067581    .00217432    .00073382
       ffr   -13.797021    .45998626    .44964119
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="compute-and-decompose-the-covariance-matrix-sigma_e-and-sigma_epsilon">Compute and decompose the covariance matrix $\Sigma_e$ and $\Sigma_\epsilon$</h3>
-<p>The reduced-form residuals $e$ are given by
+</div><h3 id="compute-and-decompose-the-covariance-matrix-sigma_e-and-sigma_epsilon">Compute and decompose the covariance matrix \(\Sigma_e\) and \(\Sigma_\epsilon\)</h3>
+<p>The reduced-form residuals \(e\) are given by
 $$
 e = Y-X\beta
 $$
 It&rsquo;s covariance matrix is 
 $$
-\Sigma_e =\frac{(e-\bar{e})(e-\bar{e})'}{n-p} \tag{14}
+\Sigma_e =\frac{(e-\bar{e})(e-\bar{e})'}{n-p} 
 $$
-where $n$ is the number of observations in the dataset and $p$ is the number of lag order specified.</p>
-<p>The covariance matrix of structural shock $\epsilon_t$ is 
+where \(n\) is the number of observations in the dataset and \(p\) is the number of lag order specified.</p>
+<p>The covariance matrix of structural shock \(\epsilon_t\) is 
 $$
 \Sigma_\epsilon = B\Sigma_eB'
 $$
-I decompose the covariance matrix $\Sigma_e$ and $\Sigma_\epsilon$ such that
+I decompose the covariance matrix \(\Sigma_e\) and \(\Sigma_\epsilon\) such that
 $$
 \Sigma_e=PP', \Sigma_\epsilon=P_1P_1'
 $$
-The codes are as follows. Note that I save the reduced-form residuals of <code>inflation</code>, <code>unrate</code>, and <code>ffr</code> equations as $e_1$, $e_2$, and $e_3$ respectively in this step.</p>
+The codes are as follows. Note that I save the reduced-form residuals of <code>inflation</code>, <code>unrate</code>, and <code>ffr</code> equations as \(e_1\), \(e_2\), and \(e_3\) respectively in this step.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -695,16 +701,16 @@ mat sigma_e = sigma_e/(_N-$lagorder)
 mat list sigma_e
 
 * decompose sigma_e
-mat P = cholesky(sigma_e)
+mat P = Cholesky(sigma_e)
 mat list P
 
 * compute and decompose sigma_epsilon
 mat sigma_epsilon = B*sigma_e*B&#39;
-mat P1 = cholesky(sigma_epsilon)
+mat P1 = Cholesky(sigma_epsilon)
 mat list P1
 </code></pre></td></tr></table>
 </div>
-</div><p>The decomposition results of $\Sigma_e$ and $\Sigma_\epsilon$ are as follows. As expected, both of them are lower triangular matrix.</p>
+</div><p>The decomposition results of \(\Sigma_e\) and \(\Sigma_\epsilon\) are as follows. As expected, both of them are lower triangular matrix.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -741,22 +747,27 @@ r2   3.232e-18   .26616909
 r3  -5.172e-17   1.518e-16   1.4708232
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="compute-the-contemporaneous-matrix-b">Compute the contemporaneous matrix $B$</h3>
-<p>Note that $e_t = B^{-1}\epsilon_t$, that means we can estimate the unknown factors $B_{21}$, $B_{31}$, and $B_{32}$ from the relationships of residuals of the reduced-form.
+</div><h3 id="compute-the-contemporaneous-matrix-b">Compute the contemporaneous matrix \(B\)</h3>
+<p>Note that \(e_t = B^{-1}\epsilon_t\), that means we can estimate the unknown factors \(B_{21}\), \(B_{31}\), and \(B_{32}\) from the relationships of residuals of the reduced-form.
 $$
-\left(\begin{array}{ccc}\epsilon_{1,t}\\epsilon_{2,t}\\epsilon_{3,t} \end{array}\right) =\left(\begin{array}{ccc}
-1 &amp; 0 &amp; 0 \
-B_{21} &amp; 1 &amp; 0 \
+\left(\begin{array}{ccc}\epsilon_{1,t}\\\
+\epsilon_{2,t}\\\
+\epsilon_{3,t} \end{array}\right) =\left(\begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\\
+B_{21} &amp; 1 &amp; 0 \\\
 B_{31} &amp; B_{32} &amp; 1
-\end{array}\right)\left(\begin{array}{ccc}e_{1,t}\e_{2,t}\e_{3,t} \end{array}\right)\tag{9}
+\end{array}\right)
+\left(\begin{array}{ccc}e_{1,t}\\\
+e_{2,t}\\\
+e_{3,t} \end{array}\right)
 $$</p>
 <p>To be exact, the Equation (8) implies
 $$
-e_{2,t} = \epsilon_{2,t}-B_{21}\times e_{1,t}\
-e_{3,t} = \epsilon_{3,t} - B_{31}\times e_{1,t} - B_{32}\times e_{2,t} 
-\tag{10}
+\begin{array}{c}
+e_{2,t} = \epsilon_{2,t}-B_{21}\times e_{1,t}\\\
+e_{3,t} = \epsilon_{3,t} - B_{31}\times e_{1,t} - B_{32}\times e_{2,t} \end{array}
 $$
-That is to say, we can estimate $B_{21}$ by regressing the reduced-form residual $e_{2,t}$ on $e_{1,t}$, and we estimate $B_{31}$ and $B_{32}$ by regressing the reduced-form residual $e_{3,t}$ on $e_{1,t}$ and $e_{2,t} $.</p>
+That is to say, we can estimate \(B_{21}\) by regressing the reduced-form residual \(e_{2,t}\) on \(e_{1,t}\), and we estimate \(B_{31}\) and \(B_{32}\) by regressing the reduced-form residual \(e_{3,t}\) on \(e_{1,t}\) and \(e_{2,t}\).</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -779,7 +790,7 @@ global B32 = -e(b)[1,2]
 mat B = (1,0,0 \ $B21,1,0 \ $B31,$B32,1)
 </code></pre></td></tr></table>
 </div>
-</div><p>The manually constructed matrix $B$ is as follows.</p>
+</div><p>The manually constructed matrix \(B\) is as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -800,14 +811,14 @@ r2   2.8385778           1           0
 r3  -31.313795   1.5109512           1
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="compute-irfs-phil-orthogonalized-irfs-thetal-and-structural-irfs-psil">Compute IRFs $\Phi(L)$, Orthogonalized IRFs $\Theta(L)$, and Structural IRFs $\Psi(L)$</h3>
+</div><h3 id="compute-irfs-phil-orthogonalized-irfs-thetal--and-structural-irfs-psil">Compute IRFs \(\Phi(L)\), Orthogonalized IRFs \(\Theta(L)\) , and Structural IRFs \(\Psi(L)\)</h3>
 <p>I follow formula from Lütkepohl (2007) to calculate the IRFs.
 $$
 \Phi_0 = I_k\
 \Phi_i = \Sigma_{j=1}^{i}\Phi_{i-j}A_j
 $$
-I post-multiply IRF $\Phi_i$ with $P$ to get orthogonalized IRFs $\Theta_i$.</p>
-<p>I post-multiply IRF $\Phi_i$ with $B^{-1}P_1$ to get (orthogonalized) structural IRFs $\Psi_i$.</p>
+I post-multiply IRF \(\Phi_i\) with \(P\) to get orthogonalized IRFs \(\Theta_i\).</p>
+<p>I post-multiply IRF \(\Phi_i\) with \(B^{-1}P_1\) to get (orthogonalized) structural IRFs \(\Psi_i\).</p>
 <p>The number of forecast steps is set to be 15 in this blog.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1000,7 +1011,7 @@ save fullirfs, replace
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="compute-the-forecast-error-variance-decomposition-fevd">Compute the Forecast Error Variance Decomposition (FEVD)</h3>
-<p>Based on the collected IRF dataset <code>fullirfs.dta</code>, I follow the following formula to decompose the mean squared forecast errors , where $\theta_{js,i}$ is the orthogonalized IRF from impulse of variable $s$ to variable $j$ with $i$-step lag(s). The results of each step&rsquo;s Mean Squared Error (MSE) and variance decomposition are saved into a new dataset <code>fevds.dta</code>.
+<p>Based on the collected IRF dataset <code>fullirfs.dta</code>, I follow the following formula to decompose the mean squared forecast errors , where \(\theta_{js,i}\) is the orthogonalized IRF from impulse of variable \(s\) to variable \(j\) with \(i\)-step lag(s). The results of each step&rsquo;s Mean Squared Error (MSE) and variance decomposition are saved into a new dataset <code>fevds.dta</code>.
 $$
 \Omega_{js,h} = \frac{\sum_{i=0}^{h-1} \theta_{j s, i}^2}{\sum_{i=0}^{h-1} \sum_{s=1}^k \theta_{j s, i}^2}
 $$</p>
@@ -1115,7 +1126,7 @@ save fevds, replace
 </div>
 </div><h2 id="generate-benchmark">Generate Benchmark</h2>
 <p>To get reliable benchmarks, I use the integrated command <code>svar</code> to generate all the above outputs of the VAR estimation with the same dataset and lag orders.</p>
-<p>The codes for generating benchmarks are as follows. The readers can see more explanations about these commands in my last blog.</p>
+<p>The codes for generating benchmarks are as follows. The readers can see more explanations about these commands in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">my last blog</a>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -1145,7 +1156,7 @@ mat beta_bench = e(b_var)
 </div><h2 id="compare-manually-computed-results-with-benchmark">Compare Manually Computed Results with Benchmark</h2>
 <p>To check the validity of my manually computations, I list these computations and the benchmark together to see whether they are consistent.</p>
 <h3 id="check-reduced-form-coefficients">Check reduced-form coefficients</h3>
-<p>I firstly reshape the coefficient matrix of the benchmark to make sure it has the same shape as my manually computed $\beta$.</p>
+<p>I firstly reshape the coefficient matrix of the benchmark to make sure it has the same shape as my manually computed coefficient matrix <code>beta</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -1170,7 +1181,7 @@ mat betas = (beta, beta_bench)
 mat list betas
 </code></pre></td></tr></table>
 </div>
-</div><p>Then I put them into a same matrix called <code>betas</code>, where the first three columns are manually computed coefficients and the last three columns are coefficients produced by <code>svar</code>. The <code>betas</code> matrix is as follows. Clearly, they are exactly the same.</p>
+</div><p>Then I put them together into a matrix called <code>betas</code>, where the first three columns are manually computed coefficients and the last three columns are coefficients produced by <code>svar</code>. The <code>betas</code> matrix is as follows. Clearly, they are exactly the same.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -1198,9 +1209,11 @@ mat list betas
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="23"><a style="outline: none; text-decoration:none; color:inherit" href="#23">23</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="24"><a style="outline: none; text-decoration:none; color:inherit" href="#24">24</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="25"><a style="outline: none; text-decoration:none; color:inherit" href="#25">25</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="26"><a style="outline: none; text-decoration:none; color:inherit" href="#26">26</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">. mat list betas
+
 betas[22,6]
               inflation      unrate         ffr          c1          c2          c3
 l1inflation   1.1624496  -1.2311559  -4.7074491   1.1624496  -1.2311559  -4.7074491
@@ -1227,7 +1240,7 @@ l7inflation  -.07969876  -1.4801693  -22.071136  -.07969876  -1.4801693  -22.071
          c1   .00707448   .12277881   1.0777927   .00707448   .12277881   1.0777927
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="check-parameter-matrix-sigma_e-sigma_epsilon-and-b">Check parameter matrix $\Sigma_e$, $\Sigma_\epsilon$ and $B$</h3>
+</div><h3 id="check-parameter-matrix-sigma_e-sigma_epsilon-and-b">Check parameter matrix \(\Sigma_e\), \(\Sigma_\epsilon\) and \(B\)</h3>
 <p>The codes and results are as follows. Clearly, they are exactly the same.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1684,12 +1697,12 @@ mat sigma_e = sigma_e/(_N-$lagorder)
 mat list sigma_e
 
 * decompose sigma_e
-mat P = cholesky(sigma_e)
+mat P = Cholesky(sigma_e)
 mat list P
 
 * compute and decompose sigma_epsilon
 mat sigma_epsilon = B*sigma_e*B&#39;
-mat P1 = cholesky(sigma_epsilon)
+mat P1 = Cholesky(sigma_epsilon)
 mat list P1
 
 * estimate inverse of B
@@ -1827,7 +1840,8 @@ list impulse response step bfevd fevd_manual bmse mse in 1/18
 <p>While anyone can produce the above results with the integrated command <code>svar</code> in seconds, how are these results are produced is unclear for many people and deter them from confidently using the VAR outputs in their own research. I hope this blog can help to mitigate this issue and help my readers gain more thorough understanding about VAR estimation and more confidently use the outputs of VAR estimation.</p>
 <h2 id="reference">Reference</h2>
 <ol>
-<li>Ltkepohl, Helmut. &ldquo;New Introduction to Multiple Time Series Analysis.&rdquo; (2007).</li>
+<li>Lütkepohl, Helmut. &ldquo;New Introduction to Multiple Time Series Analysis.&rdquo; (2007).</li>
+<li>Enders, Walter. &ldquo;Applied Econometric Time Series, 2nd Edition&rdquo;  (2004) .</li>
 </ol>
 
 

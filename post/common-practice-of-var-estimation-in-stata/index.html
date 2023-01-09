@@ -390,7 +390,6 @@ Lag-order selection criteria
 </div>
 </div><h2 id="estimate-the-var-system-var-or-svar">Estimate the VAR system (<code>var</code> or <code>svar</code>)</h2>
 <p>Having decided that the 7 lags are appropriate for this VAR, we can use either <code>var</code> or <code>svar</code> command to estimate the coefficients of the VAR. Theoretically we need to decide whether the VAR system is stable before the VAR estimation but we can usually skip this step because the VAR estimation would not converge if the system were not stable.</p>
-<p>Note that if we explicitly impose lower-triangle type restrictions to matrix B in Equation (2) when using <code>svar</code> command, we will get exactly the same results (though they may look very different) as what produced from <code>var</code> command - because that&rsquo;s the default assumption of the <code>var</code> order.</p>
 <h3 id="var-command"><code>var</code> command</h3>
 <p>The <code>var</code> command and results are as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -623,12 +622,12 @@ ffr          |
 <p>One can find the precise specifications of this command in the handbook (p. 7) of Stata&rsquo;s <code>svar</code> command (see in <a href="https://www.stata.com/manuals/tsvarsvar.pdf#page=7&amp;zoom=100,30,234">this link</a>). The handbook also mentioned that one can manually add constraints to the SVAR model. In particular, one way to impose the Cholesky restrictions, which are by default used in the <code>var</code> command, is to specify the aeq and beq matrix as the following format.
 $$
 \mathbf{aeq}=\left[\begin{array}{lll}
-1 &amp; 0 &amp; 0 \
-\cdot &amp; 1 &amp; 0 \
+1 &amp; 0 &amp; 0 \\\
+\cdot &amp; 1 &amp; 0 \\\
 \cdot &amp; \cdot &amp; 1
 \end{array}\right] \quad \text { and } \quad \mathbf{beq}=\left[\begin{array}{ccc}
-\cdot &amp; 0 &amp; 0 \
-0 &amp; . &amp; 0 \
+\cdot &amp; 0 &amp; 0 \\\
+0 &amp; . &amp; 0 \\\
 0 &amp; 0 &amp; \cdot
 \end{array}\right]
 $$
@@ -636,7 +635,7 @@ For me, the biggest incremental value of <code>svar</code> command to the <code>
 $$
 Ax_t=\nu+\Sigma_{i=1}^{p}\Gamma_i x_{t-i}+e_t
 $$
-To be exact, the <code>svar</code> model stores the estimation of the matrix $A$ in a matrix called <code>e(A)</code>. With this matrix $A$, one can recover the structural shocks $\epsilon_t$ and its covariance matrix $\Sigma_\epsilon$ from reduced-form residuals $e_t$ via $\epsilon_t=Ae_t$ and $\Sigma_\epsilon= A\Sigma_eA'$.</p>
+To be exact, the <code>svar</code> model stores the estimation of the matrix \(A\) in a matrix called <code>e(A)</code>. With this matrix \(A\) , one can recover the structural shocks \(\epsilon_t\)  and its covariance matrix \(\Sigma_\epsilon\) from reduced-form residuals  \(e_t\) via \(\epsilon_t=Ae_t\) and  \(\Sigma_\epsilon= A\Sigma_eA'\).</p>
 <p>I skipped some details to be brief, readers who would like to dig deeper can find more details in Stata&rsquo;s <code>svar</code> command handbook (see in <a href="https://www.stata.com/manuals/tsvarsvar.pdf#page=7&amp;zoom=100,30,234">this link</a>). The <code>svar</code> command and results are as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
