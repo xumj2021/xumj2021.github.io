@@ -389,7 +389,7 @@ $$</p>
 $$
 x_t =\mu+\Phi(L)e_t =\mu+\Phi(L)B^{-1}\epsilon_t=\mu+\Lambda(L)\epsilon_t \tag{13}
 $$
-One can intuitively infer from the Equation (8) that the structural IRFs (SIRFs) should be the IRFs \(\Phi_i\) postmultiplied by \(B^{-1}\) as in Equation (9).
+One can intuitively infer from the Equation (13) that the structural IRFs (SIRFs) should be the IRFs \(\Phi_i\) postmultiplied by \(B^{-1}\) as in Equation (9).
 $$
 \Lambda_i=\Phi_iB^{-1} 
 $$</p>
@@ -447,7 +447,7 @@ $$
 \Psi_i=\Lambda_i P_1=\Phi_iB^{-1}P_1\tag{14}
 $$</p>
 <h3 id="calculate-forecast-error-variance-decomposition-fevd">Calculate Forecast Error Variance Decomposition (FEVD)</h3>
-<p>Following  Lütkepohl (2007, p63-64), the error in the optimal \(h\) -step forecast can be derived from the VMA representation in Equation (10).
+<p>Following  Lütkepohl (2007, p63-64), the error in the optimal \(h\) -step forecast can be derived from the VMA representation in Equation (6).
 $$
 \begin{aligned}
 x_{t+h}-x_t(h) &amp; =\sum_{i=0}^{h-1} \Phi_i e_{t+h-i}\\\
@@ -762,7 +762,7 @@ B_{31} &amp; B_{32} &amp; 1
 e_{2,t}\\\
 e_{3,t} \end{array}\right)
 $$</p>
-<p>To be exact, the Equation (8) implies
+<p>To be exact, the above matrix implies
 $$
 \begin{array}{c}
 e_{2,t} = \epsilon_{2,t}-B_{21}\times e_{1,t}\\\
