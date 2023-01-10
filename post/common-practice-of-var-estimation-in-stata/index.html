@@ -209,7 +209,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://assets.bbhub.io/image/v1/convert?type=auto&amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2Fterminal-bg4.jpg')
+        background-image: url('https://assets.bbhub.io/image/v1/resize?type=auto&url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2F367131633.jpg')
     }
 </style>
 <header class="intro-header">
@@ -285,9 +285,7 @@
 </nav>
                 
                 <h2 id="motivation">Motivation</h2>
-<p>In <a href="https://mengjiexu.com/post/an-information-based-decomposition-of-stock-price/">my last blog</a>, I recognized the potential of the information-based variance decomposition method introduced by Brogaard et al. (2022, RFS) and showed interests of applying this method into my own research. As replicating Brogaard et al. (2022, RFS) requires some manipulations on the VAR estimation outputs, I took some time to figure out how Stata produced the reduced-form VAR coefficients, Impulse response functions (IRFs), structural IRFS, orthogonalized IRFs, and variance decomposition.</p>
-<p>In this blog, I will introduce how to use Stata&rsquo;s integrated commands <code>var</code> and <code>svar</code> to produce these results, which are also common practices for researchers in VAR estimation. While it has little incremental value to an extant blog <a href="https://blog.stata.com/2016/08/09/vector-autoregressions-in-stata/">Vector autoregressions in Stata written by David Schenck</a>, it will serve as an important benchmark for my manual calculations of all the major VAR estimation outputs in the next blog.</p>
-<p>The idea is that while people can always use integrated commands in Stata to produce abundant outputs of VAR estimation, they can not confidently use it without knowing how these outputs are theoretically defined and practically calculated. Manually replicating the outputs of the <code>var</code> and <code>svar</code> commands will be very helpful to resolve this issue - and that is what I will do in the next blog.</p>
+<p>This blog is the second one of my 3 blogs about VAR model. In this blog, I will introduce how to use Stata&rsquo;s integrated commands <code>var</code> and <code>svar</code> to estimate the VAR model, which is also the common practices for researchers in VAR estimation. While it has little incremental value to an extant blog <a href="https://blog.stata.com/2016/08/09/vector-autoregressions-in-stata/">Vector autoregressions in Stata written by David Schenck</a>, this blog will serve as an important benchmark for my manual calculations of all the major VAR estimation outputs in <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">the next blog</a>.</p>
 <h2 id="sample-dataset">Sample Dataset</h2>
 <p>The dataset used in this blog is a shipped dataset named <code>varsample.dta</code>. It can be approached conveniently through Stata&rsquo;s <code>sysuse</code> command. This dataset collects the quarterly times series of U.S. unemployment rate <code>unrate</code>, rate of consumer price inflation <code>inflation</code>, and short-term nominal interest rate (federal funds rate) <code>ffr</code> from 1968 to 2018.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
