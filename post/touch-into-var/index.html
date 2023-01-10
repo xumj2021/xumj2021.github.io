@@ -236,7 +236,7 @@
                             Mengjie Xu
                          
                         on 
-                        Monday, November 21, 2022
+                        Tuesday, November 22, 2022
                         
                         
                         
@@ -282,7 +282,7 @@
                 <h2 id="motivation">Motivation</h2>
 <p>In <a href="https://mengjiexu.com/post/an-information-based-decomposition-of-stock-price/">my last blog</a>, I recognized the potential of the information-based variance decomposition method introduced by Brogaard et al. (2022, RFS) and showed interests of applying this method into my own research.</p>
 <p>As replicating Brogaard et al. (2022, RFS) requires some manipulations on the VAR estimation outputs, I took some time to figure out the theory and estimation of the reduced-form VAR coefficients, Impulse response functions (IRFs), structural IRFS, orthogonalized IRFs, and variance decomposition.</p>
-<p>I summarized what&rsquo;ve got in three blogs. In the first blog, I  show the basic logics of VAR model with the simplest 2-variable, 1-lag VAR model. In the second blog, I show how to use <code>var</code> and <code>svar</code> commands to conveniently estimate the VAR model in Stata. In the third blog, I will dig deeper, show the theoretical definitions and calculation formula of major outputs in VAR model, and manually calculate them in Stata to thourougly uncover the black box of the  VAR estimation.</p>
+<p>I summarized what&rsquo;ve got in three blogs. In <a href="https://mengjiexu.com/post/touch-into-var/">the first blog</a>, I  show the basic logics of VAR model with the simplest 2-variable, 1-lag VAR model. In <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">the second blog</a>, I show how to use <code>var</code> and <code>svar</code> commands to conveniently estimate the VAR model in Stata. In <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">the third blog</a>, I will dig deeper, show the theoretical definitions and calculation formula of major outputs in VAR model, and manually calculate them in Stata to thourougly uncover the black box of the  VAR estimation.</p>
 <p>This blog is the first one among my VAR blog series. In this blog, I summarized the logics of VAR, Impulse Reaction, and Variance Decomposition with the simplest 2-variable, 1-lag VAR model. The following summary is based on PP.264-PP.311 of Enders (2004).</p>
 <h2 id="var-in-structural-and-reduced-form">VAR in structural and reduced form</h2>
 <p>Consider <em>a bivariate structural VAR system</em> composed by two \(I(0)\) series \({y_{t}}\) and \({z_{t}}\)</p>
@@ -677,13 +677,13 @@ $$</p>
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/seeking-alpha-from-investor-attention/" data-toggle="tooltip" data-placement="top" title="Seeking Alpha From Market Participants&#39; Information Acquisition Actions">&larr;
+                        <a href="/post/an-information-based-decomposition-of-stock-price/" data-toggle="tooltip" data-placement="top" title="Theory for the information-based decomposition of stock price">&larr;
                             Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/post/an-information-based-decomposition-of-stock-price/" data-toggle="tooltip" data-placement="top" title="Theory for the information-based decomposition of stock price">Next
+                        <a href="/post/common-practice-of-var-estimation-in-stata/" data-toggle="tooltip" data-placement="top" title="Estimations of VAR, IRFs, and Variance Decomposition in Stata">Next
                             Post &rarr;</a>
                     </li>
                     
