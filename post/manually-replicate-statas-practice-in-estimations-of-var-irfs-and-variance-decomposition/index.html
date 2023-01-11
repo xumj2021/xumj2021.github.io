@@ -289,7 +289,6 @@
         <li><a href="#compute-the-forecast-error-variance-decomposition-fevd">Compute the Forecast Error Variance Decomposition (FEVD)</a></li>
       </ul>
     </li>
-    <li><a href="#generate-benchmark">Generate Benchmark</a></li>
     <li><a href="#compare-manually-computed-results-with-benchmark">Compare Manually Computed Results with Benchmark</a>
       <ul>
         <li><a href="#check-reduced-form-coefficients">Check reduced-form coefficients</a></li>
@@ -308,6 +307,7 @@
 <p>While people can always use integrated commands in Stata (e.g., <code>var</code> and <code>svar</code>) to produce abundant outputs of VAR estimation, many can not confidently interpret these results without knowing how they are theoretically defined and practically calculated. Manually replicating the outputs of the Stata&rsquo;s integrated commands for VAR estimation will be very helpful to resolve this issue.</p>
 <p>In this blog, I will firstly provide the theoretical calculation formulas of reduced-form coefficients, IRFs, Structural IRFs, Orthogonalized IRFs, and Forecast Error Variance Decomposition. Then I will follow their theoretical definition to manually calculate these outputs in Stata. Finally, I will compare the manually computed results with the outputs generated from Stata&rsquo;s integrated commands (see in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">the last blog</a>) and cross-check the validity of my manual computation.</p>
 <p>By doing so, I hope this blog can provide precise insights on how the VAR outputs are produced in Stata and help the readers confidently use these results in their own research.</p>
+<p>For readers with time constraints, all the codes used in this blog can be approched via <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/#integrated-codes">this link</a>.</p>
 <p>This blog is the last one of my 3-blog series about VAR model. I  show the basic logics of VAR model with the simplest 2-variable, 1-lag VAR model in <a href="https://mengjiexu.com/post/touch-into-var/">the first blog</a> and show how to use <code>var</code> and <code>svar</code> commands to conveniently estimate the VAR model in Stata in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">the second blog</a>.</p>
 <h2 id="set-benchmark">Set Benchmark</h2>
 <p>To get reliable benchmarks, I use the integrated command <code>svar</code> to generate all the major outputs of the VAR estimation with the same dataset and lag orders as what&rsquo;ve showed in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">the last blog</a>.</p>
@@ -733,12 +733,12 @@ mat sigma_e = sigma_e/(_N-$lagorder)
 mat list sigma_e
 
 * decompose sigma_e
-mat P = Cholesky(sigma_e)
+mat P = cholesky(sigma_e)
 mat list P
 
 * compute and decompose sigma_epsilon
 mat sigma_epsilon = B*sigma_e*B&#39;
-mat P1 = Cholesky(sigma_epsilon)
+mat P1 = cholesky(sigma_epsilon)
 mat list P1
 </code></pre></td></tr></table>
 </div>
@@ -1154,35 +1154,6 @@ save fevds, replace
  17. |    unrate         ffr      2   .1965833   3.036672 |
  18. |       ffr         ffr      2   .7711006   3.036672 |
      +----------------------------------------------------+
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="generate-benchmark">Generate Benchmark</h2>
-<p>To get reliable benchmarks, I use the integrated command <code>svar</code> to generate all the above outputs of the VAR estimation with the same dataset and lag orders.</p>
-<p>The codes for generating benchmarks are as follows. The readers can see more explanations about these commands in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">my last blog</a>.</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="2"><a style="outline: none; text-decoration:none; color:inherit" href="#2"> 2</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="3"><a style="outline: none; text-decoration:none; color:inherit" href="#3"> 3</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="4"><a style="outline: none; text-decoration:none; color:inherit" href="#4"> 4</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="5"><a style="outline: none; text-decoration:none; color:inherit" href="#5"> 5</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="6"><a style="outline: none; text-decoration:none; color:inherit" href="#6"> 6</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="7"><a style="outline: none; text-decoration:none; color:inherit" href="#7"> 7</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="8"><a style="outline: none; text-decoration:none; color:inherit" href="#8"> 8</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="9"><a style="outline: none; text-decoration:none; color:inherit" href="#9"> 9</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">**#  generate benchmark
-use varsample.dta, clear
-tsset yq
-matrix A1 = (1,0,0 \ .,1,0 \ .,.,1)
-matrix B1 = (.,0,0 \ 0,.,0 \ 0,0,.)
-svar $names, lags(1/7) aeq(A1) beq(B1)
-irf create forblog, step(15) set(myirf) replace
-mat sigma_e_bench = e(Sigma)
-mat B_bench = e(A)
-mat beta_bench = e(b_var)
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="compare-manually-computed-results-with-benchmark">Compare Manually Computed Results with Benchmark</h2>
@@ -1729,12 +1700,12 @@ mat sigma_e = sigma_e/(_N-$lagorder)
 mat list sigma_e
 
 * decompose sigma_e
-mat P = Cholesky(sigma_e)
+mat P = cholesky(sigma_e)
 mat list P
 
 * compute and decompose sigma_epsilon
 mat sigma_epsilon = B*sigma_e*B&#39;
-mat P1 = Cholesky(sigma_epsilon)
+mat P1 = cholesky(sigma_epsilon)
 mat list P1
 
 * estimate inverse of B

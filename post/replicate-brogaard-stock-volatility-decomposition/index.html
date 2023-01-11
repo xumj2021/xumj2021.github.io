@@ -209,7 +209,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://assets.bbhub.io/image/v1/resize?type=auto&url=https%253A%252F%252Fassets.bbhub.io%252Fprofessional%252Fsites%252F10%252F254661284_1-4.jpg')
+        background-image: url('https://assets.bbhub.io/image/v1/convert?type=auto&url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F10%2F377643951.jpg')
     }
 </style>
 <header class="intro-header">
@@ -288,6 +288,7 @@
                 
                 <h2 id="introduction">Introduction</h2>
 <p>Having recognized the potential of the stock volatility decomposition method introduced by Brogaard et al. (2022, RFS) in <a href="https://mengjiexu.com/post/an-information-based-decomposition-of-stock-price/">my previous blog</a>, I will show how to implement this method to empower your own research in this blog.</p>
+<p>For readers with time constraints, the codes for implementing this variance decomposition method can be approched via <a href="https://mengjiexu.com/post/replicate-brogaard-stock-volatility-decomposition/#pack-codes">this link</a>.</p>
 <p>As replicating Brogaard et al. (2022, RFS) requires some manipulations on the VAR estimation outputs, I took some time to figure out the theory and estimation of the reduced-form VAR coefficients, Impulse response functions (IRFs), structural IRFS, orthogonalized IRFs, and variance decomposition and summarized what I&rsquo;ve got in a three-blog series about VAR.</p>
 <p>In <a href="https://mengjiexu.com/post/touch-into-var/">the first blog</a>, I  show the basic logics of VAR model with the simplest 2-variable, 1-lag VAR model. In <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">the second blog</a>, I show how to use <code>var</code> and <code>svar</code> commands to conveniently estimate the VAR model in Stata. In <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">the third blog</a>, I dig deeper, show the theoretical definitions and calculation formula of major outputs in VAR model, and manually calculate them in Stata to thoroughly uncover the black box of the  VAR estimation.</p>
 <p>For this blog, I will only focus on the paper-specific ideas. Readers who need more background information about VAR estimation can find clues in my three-blog series about VAR.</p>
@@ -608,7 +609,7 @@ global rownum = _N
 <p>Estimate the structural shocks \(\epsilon_t\) and their variance-covariance matrix \(\Sigma_\epsilon\)</p>
 </li>
 <li>
-<p>Estimate the 15-step cumulative structural IRFs \(\theta_{rm}\), \(\theta_x\), \(\theta_r), which represent the (permanent) cumulative return responses to unit shocks of the corresponding structural-model innovations</p>
+<p>Estimate the 15-step cumulative structural IRFs \(\theta_{rm}\), \(\theta_x\), \(\theta_r\), which represent the (permanent) cumulative return responses to unit shocks of the corresponding structural-model innovations</p>
 </li>
 <li>
 <p>Combine the estimated variances of the structural innovations from step 3 with the long-run responses from step 4 to get the variance components and variance shares of each information source using the following formula.
@@ -621,14 +622,14 @@ $$</p>
 $$
 \Delta_s = r_t-a_0-\theta_{rm}\epsilon_{rm,t}-\theta_x\epsilon_{x,t}-\theta_r\epsilon_{r,t} 
 $$
-As we&rsquo;re only interested in the variance of \(\Delta_s\), which is by construct the variance from noise, we can ignore the constant term \(a_0\) and use the variance of \(\Delta_s^<em>\) to represent the noise variance instead.
+As we&rsquo;re only interested in the variance of \(\Delta_s\), which is by construct the variance from noise, we can ignore the constant term \(a_0\) and use the variance of \(\Delta_s^*\) to represent the noise variance instead, where
 $$
-Noise = \sigma_s^2=Var(\Delta_s)=Var(\Delta_s^</em>)\\\
+Noise = \sigma_s^2=Var(\Delta_s)=Var(\Delta_s^*)\\\
 \Delta_s^*=r_t-\theta_{rm}\epsilon_{rm,t}-\theta_x\epsilon_{x,t}-\theta_r\epsilon_{r,t}
 $$</p>
 </li>
 <li>
-<p>Get variance shares by normalizing these variance components to sum to 100%
+<p>Get variance shares by normalizing these variance components
 $$
 \begin{aligned}
 \text { MktInfoShare } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 /(\sigma_w^2+\sigma_r^2 )\\\
@@ -640,8 +641,8 @@ $$</p>
 </li>
 </ol>
 <h3 id="estimate-var-coefficients-matrix-b-epsilon_t-sigma_e-and-sigma_epsilon">Estimate VAR Coefficients, Matrix \(B\), \(\epsilon_t\), \(\Sigma_e\), and \(\Sigma_\epsilon\)</h3>
-<p>I set the lag order as 5 to keep consistent with Broggard et al. (2022, RFS) and then I use <code>svar</code> model to estimate the VAR model, with imposing a Cholesky type restriction to contemporaneous matrix $B$ as mentioned in the paper.</p>
-<p>The readers can see details about the matrix $B$ in <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata</a> and see why <code>svar</code> command can directly estimate it in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">Estimations of VAR, IRFs, and Variance Decomposition in Stata</a>.</p>
+<p>I set the lag order as 5 to keep consistent with Broggard et al. (2022, RFS) and then I use <code>svar</code> model to estimate the VAR model, with imposing a Cholesky type restriction to contemporaneous matrix \(B\) as mentioned in the paper.</p>
+<p>The readers can see details about the matrix \(B\) in <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata</a> and see why <code>svar</code> command can directly estimate it in <a href="https://mengjiexu.com/post/common-practice-of-var-estimation-in-stata/">Estimations of VAR, IRFs, and Variance Decomposition in Stata</a>.</p>
 <p>The codes for estimating the reduced-form model are as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -717,13 +718,12 @@ mat sigma_epsilon = B*sigma_e*B&#39;
 <h4 id="procedures-for-estimating-theta">Procedures for estimating \(\theta\)</h4>
 <p>These un-orthogonalized Structural IRFs can be quickly and conveniently calculated via the following procedures (please see more details in <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">Dig into Estimation of VAR Coefficients, IRFs, and Variance Decomposition in Stata</a>).</p>
 <ol>
-<li>calculate the IRFs \(\Phi_i(i=1,2,3&hellip;,15)\) following the following formula.</li>
+<li>calculate the IRFs \(\Phi_i(i=1,2,3&hellip;,15)\) following the following formula, where \(k\) is the number of variables in the VAR system. \(A_j\) is the \(j\)-lag coefficient matrix for the 		reduced-form VAR</li>
 </ol>
 <p>$$
-\Phi_0 = I_k\
+\Phi_0 = I_k\\\
 \Phi_i = \Sigma_{j=1}^{i}\Phi_{i-j}A_j \tag{2}
 $$</p>
-<p>​		where \(k\) is the number of variables in the VAR system. \(A_j\) is the \(j\)-lag coefficient matrix for the 		reduced-form VAR</p>
 <ol start="2">
 <li>
 <p>post-multiply IRF \(\Phi_i\) with \(B^{-1}\) to get (un-orthogonalized) structural IRFs \(\Lambda_i\) for each forward-looking step \(i=1,2,3,..,15\)
@@ -732,15 +732,15 @@ $$
 $$</p>
 </li>
 <li>
-<p>Sum all the 15-step (un-orthogonalized) structural IRFs \(\Gamma_i\) to obtain the cumulative structural IRFs.</p>
+<p>Sum all the 15-step (un-orthogonalized) structural IRFs \(\Lambda_i\) to obtain the cumulative structural IRFs.</p>
 </li>
 <li>
-<p>As we are only interested in the 15-step cumulative structural IRFs functioning on the stock returns, which are specified in the third equation in the VAR system, the \(\theta_{rm}\), \(\theta_x\), and \(\theta_r\) lies on the third row of the 15-step cumulative structural IRF matrix.</p>
+<p>As we are only interested in the 15-step cumulative structural IRFs functioning on the stock returns, which are specified in the third equation in the VAR system, the \(\theta_{rm}\), \(\theta_x\), and \(\theta_r\) lie on the third row of the 15-step cumulative structural IRF matrix.</p>
 </li>
 </ol>
 <h4 id="obtain-coefficient-matrix-a_jj125">Obtain coefficient matrix \(A_j(j=1,2,&hellip;,5)\)</h4>
 <p>To implement the above procedures, the first thing we need to get are the reduced-form coefficient matrix \(A_j(j=1,2,&hellip;,5)\). As we have obtained all the reduce-form coefficients with <code>svar</code> command and stored them in a matrix <code>coef</code> in the last step, we don&rsquo;t have to compute them again but just need to reshape the matrix <code>coef</code> into the shape we need.</p>
-<p>The coefficient matrix we currently have <code>coef</code> is a $1\times 48$ matrix. I first reshape it to a $3\times 16$ matrix named <code>newcoef</code>, where  each row contains the coefficients for one equation in the VAR system. Within each row, the coefficients are ordered with fixed rules: the coefficients for the first variable <code>rm</code> with 1 to 5 lags, the coefficients for the second variable <code>x</code> with 1 to 5 lags, the coefficients for the third variable <code>x</code> with 1 to 5 lags, and the constant for the corresponding equation. That implies, the coefficients for the same lag can always be found every 5 columns.</p>
+<p>The coefficient matrix we currently have <code>coef</code> is a \(1\times 48\) matrix. I first reshape it to a \(3\times 16\) matrix named <code>newcoef</code>, where  each row contains the coefficients for one equation in the VAR system. Within each row, the coefficients are ordered with fixed rules: the coefficients for the first variable <code>rm</code> with 1 to 5 lags, the coefficients for the second variable <code>x</code> with 1 to 5 lags, the coefficients for the third variable <code>x</code> with 1 to 5 lags, and the constant for the corresponding equation. That implies, the coefficients for the same lag can always be found every 5 columns.</p>
 <p>With the above observations, I generated matrix \(A_1\) to \(A_5\) with the following codes.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -774,7 +774,7 @@ forvalues i = 1/5{
 	}
 </code></pre></td></tr></table>
 </div>
-</div><p>I list the 3-lag coefficient matrix \(A_3\) as an example to show the desired format of coefficient matrix  \(A_1\) to \(A_5\). For the \(ij\)-th element of the matrix \(A_j\), it represents the impact of one-unit reduced-form shock \(e_jt\) on the Equation with variable \(i\) as dependent variable.</p>
+</div><p>I list the 3-lag coefficient matrix \(A_3\) as an example to show the desired format of coefficient matrix  \(A_1\) to \(A_5\). For the \(ij\)-th element of the matrix \(A_j\), it represents the impact of one-unit reduced-form shock \(e_{jt}\) on the Equation with variable \(i\) as dependent variable.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -798,7 +798,7 @@ inflation  -.06574644   .00181085  -.00500138
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="calculate-irfs-and-cumulative-un-orthogonalized-structural-irfs">Calculate IRFs and cumulative un-orthogonalized Structural IRFs</h4>
-<p>To this stage, we&rsquo;ve made it clear about the formulas of calculating the IRFs and un-orthogonalized Structural IRFs (please see equations 2 and 3) and obtained all the necessary ingredients (coefficient matrix \(A_i\) and matrix \(B\)) for the calculations.</p>
+<p>To this stage, we&rsquo;ve made it clear about the formulas of calculating the IRFs and un-orthogonalized Structural IRFs (please see Equation (2) and (3)) and obtained all the necessary ingredients (coefficient matrix \(A_i\) and matrix \(B\)) for the calculations.</p>
 <p>The codes for calculating IRFs and cumulative un-orthogonalized Structural IRFs are as follows. I summed up all the un-orthogonalized Structural IRF matrix step by step to get the 15-step cumulative un-orthogonalized Structural IRFs and name it as <code>csirf</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -841,7 +841,7 @@ mat rownames csirf = $names
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="extract-theta">Extract \(\theta\)</h4>
-<p>The 15-step cumulative un-orthogonalized Structural IRF matrix <code>csirf</code> is as follows. The \(ij)-th element of this matrix represents the permanent (cumulative) impact of one-unit structural shock \(\epsilon_{j,t}\) on the \(i\)-th Equation in the VAR system.</p>
+<p>The 15-step cumulative un-orthogonalized Structural IRF matrix <code>csirf</code> is as follows. The \(ij\)-th element of this matrix represents the permanent (cumulative) impact of one-unit structural shock \(\epsilon_{j,t}\) on the \(i\)-th Equation in the VAR system.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1">1</a>
@@ -877,11 +877,11 @@ mat theta = csirf[3..3, 1..3]
 </div><h3 id="calculate-noise-term">Calculate noise term</h3>
 <p>As we&rsquo;ve discussed in the road map, the noise variance is given by the following formula.
 $$
-Noise = \sigma_s^2=Var(\Delta_s)=Var(\Delta_s^<em>)\\\
-\Delta_s^</em>=r_t-\theta_{rm}\epsilon_{rm,t}-\theta_x\epsilon_{x,t}-\theta_r\epsilon_{r,t}
+Noise = \sigma_s^2=Var(\Delta_s)=Var(\Delta_s^*)\\\
+\Delta_s^*=r_t-\theta_{rm}\epsilon_{rm,t}-\theta_x\epsilon_{x,t}-\theta_r\epsilon_{r,t}
 $$
 Intuitively, we need to first calculate \(\Delta_s^*\) by substracting the combinations of structural shocks \(\epsilon_t\) and the permanent impact of structural shocks on stock returns \(\theta\) from the contemporaneous stock return \(r_t\).</p>
-<p>As we&rsquo;ve saved the structural shocks (\epsilon_t\) in a matrix named <code>epsilons</code> and the permanent impact of structural shocks on stock returns \(\theta\) in a matrix named <code>theta</code>, the contemporaneous noise term \(\Delta_s^*\) can be calculated with the following codes, where I save the noise term into a matrix named <code>delta_s</code>.</p>
+<p>As we&rsquo;ve saved the structural shocks \(\epsilon_t\) in a matrix named <code>epsilons</code> and the permanent impact of structural shocks on stock returns \(\theta\) in a matrix named <code>theta</code>, the contemporaneous noise term \(\Delta_s^*\) can be calculated with the following codes, where I save the noise term into a matrix named <code>delta_s</code>.</p>
 <p>To more conveniently produce the variance of the noise term, I saved the noise term matrix <code>delta_s</code> into a new column named <code>delta_s</code> in the dataset.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1034,8 +1034,16 @@ qui g varpct = varpart/fullvar*100
 <p>Remember the Broggard decomposition is implemented in stock-year level. That means we need to loop over the above codes over the daily observations of each stock in each year. That requires an efficient packing of the codes.</p>
 <p>There are two issues worth noted in the packing procedures.</p>
 <ol>
-<li>I require there are at least 50 observations for the estimation of the VAR model</li>
-<li>I require the estimation of VAR model converges</li>
+<li>I require there are at least 50 observations for the estimation of the VAR model
+<ul>
+<li>otherwise, the VAR estimation doesn&rsquo;t converge or lacks vaidility with too few freedoms</li>
+</ul>
+</li>
+<li>I require the estimation of VAR model converges
+<ul>
+<li>otherwise, it&rsquo;s not possible to get converged residuals, which are the prerequisite for the subsequent calculations</li>
+</ul>
+</li>
 </ol>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">

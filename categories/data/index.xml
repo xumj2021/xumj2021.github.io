@@ -14,6 +14,7 @@
       
       <guid>https://xumj2021.github.io/post/replicate-brogaard-stock-volatility-decomposition/</guid>
       <description>Introduction Having recognized the potential of the stock volatility decomposition method introduced by Brogaard et al. (2022, RFS) in my previous blog, I will show how to implement this method to empower your own research in this blog.
+For readers with time constraints, the codes for implementing this variance decomposition method can be approched via this link.
 As replicating Brogaard et al. (2022, RFS) requires some manipulations on the VAR estimation outputs, I took some time to figure out the theory and estimation of the reduced-form VAR coefficients, Impulse response functions (IRFs), structural IRFS, orthogonalized IRFs, and variance decomposition and summarized what I&amp;rsquo;ve got in a three-blog series about VAR.</description>
     </item>
     
