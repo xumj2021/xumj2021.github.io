@@ -501,7 +501,7 @@ $$</p>
 <li>The reduced-form coefficients \(A_i(i=1,2,..,p)\) are the coefficients of the OLS estimation for the reduced-form VAR</li>
 <li>The Impulse Response Coefficients \(\Phi(L)\) can be estimated with Equation (7). The prerequisite is the  reduced-form coefficients \(A_i(i=1,2,..,p)\)</li>
 <li>The Orthogonalized IRFs \(\Theta(L)\) can be obtained by postmultipling IRF matrix \(\Phi(L)\) with \(P\), where \(\Sigma_e = PP'\). The prerequisites are the IRF \(\Phi(L)\) and the variance-covariance matrix of residuals \(\Sigma_e\)</li>
-<li>The Structural IRFs \(\Psi(L)\) can be obtained by postmultipling IRF matrix \(\Phi(L)\) with \(B^{-1}P_1\). The prerequisite are the IRF \(\Phi(L)\), contemporaneous effect matrix \(B\) , and covariance matrix of structural shocks \(\Sigma_\epsilon\) such that \(\Sigma_\epsilon=P_1P_1'\)</li>
+<li>The (orthogonalized) Structural IRFs \(\Psi(L)\) can be obtained by postmultipling IRF matrix \(\Phi(L)\) with \(B^{-1}P_1\). The prerequisite are the IRF \(\Phi(L)\), contemporaneous effect matrix \(B\) , and covariance matrix of structural shocks \(\Sigma_\epsilon\) such that \(\Sigma_\epsilon=P_1P_1'\)</li>
 <li>The Forecast Error Variance Decomposition \(\Omega_{js,h}\) can be obtained by calculating the sum of the squared orthogonalized IRFs of impulse \(s\) on equation \(j\) from the 1st step to \(h-1\) step standardized by the Mean Squared Forecast Error, which could also be calculated from the orthogonalized IRFs  \(\Theta(L)\). The prerequisite is only the orthogonalized IRFs \(\Theta(L)\)</li>
 </ul>
 <h2 id="manually-compute-the-var-outputs-in-stata">Manually Compute the VAR outputs in Stata</h2>
