@@ -673,7 +673,7 @@ mat coef = e(b_var)
 mat sigma_hat = e(Sigma)
 </code></pre></td></tr></table>
 </div>
-</div><p>I adjust the freedom of variance/covariance matrix of residuals generated from <code>svar</code> command <code>sigma_hat</code> from \(n\) to \(n-1\) and name the adjusted variance/covariance matrix as <code>sigma_e</code>. It shouldn&rsquo;t make much difference if the readers ignore this step.</p>
+</div><p>I adjust the freedom of variance/covariance matrix of residuals generated from <code>svar</code> command <code>sigma_hat</code> from \(n-p\) to \(n-p-1\) and name the adjusted variance/covariance matrix as <code>sigma_e</code>, where \(n\) is the total number of the observations in the dataset and \(p\) is the number of lag orders, which is set as 5 following the paper. It shouldn&rsquo;t make much difference if the readers ignore this step. Note that as preidcting residuals needs \(p\)-lag variables, the residuals \(e\) by definition lose freedom of \(p\).</p>
 <p>By definition,
 $$
 \epsilon_t=Be_t
@@ -709,7 +709,7 @@ mkmat e_rm e_x e_r, matrix(resi)
 mat epsilons = (B*resi&#39;)&#39;
 
 * get variance-covariance matrix of residuals and epsilons
-mat sigma_e = sigma_hat*_N/(_N-1)
+mat sigma_e = sigma_hat*(_N-5)/(_N-5-1)
 mat sigma_epsilon = B*sigma_e*B&#39;
 </code></pre></td></tr></table>
 </div>
@@ -1226,7 +1226,7 @@ cap program define loopb
 		mat epsilons = (B*resi&#39;)&#39;
 
 		** get variance-covariance matrix of residuals and epsilons
-		mat sigma_e = sigma_hat*_N/(_N-1)
+		mat sigma_e = sigma_hat*(_N-5)/(_N-5-1)
 		mat sigma_epsilon = B*sigma_e*B&#39;
 
 		* calculate noise
