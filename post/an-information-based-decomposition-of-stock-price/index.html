@@ -345,15 +345,15 @@ $$
 Normalizing these variance components to sum to 100% gives variance shares:
 $$
 \begin{aligned}
-\text { MktInfoShare } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 /(\sigma_w^2+\sigma_r^2 )\\\
-\text { PrivateInfoShare } &amp;=\theta_{x}^2 \sigma_{\varepsilon_x}^2 /(\sigma_w^2+\sigma_r^2 ) \\\
-\text { PublicInfoShare } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 /(\sigma_w^2+\sigma_r^2 ) \\\
-\text { NoiseShare } &amp;=\sigma_s^2 /(\sigma_w^2+\sigma_r^2 ) .
+\text { MktInfoShare } &amp;=\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 /(\sigma_w^2+\sigma_s^2 )\\\
+\text { PrivateInfoShare } &amp;=\theta_{x}^2 \sigma_{\varepsilon_x}^2 /(\sigma_w^2+\sigma_s^2 ) \\\
+\text { PublicInfoShare } &amp;=\theta_r^2 \sigma_{\varepsilon_r}^2 /(\sigma_w^2+\sigma_s^2 ) \\\
+\text { NoiseShare } &amp;=\sigma_s^2 /(\sigma_w^2+\sigma_s^2 ) .
 \end{aligned} \notag
 $$
-where the variance of the realized stock returns \(\sigma_r^2\) is the combination of the variance induced by informational shocks \(\sigma_w^2\) and the variance attributed by noises \(\sigma_s^2\).
+where \(\sigma_w^2\) represents the sum of all information-based components in stock return volatility.
 $$
-\sigma_r^2 = \sigma_w^2+\sigma_s^2 \notag
+\sigma_w^2 =\theta_{r_m}^2 \sigma_{\varepsilon_{r_m}}^2 +\theta_{x}^2 \sigma_{\varepsilon_{x}}^2 +\theta_{r}^2 \sigma_{\varepsilon_{r}}^2
 $$</p>
 <h2 id="technique-details-in-brogaard-decomposition">Technique details in Brogaard decomposition</h2>
 <h3 id="define-the-var-system">Define the VAR system</h3>
