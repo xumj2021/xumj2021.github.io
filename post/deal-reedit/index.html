@@ -288,7 +288,11 @@
         <li><a href="#codes-for-counting-daily-mentions-of-all-crsp-tickers">Codes for Counting Daily Mentions of all CRSP Tickers</a></li>
       </ul>
     </li>
-    <li><a href="#task-3-implement-event-study-on-wsb-comments">Task 3: Implement Event Study on WSB Comments</a></li>
+    <li><a href="#task-3-implement-event-study-on-wsb-comments">Task 3: Implement Event Study on WSB Comments</a>
+      <ul>
+        <li><a href="#codes-for-implementing-event-study-on-wsb-comments">Codes for Implementing Event Study on WSB Comments</a></li>
+      </ul>
+    </li>
     <li><a href="#summary">Summary</a></li>
     <li><a href="#references">References</a></li>
   </ul>
@@ -905,6 +909,7 @@
 </div><h2 id="task-3-implement-event-study-on-wsb-comments">Task 3: Implement Event Study on WSB Comments</h2>
 <p>WSB has the potential to provide granularity beyond daily frequency, allowing for analysis at an hourly, minute, or even second level, depending on researchers' needs. The logic to implement higher frequency event study is as similar to what we did with daily frequency.</p>
 <p>Take the hourly event study as an example. First you need a timestamp when your event happens. Then you calculate the time difference between the event timestamp and the comment timestamps, determining the hourly difference between them. At the same time, you narrow down the dataset to the desired time range, say [-12, +12] hours relative to your event. Next, you group the dataset based on the hourly gap relative to the event occurrence and apply the CRSP ticker count program, as outlined in the function <code>countcrsp(df)</code>, for each hour gap.</p>
+<h3 id="codes-for-implementing-event-study-on-wsb-comments">Codes for Implementing Event Study on WSB Comments</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
