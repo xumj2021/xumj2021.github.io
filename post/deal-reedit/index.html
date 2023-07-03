@@ -818,7 +818,7 @@
 </div><h2 id="task-2-count-the-daily-mentions-of-all-crsp-tickers">Task 2: Count the daily mentions of all CRSP tickers</h2>
 <p>Despite the potential for higher granularity offered by WSB comments, researchers opt to use the daily counts of firms' tickers to ensure the comparability with other retail attention measures, such as Google search trends and page clicks of firm&rsquo;s  wiki profile. Our second task is thus to count the WSB mentioning times for each CRSP tickers. Following Bryzgalova et al. (2023, JF forthcoming), I only count the capitalized tickers in WSB comments.</p>
 <p>To implement this, we need first obtain all the CRSP symbols from WRDS, which is available at <a href="https://wrds-www.wharton.upenn.edu/pages/get-data/center-research-security-prices-crsp/annual-update/stock-security-files/stock-header-info/">WRDS CRSP Stock Header Information</a>. Note that any symbol list should work, the point is to get a symbol list you want to count the mentioning times by WSB comments.</p>
-<p>The algorithms of implementing this are as follows.</p>
+<p>The algorithm of implementing this are as follows.</p>
 <ol>
 <li>Load all the CRSP tickers to a dataframe</li>
 <li>Load all the WSB comments in &ldquo;Daily Discussion&rdquo; thread, which we have obtained in Task 1</li>
@@ -906,7 +906,7 @@
 </div>
 </div><h2 id="task-3-implement-event-study-on-wsb-comments">Task 3: Implement Event Study on WSB Comments</h2>
 <p>WSB has the potential to provide granularity beyond daily frequency, allowing for analysis at an hourly, minute, or even second level, depending on researchers' needs. The logic to implement higher frequency event study is as similar to what we did with daily frequency.</p>
-<p>Take the hourly event study as an example. First you need a timestamp when your event happens. Then you calculate the time difference between the event timestamp and the comment timestamps, determining the hourly difference between them. At the same time, you narrow down the dataset to the desired time range, say [-12, +12] hours relative to your event. Next, you group the dataset based on the hourly gap relative to the event occurrence and apply the CRSP ticker count program, as outlined in the function <code>countcrsp(df)</code>, for each hour gap.</p>
+<p>Take the hourly event study as an example. First you need a timestamp when your event happens. Then you calculate the time difference between the event timestamp and the comment timestamps, determining the hourly difference between them. At the same time, you narrow down the dataset to the desired time range, say [-12, +12] hours relative to your event. Next, you group the dataset based on the hourly gap relative to the event occurrence and apply the CRSP ticker count program, as outlined in the function <code>countcrsp(df)</code> in Task 2, for each hour gap.</p>
 <h3 id="codes-for-implementing-event-study-on-wsb-comments">Codes for Implementing Event Study on WSB Comments</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
