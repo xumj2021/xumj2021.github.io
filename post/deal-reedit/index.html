@@ -820,7 +820,7 @@
 <p>To implement this, we need first obtain all the CRSP symbols from WRDS, which is available at <a href="https://wrds-www.wharton.upenn.edu/pages/get-data/center-research-security-prices-crsp/annual-update/stock-security-files/stock-header-info/">WRDS CRSP Stock Header Information</a>. Note that any symbol list should work, the point is to get a symbol list you want to count the mentioning times by WSB comments.</p>
 <p>The algorithms of implementing this are as follows.</p>
 <ol>
-<li>Load all the CRSP tickers to a dataframe, say <code>symbolpool</code></li>
+<li>Load all the CRSP tickers to a dataframe</li>
 <li>Load all the WSB comments in &ldquo;Daily Discussion&rdquo; thread, which we have obtained in Task 1</li>
 <li>Group the dataframe for WSB comments by comment date</li>
 <li>For each comment date, gather all the comment text into a single string, within this string
