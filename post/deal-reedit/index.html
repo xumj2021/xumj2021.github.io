@@ -285,7 +285,7 @@
     </li>
     <li><a href="#task-2-count-the-daily-mentions-of-all-crsp-tickers">Task 2: Count the daily mentions of all CRSP tickers</a>
       <ul>
-        <li></li>
+        <li><a href="#codes-for-counting-daily-mentions-of-all-crsp-tickers">Codes for Counting Daily Mentions of all CRSP Tickers</a></li>
       </ul>
     </li>
     <li><a href="#task-3-implement-event-study-on-wsb-comments">Task 3: Implement Event Study on WSB Comments</a></li>
@@ -446,7 +446,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="codes">Codes</h4>
+<h4 id="codes-for-decompressing-zst-files">Codes for Decompressing ZST files</h4>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -530,85 +530,85 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="79"><a style="outline: none; text-decoration:none; color:inherit" href="#79">79</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import zstandard
-import os
-import json
-import sys
-import csv
-from datetime import datetime
-import logging.handlers
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">zstandard</span>
+<span style="color:#f92672">import</span> <span style="color:#111">os</span>
+<span style="color:#f92672">import</span> <span style="color:#111">json</span>
+<span style="color:#f92672">import</span> <span style="color:#111">sys</span>
+<span style="color:#f92672">import</span> <span style="color:#111">csv</span>
+<span style="color:#f92672">from</span> <span style="color:#111">datetime</span> <span style="color:#f92672">import</span> <span style="color:#111">datetime</span>
+<span style="color:#f92672">import</span> <span style="color:#111">logging.handlers</span>
 
 
-log = logging.getLogger(&#34;bot&#34;)
-log.setLevel(logging.DEBUG)
-log.addHandler(logging.StreamHandler())
+<span style="color:#111">log</span> <span style="color:#f92672">=</span> <span style="color:#111">logging</span><span style="color:#f92672">.</span><span style="color:#111">getLogger</span><span style="color:#111">(</span><span style="color:#d88200">&#34;bot&#34;</span><span style="color:#111">)</span>
+<span style="color:#111">log</span><span style="color:#f92672">.</span><span style="color:#111">setLevel</span><span style="color:#111">(</span><span style="color:#111">logging</span><span style="color:#f92672">.</span><span style="color:#111">DEBUG</span><span style="color:#111">)</span>
+<span style="color:#111">log</span><span style="color:#f92672">.</span><span style="color:#111">addHandler</span><span style="color:#111">(</span><span style="color:#111">logging</span><span style="color:#f92672">.</span><span style="color:#111">StreamHandler</span><span style="color:#111">())</span>
 
 
-def read_and_decode(reader, chunk_size, max_window_size, previous_chunk=None, bytes_read=0):
-    chunk = reader.read(chunk_size)
-    bytes_read += chunk_size
-    if previous_chunk is not None:
-        chunk = previous_chunk + chunk
-    try:
-        return chunk.decode()
-    except UnicodeDecodeError:
-        if bytes_read &gt; max_window_size:
-            raise UnicodeError(f&#34;Unable to decode frame after reading {bytes_read:,} bytes&#34;)
-        return read_and_decode(reader, chunk_size, max_window_size, chunk, bytes_read)
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">read_and_decode</span><span style="color:#111">(</span><span style="color:#111">reader</span><span style="color:#111">,</span> <span style="color:#111">chunk_size</span><span style="color:#111">,</span> <span style="color:#111">max_window_size</span><span style="color:#111">,</span> <span style="color:#111">previous_chunk</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">,</span> <span style="color:#111">bytes_read</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">):</span>
+    <span style="color:#111">chunk</span> <span style="color:#f92672">=</span> <span style="color:#111">reader</span><span style="color:#f92672">.</span><span style="color:#111">read</span><span style="color:#111">(</span><span style="color:#111">chunk_size</span><span style="color:#111">)</span>
+    <span style="color:#111">bytes_read</span> <span style="color:#f92672">+=</span> <span style="color:#111">chunk_size</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">previous_chunk</span> <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#00a8c8">None</span><span style="color:#111">:</span>
+        <span style="color:#111">chunk</span> <span style="color:#f92672">=</span> <span style="color:#111">previous_chunk</span> <span style="color:#f92672">+</span> <span style="color:#111">chunk</span>
+    <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">chunk</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">except</span> <span style="color:#75af00">UnicodeDecodeError</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#111">bytes_read</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">max_window_size</span><span style="color:#111">:</span>
+            <span style="color:#00a8c8">raise</span> <span style="color:#75af00">UnicodeError</span><span style="color:#111">(</span><span style="color:#d88200">f</span><span style="color:#d88200">&#34;Unable to decode frame after reading </span><span style="color:#d88200">{</span><span style="color:#111">bytes_read</span><span style="color:#d88200">:</span><span style="color:#d88200">,</span><span style="color:#d88200">}</span><span style="color:#d88200"> bytes&#34;</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">read_and_decode</span><span style="color:#111">(</span><span style="color:#111">reader</span><span style="color:#111">,</span> <span style="color:#111">chunk_size</span><span style="color:#111">,</span> <span style="color:#111">max_window_size</span><span style="color:#111">,</span> <span style="color:#111">chunk</span><span style="color:#111">,</span> <span style="color:#111">bytes_read</span><span style="color:#111">)</span>
 
 
-def read_lines_zst(file_name):
-    try:
-        with open(file_name, &#39;rb&#39;) as file_handle:
-            buffer = &#39;&#39;
-            reader = zstandard.ZstdDecompressor(max_window_size=2**31).stream_reader(file_handle)
-            while True:
-                #chunk = read_and_decode(reader, 2**27, (2**29) * 2)
-                chunk = read_and_decode(reader, 2**27, (2**29) * 2)
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">read_lines_zst</span><span style="color:#111">(</span><span style="color:#111">file_name</span><span style="color:#111">):</span>
+    <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">file_name</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;rb&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">file_handle</span><span style="color:#111">:</span>
+            <span style="color:#111">buffer</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;&#39;</span>
+            <span style="color:#111">reader</span> <span style="color:#f92672">=</span> <span style="color:#111">zstandard</span><span style="color:#f92672">.</span><span style="color:#111">ZstdDecompressor</span><span style="color:#111">(</span><span style="color:#111">max_window_size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">31</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">stream_reader</span><span style="color:#111">(</span><span style="color:#111">file_handle</span><span style="color:#111">)</span>
+            <span style="color:#00a8c8">while</span> <span style="color:#00a8c8">True</span><span style="color:#111">:</span>
+                <span style="color:#75715e">#chunk = read_and_decode(reader, 2**27, (2**29) * 2)</span>
+                <span style="color:#111">chunk</span> <span style="color:#f92672">=</span> <span style="color:#111">read_and_decode</span><span style="color:#111">(</span><span style="color:#111">reader</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">27</span><span style="color:#111">,</span> <span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#f92672">**</span><span style="color:#ae81ff">29</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">)</span>
                 
-                if not chunk:
-                    break
-                lines = (buffer + chunk).split(&#34;\n&#34;)
+                <span style="color:#00a8c8">if</span> <span style="color:#f92672">not</span> <span style="color:#111">chunk</span><span style="color:#111">:</span>
+                    <span style="color:#00a8c8">break</span>
+                <span style="color:#111">lines</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">buffer</span> <span style="color:#f92672">+</span> <span style="color:#111">chunk</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;</span><span style="color:#8045ff">\n</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span>
 
-                for line in lines[:-1]:
-                    yield line, file_handle.tell()
+                <span style="color:#00a8c8">for</span> <span style="color:#111">line</span> <span style="color:#f92672">in</span> <span style="color:#111">lines</span><span style="color:#111">[:</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]:</span>
+                    <span style="color:#00a8c8">yield</span> <span style="color:#111">line</span><span style="color:#111">,</span> <span style="color:#111">file_handle</span><span style="color:#f92672">.</span><span style="color:#111">tell</span><span style="color:#111">()</span>
 
-                buffer = lines[-1]
-    except:
-        pass
+                <span style="color:#111">buffer</span> <span style="color:#f92672">=</span> <span style="color:#111">lines</span><span style="color:#111">[</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">pass</span>
 
 
-if __name__ == &#34;__main__&#34;:
-    input_file_path = &#34;xx\\wallstreetbets_comments.zst&#34;
-    output_file_path = &#34;xx\\wallstreetbets_comments.csv&#34;
-    fields = [&#39;author&#39;, &#39;parent_id&#39;, &#39;link_id&#39;,  &#39;distinguished&#39;, &#39;score&#39;, 
-&#39;created_utc&#39;, &#39;body&#39;, &#39;edited&#39;, &#39;subreddit&#39;, &#39;id&#39;]
-    file_size = os.stat(input_file_path).st_size
-    file_lines = 0
-    file_bytes_processed = 0
-    line = None
-    created = None
-    bad_lines = 0
-    output_file = open(output_file_path, &#34;w&#34;, encoding=&#39;utf-8&#39;, newline=&#34;&#34;)
-    writer = csv.writer(output_file)
-    writer.writerow(fields)
-    try:
-        for line, file_bytes_processed in read_lines_zst(input_file_path):
-            try:
-                obj = json.loads(line)
-                output_obj = []
-                for field in fields:
-                    output_obj.append(str(obj[field]).encode(&#34;utf-8&#34;, errors=&#39;replace&#39;).decode())
-                writer.writerow(output_obj)
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;__main__&#34;</span><span style="color:#111">:</span>
+    <span style="color:#111">input_file_path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">wallstreetbets_comments.zst&#34;</span>
+    <span style="color:#111">output_file_path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">wallstreetbets_comments.csv&#34;</span>
+    <span style="color:#111">fields</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;author&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;parent_id&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;link_id&#39;</span><span style="color:#111">,</span>  <span style="color:#d88200">&#39;distinguished&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;score&#39;</span><span style="color:#111">,</span> 
+<span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;body&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;edited&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;subreddit&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">]</span>
+    <span style="color:#111">file_size</span> <span style="color:#f92672">=</span> <span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">stat</span><span style="color:#111">(</span><span style="color:#111">input_file_path</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">st_size</span>
+    <span style="color:#111">file_lines</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#111">file_bytes_processed</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#111">line</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">None</span>
+    <span style="color:#111">created</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">None</span>
+    <span style="color:#111">bad_lines</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#111">output_file</span> <span style="color:#f92672">=</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">output_file_path</span><span style="color:#111">,</span> <span style="color:#d88200">&#34;w&#34;</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf-8&#39;</span><span style="color:#111">,</span> <span style="color:#111">newline</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">writer</span> <span style="color:#f92672">=</span> <span style="color:#111">csv</span><span style="color:#f92672">.</span><span style="color:#111">writer</span><span style="color:#111">(</span><span style="color:#111">output_file</span><span style="color:#111">)</span>
+    <span style="color:#111">writer</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">fields</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">line</span><span style="color:#111">,</span> <span style="color:#111">file_bytes_processed</span> <span style="color:#f92672">in</span> <span style="color:#111">read_lines_zst</span><span style="color:#111">(</span><span style="color:#111">input_file_path</span><span style="color:#111">):</span>
+            <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+                <span style="color:#111">obj</span> <span style="color:#f92672">=</span> <span style="color:#111">json</span><span style="color:#f92672">.</span><span style="color:#111">loads</span><span style="color:#111">(</span><span style="color:#111">line</span><span style="color:#111">)</span>
+                <span style="color:#111">output_obj</span> <span style="color:#f92672">=</span> <span style="color:#111">[]</span>
+                <span style="color:#00a8c8">for</span> <span style="color:#111">field</span> <span style="color:#f92672">in</span> <span style="color:#111">fields</span><span style="color:#111">:</span>
+                    <span style="color:#111">output_obj</span><span style="color:#f92672">.</span><span style="color:#111">append</span><span style="color:#111">(</span><span style="color:#111">str</span><span style="color:#111">(</span><span style="color:#111">obj</span><span style="color:#111">[</span><span style="color:#111">field</span><span style="color:#111">])</span><span style="color:#f92672">.</span><span style="color:#111">encode</span><span style="color:#111">(</span><span style="color:#d88200">&#34;utf-8&#34;</span><span style="color:#111">,</span> <span style="color:#111">errors</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;replace&#39;</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">decode</span><span style="color:#111">())</span>
+                <span style="color:#111">writer</span><span style="color:#f92672">.</span><span style="color:#111">writerow</span><span style="color:#111">(</span><span style="color:#111">output_obj</span><span style="color:#111">)</span>
 
-                created = datetime.utcfromtimestamp(int(obj[&#39;created_utc&#39;]))
-            except:
-                bad_lines += 1
-            file_lines += 1
-            if file_lines % 100000 == 0:
-                log.info(f&#34;{created.strftime(&#39;%Y-%m-%d %H:%M:%S&#39;)} : {file_lines:,} : {bad_lines:,} : {(file_bytes_processed / file_size) * 100:.0f}%&#34;)
-    except:
-        pass
+                <span style="color:#111">created</span> <span style="color:#f92672">=</span> <span style="color:#111">datetime</span><span style="color:#f92672">.</span><span style="color:#111">utcfromtimestamp</span><span style="color:#111">(</span><span style="color:#111">int</span><span style="color:#111">(</span><span style="color:#111">obj</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">]))</span>
+            <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+                <span style="color:#111">bad_lines</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#111">file_lines</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#111">file_lines</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">100000</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#111">:</span>
+                <span style="color:#111">log</span><span style="color:#f92672">.</span><span style="color:#111">info</span><span style="color:#111">(</span><span style="color:#d88200">f</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">{</span><span style="color:#111">created</span><span style="color:#f92672">.</span><span style="color:#111">strftime</span><span style="color:#111">(</span><span style="color:#d88200">&#39;%Y-%m-</span><span style="color:#d88200">%d</span><span style="color:#d88200"> %H:%M:%S&#39;</span><span style="color:#111">)</span><span style="color:#d88200">}</span><span style="color:#d88200"> : </span><span style="color:#d88200">{</span><span style="color:#111">file_lines</span><span style="color:#d88200">:</span><span style="color:#d88200">,</span><span style="color:#d88200">}</span><span style="color:#d88200"> : </span><span style="color:#d88200">{</span><span style="color:#111">bad_lines</span><span style="color:#d88200">:</span><span style="color:#d88200">,</span><span style="color:#d88200">}</span><span style="color:#d88200"> : </span><span style="color:#d88200">{</span><span style="color:#111">(</span><span style="color:#111">file_bytes_processed</span> <span style="color:#f92672">/</span> <span style="color:#111">file_size</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span><span style="color:#d88200">:</span><span style="color:#d88200">.0f</span><span style="color:#d88200">}</span><span style="color:#d88200">%&#34;</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">pass</span>
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="output">Output</h4>
@@ -700,22 +700,22 @@ if __name__ == &#34;__main__&#34;:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="16"><a style="outline: none; text-decoration:none; color:inherit" href="#16">16</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">from itertools import zip_longest
-from tqdm import tqdm
-import os
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> <span style="color:#111">itertools</span> <span style="color:#f92672">import</span> <span style="color:#111">zip_longest</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">import</span> <span style="color:#111">os</span>
 
-def grouper(n, iterable, fillvalue=None):
-    args = [iter(iterable)] * n
-    return zip_longest(fillvalue=fillvalue, *args)
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">grouper</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">iterable</span><span style="color:#111">,</span> <span style="color:#111">fillvalue</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">):</span>
+    <span style="color:#111">args</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">iter</span><span style="color:#111">(</span><span style="color:#111">iterable</span><span style="color:#111">)]</span> <span style="color:#f92672">*</span> <span style="color:#111">n</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">zip_longest</span><span style="color:#111">(</span><span style="color:#111">fillvalue</span><span style="color:#f92672">=</span><span style="color:#111">fillvalue</span><span style="color:#111">,</span> <span style="color:#f92672">*</span><span style="color:#111">args</span><span style="color:#111">)</span>
 
-def getsmaller(n, file):
-    with open(file, &#39;r&#39;, encoding=&#39;utf8&#39;) as f:
-        for i, g in tqdm(enumerate(grouper(n, f, fillvalue=&#39;&#39;), 1)):
-            with open(&#39;xx\\WSB_comments_part_%s.csv&#39;%i, &#39;w&#39;, encoding=&#39;utf8&#39;) as fout:
-                fout.writelines(g)
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getsmaller</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">file</span><span style="color:#111">):</span>
+    <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#111">file</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;r&#39;</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf8&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">f</span><span style="color:#111">:</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#111">g</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">enumerate</span><span style="color:#111">(</span><span style="color:#111">grouper</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">f</span><span style="color:#111">,</span> <span style="color:#111">fillvalue</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;&#39;</span><span style="color:#111">),</span> <span style="color:#ae81ff">1</span><span style="color:#111">)):</span>
+            <span style="color:#00a8c8">with</span> <span style="color:#111">open</span><span style="color:#111">(</span><span style="color:#d88200">&#39;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">WSB_comments_part_</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#39;</span><span style="color:#f92672">%</span><span style="color:#111">i</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;w&#39;</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf8&#39;</span><span style="color:#111">)</span> <span style="color:#00a8c8">as</span> <span style="color:#111">fout</span><span style="color:#111">:</span>
+                <span style="color:#111">fout</span><span style="color:#f92672">.</span><span style="color:#111">writelines</span><span style="color:#111">(</span><span style="color:#111">g</span><span style="color:#111">)</span>
 
-if __name__ == &#39;__main__&#39;:
-    getsmaller(1000000, &#39;xx\\wallstreetbets_comments.csv&#39;)
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#39;__main__&#39;</span><span style="color:#111">:</span>
+    <span style="color:#111">getsmaller</span><span style="color:#111">(</span><span style="color:#ae81ff">1000000</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">wallstreetbets_comments.csv&#39;</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>After this step, you will obtain 94 sub-files of WSB comments in CSV format, each comprising 1,000,000 lines. It is important to note that, except for the first sub-file, the sliced sub-files do not have a header and may have a few improperly formatted lines due to delimiter issues in the beginning of the file. While this is not a significant problem, it may require skipping the initial lines, say first 50, to ensure smooth reading of the CSV file in Python.</p>
@@ -774,43 +774,43 @@ if __name__ == &#39;__main__&#39;:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="37"><a style="outline: none; text-decoration:none; color:inherit" href="#37">37</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import pandas as pd
-import os, csv, re
-from tqdm import tqdm
-from datetime import datetime
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">import</span> <span style="color:#111">os</span><span style="color:#f92672">,</span> <span style="color:#111">csv</span><span style="color:#f92672">,</span> <span style="color:#111">re</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">from</span> <span style="color:#111">datetime</span> <span style="color:#f92672">import</span> <span style="color:#111">datetime</span>
 
-def getposts():
-    df = pd.read_csv(submission_file_path)
-    df = df[df[&#39;title&#39;].notna()]
-    postdf = df[df[&#39;title&#39;].str.contains(&#34;Daily Discussion&#34;)]
-    postdf = postdf.rename(columns={&#39;id&#39;: &#39;link_id&#39;})
-    return postdf
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">getposts</span><span style="color:#111">():</span>
+    <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#111">submission_file_path</span><span style="color:#111">)</span>
+    <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;title&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">notna</span><span style="color:#111">()]</span>
+    <span style="color:#111">postdf</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;title&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">str</span><span style="color:#f92672">.</span><span style="color:#111">contains</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Daily Discussion&#34;</span><span style="color:#111">)]</span>
+    <span style="color:#111">postdf</span> <span style="color:#f92672">=</span> <span style="color:#111">postdf</span><span style="color:#f92672">.</span><span style="color:#111">rename</span><span style="color:#111">(</span><span style="color:#111">columns</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">:</span> <span style="color:#d88200">&#39;link_id&#39;</span><span style="color:#111">})</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">postdf</span>
 
-def cleanslice(file):
-    try:
-        df=pd.read_csv(indir+file, header=None, encoding=&#39;utf-8&#39;, dtype=str, skiprows=range(50), engine=&#39;python&#39;, on_bad_lines=&#39;skip&#39;)      
-    except:
-        df=pd.read_csv(indir+file, header=None, encoding=&#39;utf-8&#39;, dtype=str, engine=&#39;python&#39;, on_bad_lines=&#39;skip&#39;)   
-    df.columns = fields
-    df[&#39;created_utc&#39;] = df[&#39;created_utc&#39;] = pd.to_numeric(df[&#39;created_utc&#39;], errors=&#39;coerce&#39;)
-    df[&#39;date&#39;] = df[&#39;created_utc&#39;].apply(lambda x: datetime.fromtimestamp(x).date())
-    df[&#39;id&#39;] = df[&#39;link_id&#39;].apply(lambda x: x.split(&#34;_&#34;)[1])
-    [mint, maxt] = [df[&#39;date&#39;].min(), df[&#39;date&#39;].max()]
-    df.to_csv(cleandir+&#34;%s_%s_%s.csv&#34;%(file[:-4], mint, maxt), index=None)
-    return df
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">cleanslice</span><span style="color:#111">(</span><span style="color:#111">file</span><span style="color:#111">):</span>
+    <span style="color:#00a8c8">try</span><span style="color:#111">:</span>
+        <span style="color:#111">df</span><span style="color:#f92672">=</span><span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#111">indir</span><span style="color:#f92672">+</span><span style="color:#111">file</span><span style="color:#111">,</span> <span style="color:#111">header</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf-8&#39;</span><span style="color:#111">,</span> <span style="color:#111">dtype</span><span style="color:#f92672">=</span><span style="color:#111">str</span><span style="color:#111">,</span> <span style="color:#111">skiprows</span><span style="color:#f92672">=</span><span style="color:#111">range</span><span style="color:#111">(</span><span style="color:#ae81ff">50</span><span style="color:#111">),</span> <span style="color:#111">engine</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;python&#39;</span><span style="color:#111">,</span> <span style="color:#111">on_bad_lines</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;skip&#39;</span><span style="color:#111">)</span>      
+    <span style="color:#00a8c8">except</span><span style="color:#111">:</span>
+        <span style="color:#111">df</span><span style="color:#f92672">=</span><span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#111">indir</span><span style="color:#f92672">+</span><span style="color:#111">file</span><span style="color:#111">,</span> <span style="color:#111">header</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">,</span> <span style="color:#111">encoding</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;utf-8&#39;</span><span style="color:#111">,</span> <span style="color:#111">dtype</span><span style="color:#f92672">=</span><span style="color:#111">str</span><span style="color:#111">,</span> <span style="color:#111">engine</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;python&#39;</span><span style="color:#111">,</span> <span style="color:#111">on_bad_lines</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;skip&#39;</span><span style="color:#111">)</span>   
+    <span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">columns</span> <span style="color:#f92672">=</span> <span style="color:#111">fields</span>
+    <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">to_numeric</span><span style="color:#111">(</span><span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">],</span> <span style="color:#111">errors</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;coerce&#39;</span><span style="color:#111">)</span>
+    <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">apply</span><span style="color:#111">(</span><span style="color:#00a8c8">lambda</span> <span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">datetime</span><span style="color:#f92672">.</span><span style="color:#111">fromtimestamp</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">)</span><span style="color:#f92672">.</span><span style="color:#111">date</span><span style="color:#111">())</span>
+    <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;link_id&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">apply</span><span style="color:#111">(</span><span style="color:#00a8c8">lambda</span> <span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">x</span><span style="color:#f92672">.</span><span style="color:#111">split</span><span style="color:#111">(</span><span style="color:#d88200">&#34;_&#34;</span><span style="color:#111">)[</span><span style="color:#ae81ff">1</span><span style="color:#111">])</span>
+    <span style="color:#111">[</span><span style="color:#111">mint</span><span style="color:#111">,</span> <span style="color:#111">maxt</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">min</span><span style="color:#111">(),</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">max</span><span style="color:#111">()]</span>
+    <span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">to_csv</span><span style="color:#111">(</span><span style="color:#111">cleandir</span><span style="color:#f92672">+</span><span style="color:#d88200">&#34;</span><span style="color:#d88200">%s</span><span style="color:#d88200">_</span><span style="color:#d88200">%s</span><span style="color:#d88200">_</span><span style="color:#d88200">%s</span><span style="color:#d88200">.csv&#34;</span><span style="color:#f92672">%</span><span style="color:#111">(</span><span style="color:#111">file</span><span style="color:#111">[:</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span><span style="color:#111">],</span> <span style="color:#111">mint</span><span style="color:#111">,</span> <span style="color:#111">maxt</span><span style="color:#111">),</span> <span style="color:#111">index</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">)</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">df</span>
 
-if __name__ == &#39;__main__&#39;:
-    indir = &#34;xx\\xx\\&#34;
-    cleandir = &#34;xx\\xx\\&#34;
-    submission_file_path = &#34;xx\\wallstreetbets_submissions.csv&#34;
-    out_file_path = &#34;E:\\WSBDailyDiscussion\\WSB_DD.csv&#34;
-    postdf = getposts()
-    fields = [&#39;author&#39;, &#39;parent_id&#39;, &#39;link_id&#39;,  &#39;distinguished&#39;, &#39;score&#39;, 
-&#39;created_utc&#39;, &#39;body&#39;, &#39;edited&#39;, &#39;subreddit&#39;, &#39;id&#39;]
-    for file in tqdm(os.listdir(indir)):
-        df = cleanslice(file)
-        outdf = df.merge(postdf, how=&#39;inner&#39;, on=&#39;link_id&#39;)
-        outdf.to_csv(out_file_path, index=None, mode=&#39;a&#39;)
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#39;__main__&#39;</span><span style="color:#111">:</span>
+    <span style="color:#111">indir</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">&#34;</span>
+    <span style="color:#111">cleandir</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">&#34;</span>
+    <span style="color:#111">submission_file_path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">wallstreetbets_submissions.csv&#34;</span>
+    <span style="color:#111">out_file_path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;E:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">WSBDailyDiscussion</span><span style="color:#8045ff">\\</span><span style="color:#d88200">WSB_DD.csv&#34;</span>
+    <span style="color:#111">postdf</span> <span style="color:#f92672">=</span> <span style="color:#111">getposts</span><span style="color:#111">()</span>
+    <span style="color:#111">fields</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#d88200">&#39;author&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;parent_id&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;link_id&#39;</span><span style="color:#111">,</span>  <span style="color:#d88200">&#39;distinguished&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;score&#39;</span><span style="color:#111">,</span> 
+<span style="color:#d88200">&#39;created_utc&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;body&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;edited&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;subreddit&#39;</span><span style="color:#111">,</span> <span style="color:#d88200">&#39;id&#39;</span><span style="color:#111">]</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">file</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">os</span><span style="color:#f92672">.</span><span style="color:#111">listdir</span><span style="color:#111">(</span><span style="color:#111">indir</span><span style="color:#111">)):</span>
+        <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">cleanslice</span><span style="color:#111">(</span><span style="color:#111">file</span><span style="color:#111">)</span>
+        <span style="color:#111">outdf</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">merge</span><span style="color:#111">(</span><span style="color:#111">postdf</span><span style="color:#111">,</span> <span style="color:#111">how</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;inner&#39;</span><span style="color:#111">,</span> <span style="color:#111">on</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;link_id&#39;</span><span style="color:#111">)</span>
+        <span style="color:#111">outdf</span><span style="color:#f92672">.</span><span style="color:#111">to_csv</span><span style="color:#111">(</span><span style="color:#111">out_file_path</span><span style="color:#111">,</span> <span style="color:#111">index</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">,</span> <span style="color:#111">mode</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="task-2-count-the-daily-mentions-of-all-crsp-tickers">Task 2: Count the daily mentions of all CRSP tickers</h2>
@@ -831,7 +831,7 @@ if __name__ == &#39;__main__&#39;:
 </li>
 <li>Iterate over the comments dates</li>
 </ol>
-<h4 id="codes-for-counting-daily-mentions-of-all-crsp-tickers">Codes for Counting Daily Mentions of all CRSP Tickers</h4>
+<h3 id="codes-for-counting-daily-mentions-of-all-crsp-tickers">Codes for Counting Daily Mentions of all CRSP Tickers</h3>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -868,38 +868,38 @@ if __name__ == &#39;__main__&#39;:
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import os, re
-import pandas as pd
-from tqdm import tqdm
-import collections
-import calendar
-import time
-from datetime import datetime
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> <span style="color:#111">os</span><span style="color:#f92672">,</span> <span style="color:#111">re</span>
+<span style="color:#f92672">import</span> <span style="color:#111">pandas</span> <span style="color:#00a8c8">as</span> <span style="color:#111">pd</span>
+<span style="color:#f92672">from</span> <span style="color:#111">tqdm</span> <span style="color:#f92672">import</span> <span style="color:#111">tqdm</span>
+<span style="color:#f92672">import</span> <span style="color:#111">collections</span>
+<span style="color:#f92672">import</span> <span style="color:#111">calendar</span>
+<span style="color:#f92672">import</span> <span style="color:#111">time</span>
+<span style="color:#f92672">from</span> <span style="color:#111">datetime</span> <span style="color:#f92672">import</span> <span style="color:#111">datetime</span>
 
-def countcrsp(df):
-    for idx, wsb in df.groupby(&#39;date&#39;):
-        comments = &#34;,&#34;.join([str(i) for i in wsb[&#39;body&#39;].tolist()])
-        upperwords = re.findall(&#34; [A-Z]+ &#34;, comments)
-        upperwords = [i.strip() for i in upperwords]
-        counter = collections.Counter(upperwords)
-        res = list(set(symbolpool)&amp;set(upperwords))
-        resdict = {key: counter[key] for key in res}
-        resdf = pd.DataFrame([resdict]).T
-        resdf[&#39;link_id&#39;] = postid
-        resdf[&#39;commentdate&#39;] = idx
-        resdf.to_csv(outfile, mode=&#39;a&#39;, header=None)
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">countcrsp</span><span style="color:#111">(</span><span style="color:#111">df</span><span style="color:#111">):</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">idx</span><span style="color:#111">,</span> <span style="color:#111">wsb</span> <span style="color:#f92672">in</span> <span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">groupby</span><span style="color:#111">(</span><span style="color:#d88200">&#39;date&#39;</span><span style="color:#111">):</span>
+        <span style="color:#111">comments</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;,&#34;</span><span style="color:#f92672">.</span><span style="color:#111">join</span><span style="color:#111">([</span><span style="color:#111">str</span><span style="color:#111">(</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">wsb</span><span style="color:#111">[</span><span style="color:#d88200">&#39;body&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">tolist</span><span style="color:#111">()])</span>
+        <span style="color:#111">upperwords</span> <span style="color:#f92672">=</span> <span style="color:#111">re</span><span style="color:#f92672">.</span><span style="color:#111">findall</span><span style="color:#111">(</span><span style="color:#d88200">&#34; [A-Z]+ &#34;</span><span style="color:#111">,</span> <span style="color:#111">comments</span><span style="color:#111">)</span>
+        <span style="color:#111">upperwords</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#f92672">.</span><span style="color:#111">strip</span><span style="color:#111">()</span> <span style="color:#00a8c8">for</span> <span style="color:#111">i</span> <span style="color:#f92672">in</span> <span style="color:#111">upperwords</span><span style="color:#111">]</span>
+        <span style="color:#111">counter</span> <span style="color:#f92672">=</span> <span style="color:#111">collections</span><span style="color:#f92672">.</span><span style="color:#111">Counter</span><span style="color:#111">(</span><span style="color:#111">upperwords</span><span style="color:#111">)</span>
+        <span style="color:#111">res</span> <span style="color:#f92672">=</span> <span style="color:#111">list</span><span style="color:#111">(</span><span style="color:#111">set</span><span style="color:#111">(</span><span style="color:#111">symbolpool</span><span style="color:#111">)</span><span style="color:#f92672">&amp;</span><span style="color:#111">set</span><span style="color:#111">(</span><span style="color:#111">upperwords</span><span style="color:#111">))</span>
+        <span style="color:#111">resdict</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span><span style="color:#111">key</span><span style="color:#111">:</span> <span style="color:#111">counter</span><span style="color:#111">[</span><span style="color:#111">key</span><span style="color:#111">]</span> <span style="color:#00a8c8">for</span> <span style="color:#111">key</span> <span style="color:#f92672">in</span> <span style="color:#111">res</span><span style="color:#111">}</span>
+        <span style="color:#111">resdf</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">DataFrame</span><span style="color:#111">([</span><span style="color:#111">resdict</span><span style="color:#111">])</span><span style="color:#f92672">.</span><span style="color:#111">T</span>
+        <span style="color:#111">resdf</span><span style="color:#111">[</span><span style="color:#d88200">&#39;link_id&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">postid</span>
+        <span style="color:#111">resdf</span><span style="color:#111">[</span><span style="color:#d88200">&#39;commentdate&#39;</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">idx</span>
+        <span style="color:#111">resdf</span><span style="color:#f92672">.</span><span style="color:#111">to_csv</span><span style="color:#111">(</span><span style="color:#111">outfile</span><span style="color:#111">,</span> <span style="color:#111">mode</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#111">,</span> <span style="color:#111">header</span><span style="color:#f92672">=</span><span style="color:#00a8c8">None</span><span style="color:#111">)</span>
 
-def loadcrsp():
-    df = pd.read_csv(&#34;xx\\crspsymbolpool.csv&#34;)
-    symbolpool = df[&#39;HTICK&#39;].drop_duplicates().to_list()
-    return symbolpool
+<span style="color:#00a8c8">def</span> <span style="color:#75af00">loadcrsp</span><span style="color:#111">():</span>
+    <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">crspsymbolpool.csv&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">symbolpool</span> <span style="color:#f92672">=</span> <span style="color:#111">df</span><span style="color:#111">[</span><span style="color:#d88200">&#39;HTICK&#39;</span><span style="color:#111">]</span><span style="color:#f92672">.</span><span style="color:#111">drop_duplicates</span><span style="color:#111">()</span><span style="color:#f92672">.</span><span style="color:#111">to_list</span><span style="color:#111">()</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">symbolpool</span>
     
-if __name__ == &#39;__main__&#39;:
-    in_file_path = &#34;xx\\WSB_DD.csv&#34;
-    outfile = &#34;xx\\WSBCRSPCount_202306.csv&#34;
-    symbolpool = loadcrsp()
-    df = pd.read_csv(file, header=0)
-    countcrsp(in_file_path)
+<span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#39;__main__&#39;</span><span style="color:#111">:</span>
+    <span style="color:#111">in_file_path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">WSB_DD.csv&#34;</span>
+    <span style="color:#111">outfile</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;xx</span><span style="color:#8045ff">\\</span><span style="color:#d88200">WSBCRSPCount_202306.csv&#34;</span>
+    <span style="color:#111">symbolpool</span> <span style="color:#f92672">=</span> <span style="color:#111">loadcrsp</span><span style="color:#111">()</span>
+    <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#111">file</span><span style="color:#111">,</span> <span style="color:#111">header</span><span style="color:#f92672">=</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span>
+    <span style="color:#111">countcrsp</span><span style="color:#111">(</span><span style="color:#111">in_file_path</span><span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="task-3-implement-event-study-on-wsb-comments">Task 3: Implement Event Study on WSB Comments</h2>
