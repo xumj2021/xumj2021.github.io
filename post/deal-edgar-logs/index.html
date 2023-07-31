@@ -209,7 +209,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://assets1.cbsnewsstatic.com/hub/i/r/2023/07/15/c31b76ed-d841-43a7-91da-68af81f4dd2c/thumbnail/1200x630/e6d0b1419dd776d3cbfdf8906bbdbecc/j-robert-oppenheimer-1280.jpg?v=86db2ab42e1f4996c0f037a20ce5a325')
+        background-image: url('https://images.newscientist.com/wp-content/uploads/2019/07/19100305/quantum_mechanicswk394y.jpg?width=1200')
     }
 </style>
 <header class="intro-header">
@@ -289,8 +289,7 @@
   </ul>
 </nav>
                 
-                <p>[TOC]</p>
-<h2 id="1-introduction">1. Introduction</h2>
+                <h2 id="1-introduction">1. Introduction</h2>
 <p><a href="https://sites.google.com/view/mengjiexu/">My research</a> centers around how market participants act upon their perceived informational advantages over others. And because of this, I have always found it intriguing to leverage people&rsquo;s digital traffic in accessing firms' EDGAR filings to capture the dynamics of market participants' information sets. During my explorations, I found <a href="http://ipinfo.io/">IPInfo.io</a> generously provided all the registered users with the bulk data for organization to which the IP address is registered. Per their invitation, I am pleased to share my methods on distinguishing EDGAR downloads from different stakeholder groups, especially those from the retail and institutional investors.</p>
 <p>In this blog post, I will firstly introduce some background information about EDGAR and EDGAR logs in case some readers are not familiar about these terms. Then I showcase the potential of the EDGAR log files in capturing the intended moves from different stakeholder groups. Readers with related backgrounds can skip these two sections. Next, I discuss the two viable pathways of figuring out the stakeholder types of EDGAR downloads and outlines the reason why I choose the pathway I utilize in this blog.</p>
 <p>Regarding the technical roadmap of the pathway chosen, I will begin by compiling a list of stakeholders with potentially informative EDGAR downloads. Next, I will demonstrate the process of searching for their respective IP address ranges. By combining the IP ranges with the EDGAR logs, I will proceed to extract the downloads from the targeted stakeholders. Finally, I will illustrate how to expand the stakeholder list and repeat the previous procedures to capture the EDGAR downloads for an entire stakeholder category, such as institutional investors and retail investors.</p>
