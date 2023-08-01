@@ -933,7 +933,6 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#75715e">/* import the EDGAR log file */</span>
@@ -965,8 +964,7 @@
 <span style="color:#00a8c8">proc sql;</span>
 	<span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> home<span style="color:#ae81ff">.</span>sampleentitydownloads <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> a.*, b<span style="color:#ae81ff">.</span>name, b<span style="color:#ae81ff">.</span>asn, b<span style="color:#ae81ff">.</span>domain
 	<span style="color:#00a8c8">from</span> home<span style="color:#ae81ff">.</span>logsample a, home<span style="color:#ae81ff">.</span>entityips b
-	<span style="color:#00a8c8">where</span> b<span style="color:#ae81ff">.</span>start_ip &lt;= a<span style="color:#ae81ff">.</span>exactip &lt;= b<span style="color:#ae81ff">.</span>end_ip
-	<span style="color:#00a8c8">and</span> category ne <span style="color:#d88200">&#39;TOP Internet Service Providers (Retailers)&#39;</span><span style="color:#00a8c8">;
+	<span style="color:#00a8c8">where</span> b<span style="color:#ae81ff">.</span>start_ip &lt;= a<span style="color:#ae81ff">.</span>exactip &lt;= b<span style="color:#ae81ff">.</span>end_ip<span style="color:#00a8c8">;
 </span><span style="color:#00a8c8">quit;</span>
 </code></pre></td></tr></table>
 </div>
