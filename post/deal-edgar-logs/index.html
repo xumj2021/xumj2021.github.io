@@ -290,7 +290,7 @@
 </nav>
                 
                 <h2 id="1-introduction">1. Introduction</h2>
-<p><a href="https://sites.google.com/view/mengjiexu/">My research</a> centers around how market participants act upon their perceived informational advantages over others. And because of this, I have always found it intriguing to leverage people&rsquo;s digital traffic in accessing firms' EDGAR filings to capture the dynamics of market participants' information sets. During my explorations, I found <a href="http://ipinfo.io/">IPInfo.io</a> generously provided all the registered users with the bulk data for organization to which the IP address is registered. Per their invitation, I am pleased to share my methods on distinguishing EDGAR downloads from different stakeholder groups, especially those from the retail and institutional investors.</p>
+<p><a href="https://sites.google.com/view/mengjiexu/">My research</a> centers around how market participants act upon their perceived informational advantages over others. And because of this, I have always found it intriguing to leverage people&rsquo;s digital traffic in accessing firms' EDGAR filings to capture the dynamics of market participants' information sets. During my explorations, I found <a href="http://IPinfo.io/">IPinfo.io</a> generously provided all the registered users with the bulk data for organization to which the IP address is registered. Per their invitation, I am pleased to share my methods on distinguishing EDGAR downloads from different stakeholder groups, especially those from the retail and institutional investors.</p>
 <p>In this blog post, I will firstly introduce some background information about EDGAR and EDGAR logs in case some readers are not familiar about these terms. Then I showcase the potential of the EDGAR log files in capturing the intended moves from different stakeholder groups. Readers with related backgrounds can skip these two sections. Next, I discuss the two viable pathways of figuring out the stakeholder types of EDGAR downloads and outlines the reason why I choose the pathway I utilize in this blog.</p>
 <p>Regarding the technical roadmap of the pathway chosen, I will begin by compiling a list of stakeholders with potentially informative EDGAR downloads. Next, I will demonstrate the process of searching for their respective IP address ranges. By combining the IP ranges with the EDGAR logs, I will proceed to extract the downloads from the targeted stakeholders. Finally, I will illustrate how to expand the stakeholder list and repeat the previous procedures to capture the EDGAR downloads for an entire stakeholder category, such as institutional investors and retail investors.</p>
 <p>In the conclusion part, I will focus on discussing avenues for researchers and practitioners to continue deriving valuable insights from EDGAR logs when considering the cessation of SEC&rsquo;s disclosure of EDGAR logs in the past few years and the increased redaction in the recently updated EDGAR logs.</p>
@@ -532,7 +532,7 @@
 </tbody>
 </table>
 <h3 id="step-2-google-the-ip-addresses-of-stakeholders">Step 2: Google the IP Addresses of Stakeholders</h3>
-<p>From my reading of extant literature, researchers typically employ a ‘‘WhoIs’’ Perl script to build a database based on the American Registry of Internet Numbers (ARIN; see: <a href="https://www.arin.net/">https://www.arin.net/</a>) to identify the organization to which the IP address is registered (e.g., Drake, 2020 TAR). However, I bypassed this step as IPInfo.io generously provides a highly similar dataset free of charge, available for download by any registered user at <a href="https://ipinfo.io/account/data-downloads">this link</a>. The key distinction lies in the identifiers used for organizations: IPInfo.io&rsquo;s dataset utilizes Autonomous System Numbers (ASNs), whereas the dataset built on WhoIs relies on ARIN as the identifier. Either case, the organization name and the IP address ranges can be mapped with the identifier.</p>
+<p>From my reading of extant literature, researchers typically employ a ‘‘WhoIs’’ Perl script to build a database based on the American Registry of Internet Numbers (ARIN; see: <a href="https://www.arin.net/">https://www.arin.net/</a>) to identify the organization to which the IP address is registered (e.g., Drake, 2020 TAR). However, I bypassed this step as IPinfo.io generously provides a highly similar dataset free of charge, available for download by any registered user at <a href="https://IPinfo.io/account/data-downloads">this link</a>. The key distinction lies in the identifiers used for organizations: IPinfo.io&rsquo;s dataset utilizes Autonomous System Numbers (ASNs), whereas the dataset built on WhoIs relies on ARIN as the identifier. Either case, the organization name and the IP address ranges can be mapped with the identifier.</p>
 <center>
       <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -592,8 +592,8 @@
 </tr>
 </tbody>
 </table>
-<p>Having IPInfo&rsquo;s ASN dataset in hand, I conduct Google searches for each entity&rsquo;s name along with &ldquo;IPInfo&rdquo; and record the corresponding ASNs from the search results. These ASNs will serve as the key to merge with IPInfo&rsquo;s ASN dataset, allowing us to identify the IP address ranges of the entities of interest.</p>
-<p>Using the institutional investor &ldquo;Wells Fargo&rdquo; as an illustration, Figure 4 showcases the retrieved results for Googling &ldquo;Wells Fargo IPInfo.&rdquo; What I did was to collect headlines from all the search results, specifically retaining those containing ASN-formatted characters while ensuring inclusion of the first word of the institution, &ldquo;Wells,&rdquo; in the headline. Then I extract all the unique ASN numbers of retained search results. In this case, I would record AS4196, AS10837, AS4243, AS10375, and AS10373.  I proceed to repeat this process for all stakeholders in the list, thereby obtaining the respective ASN numbers for each of them.</p>
+<p>Having IPinfo&rsquo;s ASN dataset in hand, I conduct Google searches for each entity&rsquo;s name along with &ldquo;IPinfo&rdquo; and record the corresponding ASNs from the search results. These ASNs will serve as the key to merge with IPinfo&rsquo;s ASN dataset, allowing us to identify the IP address ranges of the entities of interest.</p>
+<p>Using the institutional investor &ldquo;Wells Fargo&rdquo; as an illustration, Figure 4 showcases the retrieved results for Googling &ldquo;Wells Fargo IPinfo.&rdquo; What I did was to collect headlines from all the search results, specifically retaining those containing ASN-formatted characters while ensuring inclusion of the first word of the institution, &ldquo;Wells,&rdquo; in the headline. Then I extract all the unique ASN numbers of retained search results. In this case, I would record AS4196, AS10837, AS4243, AS10375, and AS10373.  I proceed to repeat this process for all stakeholders in the list, thereby obtaining the respective ASN numbers for each of them.</p>
 <center>
       <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -723,10 +723,10 @@
     <span style="color:#00a8c8">return</span> <span style="color:#111">unit</span>
     
 <span style="color:#00a8c8">if</span> <span style="color:#111">__name__</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#39;__main__&#39;</span><span style="color:#111">:</span>
-    <span style="color:#111">augkey</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;IPInfo&#39;</span>
-    <span style="color:#111">savefile</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;E:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EDGARforIPInfo</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EntityBlogASNs.csv&#39;</span>
+    <span style="color:#111">augkey</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;IPinfo&#39;</span>
+    <span style="color:#111">savefile</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#39;E:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EDGARforIPinfo</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EntityBlogASNs.csv&#39;</span>
     <span style="color:#111">driver</span> <span style="color:#f92672">=</span> <span style="color:#111">openbrowser</span><span style="color:#111">()</span>
-    <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;E:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EDGARforIPInfo</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EntityListBlog.csv&#34;</span><span style="color:#111">)</span>
+    <span style="color:#111">df</span> <span style="color:#f92672">=</span> <span style="color:#111">pd</span><span style="color:#f92672">.</span><span style="color:#111">read_csv</span><span style="color:#111">(</span><span style="color:#d88200">&#34;E:</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EDGARforIPinfo</span><span style="color:#8045ff">\\</span><span style="color:#d88200">EntityListBlog.csv&#34;</span><span style="color:#111">)</span>
     <span style="color:#00a8c8">for</span> <span style="color:#111">idx</span><span style="color:#111">,</span> <span style="color:#111">row</span> <span style="color:#f92672">in</span> <span style="color:#111">tqdm</span><span style="color:#111">(</span><span style="color:#111">df</span><span style="color:#f92672">.</span><span style="color:#111">iterrows</span><span style="color:#111">()):</span>
         <span style="color:#111">[</span><span style="color:#111">searchkey</span><span style="color:#111">,</span> <span style="color:#111">cate</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">row</span>
         <span style="color:#111">unit</span> <span style="color:#f92672">=</span> <span style="color:#111">parseweb</span><span style="color:#111">(</span><span style="color:#111">searchkey</span><span style="color:#111">)</span>
@@ -787,7 +787,7 @@
 </tr>
 </tbody>
 </table>
-<p>I then merge the ASNs of stakeholders with the IPInfo.io&rsquo;s ASN dataset to acquire their respective IP addresses. For the ease of the subsequent merge with EDGAR log files, I opt to utilize <code>SAS</code> for this procedure. The codes are as follows.</p>
+<p>I then merge the ASNs of stakeholders with the IPinfo.io&rsquo;s ASN dataset to acquire their respective IP addresses. For the ease of the subsequent merge with EDGAR log files, I opt to utilize <code>SAS</code> for this procedure. The codes are as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="1"><a style="outline: none; text-decoration:none; color:inherit" href="#1"> 1</a>
@@ -802,16 +802,16 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="10"><a style="outline: none; text-decoration:none; color:inherit" href="#10">10</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SAS" data-lang="SAS"><span style="color:#00a8c8">libname</span> home <span style="color:#d88200">&#39;E:\EDGARforIPInfo&#39;</span><span style="color:#00a8c8">;
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SAS" data-lang="SAS"><span style="color:#00a8c8">libname</span> home <span style="color:#d88200">&#39;E:\EDGARforIPinfo&#39;</span><span style="color:#00a8c8">;
 </span><span style="color:#00a8c8">
-</span><span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;E:\EDGARforIPInfo\asn.csv&#34;</span> <span style="color:#00a8c8">out</span>=home<span style="color:#ae81ff">.</span>ipinfo_asn dbms=csv <span style="color:#00a8c8">replace</span>; guessingrows=<span style="color:#ae81ff">10000</span><span style="color:#00a8c8">; run;</span>
-<span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;E:\EDGARforIPInfo\EntityBlogASNs.csv&#34;</span> <span style="color:#00a8c8">out</span>=home<span style="color:#ae81ff">.</span>EntityBlogASNs dbms=csv <span style="color:#00a8c8">replace</span>; guessingrows=max<span style="color:#00a8c8">; run;</span>
+</span><span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;E:\EDGARforIPinfo\asn.csv&#34;</span> <span style="color:#00a8c8">out</span>=home<span style="color:#ae81ff">.</span>IPinfo_asn dbms=csv <span style="color:#00a8c8">replace</span>; guessingrows=<span style="color:#ae81ff">10000</span><span style="color:#00a8c8">; run;</span>
+<span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;E:\EDGARforIPinfo\EntityBlogASNs.csv&#34;</span> <span style="color:#00a8c8">out</span>=home<span style="color:#ae81ff">.</span>EntityBlogASNs dbms=csv <span style="color:#00a8c8">replace</span>; guessingrows=max<span style="color:#00a8c8">; run;</span>
 <span style="color:#00a8c8">proc sql;</span>
 	<span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> home<span style="color:#ae81ff">.</span>entityips <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> a<span style="color:#ae81ff">.</span>asn, a<span style="color:#ae81ff">.</span>searchkey, a<span style="color:#ae81ff">.</span>category, b.*
-	<span style="color:#00a8c8">from</span> home<span style="color:#ae81ff">.</span>EntityBlogASNs a, home<span style="color:#ae81ff">.</span>ipinfo_asn b
+	<span style="color:#00a8c8">from</span> home<span style="color:#ae81ff">.</span>EntityBlogASNs a, home<span style="color:#ae81ff">.</span>IPinfo_asn b
 	<span style="color:#00a8c8">where</span> a<span style="color:#ae81ff">.</span>asn=b<span style="color:#ae81ff">.</span>asn<span style="color:#00a8c8">;
 </span><span style="color:#00a8c8">quit;</span>
-<span style="color:#00a8c8">proc export </span>data=home<span style="color:#ae81ff">.</span>entityips outfile=<span style="color:#d88200">&#34;E:\EDGARforIPInfo\EntityIPs.csv&#34;</span> dbms=csv <span style="color:#00a8c8">replace</span><span style="color:#00a8c8">; run;</span>
+<span style="color:#00a8c8">proc export </span>data=home<span style="color:#ae81ff">.</span>entityips outfile=<span style="color:#d88200">&#34;E:\EDGARforIPinfo\EntityIPs.csv&#34;</span> dbms=csv <span style="color:#00a8c8">replace</span><span style="color:#00a8c8">; run;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>The output of this step is the IP addresses of the stakeholders of interest.</p>
@@ -870,7 +870,7 @@
 <p>It&rsquo;s worth noted that it&rsquo;s possible that you do not have any valid ASNs returned for some of your Google searches. In such as case, please remember that Google search is just one among many ways to locate firms' IP address with their names. There are two alternative ways that I would recommend when the Google search does not work.</p>
 <ol>
 <li>
-<p>Perform a fuzzy match of your stakeholder&rsquo;s name with the corresponding Name entries in the ASN database provided by IPInfo.com.</p>
+<p>Perform a fuzzy match of your stakeholder&rsquo;s name with the corresponding Name entries in the ASN database provided by IPinfo.com.</p>
 </li>
 <li>
 <p>Conduct a Google search for the stakeholder&rsquo;s domain and then use websites such as <a href="https://www.whatismyip.com/dns-lookup/">https://www.whatismyip.com/dns-lookup/</a> or any other DNS lookup tool to retrieve the IP address associated with the domain. For example, with the domain of the Wall Street Journal <code>https://wsj.com</code>, the IP addresses are returned as in Figure 5.</p>
@@ -952,7 +952,7 @@
 </span><span style="color:#00a8c8">run;</span>
 
 <span style="color:#75715e">/* import the mapping file from Chen et al. (2020, JFE) */</span>
-<span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;E:\EDGARforIPInfo\edgardecodemap.csv&#34;</span> <span style="color:#00a8c8">out</span>=home<span style="color:#ae81ff">.</span>edgardecodemap dbms=csv <span style="color:#00a8c8">replace</span><span style="color:#00a8c8">; run;</span>
+<span style="color:#00a8c8">proc import </span>datafile=<span style="color:#d88200">&#34;E:\EDGARforIPinfo\edgardecodemap.csv&#34;</span> <span style="color:#00a8c8">out</span>=home<span style="color:#ae81ff">.</span>edgardecodemap dbms=csv <span style="color:#00a8c8">replace</span><span style="color:#00a8c8">; run;</span>
 
 <span style="color:#75715e">/* get precise ip addresses by applying the mapping file */</span>
 <span style="color:#00a8c8">proc sql;</span>
