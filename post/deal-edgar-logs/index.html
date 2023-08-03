@@ -285,6 +285,7 @@
       </ul>
     </li>
     <li><a href="#7-summary">7. Summary</a></li>
+    <li><a href="#easter-eggs">Easter Eggs</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -303,7 +304,7 @@
 <li>Pages visited: Details of the specific pages or documents accessed on the EDGAR website.</li>
 <li>User agent: Information about the web browser or software used to access EDGAR.</li>
 </ol>
-<p>To provide readers with a glimpse of the EDGAR log files, I present five lines extracted from the EDGAR log for Sep. 30, 2013. The variable definitions for these files are sourced from the SEC and can be accessed at <a href="https://www.sec.gov/files/variables-edgar-log-file-data-sets.pdf">this link</a>. Although the fourth octets of the IP addresses are redacted, their precise retrieval is feasible using the map provided by Chen et al. (2020, JFE). I will discuss this issue further in the data processing section.</p>
+<p>To provide readers with a glimpse of the EDGAR log files, I present five lines extracted from the EDGAR log for Sep. 30, 2013. The variable definitions for these files are sourced from the SEC and can be accessed at <a href="https://www.sec.gov/files/variables-edgar-log-file-data-sets.pdf">this link</a>. Although the fourth octets of the IP addresses are redacted, their precise retrieval is feasible using the map provided by Chen et al. (2020, JFE). I will discuss this issue further in the <a href="https://mengjiexu.com/post/deal-edgar-logs/#5-locate-edgar-downloads-from-specified-stakeholders">Section 5</a>.</p>
 <table>
 <thead>
 <tr>
@@ -933,6 +934,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="29"><a style="outline: none; text-decoration:none; color:inherit" href="#29">29</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="30"><a style="outline: none; text-decoration:none; color:inherit" href="#30">30</a>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="31"><a style="outline: none; text-decoration:none; color:inherit" href="#31">31</a>
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="32"><a style="outline: none; text-decoration:none; color:inherit" href="#32">32</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sas" data-lang="sas"><span style="color:#75715e">/* import the EDGAR log file */</span>
@@ -964,7 +966,8 @@
 <span style="color:#00a8c8">proc sql;</span>
 	<span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> home<span style="color:#ae81ff">.</span>sampleentitydownloads <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> a.*, b<span style="color:#ae81ff">.</span>name, b<span style="color:#ae81ff">.</span>asn, b<span style="color:#ae81ff">.</span>domain
 	<span style="color:#00a8c8">from</span> home<span style="color:#ae81ff">.</span>logsample a, home<span style="color:#ae81ff">.</span>entityips b
-	<span style="color:#00a8c8">where</span> b<span style="color:#ae81ff">.</span>start_ip &lt;= a<span style="color:#ae81ff">.</span>exactip &lt;= b<span style="color:#ae81ff">.</span>end_ip<span style="color:#00a8c8">;
+	<span style="color:#00a8c8">where</span> b<span style="color:#ae81ff">.</span>start_ip &lt;= a<span style="color:#ae81ff">.</span>exactip &lt;= b<span style="color:#ae81ff">.</span>end_ip
+	<span style="color:#00a8c8">and</span> category ne <span style="color:#d88200">&#39;TOP Internet Service Providers (Retailers)&#39;</span><span style="color:#00a8c8">;
 </span><span style="color:#00a8c8">quit;</span>
 </code></pre></td></tr></table>
 </div>
@@ -1082,15 +1085,19 @@
 <h2 id="6-locate-the-edgar-downloads-from-specified-stakeholder-group">6. Locate the EDGAR Downloads From Specified Stakeholder Group</h2>
 <p>At this stage, we have successfully extracted all the EDGAR downloads from a given stakeholder list for a specific day. By expanding the stakeholder list properly, we can capture the EDGAR downloads from specified stakeholder groups.</p>
 <h3 id="locate-edgar-downloads-from-retail-investors">Locate EDGAR Downloads from Retail Investors</h3>
-<p>As an illustrative example, I adopt the methodology employed by Drake et al. (2020, TAR) to identify EDGAR downloads from retail investors. In particular, the retail investor group is defined as EDGAR users accessing the system via one of the top ten U.S. or top ten worldwide internet service providers (ISP), such as Comcast or Time Warner. The following table provides the list of top ten U.S. internet service providers (ISP) provided by Drake et al. (2020, TAR) in Appendix A.</p>
+<p>I adopt the methodology employed by Drake et al. (2020, TAR) to identify EDGAR downloads from retail investors. In particular, the retail investor group is defined as EDGAR users accessing the system via one of the top ten U.S. or top ten worldwide internet service providers (ISP), such as Comcast or Time Warner. The following table provides the list of top ten U.S. internet service providers (ISP) provided by Drake et al. (2020, TAR) in Appendix A.</p>
 <table>
 <thead>
 <tr>
-<th>Time Warner Cable  Internet LLC</th>
-<th>Top Internet Service Providers (Retailers)</th>
+<th>Name</th>
+<th>Category</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Time Warner Cable  Internet LLC</td>
+<td>Top Internet Service Providers (Retailers)</td>
+</tr>
 <tr>
 <td>Verizon Online LLC</td>
 <td>Top Internet Service Providers (Retailers)</td>
@@ -1129,7 +1136,7 @@
 </tr>
 </tbody>
 </table>
-<p>Using the provided list of top 10 internet service providers worldwide, you can replicate the procedures outlined in Section 5 to identify all the EDGAR downloads from retail investors within a given log file. There are two tips to improve the program efficiency here.</p>
+<p>Using the provided list of top 10 internet service providers worldwide, you can replicate the procedures outlined in <a href="https://mengjiexu.com/post/deal-edgar-logs/#5-locate-edgar-downloads-from-specified-stakeholders">Section 5</a> to identify all the EDGAR downloads from retail investors within a given log file. There are two tips to improve the program efficiency here.</p>
 <ol>
 <li>
 <p>As which internet service providers (ISPs) the retailers are using is not of primary importance in this context, you could avoid distinguishing among different ISPs.</p>
@@ -1169,13 +1176,23 @@
 </li>
 </ol>
 <h3 id="locate-edgar-downloads-from-institutional-investors">Locate EDGAR Downloads from Institutional Investors</h3>
-<p>Considering the substantial heterogeneity within the institutional investors, the specification of the list of institutional investors is contingent upon the specific requirements and objectives of researchers or practitioners. This category encompasses a diverse range of entities, such as investment banks, hedge funds, commercial banks, insurance companies, among others. Using the methods elucidated in this blog, researchers and practitioners have the flexibility to compile a separate list of the most prominent entities from each subgroup and then combine them to form the whole institutional group.</p>
+<p>The specification of the list of institutional investors is contingent upon the specific requirements and objectives of researchers or practitioners as this category encompasses a diverse range of entities, such as investment banks, hedge funds, commercial banks, insurance companies, among others. Using the methods elucidated in this blog, researchers and practitioners have the flexibility to compile a separate list of the most prominent entities from each subgroup and then combine them to form the whole institutional group.</p>
 <p>Suppose you are interested in studying EDGAR downloads of hedge funds, as Crane et al. (2023, MS) did.  There are multiple avenues to obtain a list of institutional investors. For instance, a quick online search using keywords like &lsquo;Top 100 hedge funds in US&rsquo; can lead you to resources such as the <a href="https://www.swfinstitute.org/fund-manager-rankings/hedge-fund-manager">List of Top 100 Hedge Fund Managers by Managed AUM</a> provided by the Sovereign Wealth Fund Institute. Alternatively, you could access the archival dataset from <a href="https://wrds-www.wharton.upenn.edu/pages/get-data/thomson-reuters/institutional-13f-holdings-s34/">WRDS Thomson Reuters Institutional (13f) Holdings</a> or <a href="https://corporateownershipdata.com/">Corporate Ownership of S&amp;P 500 firms</a> for a more comprehensive list of institutional investors, which includes hedge funds.</p>
-<p>Regardless of the method chosen, you always have the discretion to compile a list of entities belonging to the institutional investor group,  and then utilize the techniques introduced in Section 5 to locate the EDGAR downloads from them.</p>
+<p>Regardless of the sources chosen, you always have the discretion to compile a list of entities belonging to the institutional investor group,  and then utilize the techniques introduced in <a href="https://mengjiexu.com/post/deal-edgar-logs/#5-locate-edgar-downloads-from-specified-stakeholders">Section 5</a> to locate the EDGAR downloads from them.</p>
 <h2 id="7-summary">7. Summary</h2>
 <p>In this blog, I have explored the potential and methodologies for determining the stakeholder group of EDGAR users. However, it is essential to acknowledge that the SEC ceased updating EDGAR log files after June 30, 2017 for several years. While there were recent updates to the log files between May 19, 2020, and Feb 13, 2022, these new log files no longer include IP addresses, which deters identifying the identity of EDGAR users.</p>
 <p>Technically, one can make a Freedom of Information Act (FOIA) request to the SEC for unredacted EDGAR logs, as permitted by the Freedom of Information Act enacted in 1967. However, it is important to note that even before 2017, the SEC disclosed the EDGAR log files with a considerable latency of about one year. This delay could render much of the information embedded in EDGAR downloads stale, limiting their practical utility for trading purposes.</p>
 <p>Despite these complexities, it is undeniable that EDGAR logs still offer a valuable playing field for practitioners to gain retrospective insights. And I believe they will continue to provide a rich source of information for researchers to study market dynamics.</p>
+<h2 id="easter-eggs">Easter Eggs</h2>
+<p>Thanks for reading all over through! As a big fan of Christopher Nolan, I just watched the Oppenheimer in the movie theater. The movie was magnificent and made feel my efforts in sparing out 3 hours to watch it during my super busy job market preparation season was not wasted. But  I have to say it might be hard to delve in if you do not have a <strong>decent understanding of the context before watching the movie</strong> - I did not see significant efforts from Nolan in this regard and saw some people in the theater left in the middle.</p>
+<p>Combining my personal homework and  movie-watching experience, I will share f<strong>ive things you may want to know before watching Oppenheimer</strong>. Most of them are from <a href="https://en.wikipedia.org/wiki/J._Robert_Oppenheimer">the wiki profile of J. Robert Oppenheimer</a>, and I highlight them as they are clues for following the story line of the movie.</p>
+<ol>
+<li>The overarching context of this movie: <a href="https://en.wikipedia.org/wiki/J._Robert_Oppenheimer">J. Robert Oppenheimer</a> directed the <a href="https://en.wikipedia.org/wiki/Los_Alamos_Laboratory">Los Alamos Laboratory</a> during World War II, designing nuclear bombs. Given the Nazis has made progress in developing this weapon (see the <a href="https://en.wikipedia.org/wiki/Einstein%E2%80%93Szilard_letter">Einstein–Szilard letter</a> in 1939), the <strong>race against the Nazis</strong> had a crucial impact on the future of human lives.</li>
+<li>In 1924, while studying empirical physics in Cambridge, Oppenheimer expressed unhappiness. He even left a <strong>poisoned apple</strong> on his tutor Blackett&rsquo;s desk, which went uneaten. In 1926, he moved to the <a href="https://en.wikipedia.org/wiki/University_of_G%C3%B6ttingen">University of Göttingen</a> to study under <a href="https://en.wikipedia.org/wiki/Max_Born">Max Born</a>, where he began his influential career in theoretical physics at this leading center for this field then. In the autumn of 1928, Oppenheimer visited <a href="https://en.wikipedia.org/wiki/Paul_Ehrenfest">Paul Ehrenfest</a>&rsquo;s institute at the <a href="https://en.wikipedia.org/wiki/University_of_Leiden">University of Leiden</a>, the Netherlands, where he impressed by <strong>giving lectures in Dutch</strong>, despite having little experience with the language.</li>
+<li>On returning to the United States, Oppenheimer accepted an associate professorship from the <a href="https://en.wikipedia.org/wiki/University_of_California,_Berkeley">University of California, Berkeley</a>. During his lecturing time there, Oppenheimer had associations with individuals who were members of or sympathetic to the Communist Party and was part of intellectual circles at Berkeley that included <strong>left-leaning</strong> academics, writers, and activists. His lover <a href="https://en.wikipedia.org/wiki/Jean_Tatlock">Jean Tatlock</a> (started from 1936 and ended in 1939), wife <a href="https://en.wikipedia.org/wiki/Katherine_Oppenheimer">Katherine (&ldquo;Kitty&rdquo;) Puening</a> (since 1940), brother Frank, and Frank&rsquo;s wife Jackie were all (once) active in the Communist Party in the 1930s or 1940s. Moreover, one of his close friends during the weapon development was accused to leak the confidential information to the Soviet Union. These led to <strong>suspicions about his loyalty</strong> to the United States during the McCarthy era in 1950s and the revocation of his <a href="https://en.wikipedia.org/wiki/Security_clearance#United_States">security clearance</a> following a <a href="https://en.wikipedia.org/wiki/Oppenheimer_security_hearing">1954 security hearing</a>.</li>
+<li>Oppenheimer <strong>struggled a lot from the moral question of weapons of mass destruction</strong>.. He later recalled that, while witnessing the explosion, he thought of a verse from the <a href="https://en.wikipedia.org/wiki/Hindu">Hindu</a> holy book, the <em><a href="https://en.wikipedia.org/wiki/Bhagavad_Gita">Bhagavad Gita</a></em>: &ldquo;<em>If the radiance of a thousand suns were to burst at once into the sky, that would be like the splendor of the mighty one &hellip;</em>&rdquo; and &ldquo;<em>Now I am become Death, the destroyer of worlds.' I suppose we all thought that, one way or another.</em>&rdquo; In October 1945, Oppenheimer met then US president <a href="https://en.wikipedia.org/wiki/Harry_S._Truman">Harry S. Truman</a> and said he felt he had &ldquo;<em>blood on my hands</em>&rdquo;. These struggles also played a role in his strong opposition to the development of the hydrogen bomb, which hurt him during the McCarthy era.</li>
+<li>In 1947, Oppenheimer accepted an offer from <a href="https://en.wikipedia.org/wiki/Lewis_Strauss">Lewis Strauss</a> to serve as a member of the Board of Consultants to Atomic Energy Commission. Lewis Strauss later became Oppenheimer&rsquo;s <strong>biggest enemy</strong> and initiated the revocation of the latter&rsquo;s <a href="https://en.wikipedia.org/wiki/Security_clearance#United_States">security clearance</a> in 1954. The anger between Lewis Strauss and Oppenheimer can be traced back to a public hearing in 1947, where Strauss had been questioned over security concerns regarding the exportation of radioactive isotopes, which he’d advocated for. Oppenheimer then not only disagreed with Strauss’ position but <strong>outright mocked it in front of everyone in attendance</strong>, which proved to be an important, bitter seed in his efforts to dismantle his career and reputation. Moreover, racked by guilt in the wake of Hiroshima and Nagasaki, Oppenheimer was <strong>strongly against the development of more destructive hydrogen bombs in post-war</strong>, whereas Strauss was on the opposite side. The latter suggested that if they do not develop hydrogen bombs first, their enemies would, and in turn they have to develop them anyway.</li>
+</ol>
 <h2 id="references">References</h2>
 <ol>
 <li>Drake, Michael S., Bret A. Johnson, Darren T. Roulstone, and Jacob R. Thornock. &ldquo;Is there information content in information acquisition?.&rdquo; <em>The Accounting Review</em> 95, no. 2 (2020): 113-139.</li>
