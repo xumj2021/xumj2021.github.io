@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Democratize Data For Insights</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Democratize Data For Insights</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Glassdoor</title>
+      <link>http://localhost:1313/tags/glassdoor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/glassdoor/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Labor Market</title>
+      <link>http://localhost:1313/tags/labor-market/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/labor-market/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Workplace</title>
+      <link>http://localhost:1313/tags/workplace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/workplace/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>EDGAR Logs</title>
+      <link>http://localhost:1313/tags/edgar-logs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/edgar-logs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Information Acquisition</title>
+      <link>http://localhost:1313/tags/information-acquisition/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/information-acquisition/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reddit</title>
+      <link>http://localhost:1313/tags/reddit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/reddit/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Retail Investors</title>
+      <link>http://localhost:1313/tags/retail-investors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/retail-investors/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Wallstreetbets</title>
+      <link>http://localhost:1313/tags/wallstreetbets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/wallstreetbets/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Information</title>
+      <link>http://localhost:1313/tags/information/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/information/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Stock Volatility</title>
+      <link>http://localhost:1313/tags/stock-volatility/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/stock-volatility/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Time Series</title>
+      <link>http://localhost:1313/tags/time-series/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/time-series/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>VAR</title>
+      <link>http://localhost:1313/tags/var/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/var/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Impulse Response</title>
+      <link>http://localhost:1313/tags/impulse-response/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/impulse-response/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Market Mirco-Structure</title>
+      <link>http://localhost:1313/tags/market-mirco-structure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/market-mirco-structure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Price Informativeness</title>
+      <link>http://localhost:1313/tags/price-informativeness/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/price-informativeness/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bloomberg</title>
+      <link>http://localhost:1313/tags/bloomberg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/bloomberg/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google Search Volume</title>
+      <link>http://localhost:1313/tags/google-search-volume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/google-search-volume/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Market Transparency</title>
+      <link>http://localhost:1313/tags/market-transparency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/market-transparency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Short Selling</title>
+      <link>http://localhost:1313/tags/short-selling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/short-selling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Google Search</title>
+      <link>http://localhost:1313/tags/google-search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/google-search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unformatted Data</title>
+      <link>http://localhost:1313/tags/unformatted-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/unformatted-data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>High Frequency</title>
+      <link>http://localhost:1313/tags/high-frequency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/high-frequency/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SAS</title>
+      <link>http://localhost:1313/tags/sas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/sas/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TAQ</title>
+      <link>http://localhost:1313/tags/taq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/taq/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WRDS</title>
+      <link>http://localhost:1313/tags/wrds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/wrds/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Social Media</title>
+      <link>http://localhost:1313/tags/social-media/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/social-media/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Twitter API</title>
+      <link>http://localhost:1313/tags/twitter-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/twitter-api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Economy</title>
+      <link>http://localhost:1313/tags/economy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/economy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Literature</title>
+      <link>http://localhost:1313/tags/literature/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/literature/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SSH</title>
+      <link>http://localhost:1313/tags/ssh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/ssh/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>API</title>
+      <link>http://localhost:1313/tags/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/api/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anecdotes</title>
+      <link>http://localhost:1313/tags/anecdotes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/anecdotes/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Financial News</title>
+      <link>http://localhost:1313/tags/financial-news/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/financial-news/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WSJ</title>
+      <link>http://localhost:1313/tags/wsj/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/wsj/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Geo-Economics</title>
+      <link>http://localhost:1313/tags/geo-economics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/geo-economics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NOAA</title>
+      <link>http://localhost:1313/tags/noaa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/noaa/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
