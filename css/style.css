@@ -99,6 +99,7 @@ body {
 
 p {
   margin: 1.5em 0;
+  text-align: justify;
 }
 
 a {
@@ -106,6 +107,7 @@ a {
   color: #222;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  text-align: justify;
 }
 a:link {
   color: #222;

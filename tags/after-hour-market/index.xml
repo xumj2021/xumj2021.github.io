@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>After-Hour Market on Democratize Data For Insights</title>
-    <link>http://localhost:1313/tags/after-hour-market/</link>
+    <link>https://xumj2021.github.io/tags/after-hour-market/</link>
     <description>Recent content in After-Hour Market on Democratize Data For Insights</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/after-hour-market/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://xumj2021.github.io/tags/after-hour-market/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Overnight Trading and Information Processing: When Earnings Announcements Go After 4 PM</title>
-      <link>http://localhost:1313/post/after-hour-trading-and-information-processing/</link>
+      <title>When Earnings Announcements Go After 4 PM</title>
+      <link>https://xumj2021.github.io/post/after-hour-trading-and-information-processing/</link>
       <pubDate>Wed, 26 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/post/after-hour-trading-and-information-processing/</guid>
-      <description>Introduction Decades ago, less than 15% of earnings announcements were released after 4 PM. In these limited after-hour earnings releases, a significant portion was with bad news. Presumably, managers with bad news were taking advantage of the fact that far fewer traders are active in after-market hours compared to during trading hours, or that they are distracted by other issues (Patell and Wolfson, 1982 TAR).&#xA;Things have changed in recent years.</description>
+      <guid>https://xumj2021.github.io/post/after-hour-trading-and-information-processing/</guid>
+      <description>Introduction Decades ago, less than 15% of earnings announcements were released after 4 PM. In these limited after-hour earnings releases, a significant portion was with bad news. Presumably, managers with bad news were taking advantage of the fact that far fewer traders are active in after-market hours compared to during trading hours, or that they are distracted by other issues (Patell and Wolfson, 1982 TAR). Things have changed in recent years.</description>
     </item>
   </channel>
 </rss>
