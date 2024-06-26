@@ -105,7 +105,8 @@ a {
   text-decoration: none;
   color: #222;
   -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease
+  transition: all 0.2s ease;
+  text-align: justify
 }
 a:link {
   color: #222;
