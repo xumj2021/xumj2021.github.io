@@ -127,7 +127,8 @@ a img:focus {
 }
 
 article {
-	overflow: hidden
+	overflow: hidden;
+	text-align: justify
 }
 
 blockquote {
