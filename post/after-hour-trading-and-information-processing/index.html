@@ -247,23 +247,59 @@
 
                 
                 <h2 id="introduction">Introduction</h2>
-<p align="justify">Decades ago, less than 15% of earnings announcements were released after 4 PM. In these limited after-hour earnings releases, a significant portion was with bad news. Presumably, managers with bad news were taking advantage of the fact that far fewer traders are active in after-market hours compared to during trading hours, or that they are distracted by other issues (Patell and Wolfson, 1982 TAR). </p>
-<p align="justify">Things have changed in recent years. With the technology advancement since 2000s, speed traders are able to front-run other investors upon the earnings releases during the trading hours. This not only caused extraordinary volatility in individual stocks (e.g., Michael, 2014) but also discouraged non-speed traders from acquiring or processing the released earnings (Lee and Watts, 2021 TAR), dampening the long-term market efficiency. 
-<p align="justify">Given this, both exchanges and regulators urge firms to release material earnings news in after-hours, giving investors more time to acquire and integrate the information into their valuation assessments. For example, the <a href="https://listingcenter.nasdaq.com/assets/rulebook/nasdaq/rules/Issuer_Alert_2015-001.pdf">Nasdaq and NYSE issued guidance</a> requiring issuers to release material news after 4:05 PM in November 2015. Later, the <a href="https://www.sec.gov/files/rules/sro/nyse/2017/34-82213.pdf">SEC accepted the NYSE’s proposal</a> to mandate that issuers release material news after 4:05 PM in December 2017. 
-<p align="justify">The following two figures are from Tucker et al. (2024, JAPP) and contrast the hourly distribution of trading volume and earnings announcement frequencies for fiscal years 2006–2020. The figures suggest that while the trading volume in after-market hours remains relatively low compared to trading hours, after-hours earnings announcements have become dominant regardless of whether the news is good or bad. 
-<center>
-<p float="left">
-  <img src="https://raw.githubusercontent.com/xumj2021/Imgs/main/blogvol.jpg" width="380" />
-  <img src="https://raw.githubusercontent.com/xumj2021/Imgs/main/blogfilev3.jpg" width="370" /> 
-</p>
-    <div>
-        Figure 1: Hour Bars for Trading Volume and Eearnings Announcement Frequencies
-    </div>
-</center>
-<p align="justify">With the prevalence of after-hours earnings announcements, a natural question is: how do market participants integrate the newly released earnings and incorporate them into stock prices overnight?  Unlike the trading hours, the after-hours market is characterized by an illiquid trading environment, high trading costs, a high degree of information asymmetry, low trading volume, and most importantly, relatively 'inactive' market participants (Barclay and Hendershott, 2004 JF). These features make it challenging to trace information incorporation and price discovery in the after-hours market, but also highlight its importance at the same time.
-<p align="justify">In this blog post, I will introduce how to leverage the TAQ and EDGAR log files to generate insights into market participants' information processing and trading activities in the after-hours market. In addition, following the recent discussions on retail investors' activities in the options and bond markets (Bryzgalova et al., 2023 JF; deHaan et al., 2023 JAE), both commonly perceived as being dominated by institutional investors like the after-hours market, I will also show how to gain some general ideas about retail investors' role in the after-hours market based on the publicly accessible Robinhood and Reddit archives.
-<p align="justify">Note that although this blog post uses the more prevalent after-hours earnings announcements in the recent years as the motivating example, the techniques introduced should also suffice for the exploration of other material news likely released in the after-hours, such as conference calls, analysts' recommendations, SEC disclosures, and so on.
-<h2 id="main-references">Main References</h2>
+<p>Decades ago, less than 15% of earnings announcements were released after 4 p.m. In these limited after-hour earnings releases, a significant portion was with bad news. Presumably, managers with bad news were taking advantage of the fact that far fewer traders are active in after-market hours (4 p.m. to 9:30 a.m.) compared to during trading hours, or that they are distracted by other issues (Patell and Wolfson, 1982 TAR).</p>
+<p>Things have changed in recent years. With the technology advancement since 2000s, speed traders are able to front-run other investors upon the earnings releases during the trading hours. This not only caused extraordinary volatility in individual stocks (e.g., Michael, 2014) but also discouraged non-speed traders from acquiring or processing the released earnings (Lee and Watts, 2021 TAR), dampening the long-term market efficiency.</p>
+<p>Given this, both exchanges and regulators urge firms to release material earnings news in after-hours, giving investors more time to acquire and integrate the information into their valuation assessments. For example, the <a href="https://listingcenter.nasdaq.com/assets/rulebook/nasdaq/rules/Issuer_Alert_2015-001.pdf">Nasdaq and NYSE issued guidance</a> requiring issuers to release material news after 4:05 PM in November 2015. Later, the <a href="https://www.sec.gov/files/rules/sro/nyse/2017/34-82213.pdf">SEC accepted the NYSE’s proposal</a> to mandate that issuers release material news after 4:05 PM in December 2017.</p>
+<p>The following two figures are from Tucker et al. (2024, JAPP) and contrast the hourly distribution of trading volume and earnings announcement frequencies for fiscal years 2006–2020. The figures suggest that while the trading volume in after-market hours remains relatively low compared to trading hours, after-hours earnings announcements have become dominant regardless of whether the news is good or bad.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Trading Volume</th>
+<th style="text-align:center">#Earnings Release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">
+  <img src="https://raw.githubusercontent.com/xumj2021/Imgs/main/blogvol.jpg" alt="">
+
+</td>
+<td style="text-align:center">
+  <img src="https://raw.githubusercontent.com/xumj2021/Imgs/main/blogfilev3.jpg" alt="">
+
+</td>
+</tr>
+</tbody>
+</table>
+<p>With the prevalence of after-hours earnings announcements, a natural question is: how do market participants integrate the newly released earnings and incorporate them into stock prices overnight?  Unlike the market during trading hours, the after-hours market is characterized by an illiquid trading environment, high trading costs, a high degree of information asymmetry, low trading volume, and most importantly, relatively &lsquo;inactive&rsquo; market participants (Barclay and Hendershott, 2004 JF). These features make it challenging to trace information incorporation and price discovery in the after-hours market, but also highlight its importance at the same time.</p>
+<p>In this blog post, I will introduce how to leverage the TAQ and EDGAR log files to generate insights into market participants&rsquo; information processing and trading activities in the after-hours market. In addition, following the recent discussions on retail investors&rsquo; activities in the options and bond markets (Bryzgalova et al., 2023 JF; deHaan et al., 2023 JAE), both commonly perceived as being dominated by institutional investors like the after-hours market, I will also show how to gain some general ideas about retail investors&rsquo; role in the after-hours market based on the publicly accessible Robinhood and Reddit archives.</p>
+<h2 id="after-hour-trading">After Hour Trading</h2>
+<p>While conducting after-hours trading analysis, insights from two papers are deemed important. Gregoire and Martineau (2022, JAR) provide practical recommendations for quantifying after-hours price discovery, and Hu and Stephan (2022, TAR) highlight the necessity of distinguishing the highly volatile 4:00-to-4:01 p.m. period from the period afterwards when analyzing after-hours trading.</p>
+<p>The practical recommendations from Gregoire and Martineau (2022, JAR) are as follows. In the after-hour market,</p>
+<ul>
+<li>Use ask price adjustments to trace price discovery following positive news (earnings surprises), and bid price adjustments to trace price discovery following negative news (earnings surprises).</li>
+<li>If the direction of news is not clear, use changes in mid-quotes instead of trade prices to trace the price discovery.</li>
+</ul>
+<p>According to Gregoire and Martineau (2022, JAR), the rationales would be:</p>
+<ul>
+<li>
+<p>While trade in after-hours market is indeed sparse, the placed orders with information content are not as sparse. It&rsquo;s just that many of these orders are not successfully executed.</p>
+<ul>
+<li>Therefore, using trade prices to compute returns would omit a considerable part of meaningful price discovery.</li>
+</ul>
+</li>
+<li>
+<p>In addition, there is an asymmetry in the speed of adjustment: following a positive surprise, the best ask price is adjusted much more quickly than the best bid price, and vice versa for negative surprises.</p>
+<ul>
+<li>That said, conditional on the direction of news, using trade prices (or even mid-quotes) would underestimate both the speed and the magnitude of the price discovery.</li>
+</ul>
+</li>
+</ul>
+<h2 id="after-hour-information-acquisition">After Hour Information Acquisition</h2>
+<h2 id="retail-investors-in-after-hours">Retail Investors in After Hours</h2>
+<h2 id="summary">Summary</h2>
+<p>Although this blog post uses the more prevalent after-hours earnings announcements in the recent years as the motivating example, the techniques introduced should also suffice for the exploration of other material news likely released in the after-hours, such as conference calls, analysts&rsquo; recommendations, SEC disclosures, and so on.</p>
+<h2 id="reference">Reference</h2>
 <ol>
 <li>Patell, James M., and Mark A. Wolfson. &ldquo;Good news, bad news, and the intraday timing of corporate disclosures.&rdquo; <em>The Accounting review</em> (1982): 509-527.</li>
 <li>Tucker, Jennifer Wu, and Angie Wang. &ldquo;Intraday disclosure timing deviations and their implications for financial reporting.&rdquo; <em>Journal of Accounting and Public Policy</em> 44 (2024): 107177.</li>
@@ -271,6 +307,8 @@
 <li>Barclay, Michael J., and Terrence Hendershott. &ldquo;Liquidity externalities and adverse selection: Evidence from trading after hours.&rdquo; <em>The Journal of Finance</em> 59, no. 2 (2004): 681-710.</li>
 <li>Bryzgalova, Svetlana, Anna Pavlova, and Taisiya Sikorskaya. &ldquo;Retail trading in options and the rise of the big three wholesalers.&rdquo; <em>The Journal of Finance</em> 78, no. 6 (2023): 3465-3514.</li>
 <li>deHaan, Ed, Jiacui Li, and Edward M. Watts. &ldquo;Retail bond investors and credit ratings.&rdquo; <em>Journal of Accounting and Economics</em> 76, no. 1 (2023): 101587.</li>
+<li>Gregoire, Vincent, and Charles Martineau. &ldquo;How is earnings news transmitted to stock prices?.&rdquo; <em>Journal of Accounting Research</em> 60, no. 1 (2022): 261-297.</li>
+<li>Hu, Danqi, and Andrew Stephan. &ldquo;News at the Bell and a Level Playing Field.&rdquo; <em>The Accounting Review</em> 97, no. 6 (2022): 357-384.</li>
 </ol>
 
 
