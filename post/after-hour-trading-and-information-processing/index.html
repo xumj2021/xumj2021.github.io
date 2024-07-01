@@ -41,9 +41,9 @@
     
 
     
-    <meta name="description" content="Analyse price discovery in after-hour market">
-    <meta property="og:description" content="Analyse price discovery in after-hour market" />
-    <meta property="twitter:description" content="Analyse price discovery in after-hour market" />
+    <meta name="description" content="Analyse minute-level price discovery in after-hour market">
+    <meta property="og:description" content="Analyse minute-level price discovery in after-hour market" />
+    <meta property="twitter:description" content="Analyse minute-level price discovery in after-hour market" />
     
 
     
@@ -198,12 +198,8 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/information-acquisition" title="Information Acquisition">
-                            Information Acquisition
-                        </a>
-                        
-                        <a class="tag" href="/tags/price-formation" title="Price Formation">
-                            Price Formation
+                        <a class="tag" href="/tags/price-discovery" title="Price Discovery">
+                            Price Discovery
                         </a>
                         
                         <a class="tag" href="/tags/after-hour-market" title="After-hour Market">
@@ -220,7 +216,7 @@
                                 Mengjie Xu
                              
                             on 
-                            Wednesday, June 26, 2024
+                            Monday, July 1, 2024
                             
                             
                             
@@ -249,7 +245,7 @@
                 <h2 id="introduction">Introduction</h2>
 <p>Unlike the market during trading hours, the after-hours market is characterized by an illiquid trading environment, high trading costs, a high degree of information asymmetry, low trading volume, and most importantly, relatively &lsquo;inactive&rsquo; market participants (Barclay and Hendershott, 2004 JF), all making it challenging to trace information incorporation and price discovery in the after-hours market.</p>
 <p>On the other hand, to avoid the excess volatility during the trading hours and allow more time for investors to acquire and integrate the information into their valuation assessments, firms and regulators have become more prone to release material news outside trading hours in recent years. Take the firms&rsquo; earnings announcements as an example. Figure 1 from Chan and Marsh (2024, WP) plots the intraday distribution of earnings announcement frequencies during October 2004 and December 2020. In contrast to the situation decades ago, when over 80% of earnings announcements were released during trading hours (Patell and Wolfson, 1982 TAR), after-hour earnings announcements have become dominant nowadays.</p>
-<p>In this blog post, I will introduce how to trace the minute-level price discovery in the after-hours market, and therefore generate insights into how the material news released after 4:00 p.m. is incorporated into stock prices nowadays.</p>
+<p>In this blog post, I will introduce how to trace minute-level price discovery in the after-hours market, thereby generating insights into how material news released after 4:00 p.m. is incorporated into stock prices.</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -1366,8 +1362,8 @@
 </div>
 </div><h3 id="step-5-draw-stylized-patterns">Step 5: Draw Stylized Patterns</h3>
 <p>Here, readers can already fit the data outputs to their research agenda already. To provide an example, I draw the bid price changes for negative earnings surprises and the ask price changes for positive earnings surprises, respectively, similar to what Gregoire and Martineau (2022, JAR) did.</p>
-<p>In particular, I group my firm-date observations into three ranked groups based on the earnings surprises, <code>Surprise</code>. The dummy variable <code>qsurprise</code> equals 1 for firms with the lowest <code>Surprise</code> and therefore the most negative news, and 3 for firms with the highest <code>Surprise</code> and therefore the most positive news. Then I plotted in Figure 3 the minute-level quote price changes for positive (<code>qsurprise</code>=3) and negative news  (<code>qsurprise</code>=1) respectively.</p>
-<p>Patterns in Figure 3 kind of validate my methods in this post.</p>
+<p>In particular, I group my firm-date observations into three ranked groups based on the earnings surprises, <code>Surprise</code>. The dummy variable <code>qsurprise</code> equals 1 for firms with the lowest <code>Surprise</code> and therefore the most negative news, and 3 for firms with the highest <code>Surprise</code> and therefore the most positive news. Then I plotted in Figure 4 the minute-level quote price changes for positive (<code>qsurprise</code>=3) and negative news  (<code>qsurprise</code>=1) respectively.</p>
+<p>Patterns in Figure 4 kind of validate my methods in this post.</p>
 <ul>
 <li>Consistent with Gregoire and Martineau (2022, JAR), they show that it would be better to use bid price changes for tracking price discovery after bad news, and ask price changes for positive news. Using mid-quotes underestimates both the speed and magnitude of price discovery regardless of the news direction, not to mention when using trade prices.</li>
 <li>Consistent with Hu and Stephan (2022, TAR) , they show that there is a considerable price jump in the first minute following 4:00 p.m. More importantly, these price jumps seems to be highly informed, as they are consistent with the news directions.</li>
