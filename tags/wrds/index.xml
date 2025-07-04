@@ -13,14 +13,14 @@
       <link>https://xumj2021.github.io/post/deal-with-high-frequency-data/</link>
       <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
       <guid>https://xumj2021.github.io/post/deal-with-high-frequency-data/</guid>
-      <description>I. Motivation High-frequency traders (HFTs) are market participants that are characterized by the high speed (typically in milliseconds level) with which they react to incoming news, the low inventory on their books, and the large number of trades they execute (SEC, 2010). According to Breckenfelder (2019, WP), The high-frequency trading industry grew rapidly since its inception in the mid-2000s and has represented about 50% of trading in US equity markets by 2017 (down from a 2009 peak, when it topped 60%).</description>
+      <description>&lt;h2 id=&#34;i-motivation&#34;&gt;I. Motivation&lt;/h2&gt;&#xA;&lt;p&gt;High-frequency traders (HFTs) are market participants that are characterized by the high speed (typically in milliseconds level) with which they react to incoming news, the low inventory on their books, and the large number of trades they execute (SEC, 2010). According to Breckenfelder (2019, WP), The high-frequency trading industry grew rapidly since its inception in the mid-2000s and has represented about 50% of trading in US equity markets by 2017 (down from a 2009 peak, when it topped 60%).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Exploit WRDS Cloud via Python</title>
       <link>https://xumj2021.github.io/post/connect-to-wrds-via-python/</link>
       <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
       <guid>https://xumj2021.github.io/post/connect-to-wrds-via-python/</guid>
-      <description>Motivation The WRDS-SAS Studio seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the Reference part), this blog will introduce how to exploit WRDS cloud via Python.&#xA;The biggest advantage of WRDS Cloud is that you don&amp;rsquo;t have to download everything to your computer but just deal with the massive data using the computing source of WRDS Cloud.</description>
+      <description>&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;&#xA;&lt;p&gt;The WRDS-SAS Studio seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the &lt;strong&gt;Reference&lt;/strong&gt; part), this blog will introduce how to exploit WRDS cloud via Python.&lt;/p&gt;&#xA;&lt;p&gt;The biggest advantage of WRDS Cloud is that you don&amp;rsquo;t have to download everything to your computer but just deal with the massive data using the computing source of WRDS Cloud. Following this blog, one can quickly establish a python-wrds cloud workflow without checking various manuals.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

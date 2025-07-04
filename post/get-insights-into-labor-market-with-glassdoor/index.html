@@ -41,9 +41,9 @@
     
 
     
-    <meta name="description" content="Workflows for Parsing Comprehensive Glassdoor Dataset">
-    <meta property="og:description" content="Workflows for Parsing Comprehensive Glassdoor Dataset" />
-    <meta property="twitter:description" content="Workflows for Parsing Comprehensive Glassdoor Dataset" />
+    <meta name="description" content="Workflows for parsing comprehensive Glassdoor dataset">
+    <meta property="og:description" content="Workflows for parsing comprehensive Glassdoor dataset" />
+    <meta property="twitter:description" content="Workflows for parsing comprehensive Glassdoor dataset" />
     
 
     
@@ -91,7 +91,6 @@
     
 
 </head>
-
 
 
 
@@ -257,136 +256,136 @@
 <h3 id="data-input">Data Input</h3>
 <p>The data input is as follows. It consists of 2,219 distinct company-state pairs that require the Glassdoor review data.</p>
 <table>
-<thead>
-<tr>
-<th>Index</th>
-<th>conml</th>
-<th>state</th>
-<th>gvkey</th>
-<th>companyid</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>AAR Corp</td>
-<td>IL</td>
-<td>1004</td>
-<td>394</td>
-</tr>
-<tr>
-<td>2</td>
-<td>American Airlines Group Inc</td>
-<td>TX</td>
-<td>1045</td>
-<td>2021732</td>
-</tr>
-<tr>
-<td>3</td>
-<td>AVX Corp.</td>
-<td>SC</td>
-<td>1072</td>
-<td>3262</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Abbott Laboratories</td>
-<td>IL</td>
-<td>1078</td>
-<td>428</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Aceto Corp</td>
-<td>NY</td>
-<td>1094</td>
-<td>631</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Acme United Corp</td>
-<td>CT</td>
-<td>1104</td>
-<td>656</td>
-</tr>
-<tr>
-<td>7</td>
-<td>BK Technologies Corp</td>
-<td>FL</td>
-<td>1117</td>
-<td>26018</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Adams Resources &amp; Energy Inc.</td>
-<td>TX</td>
-<td>1121</td>
-<td>751</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Advanced Micro Devices Inc</td>
-<td>CA</td>
-<td>1161</td>
-<td>881</td>
-</tr>
-<tr>
-<td>&hellip;</td>
-<td>&hellip;</td>
-<td>&hellip;</td>
-<td>&hellip;</td>
-<td>&hellip;</td>
-</tr>
-<tr>
-<td>2213</td>
-<td>EnSync Inc</td>
-<td>WI</td>
-<td>272699</td>
-<td>932520</td>
-</tr>
-<tr>
-<td>2214</td>
-<td>FutureFuel Corp</td>
-<td>MO</td>
-<td>287462</td>
-<td>1694747</td>
-</tr>
-<tr>
-<td>2215</td>
-<td>Vislink Technologies Inc</td>
-<td>FL</td>
-<td>289735</td>
-<td>1065975</td>
-</tr>
-<tr>
-<td>2216</td>
-<td>Aevi Genomic Medicine Inc</td>
-<td>PA</td>
-<td>293754</td>
-<td>66112</td>
-</tr>
-<tr>
-<td>2217</td>
-<td>LyondellBasell Industries NV</td>
-<td>TX</td>
-<td>294524</td>
-<td>1667126</td>
-</tr>
-<tr>
-<td>2218</td>
-<td>Element Solutions Inc</td>
-<td>FL</td>
-<td>315318</td>
-<td>2005381</td>
-</tr>
-<tr>
-<td>2219</td>
-<td>Dorian LPG Ltd</td>
-<td>CT</td>
-<td>317264</td>
-<td>2066589</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Index</th>
+          <th>conml</th>
+          <th>state</th>
+          <th>gvkey</th>
+          <th>companyid</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>AAR Corp</td>
+          <td>IL</td>
+          <td>1004</td>
+          <td>394</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>American Airlines Group Inc</td>
+          <td>TX</td>
+          <td>1045</td>
+          <td>2021732</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>AVX Corp.</td>
+          <td>SC</td>
+          <td>1072</td>
+          <td>3262</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Abbott Laboratories</td>
+          <td>IL</td>
+          <td>1078</td>
+          <td>428</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Aceto Corp</td>
+          <td>NY</td>
+          <td>1094</td>
+          <td>631</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>Acme United Corp</td>
+          <td>CT</td>
+          <td>1104</td>
+          <td>656</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>BK Technologies Corp</td>
+          <td>FL</td>
+          <td>1117</td>
+          <td>26018</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>Adams Resources &amp; Energy Inc.</td>
+          <td>TX</td>
+          <td>1121</td>
+          <td>751</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>Advanced Micro Devices Inc</td>
+          <td>CA</td>
+          <td>1161</td>
+          <td>881</td>
+      </tr>
+      <tr>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+      </tr>
+      <tr>
+          <td>2213</td>
+          <td>EnSync Inc</td>
+          <td>WI</td>
+          <td>272699</td>
+          <td>932520</td>
+      </tr>
+      <tr>
+          <td>2214</td>
+          <td>FutureFuel Corp</td>
+          <td>MO</td>
+          <td>287462</td>
+          <td>1694747</td>
+      </tr>
+      <tr>
+          <td>2215</td>
+          <td>Vislink Technologies Inc</td>
+          <td>FL</td>
+          <td>289735</td>
+          <td>1065975</td>
+      </tr>
+      <tr>
+          <td>2216</td>
+          <td>Aevi Genomic Medicine Inc</td>
+          <td>PA</td>
+          <td>293754</td>
+          <td>66112</td>
+      </tr>
+      <tr>
+          <td>2217</td>
+          <td>LyondellBasell Industries NV</td>
+          <td>TX</td>
+          <td>294524</td>
+          <td>1667126</td>
+      </tr>
+      <tr>
+          <td>2218</td>
+          <td>Element Solutions Inc</td>
+          <td>FL</td>
+          <td>315318</td>
+          <td>2005381</td>
+      </tr>
+      <tr>
+          <td>2219</td>
+          <td>Dorian LPG Ltd</td>
+          <td>CT</td>
+          <td>317264</td>
+          <td>2066589</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="description-of-task">Description of Task</h3>
 <p>To meet my colleagues&rsquo; research requirements, I need to request data for each company-state pair listed in the table above. Taking &ldquo;AAR Corp-IL&rdquo; as an example, the desired data request procedures are as follows.</p>
@@ -833,60 +832,60 @@ padding: 2px;">Figure 4: Filter Review by Geolocation</div>
 <li>
 <p>The dictionary for US states looks like the following. For example, for state <code>AL</code> in my data input, its screen name in Glassdoor is <code>Alabama</code> and the corresponding Glassdoor-assigned location ID is <code>105</code>.</p>
 <table>
-<thead>
-<tr>
-<th>Glassdoorid</th>
-<th>screenname</th>
-<th>state_ab</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>105</td>
-<td>Alabama</td>
-<td>AL</td>
-</tr>
-<tr>
-<td>496</td>
-<td>Alaska</td>
-<td>AK</td>
-</tr>
-<tr>
-<td>483</td>
-<td>Arizona</td>
-<td>AZ</td>
-</tr>
-<tr>
-<td>1892</td>
-<td>Arkansas</td>
-<td>AR</td>
-</tr>
-<tr>
-<td>2280</td>
-<td>California</td>
-<td>CA</td>
-</tr>
-<tr>
-<td>2519</td>
-<td>Colorado</td>
-<td>CO</td>
-</tr>
-<tr>
-<td>&hellip;</td>
-<td>&hellip;</td>
-<td>&hellip;</td>
-</tr>
-<tr>
-<td>481</td>
-<td>Wisconsin</td>
-<td>WI</td>
-</tr>
-<tr>
-<td>1258</td>
-<td>Wyoming</td>
-<td>WY</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Glassdoorid</th>
+          <th>screenname</th>
+          <th>state_ab</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>105</td>
+          <td>Alabama</td>
+          <td>AL</td>
+      </tr>
+      <tr>
+          <td>496</td>
+          <td>Alaska</td>
+          <td>AK</td>
+      </tr>
+      <tr>
+          <td>483</td>
+          <td>Arizona</td>
+          <td>AZ</td>
+      </tr>
+      <tr>
+          <td>1892</td>
+          <td>Arkansas</td>
+          <td>AR</td>
+      </tr>
+      <tr>
+          <td>2280</td>
+          <td>California</td>
+          <td>CA</td>
+      </tr>
+      <tr>
+          <td>2519</td>
+          <td>Colorado</td>
+          <td>CO</td>
+      </tr>
+      <tr>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+      </tr>
+      <tr>
+          <td>481</td>
+          <td>Wisconsin</td>
+          <td>WI</td>
+      </tr>
+      <tr>
+          <td>1258</td>
+          <td>Wyoming</td>
+          <td>WY</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 </ul>
@@ -896,75 +895,75 @@ padding: 2px;">Figure 4: Filter Review by Geolocation</div>
 <ul>
 <li>There are in total twelve subjects in Glassdoor, and the dictionary for mapping their screen names to Glassdoor-assigned IDs is as follows.
 <table>
-<thead>
-<tr>
-<th>__typename</th>
-<th>displayName</th>
-<th>enumValue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ReviewCategory</td>
-<td>Remote Work</td>
-<td>REMOTE_WORK</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Work Life Balance</td>
-<td>WORK_LIFE_BALANCE</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Coworkers</td>
-<td>COWORKERS</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Culture</td>
-<td>CULTURE</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Benefits</td>
-<td>BENEFITS</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Career Development</td>
-<td>CAREER_DEVELOPMENT</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Compensation</td>
-<td>COMPENSATION</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Management</td>
-<td>MANAGEMENT</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Workplace</td>
-<td>WORKPLACE</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Senior Leadership</td>
-<td>SENIOR_LEADERSHIP</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Diversity &amp; Inclusion</td>
-<td>DIVERSITY_AND_INCLUSION</td>
-</tr>
-<tr>
-<td>ReviewCategory</td>
-<td>Covid 19</td>
-<td>COVID</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>__typename</th>
+          <th>displayName</th>
+          <th>enumValue</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Remote Work</td>
+          <td>REMOTE_WORK</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Work Life Balance</td>
+          <td>WORK_LIFE_BALANCE</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Coworkers</td>
+          <td>COWORKERS</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Culture</td>
+          <td>CULTURE</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Benefits</td>
+          <td>BENEFITS</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Career Development</td>
+          <td>CAREER_DEVELOPMENT</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Compensation</td>
+          <td>COMPENSATION</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Management</td>
+          <td>MANAGEMENT</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Workplace</td>
+          <td>WORKPLACE</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Senior Leadership</td>
+          <td>SENIOR_LEADERSHIP</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Diversity &amp; Inclusion</td>
+          <td>DIVERSITY_AND_INCLUSION</td>
+      </tr>
+      <tr>
+          <td>ReviewCategory</td>
+          <td>Covid 19</td>
+          <td>COVID</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 </ul>
@@ -1236,63 +1235,63 @@ padding: 2px;">Figure 4: Filter Review by Geolocation</div>
 <li>
 <p>Original Data Input: <code>gvkey_companyid_state_list_final_nwlk_withConm.csv</code>. Example lines are as follows.</p>
 <table>
-<thead>
-<tr>
-<th>gvkey</th>
-<th>state</th>
-<th>companyid</th>
-<th>conml</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1004</td>
-<td>IL</td>
-<td>394</td>
-<td>AAR Corp</td>
-</tr>
-<tr>
-<td>1045</td>
-<td>TX</td>
-<td>2021732</td>
-<td>American Airlines Group Inc</td>
-</tr>
-<tr>
-<td>1072</td>
-<td>SC</td>
-<td>3262</td>
-<td>AVX Corp.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>gvkey</th>
+          <th>state</th>
+          <th>companyid</th>
+          <th>conml</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1004</td>
+          <td>IL</td>
+          <td>394</td>
+          <td>AAR Corp</td>
+      </tr>
+      <tr>
+          <td>1045</td>
+          <td>TX</td>
+          <td>2021732</td>
+          <td>American Airlines Group Inc</td>
+      </tr>
+      <tr>
+          <td>1072</td>
+          <td>SC</td>
+          <td>3262</td>
+          <td>AVX Corp.</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 <li>
 <p>Augmented Data Input: <code>glassdoorstateids.csv</code>, available at <a href="https://www.dropbox.com/scl/fi/ced37h35sudp54qlp1ywr/glassdoorstateids.csv?rlkey=qx37hvnjqv2im72vwqrzvqi8i&amp;dl=0">this link</a>. Example lines are as follows.</p>
 <table>
-<thead>
-<tr>
-<th>Glassdoorid</th>
-<th>screenname</th>
-<th>state_ab</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>105</td>
-<td>Alabama</td>
-<td>AL</td>
-</tr>
-<tr>
-<td>496</td>
-<td>Alaska</td>
-<td>AK</td>
-</tr>
-<tr>
-<td>483</td>
-<td>Arizona</td>
-<td>AZ</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Glassdoorid</th>
+          <th>screenname</th>
+          <th>state_ab</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>105</td>
+          <td>Alabama</td>
+          <td>AL</td>
+      </tr>
+      <tr>
+          <td>496</td>
+          <td>Alaska</td>
+          <td>AK</td>
+      </tr>
+      <tr>
+          <td>483</td>
+          <td>Arizona</td>
+          <td>AZ</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 </ol>
@@ -1512,210 +1511,210 @@ padding: 2px;">Figure 4: Filter Review by Geolocation</div>
 <li>
 <p>Review Data with Company Identifiers, e.g., <code>AVX Corp._4345.csv</code>. Example lines are as follows.</p>
 <table>
-<thead>
-<tr>
-<th>employer</th>
-<th>gvkey</th>
-<th>companyid</th>
-<th>glassdoorname</th>
-<th>stateid</th>
-<th>state_ab</th>
-<th>statename</th>
-<th>cate</th>
-<th>reviewcount</th>
-<th>isLegal</th>
-<th>reviewId</th>
-<th>reviewDateTime</th>
-<th>ratingOverall</th>
-<th>ratingCeo</th>
-<th>ratingBusinessOutlook</th>
-<th>ratingWorkLifeBalance</th>
-<th>ratingCultureAndValues</th>
-<th>ratingDiversityAndInclusion</th>
-<th>ratingSeniorLeadership</th>
-<th>ratingRecommendToFriend</th>
-<th>ratingCareerOpportunities</th>
-<th>ratingCompensationAndBenefits</th>
-<th>isCurrentJob</th>
-<th>lengthOfEmployment</th>
-<th>employmentStatus</th>
-<th>jobEndingYear</th>
-<th>pros</th>
-<th>prosOriginal</th>
-<th>cons</th>
-<th>consOriginal</th>
-<th>summary</th>
-<th>summaryOriginal</th>
-<th>advice</th>
-<th>adviceOriginal</th>
-<th>isLanguageMismatch</th>
-<th>countHelpful</th>
-<th>countNotHelpful</th>
-<th>employerResponses</th>
-<th>isCovid19</th>
-<th>topLevelDomainId</th>
-<th>languageId</th>
-<th>employer.__ref</th>
-<th>jobTitle.__ref</th>
-<th>location.__ref</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AVX Corp.</td>
-<td>1072</td>
-<td>3262</td>
-<td>AVX</td>
-<td>3411</td>
-<td>SC</td>
-<td>SouthCarolina</td>
-<td>REMOTE_WORK</td>
-<td>35</td>
-<td>TRUE</td>
-<td>55512860</td>
-<td>2021-11-17T18:38:49.553</td>
-<td>4</td>
-<td>APPROVE</td>
-<td>POSITIVE</td>
-<td>4</td>
-<td>3</td>
-<td>2</td>
-<td>2</td>
-<td>POSITIVE</td>
-<td>4</td>
-<td>2</td>
-<td>TRUE</td>
-<td>4</td>
-<td>REGULAR</td>
-<td></td>
-<td>Most management cares about their  people</td>
-<td>Too many political barriers and lack  of accountability</td>
-<td>Growing and room for growth</td>
-<td>Give more incentives across the  board and hold management/others accountable.</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>FALSE</td>
-<td>0</td>
-<td>0</td>
-<td>[]</td>
-<td>FALSE</td>
-<td>1</td>
-<td>eng</td>
-<td>Employer:4345</td>
-<td>JobTitle:31261</td>
-<td>City:1155193</td>
-</tr>
-<tr>
-<td>AVX Corp.</td>
-<td>1072</td>
-<td>3262</td>
-<td>AVX</td>
-<td>3411</td>
-<td>SC</td>
-<td>SouthCarolina</td>
-<td>REMOTE_WORK</td>
-<td>35</td>
-<td>TRUE</td>
-<td>52598500</td>
-<td>2021-09-15T11:30:21.503</td>
-<td>1</td>
-<td>APPROVE</td>
-<td>NEGATIVE</td>
-<td>2</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>NEGATIVE</td>
-<td>1</td>
-<td>1</td>
-<td>TRUE</td>
-<td>0</td>
-<td>REGULAR</td>
-<td></td>
-<td>nothing to tell, its just a job</td>
-<td>selfish managers, no raises,  terrible place to work, no accountability</td>
-<td>smh</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>FALSE</td>
-<td>1</td>
-<td>0</td>
-<td>[]</td>
-<td>FALSE</td>
-<td>1</td>
-<td>eng</td>
-<td>Employer:4345</td>
-<td>JobTitle:328345</td>
-<td>City:1155193</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>employer</th>
+          <th>gvkey</th>
+          <th>companyid</th>
+          <th>glassdoorname</th>
+          <th>stateid</th>
+          <th>state_ab</th>
+          <th>statename</th>
+          <th>cate</th>
+          <th>reviewcount</th>
+          <th>isLegal</th>
+          <th>reviewId</th>
+          <th>reviewDateTime</th>
+          <th>ratingOverall</th>
+          <th>ratingCeo</th>
+          <th>ratingBusinessOutlook</th>
+          <th>ratingWorkLifeBalance</th>
+          <th>ratingCultureAndValues</th>
+          <th>ratingDiversityAndInclusion</th>
+          <th>ratingSeniorLeadership</th>
+          <th>ratingRecommendToFriend</th>
+          <th>ratingCareerOpportunities</th>
+          <th>ratingCompensationAndBenefits</th>
+          <th>isCurrentJob</th>
+          <th>lengthOfEmployment</th>
+          <th>employmentStatus</th>
+          <th>jobEndingYear</th>
+          <th>pros</th>
+          <th>prosOriginal</th>
+          <th>cons</th>
+          <th>consOriginal</th>
+          <th>summary</th>
+          <th>summaryOriginal</th>
+          <th>advice</th>
+          <th>adviceOriginal</th>
+          <th>isLanguageMismatch</th>
+          <th>countHelpful</th>
+          <th>countNotHelpful</th>
+          <th>employerResponses</th>
+          <th>isCovid19</th>
+          <th>topLevelDomainId</th>
+          <th>languageId</th>
+          <th>employer.__ref</th>
+          <th>jobTitle.__ref</th>
+          <th>location.__ref</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>AVX Corp.</td>
+          <td>1072</td>
+          <td>3262</td>
+          <td>AVX</td>
+          <td>3411</td>
+          <td>SC</td>
+          <td>SouthCarolina</td>
+          <td>REMOTE_WORK</td>
+          <td>35</td>
+          <td>TRUE</td>
+          <td>55512860</td>
+          <td>2021-11-17T18:38:49.553</td>
+          <td>4</td>
+          <td>APPROVE</td>
+          <td>POSITIVE</td>
+          <td>4</td>
+          <td>3</td>
+          <td>2</td>
+          <td>2</td>
+          <td>POSITIVE</td>
+          <td>4</td>
+          <td>2</td>
+          <td>TRUE</td>
+          <td>4</td>
+          <td>REGULAR</td>
+          <td></td>
+          <td>Most management cares about their  people</td>
+          <td>Too many political barriers and lack  of accountability</td>
+          <td>Growing and room for growth</td>
+          <td>Give more incentives across the  board and hold management/others accountable.</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>FALSE</td>
+          <td>0</td>
+          <td>0</td>
+          <td>[]</td>
+          <td>FALSE</td>
+          <td>1</td>
+          <td>eng</td>
+          <td>Employer:4345</td>
+          <td>JobTitle:31261</td>
+          <td>City:1155193</td>
+      </tr>
+      <tr>
+          <td>AVX Corp.</td>
+          <td>1072</td>
+          <td>3262</td>
+          <td>AVX</td>
+          <td>3411</td>
+          <td>SC</td>
+          <td>SouthCarolina</td>
+          <td>REMOTE_WORK</td>
+          <td>35</td>
+          <td>TRUE</td>
+          <td>52598500</td>
+          <td>2021-09-15T11:30:21.503</td>
+          <td>1</td>
+          <td>APPROVE</td>
+          <td>NEGATIVE</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>NEGATIVE</td>
+          <td>1</td>
+          <td>1</td>
+          <td>TRUE</td>
+          <td>0</td>
+          <td>REGULAR</td>
+          <td></td>
+          <td>nothing to tell, its just a job</td>
+          <td>selfish managers, no raises,  terrible place to work, no accountability</td>
+          <td>smh</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>FALSE</td>
+          <td>1</td>
+          <td>0</td>
+          <td>[]</td>
+          <td>FALSE</td>
+          <td>1</td>
+          <td>eng</td>
+          <td>Employer:4345</td>
+          <td>JobTitle:328345</td>
+          <td>City:1155193</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 <li>
 <p>Dictionary for Reviewers&rsquo; Job Positions, e.g., <code>AVX Corp._4345_jobtitle.csv</code>. Example lines are as follows.</p>
 <table>
-<thead>
-<tr>
-<th>JobID</th>
-<th>__typename</th>
-<th>JobTitle</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>5619775</td>
-<td>JobTitle</td>
-<td>QA Final Inspection</td>
-</tr>
-<tr>
-<td>36980</td>
-<td>JobTitle</td>
-<td>Production</td>
-</tr>
-<tr>
-<td>31261</td>
-<td>JobTitle</td>
-<td>Engineer</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>JobID</th>
+          <th>__typename</th>
+          <th>JobTitle</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>5619775</td>
+          <td>JobTitle</td>
+          <td>QA Final Inspection</td>
+      </tr>
+      <tr>
+          <td>36980</td>
+          <td>JobTitle</td>
+          <td>Production</td>
+      </tr>
+      <tr>
+          <td>31261</td>
+          <td>JobTitle</td>
+          <td>Engineer</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 <li>
 <p>Dictionary for Reviewers&rsquo; Office Locations, e.g., <code>AVX Corp._4345_jobtitle.csv</code>. Example lines are as follows.</p>
 <table>
-<thead>
-<tr>
-<th>CityID</th>
-<th>__typename</th>
-<th>type</th>
-<th>City</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1155247</td>
-<td>City</td>
-<td>CITY</td>
-<td>Myrtle Beach, SC</td>
-</tr>
-<tr>
-<td>1155193</td>
-<td>City</td>
-<td>CITY</td>
-<td>Greenville, SC</td>
-</tr>
-<tr>
-<td>1155247</td>
-<td>City</td>
-<td>CITY</td>
-<td>Myrtle Beach, SC</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>CityID</th>
+          <th>__typename</th>
+          <th>type</th>
+          <th>City</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1155247</td>
+          <td>City</td>
+          <td>CITY</td>
+          <td>Myrtle Beach, SC</td>
+      </tr>
+      <tr>
+          <td>1155193</td>
+          <td>City</td>
+          <td>CITY</td>
+          <td>Greenville, SC</td>
+      </tr>
+      <tr>
+          <td>1155247</td>
+          <td>City</td>
+          <td>CITY</td>
+          <td>Myrtle Beach, SC</td>
+      </tr>
+  </tbody>
 </table>
 </li>
 </ol>
@@ -1747,6 +1746,11 @@ by-inflating-rankings-and-pressuring-employees-11548171977.</li>
                             Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/post/after-hour-trading-and-information-processing/" data-toggle="tooltip" data-placement="top" title="When Earnings Announcements Go After 4 PM">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
                 
@@ -1799,7 +1803,7 @@ by-inflating-rankings-and-pressuring-employees-11548171977.</li>
                 <ul class="list-inline text-center">                  
                     
                     <li>
-                        <a href="mailto:m.xu@fs.de">
+                        <a href="mailto:mx67@duke.edu">
                             <span class="fa-stack fa-lg">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
@@ -1866,7 +1870,7 @@ by-inflating-rankings-and-pressuring-employees-11548171977.</li>
             
              </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Mengjie Xu 2024
+                    Copyright &copy; Mengjie Xu 2025
                     
                 </p>
             </div>

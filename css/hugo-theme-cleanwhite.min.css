@@ -32,7 +32,8 @@
 
 .sidebar-container {
 	color: #555555;
-	font-size: 15px
+	font-size: 15px;
+	text-align: justify
 }
 
 .sidebar-container h5 {
@@ -42,11 +43,13 @@
 
 .sidebar-container h5 a {
 	color: gray !important;
-	text-decoration: none
+	text-decoration: none;
+	text-align: justify
 }
 
 .sidebar-container a {
-	color: #555555 !important
+	color: #555555 !important;
+	text-align: justify
 }
 
 .sidebar-container a:hover,
@@ -55,7 +58,8 @@
 }
 
 .sidebar-container .tags a {
-	border-color: #555555
+	border-color: #555555;
+	text-align: justify
 }
 
 .sidebar-container .tags a:hover,
@@ -64,7 +68,7 @@
 }
 
 .sidebar-container .short-about img {
-	width: 80%;
+	width: 100%;
 	display: block;
 	border-radius: 5px;
 	margin-bottom: 20px
@@ -123,7 +127,8 @@ a img:focus {
 }
 
 article {
-	overflow: hidden
+	overflow: hidden;
+	text-align: justify
 }
 
 blockquote {

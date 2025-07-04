@@ -13,7 +13,7 @@
       <link>https://xumj2021.github.io/post/get-insights-into-labor-market-with-glassdoor/</link>
       <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://xumj2021.github.io/post/get-insights-into-labor-market-with-glassdoor/</guid>
-      <description>Motivation Recently, at the request of my colleagues, I have been working on parsing the comprehensive Glassdoor dataset for 2,219 firms and gathering insights from employees residing in various states across the United States. In this blog post, I will share the detailed techniques and algorithms to fulfill this task. For readers who want to access the codes directly, please jump to this section.&#xA;Why Glassdoor Glassdoor has been offering rich insights for practitioners, stakeholders, and researchers and seems to continue to do so in the foreseeable future.</description>
+      <description>&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;&#xA;&lt;p&gt;Recently, at the request of my colleagues, I have been working on parsing the comprehensive Glassdoor dataset for 2,219 firms and gathering insights from employees residing in various states across the United States. In this blog post, I will share the detailed techniques and algorithms to fulfill this task. For readers who want to access the codes directly, please jump to &lt;a href=&#34;https://mengjiexu.com/post/get-insights-into-labor-market-with-glassdoor/#deploy-the-parser&#34;&gt;this section&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-glassdoor&#34;&gt;Why Glassdoor&lt;/h2&gt;&#xA;&lt;p&gt;Glassdoor has been offering rich insights for practitioners, stakeholders, and researchers and seems to continue to do so in the foreseeable future.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

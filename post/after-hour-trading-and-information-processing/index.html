@@ -96,7 +96,6 @@
 
 
 
-
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
 
     <div class="container-fluid">
@@ -260,55 +259,55 @@
 <p>My global input file <code>cq_tsymbol_date.txt</code> in this blog post is a dataset with three columns, <code>Ticker</code>, <code>Dates</code> and <code>Surprise</code>. This dataset has 10,742 observations, covering 1,496 distinct stock tickers (<code>ticker</code>) and 722 distinct earnings announcement dates (<code>dates</code>) spanning from 2015 to 2018. On the other hand, 72.50% of observations have earnings <code>Surprise</code> greater than or equal to 0 in this sample, which means these firms meet or beat the mean analyst forecast.</p>
 <p>As these earnings announcements are all released between 4:00 p.m. and 4:15 p.m., I am particularly interested in how the stock prices change since 4:00 p.m.</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">Ticker</th>
-<th style="text-align:center">Dates</th>
-<th style="text-align:center">Surprise</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">LNDC</td>
-<td style="text-align:center">20150106</td>
-<td style="text-align:center">0</td>
-</tr>
-<tr>
-<td style="text-align:center">SHLM</td>
-<td style="text-align:center">20150106</td>
-<td style="text-align:center">0.01</td>
-</tr>
-<tr>
-<td style="text-align:center">…</td>
-<td style="text-align:center">…</td>
-<td style="text-align:center">…</td>
-</tr>
-<tr>
-<td style="text-align:center">NSIT</td>
-<td style="text-align:center">20160428</td>
-<td style="text-align:center">-0.06</td>
-</tr>
-<tr>
-<td style="text-align:center">SPNC</td>
-<td style="text-align:center">20160428</td>
-<td style="text-align:center">-0.03</td>
-</tr>
-<tr>
-<td style="text-align:center">…</td>
-<td style="text-align:center">…</td>
-<td style="text-align:center">…</td>
-</tr>
-<tr>
-<td style="text-align:center">RPAI</td>
-<td style="text-align:center">20180731</td>
-<td style="text-align:center">-0.01</td>
-</tr>
-<tr>
-<td style="text-align:center">FISV</td>
-<td style="text-align:center">20180731</td>
-<td style="text-align:center">0.01</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">Ticker</th>
+          <th style="text-align: center">Dates</th>
+          <th style="text-align: center">Surprise</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">LNDC</td>
+          <td style="text-align: center">20150106</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SHLM</td>
+          <td style="text-align: center">20150106</td>
+          <td style="text-align: center">0.01</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">…</td>
+          <td style="text-align: center">…</td>
+          <td style="text-align: center">…</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">NSIT</td>
+          <td style="text-align: center">20160428</td>
+          <td style="text-align: center">-0.06</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">SPNC</td>
+          <td style="text-align: center">20160428</td>
+          <td style="text-align: center">-0.03</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">…</td>
+          <td style="text-align: center">…</td>
+          <td style="text-align: center">…</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RPAI</td>
+          <td style="text-align: center">20180731</td>
+          <td style="text-align: center">-0.01</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">FISV</td>
+          <td style="text-align: center">20180731</td>
+          <td style="text-align: center">0.01</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="overarching-implementation-tips">Overarching Implementation Tips</h2>
 <p>Insights from the following three papers guided and shaped the implementation of price discovery analysis for the after-hours market in this blog post.</p>
@@ -342,30 +341,30 @@
 <p>That said, one may need to complete NBBO order book by incorporating additional information from the quote file, if necessary. I guess a natural question here is <em>How &ldquo;incomplete&rdquo; the NBBOs readily accessible from the WRDS-TAQ database could be?</em></p>
 <p>Well, it turns out that 37.63% of my 10,742 observations have quotes-free NBBO records. However, for those exposed to NBBOs from quote records, the contribution of the quote records could be significant. See the distribution of the percentage of quote records in the complete NBBO changes in the following table.</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th>Mean</th>
-<th>S.D.</th>
-<th>P1</th>
-<th>P25</th>
-<th>Median</th>
-<th>P75</th>
-<th>P99</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NBBOs from Quotes (%)</td>
-<td>30.19</td>
-<td>29.69</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>26.90</td>
-<td>52.54</td>
-<td>95.40</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Mean</th>
+          <th>S.D.</th>
+          <th>P1</th>
+          <th>P25</th>
+          <th>Median</th>
+          <th>P75</th>
+          <th>P99</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NBBOs from Quotes (%)</td>
+          <td>30.19</td>
+          <td>29.69</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>26.90</td>
+          <td>52.54</td>
+          <td>95.40</td>
+      </tr>
+  </tbody>
 </table>
 <p>To directly evaluate the impact of NBBO completeness on price discovery analysis in the after-hours market, I plotted in Figure 2 the bid price adjustments relative to the price at 3:59 p.m. following negative earnings announcements in my sample (<code>qsurprise</code> = 1 in Step 5) using the COMPLETE and INCOMPLETE NBBOs, respectively (the patterns are similar for positive news). Figure 2 indicates that the incompleteness of NBBOs underestimates both the speed and magnitude of price discovery, but the magnitude seems tolerable for readers who just want a quick overview of the price discovery dynamics.</p>
 <center>

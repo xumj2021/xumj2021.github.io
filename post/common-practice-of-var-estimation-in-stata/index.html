@@ -96,7 +96,6 @@
 
 
 
-
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
 
     <div class="container-fluid">
@@ -245,7 +244,7 @@
                 <h2 id="motivation">Motivation</h2>
 <p>This blog is the second one of my 3 blogs about VAR model. In this blog, I will introduce how to use Stata&rsquo;s integrated commands <code>var</code> and <code>svar</code> to estimate the VAR model, which is also the common practices for researchers in VAR estimation. While it has little incremental value to an extant blog <a href="https://blog.stata.com/2016/08/09/vector-autoregressions-in-stata/">Vector autoregressions in Stata written by David Schenck</a>, this blog will serve as an important benchmark for my manual calculations of all the major VAR estimation outputs in <a href="https://mengjiexu.com/post/manually-replicate-statas-practice-in-estimations-of-var-irfs-and-variance-decomposition/">the next blog</a>.</p>
 <h2 id="sample-dataset">Sample Dataset</h2>
-<p>The dataset used in this blog is a shipped dataset named <code>varsample.dta</code>. It can be approached conveniently through Stata&rsquo;s <code>sysuse</code> command. This dataset collects the quarterly times series of U.S. unemployment rate <code>unrate</code>, rate of consumer price inflation <code>inflation</code>, and short-term nominal interest rate (federal funds rate) <code>ffr</code> from 1968 to 2018.</p>
+<p>The dataset used in this blog is a shipped dataset named <code>varsample.dta</code>. It can be accessed <a href="https://www.dropbox.com/scl/fi/gqicbihx5um4tqmj0onr4/varsample.dta?rlkey=lww9vbhwiid68lg1m8audm3ty&amp;dl=0">here</a>. This dataset collects the quarterly times series of U.S. unemployment rate <code>unrate</code>, rate of consumer price inflation <code>inflation</code>, and short-term nominal interest rate (federal funds rate) <code>ffr</code> from 1968 to 2018.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1"> 1</a>
@@ -262,7 +261,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-12">12</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#f92672">.</span> <span style="color:#111">sysuse</span> <span style="color:#111">varsample</span><span style="color:#f92672">.</span><span style="color:#111">dta</span><span style="color:#111">,</span> <span style="color:#111">clear</span>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#f92672">.</span> <span style="color:#111">use</span> <span style="color:#111">varsample</span><span style="color:#f92672">.</span><span style="color:#111">dta</span><span style="color:#111">,</span> <span style="color:#111">clear</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">.</span> <span style="color:#111">list</span> <span style="color:#f92672">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">5</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>     <span style="color:#f92672">+---------------------------------------------------------+</span>
@@ -1101,7 +1100,7 @@ To be exact, the <code>svar</code> model stores the estimation of the matrix \(A
                 <ul class="list-inline text-center">                  
                     
                     <li>
-                        <a href="mailto:m.xu@fs.de">
+                        <a href="mailto:mx67@duke.edu">
                             <span class="fa-stack fa-lg">
                                 <i class="fas fa-circle fa-stack-2x"></i>
                                 <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
@@ -1168,7 +1167,7 @@ To be exact, the <code>svar</code> model stores the estimation of the matrix \(A
             
              </ul>
 		<p class="copyright text-muted">
-                    Copyright &copy; Mengjie Xu 2024
+                    Copyright &copy; Mengjie Xu 2025
                     
                 </p>
             </div>

@@ -13,7 +13,7 @@
       <link>https://xumj2021.github.io/post/connect-to-wrds-via-python/</link>
       <pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate>
       <guid>https://xumj2021.github.io/post/connect-to-wrds-via-python/</guid>
-      <description>Motivation The WRDS-SAS Studio seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the Reference part), this blog will introduce how to exploit WRDS cloud via Python.&#xA;The biggest advantage of WRDS Cloud is that you don&amp;rsquo;t have to download everything to your computer but just deal with the massive data using the computing source of WRDS Cloud.</description>
+      <description>&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;&#xA;&lt;p&gt;The WRDS-SAS Studio seems to be suspended soon. As a big fan of this cloud platform, I have to find something alternative to make my data extraction from WRDS replicable. Compiled from a series of WRDS guidances (you can find them in the &lt;strong&gt;Reference&lt;/strong&gt; part), this blog will introduce how to exploit WRDS cloud via Python.&lt;/p&gt;&#xA;&lt;p&gt;The biggest advantage of WRDS Cloud is that you don&amp;rsquo;t have to download everything to your computer but just deal with the massive data using the computing source of WRDS Cloud. Following this blog, one can quickly establish a python-wrds cloud workflow without checking various manuals.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

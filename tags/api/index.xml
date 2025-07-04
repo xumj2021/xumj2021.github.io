@@ -13,7 +13,7 @@
       <link>https://xumj2021.github.io/post/bloomberg-api/</link>
       <pubDate>Thu, 08 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://xumj2021.github.io/post/bloomberg-api/</guid>
-      <description>Motivation Bloomberg has integrated massive data from various of data vendors. However, as a typical finance terminal designed for traders, it&amp;rsquo;s technically hard to use as a database for scholars. This blog will introduce how to prepare your Bloomberg Terminal for massive data extracting and how to access data via Bloomberg API.&#xA;Deploy Operation Enviornment Bloomberg Access Get a Bloomberg Terminal and of course a valid Bloomberg Account&#xA;Make sure the Bloomberg Add-in in Excel in this terminal works</description>
+      <description>&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;&#xA;&lt;p&gt;Bloomberg has integrated massive data from various of data vendors. However, as a typical finance terminal designed for traders,  it&amp;rsquo;s technically hard to use as a database  for scholars. This blog will introduce how to prepare your Bloomberg Terminal for massive data extracting and how to access data via Bloomberg API.&lt;/p&gt;&#xA;&lt;h2 id=&#34;deploy-operation-enviornment&#34;&gt;Deploy Operation Enviornment&lt;/h2&gt;&#xA;&lt;h3 id=&#34;bloomberg-access&#34;&gt;Bloomberg Access&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Get a Bloomberg Terminal and of course a valid Bloomberg Account&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Make sure the Bloomberg Add-in in Excel in this terminal works&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
