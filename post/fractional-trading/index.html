@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-309KENXF47"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-309KENXF47');
+    </script>
+
+    
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Democratize Data For Insights">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://assets.bbhub.io/image/v1/convert?type=auto&amp;amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F41%2FTrading-Trading-Venues-Header-1.jpg">
+    <meta property="twitter:image" content="https://assets.bbhub.io/image/v1/convert?type=auto&amp;amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F41%2FTrading-Trading-Venues-Header-1.jpg" />
+    
+
+    
+    <meta name="title" content="Fractional Trading" />
+    <meta property="og:title" content="Fractional Trading" />
+    <meta property="twitter:title" content="Fractional Trading" />
+    
+
+    
+    <meta name="description" content="Track retail trading in real time">
+    <meta property="og:description" content="Track retail trading in real time" />
+    <meta property="twitter:description" content="Track retail trading in real time" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Mengjie, Xu, Python, Stata, SAS, Econometrics, Accounting, Crawling">
+    <link rel="shortcut icon" href="/img/favicon.png.ico">
+
+    <title>Mengjie Xu | Democratize Data For Insights</title>
+
+    <link rel="canonical" href="/post/fractional-trading/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link rel="stylesheet" href="/css/font-awesome.all.min.css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Home</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                       
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/anecdotes/">anecdotes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/crawler/">crawler</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/data/">data</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/theory/">theory</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about//">ABOUT</a></li>
+                    
+		            <li>
+                       
+		           </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://assets.bbhub.io/image/v1/convert?type=auto&amp;url=https%3A%2F%2Fassets.bbhub.io%2Fprofessional%2Fsites%2F41%2FTrading-Trading-Venues-Header-1.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/retail-investors" title="Retail investors">
+                            Retail investors
+                        </a>
+                        
+                        <a class="tag" href="/tags/market-microstructure" title="Market microstructure">
+                            Market microstructure
+                        </a>
+                        
+                    </div>
+                    <h1>Fractional Trading</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Mengjie Xu
+                             
+                            on 
+                            Friday, July 4, 2025
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="motivation">Motivation</h2>
+<p>Since retail investors’ last major moves on dot-com stocks in the late 1990s, they have been
+largely silent from the capital market for decades until the COVID time. Compared to previous
+retail trading waves, the recent retail influx is characterized by unprecedented market power, fueled by crowdsourced investing ideas from online forums, one-click trading convenience, and greater access to news outlets.</p>
+<p>Looking back, it&rsquo;s tempting to attribute the recent retail influx to COVID, which left people stuck at home with ample time and spared cash due to quarantine and layoffs. However, this cannot explain why retail investors have remained an influential force even after returning to the office.</p>
+<p>Digging deeper, one may find that there is another major factor contributing to this wave of retail influx. In November 2019, major brokers such as Charles Schwab and Robinhood began offering fractional trading. Instead of requiring one share as the minimum purchase, brokers began allowing investors to buy fractional shares for as little as a penny. This is undoubtedly a game changer: it greatly lowered the entry barriers not only to expensive stocks that people couldn’t afford before, but also to the entire stock market.</p>
+<p>One illustrative example from Da et al. (2024, RFS): With a single share trading well above a quarter of a million dollars, Berkshire Hathaway’s Class A stock (BRK.A) is commonly considered out of reach for most retail investors. However, as Figure 1 from Da et al. (2024, RFS) shows, the stock has experienced a sharp increase in Robinhood ownership since 2019.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://raw.githubusercontent.com/xumj2021/Picgo/refs/heads/main/ftpic1.png" width=800 height=600>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Number of Robinhood Users Holding BRK.A</div>
+</center>
+<p>Though individually minimal, fractional trading—when coordinated during attention-grabbing events—is powerful enough to exert significant price pressure even on high-priced stocks, fueling meme-stock-like trading frenzies and bubbles (Da et al., 2024, RFS). Therefore, recognizing that this wave of retail influx is not a temporary byproduct of COVID, but rather a more prolonged fundamental change in market mechanics, is important for companies, institutional investors, and policymakers—many of whom seem to have already acknowledged  and moved upon this &ldquo;New normal.&rdquo;</p>
+<p>Recent studies suggest that institutional investors do not remain unchanged with the retail influx; they are found to ‘ride on the bubbles’ and systematically take advantage of the additional stock volatility brought by retail investors (Lin, 2024 WP, Fang et al., 2024 JFQA). In addition, institutional investors are shown to hold fewer shares and firms see less voting participation in shareholder meetings, suggesting that retail investors altered shareholder structures but cannot contribute to corporate governance the same way as their predecessors did (Aggarwal et al., 2024 WP). On the other hand, many companies realized that they cannot deter retail investors by maintaining an unaffordable stock price anymore but must carefully manage this new shareholder base to avoid potential backlashes (McCabe, 2020).</p>
+<p>There are certainly more fascinating aspects we can explore about these ongoing market dynamics. To support these explorations, in this blog, I will follow Da et al. (2024, RFS) and introduce a method for quantifying firm-level daily exposure to fractional trading.</p>
+<h2 id="how-does-fractional-trading-manifest-in-the-order-book">How Does Fractional Trading Manifest in the Order Book?</h2>
+<p>I follow Da et al. (2024, RFS) and rely on the off-exchange one-share trades to capture fractional trading. The rationales, according to Da et al. (2024, RFS), are as follows.</p>
+<ol>
+<li>Most retail investors place orders through online trading platforms like Robinhood, which bundle these orders and sell them to off-exchange market makers such as Virtu for internalization (Osipovich, 2021). These off-exchange trades are then reported to a Financial Industry Regulatory Authority (FINRA) Trade Reporting Facility (TRF), which can be identified from the order book.</li>
+<li>When reported to a FINRA TRF, the fractional share portion of the order appears as a one-share trade, in accordance with the &lsquo;rounding-up rule.&rsquo;</li>
+</ol>
+<p>The algorithm is extremely simple and intuitive:</p>
+<ol>
+<li><strong>First</strong>, determine the set of stocks of interest—for example, S&amp;P 500 firms—and the time frame, say 2020-01-01 to 2024-12-31.</li>
+<li><strong>Second</strong>, identify the TRFs where fractional trading is likely to be reported. Following Da et al. (2024, RFS), the possible <code>TR_RF</code> values in order book provided by WRDS-TAQ database are:
+<ul>
+<li>B = FINRA / NASDAQ TRF Chicago</li>
+<li>N = FINRA / NYSE TRF</li>
+<li>T = FINRA / NASDAQ TRF Carteret (CTA)</li>
+<li>Q = FINRA / NASDAQ TRF Carteret (UTP)</li>
+</ul>
+</li>
+<li><strong>Third</strong>, extract one-share trades from the orders reported to the TRFs listed above—that&rsquo;s the fractional trading you&rsquo;re aiming to capture.</li>
+</ol>
+<p>Although algorithmically simple, the calculation of fractional trading can be computationally intensive and
+time-consuming, as it requires iterating huge daily order books from 2020 to 2024. Given this, I highly recommend deploying this task as a <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/#batch-jobs-on-the-wrds-cloud">batched job on the WRDS cloud</a> instead of running it with PC SAS.</p>
+<h2 id="step-1-extract-sp-500-stock-symbols">Step 1: Extract S&amp;P 500 stock symbols</h2>
+<p>The S&amp;P 500 firm list is provided by the CRSP database with <code>permno</code> as the identifier. I merged it with the WRDS CRSP-TAQ linking table to obtain the stock symbols. As the S&amp;P 500 list can change over time, I only keep firms included as of Dec 31, 2019.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-16">16</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sas" data-lang="sas"><span style="display:flex;"><span><span style="color:#00a8c8">proc sql;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> sp500 <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> symbol
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">from</span> crsp<span style="color:#ae81ff">.</span>dsp500list a, wrdsapps<span style="color:#ae81ff">.</span>tclink b
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">where</span> a<span style="color:#ae81ff">.</span>permno=b<span style="color:#ae81ff">.</span>permno <span style="color:#00a8c8">and</span> start&lt;=<span style="color:#d88200">&#34;31Dec2019&#34;</span>d&lt;=ending<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">quit;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">proc sql </span>noprint;
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> symbol <span style="color:#00a8c8">into</span> :ticlist separated <span style="color:#00a8c8">by</span> <span style="color:#d88200">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">from</span> sp500<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">quit;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">data </span><span style="color:#00a8c8">_null_</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">length</span> temp $<span style="color:#ae81ff">20000</span>;
+</span></span><span style="display:flex;"><span>	temp=cat(<span style="color:#d88200">&#39;&#34;&#39;</span>,<span style="color:#111">tranwrd(</span><span style="color:#d88200">&#34;</span><span style="color:#111">&amp;ticlist.</span><span style="color:#d88200">&#34;</span>,<span style="color:#d88200">&#34; &#34;</span>,<span style="color:#d88200">&#39;&#34; &#34;&#39;</span>),<span style="color:#d88200">&#39;&#34;&#39;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">call</span> symput(<span style="color:#d88200">&#39;ticlist_formatted&#39;</span>,temp)<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">run;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To increase data extraction efficiency, I combined the symbols of S&amp;P 500 firms into a single string, with each symbol wrapped in quotes, and then assigned this string to the macro variable <code>ticlist_formatted</code>.</p>
+<h2 id="step-2-extract--aggregate-fractional-trading">Step 2: Extract &amp; Aggregate Fractional Trading</h2>
+<p>Before we begin extracting trading data, we need to create an empty dataset—let&rsquo;s call it <code>spft_2020_2024</code>. All newly extracted trading data will be saved to this dataset day by day without generating separate output files.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-3">3</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SAS" data-lang="SAS"><span style="display:flex;"><span><span style="color:#00a8c8">data </span>home<span style="color:#ae81ff">.</span>spft_2020_2024;
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">stop</span><span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">run;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next, we define a function to extract fractional trading for targeted stocks on a given day from the corresponding order book, and then aggregate the number of fractional trades <code>num_ft</code> and total trades <code>num_trd </code> per stock per day. One may also calculate price high and low (<code>maxprice</code> and <code>minprice</code>).</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-19">19</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SAS" data-lang="SAS"><span style="display:flex;"><span><span style="color:#111">%macro</span> getsp(yyyymmdd)<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    data </span>temp1;
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">set</span> taqmsec<span style="color:#ae81ff">.</span>ctm_<span style="color:#111">&amp;yyyymmdd</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">where</span> sym_root <span style="color:#00a8c8">in</span> ( <span style="color:#111">&amp;ticlist_formatted.</span>) <span style="color:#00a8c8">and</span> tr_corr = <span style="color:#d88200">&#34;00&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">if</span> TR_RF <span style="color:#00a8c8">in</span> (<span style="color:#d88200">&#34;B&#34;</span>, <span style="color:#d88200">&#34;N&#34;</span>, <span style="color:#d88200">&#34;T&#34;</span>, <span style="color:#d88200">&#34;Q&#34;</span>) <span style="color:#00a8c8">and</span> size=<span style="color:#ae81ff">1</span> <span style="color:#00a8c8">then</span> ft_flag = <span style="color:#ae81ff">1</span>; <span style="color:#00a8c8">else</span> ft_flag = <span style="color:#ae81ff">0</span><span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    run;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    proc sql;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> temp2 <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> sym_root, date, sym_suffix,
+</span></span><span style="display:flex;"><span>        count(tr_id) <span style="color:#00a8c8">as</span> numt_trd, <span style="color:#111">sum(</span>ft_flag) <span style="color:#00a8c8">as</span> num_ft, <span style="color:#111">max(</span>price) <span style="color:#00a8c8">as</span> maxprice,
+</span></span><span style="display:flex;"><span>        <span style="color:#111">min(</span>price) <span style="color:#00a8c8">as</span> minprice
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">from</span> temp1
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> sym_root, date, sym_suffix<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    quit;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    data </span>home<span style="color:#ae81ff">.</span>spft_2020_2024;
+</span></span><span style="display:flex;"><span>    	<span style="color:#00a8c8">set</span> home<span style="color:#ae81ff">.</span>spft_2020_2024 temp2<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    run;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">%mend</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Once the function <code>getsp</code> for processing daily order books is defined, we can proceed to run it day by day within our specified time frame: 2020-01-01 to 2024-12-31.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-12">12</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SAS" data-lang="SAS"><span style="display:flex;"><span><span style="color:#111">%macro</span> trading_days(start_date, end_date);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%let</span> start_date_num = <span style="color:#111">%sysfunc</span>(<span style="color:#111">inputn(</span><span style="color:#111">&amp;start_date</span>, yymmdd10.));
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%let</span> end_date_num = <span style="color:#111">%sysfunc</span>(<span style="color:#111">inputn(</span><span style="color:#111">&amp;end_date</span>, yymmdd10.));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%do</span> trading_date = <span style="color:#111">&amp;start_date_num</span> <span style="color:#111">%to</span> <span style="color:#111">&amp;end_date_num</span>;
+</span></span><span style="display:flex;"><span>			<span style="color:#111">%let</span> yyyymmdd = <span style="color:#111">%sysfunc</span>(<span style="color:#111">putn(</span><span style="color:#111">&amp;trading_date</span>, yymmddn8.));
+</span></span><span style="display:flex;"><span>			<span style="color:#111">%if</span> <span style="color:#111">%sysfunc</span>(<span style="color:#111">exist(</span>taqmsec<span style="color:#ae81ff">.</span>ctm_<span style="color:#111">&amp;yyyymmdd</span>)) <span style="color:#111">%then</span> <span style="color:#75af00">%getsp</span>(<span style="color:#111">&amp;yyyymmdd</span>);
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%end</span>;
+</span></span><span style="display:flex;"><span><span style="color:#111">%mend</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">%trading_days</span>(<span style="color:#ae81ff">2020-01-01</span>, <span style="color:#ae81ff">2020-01-10</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>By design, if the code runs smoothly, our fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in the home directory.</p>
+<h2 id="step-3-deploy-the-batched-job-in-wrds-cloud">Step 3: Deploy the Batched Job in WRDS Cloud</h2>
+<p>Given the substantial volume of data involved, I highly recommend packaging the code and running it as a batched job in WRDS Cloud. This approach offers several benefits: freeing up your PC’s resources for other tasks, avoiding inefficient data transfers between your PC and WRDS, and leveraging the computational power of WRDS Cloud to accelerate the process.</p>
+<p>In my earlier blog post, <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/">&ldquo;Exploit WRDS Cloud via Python&rdquo;</a>, I introduced how to connect to WRDS Cloud via SSH, link WRDS to your Dropbox account for convenient file exchanges, and deploy batch jobs there. Readers interested in more details can refer to that post. In this post, I assume you’ve already linked your WRDS Cloud to your Dropbox, and I’ll provide another example of how to deploy a batch job to WRDS Cloud—and why you might want to do that.</p>
+<p>As a preparatory step, I batched the code for calculating fractional trading into a SAS file named <code>testft.sas</code>, which is available at <a href="https://www.dropbox.com/scl/fi/0dd5fk3ghm4lfuxxd82qq/testft.sas?rlkey=w440ud3kgcu0bei3rl2vgu9rh&amp;dl=0">this link</a>. Download this SAS file to the root directory of your Dropbox folder to proceed.</p>
+<p>To deploy it to WRDS Cloud, we need:</p>
+<ul>
+<li>
+<p>Open Windows command line or Mac Terminal, and connect WRDS Could through <code>ssh</code>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh yourwrdsusername@wrds-cloud.wharton.upenn.edu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Successful connection will give you:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Upload <code>testft.sas</code> from Dropbox to the home directory of the WRDS Cloud</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli get testft.sas .
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Run <code>testft.sas</code> in WRDS Cloud</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ qsas testft.sas
+</span></span><span style="display:flex;"><span>Your job <span style="color:#ae81ff">32493003</span> <span style="color:#f92672">(</span><span style="color:#d88200">&#34;testft.sas&#34;</span><span style="color:#f92672">)</span> has been submitted
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>You can check the job status with <code>qstat</code> and view the SAS running logs with <code>cat check testft.log</code>. If the logs indicate that the code is running smoothly, you can step away from your desk, enjoy your break (or evening), and harvest your data a while later.</p>
+<h2 id="step-4-harvest-data-from-wrds-cloud">Step 4: Harvest Data From WRDS Cloud</h2>
+<p>Now it&rsquo;s time to harvest your fractional trading measures! Remember, if the code runs smoothly, the fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in your home directory in the Cloud. You can use <code>ls</code> to check whether the dataset has appeared there. If it has, simply copy <code>spft_2020_2024.sas7bdat</code> to your Dropbox folder. In my case, I would like to place it in <code>./Dropbox/Blogbackup/blogdata</code>, so my code is as follows:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>dbxcli put spft_2020_2024.sas7bdat <span style="color:#8045ff">\B</span>logbackup<span style="color:#8045ff">\b</span>logdata<span style="color:#8045ff">\s</span>pft_2020_2024.sas7bdat
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you want to</p>
+<h2 id="discussion">Discussion</h2>
+<p>Note that the calculation method in this post is relatively rough, as it cannot distinguish literal &lsquo;off-exchange one-share&rsquo; trades from fractional trades, since they appear identical in the order book. For those who prefer more precise measures of fractional trading, I recommend Bartlett et al. (2024 JFE). According to this study, it is technologically feasible to leverage the latency between order submission and execution to more accurately identify fractional trading.</p>
+<p>On the other hand, the imperfection of the calculation method in this blog post creates unique research opportunities: Although &lsquo;real fractional trading&rsquo; only appears after November 2019, using &lsquo;off-exchange one-share trades&rsquo; as a proxy for fractional trading allows researchers to observe &lsquo;placebo&rsquo; fractional trades prior to 2019, which bodes well for the design of quasi-natural experiments.</p>
+<p>A powerful example comes from Da et al. (2024, RFS), who find that, relative to cheap stocks (e.g., lower than $80 per share), more expensive ones seem to attract more fractional trading after November 2019. This finding supports the idea that fractional trading relaxes investors&rsquo; capital constraints and allows them to invest in stocks they could not afford without the option to buy in slices.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://raw.githubusercontent.com/xumj2021/Picgo/refs/heads/main/ftpic2.png" width=800 height=500>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 2: Off-Exchange One-Share Trading for High- and Low-Priced Stocks</div>
+</center>
+<p>Last but not least, by plotting the trend of &lsquo;placebo&rsquo; fractional trading before November 2019 and the real such trading afterward, I find that the measurement error of using off-exchange one-share trades as a proxy for fractional trading is reasonably acceptable: at least before November 2019, the number of literal off-exchange one-share trades appears to be minimal.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this blog post, I follow Da et al. (2024, RFS) and present a workflow for calculating off-exchange one-share trading as a proxy for fractional trading, which has been shown to be market-moving during attention-grabbing events or under savvy coordination. Although more precise measures exist, this relatively rough proxy has an acceptable measurement error and offers additional identification advantages for researchers.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Aggarwal, D., A. H. Choi, Y.-H. A. Lee. 2024. Retail Investors and Corporate Governance: Evidence
+from Zero-Commission Trading.</li>
+<li>Bartlett, R. P., J. McCrary, M. O’Hara. 2024. Tiny trades, big questions: Fractional shares. Journal
+of Financial Economics 157: 103836.</li>
+<li>Da, Z., V. W. Fang, W. Lin. 2024. Fractional Trading. The Review of Financial Studies.</li>
+<li>Fang VW, Madsen J, Shao X. Is It all Noise? The Microstructure Implications of Corporate Recurring Advertisements. Journal of Financial and Quantitative Analysis.</li>
+<li>Lin, W. 2024. Strategic Informed Trades and Tiny Trades.</li>
+<li>McCabe, C. 2020. New army of individual investors flexes its muscle. Wall Street Journal .</li>
+<li>Osipovich, A., L. Beilfuss. 2019. Schwab Cuts Fees on Online Stock Trades to Zero, Rattling Rivals.
+Wall Street Journal .</li>
+</ol>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/after-hour-trading-and-information-processing/" data-toggle="tooltip" data-placement="top" title="When Earnings Announcements Go After 4 PM">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
+
+                
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:mx67@duke.edu">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    <li>
+                        <a href="https://twitter.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xumj2021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/mengjie-xu-37410712b/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Democratize Data For Insights" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Mengjie Xu 2025
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
