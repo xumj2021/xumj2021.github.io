@@ -476,8 +476,7 @@ time-consuming, as it requires iterating huge daily order books from 2020 to 202
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>dbxcli put spft_2020_2024.sas7bdat <span style="color:#8045ff">\B</span>logbackup<span style="color:#8045ff">\b</span>logdata<span style="color:#8045ff">\s</span>pft_2020_2024.sas7bdat
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>If you want to</p>
-<h2 id="discussion">Discussion</h2>
+</div><h2 id="discussion">Discussion</h2>
 <p>Note that the calculation method in this post is relatively rough, as it cannot distinguish literal &lsquo;off-exchange one-share&rsquo; trades from fractional trades, since they appear identical in the order book. For those who prefer more precise measures of fractional trading, I recommend Bartlett et al. (2024 JFE). According to this study, it is technologically feasible to leverage the latency between order submission and execution to more accurately identify fractional trading.</p>
 <p>On the other hand, the imperfection of the calculation method in this blog post creates unique research opportunities: Although &lsquo;real fractional trading&rsquo; only appears after November 2019, using &lsquo;off-exchange one-share trades&rsquo; as a proxy for fractional trading allows researchers to observe &lsquo;placebo&rsquo; fractional trades prior to 2019, which bodes well for the design of quasi-natural experiments.</p>
 <p>A powerful example comes from Da et al. (2024, RFS), who find that, relative to cheap stocks (e.g., lower than $80 per share), more expensive ones seem to attract more fractional trading after November 2019. This finding supports the idea that fractional trading relaxes investors&rsquo; capital constraints and allows them to invest in stocks they could not afford without the option to buy in slices.</p>
