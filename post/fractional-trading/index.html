@@ -245,9 +245,19 @@
 <p>Since retail investors’ last major moves on dot-com stocks in the late 1990s, they have been
 largely silent from the capital market for decades until the COVID time. Compared to previous
 retail trading waves, the recent retail influx is characterized by unprecedented market power, fueled by crowdsourced investing ideas from online forums, one-click trading convenience, and greater access to news outlets.</p>
-<p>Looking back, it&rsquo;s tempting to attribute the recent retail influx to COVID, which left people stuck at home with ample time and spared cash due to quarantine and layoffs. However, this cannot explain why retail investors have remained an influential force even after returning to the office.</p>
+<p>Looking back, many tend to attribute the recent retail influx to COVID, which left people stuck at home with ample time and extra cash from quarantine and layoff compensation. However, this cannot explain why retail investors have remained an influential force even after returning to the office.</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://raw.githubusercontent.com/xumj2021/Picgo/refs/heads/main/fredgraph.png" width=800 height=380>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Figure 1: Retail Trade Volume</div>
+</center>
 <p>Digging deeper, one may find that there is another major factor contributing to this wave of retail influx. In November 2019, major brokers such as Charles Schwab and Robinhood began offering fractional trading. Instead of requiring one share as the minimum purchase, brokers began allowing investors to buy fractional shares for as little as a penny. This is undoubtedly a game changer: it greatly lowered the entry barriers not only to expensive stocks that people couldn’t afford before, but also to the entire stock market.</p>
-<p>One illustrative example from Da et al. (2024, RFS): With a single share trading well above a quarter of a million dollars, Berkshire Hathaway’s Class A stock (BRK.A) is commonly considered out of reach for most retail investors. However, as Figure 1 from Da et al. (2024, RFS) shows, the stock has experienced a sharp increase in Robinhood ownership since 2019.</p>
+<p>One illustrative example from Da et al. (2024, RFS): With a single share trading well above a quarter of a million dollars, Berkshire Hathaway’s Class A stock (BRK.A) is commonly considered out of reach for most retail investors. However, as Figure 2 from Da et al. (2024, RFS) shows, the stock has experienced a sharp increase in Robinhood ownership since 2019.</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -256,18 +266,18 @@ retail trading waves, the recent retail influx is characterized by unprecedented
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 1: Number of Robinhood Users Holding BRK.A</div>
+    padding: 2px;">Figure 2: Number of Robinhood Users Holding BRK.A</div>
 </center>
-<p>Though individually minimal, fractional trading—when coordinated during attention-grabbing events—is powerful enough to exert significant price pressure even on high-priced stocks, fueling meme-stock-like trading frenzies and bubbles (Da et al., 2024, RFS). Therefore, recognizing that this wave of retail influx is not a temporary byproduct of COVID, but rather a more prolonged fundamental change in market mechanics, is important for companies, institutional investors, and policymakers—many of whom seem to have already acknowledged  and moved upon this &ldquo;New normal.&rdquo;</p>
+<p>Though individually minimal, fractional trading—when coordinated during attention-grabbing events—is powerful enough to exert significant price pressure even on high-priced stocks, fueling meme-stock-like trading frenzies and bubbles (Da et al., 2024, RFS). Therefore, recognizing that this wave of retail influx is not a temporary byproduct of COVID, but rather a more prolonged fundamental change in market dynamics, is important for companies, institutional investors, and policymakers—many of whom seem to have already acknowledged  and moved upon this &ldquo;New normal.&rdquo;</p>
 <p>Recent studies suggest that institutional investors do not remain unchanged with the retail influx; they are found to ‘ride on the bubbles’ and systematically take advantage of the additional stock volatility brought by retail investors (Lin, 2024 WP, Fang et al., 2024 JFQA). In addition, institutional investors are shown to hold fewer shares and firms see less voting participation in shareholder meetings, suggesting that retail investors altered shareholder structures but cannot contribute to corporate governance the same way as their predecessors did (Aggarwal et al., 2024 WP). On the other hand, many companies realized that they cannot deter retail investors by maintaining an unaffordable stock price anymore but must carefully manage this new shareholder base to avoid potential backlashes (McCabe, 2020).</p>
 <p>There are certainly more fascinating aspects we can explore about these ongoing market dynamics. To support these explorations, in this blog, I will follow Da et al. (2024, RFS) and introduce a method for quantifying firm-level daily exposure to fractional trading.</p>
 <h2 id="how-does-fractional-trading-manifest-in-the-order-book">How Does Fractional Trading Manifest in the Order Book?</h2>
 <p>I follow Da et al. (2024, RFS) and rely on the off-exchange one-share trades to capture fractional trading. The rationales, according to Da et al. (2024, RFS), are as follows.</p>
 <ol>
 <li>Most retail investors place orders through online trading platforms like Robinhood, which bundle these orders and sell them to off-exchange market makers such as Virtu for internalization (Osipovich, 2021). These off-exchange trades are then reported to a Financial Industry Regulatory Authority (FINRA) Trade Reporting Facility (TRF), which can be identified from the order book.</li>
-<li>When reported to a FINRA TRF, the fractional share portion of the order appears as a one-share trade, in accordance with the &lsquo;rounding-up rule.&rsquo;</li>
+<li>When reported to a FINRA TRF, the fractional orders appear as a one-share trades per the &lsquo;rounding-up rule.&rsquo;</li>
 </ol>
-<p>The algorithm is extremely simple and intuitive:</p>
+<p>Institutional background above, the algorithm to quantify fractional trading is extremely simple and intuitive:</p>
 <ol>
 <li><strong>First</strong>, determine the set of stocks of interest—for example, S&amp;P 500 firms—and the time frame, say 2020-01-01 to 2024-12-31.</li>
 <li><strong>Second</strong>, identify the TRFs where fractional trading is likely to be reported. Following Da et al. (2024, RFS), the possible <code>TR_RF</code> values in order book provided by WRDS-TAQ database are:
@@ -281,9 +291,9 @@ retail trading waves, the recent retail influx is characterized by unprecedented
 <li><strong>Third</strong>, extract one-share trades from the orders reported to the TRFs listed above—that&rsquo;s the fractional trading you&rsquo;re aiming to capture.</li>
 </ol>
 <p>Although algorithmically simple, the calculation of fractional trading can be computationally intensive and
-time-consuming, as it requires iterating huge daily order books from 2020 to 2024. Given this, I highly recommend deploying this task as a <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/#batch-jobs-on-the-wrds-cloud">batched job on the WRDS cloud</a> instead of running it with PC SAS.</p>
+time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/deal-with-high-frequency-data/">huge daily order books</a> from 2020 to 2024. Given this, I highly recommend deploying this task as a <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/#batch-jobs-on-the-wrds-cloud">batched job on the WRDS cloud</a> instead of running it with PC SAS.</p>
 <h2 id="step-1-extract-sp-500-stock-symbols">Step 1: Extract S&amp;P 500 stock symbols</h2>
-<p>The S&amp;P 500 firm list is provided by the CRSP database with <code>permno</code> as the identifier. I merged it with the WRDS CRSP-TAQ linking table to obtain the stock symbols. As the S&amp;P 500 list can change over time, I only keep firms included as of Dec 31, 2019.</p>
+<p>The S&amp;P 500 firm list is provided by the CRSP database with <code>permno</code> as the identifier. I merged it with the WRDS CRSP-TAQ linking table to obtain the stock symbols. As the S&amp;P 500 list can change over time, I only keep firms included in the index as of Dec 31, 2019.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1"> 1</a>
@@ -415,7 +425,7 @@ time-consuming, as it requires iterating huge daily order books from 2020 to 202
 </div>
 </div><p>By design, if the code runs smoothly, our fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in the home directory.</p>
 <h2 id="step-3-deploy-the-batched-job-in-wrds-cloud">Step 3: Deploy the Batched Job in WRDS Cloud</h2>
-<p>Given the substantial volume of data involved, I highly recommend packaging the code and running it as a batched job in WRDS Cloud. This approach offers several benefits: freeing up your PC’s resources for other tasks, avoiding inefficient data transfers between your PC and WRDS, and leveraging the computational power of WRDS Cloud to accelerate the process.</p>
+<p>Given the substantial volume of data involved, I highly recommend packaging the code and running it as a batched job in WRDS Cloud. This approach offers several benefits: freeing up your PC’s resources for other tasks, avoiding inefficient data transfers between your PC and WRDS, and leveraging the computational power of WRDS Cloud to accelerate the calculation.</p>
 <p>In my earlier blog post, <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/">&ldquo;Exploit WRDS Cloud via Python&rdquo;</a>, I introduced how to connect to WRDS Cloud via SSH, link WRDS to your Dropbox account for convenient file exchanges, and deploy batch jobs there. Readers interested in more details can refer to that post. In this post, I assume you’ve already linked your WRDS Cloud to your Dropbox, and I’ll provide another example of how to deploy a batch job to WRDS Cloud—and why you might want to do that.</p>
 <p>As a preparatory step, I batched the code for calculating fractional trading into a SAS file named <code>testft.sas</code>, which is available at <a href="https://www.dropbox.com/scl/fi/0dd5fk3ghm4lfuxxd82qq/testft.sas?rlkey=w440ud3kgcu0bei3rl2vgu9rh&amp;dl=0">this link</a>. Download this SAS file to the root directory of your Dropbox folder to proceed.</p>
 <p>To deploy it to WRDS Cloud, we need:</p>
@@ -465,21 +475,133 @@ time-consuming, as it requires iterating huge daily order books from 2020 to 202
 </div>
 </div></li>
 </ul>
-<p>You can check the job status with <code>qstat</code> and view the SAS running logs with <code>cat check testft.log</code>. If the logs indicate that the code is running smoothly, you can step away from your desk, enjoy your break (or evening), and harvest your data a while later.</p>
+<p>You can check the job status with <code>qstat</code> and view the SAS running logs with <code>cat check testft.log</code>. If the logs indicate that the code is running smoothly, you can enjoy your break (or evening) and harvest your data a little later.</p>
 <h2 id="step-4-harvest-data-from-wrds-cloud">Step 4: Harvest Data From WRDS Cloud</h2>
-<p>Now it&rsquo;s time to harvest your fractional trading measures! Remember, if the code runs smoothly, the fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in your home directory in the Cloud. You can use <code>ls</code> to check whether the dataset has appeared there. If it has, simply copy <code>spft_2020_2024.sas7bdat</code> to your Dropbox folder. In my case, I would like to place it in <code>./Dropbox/Blogbackup/blogdata</code>, so my code is as follows:</p>
+<p>Now it&rsquo;s time to harvest your fractional trading measures! Remember, if the code runs smoothly, the fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in your home directory of the Cloud. You can use <code>ls</code> to check whether the dataset has appeared there. If it has, simply download <code>spft_2020_2024.sas7bdat</code> to your Dropbox folder. In my case, I would like to place it in <code>.\Dropbox\Blogbackup\blogdata</code>, so my code is as follows:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>dbxcli put spft_2020_2024.sas7bdat <span style="color:#8045ff">\B</span>logbackup<span style="color:#8045ff">\b</span>logdata<span style="color:#8045ff">\s</span>pft_2020_2024.sas7bdat
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli put spft_2020_2024.sas7bdat <span style="color:#8045ff">\B</span>logbackup<span style="color:#8045ff">\b</span>logdata<span style="color:#8045ff">\s</span>pft_2020_2024.sas7bdat
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you have multiple files with similar names and find downloading them one by one time-consuming, I recommend writing a <code>bash</code> script to automate the task. Simply save the following shell script as a bash file named <code>syncwrds.sh</code> and upload it to WRDS Cloud in the same way you upload a SAS file.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-28">28</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Prompt the user to enter the directory to search in</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">read</span> -p <span style="color:#d88200">&#34;Enter the directory to download to: &#34;</span> dest_dir
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Prompt the user to enter the keywords</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">read</span> -p <span style="color:#d88200">&#34;Enter the keywords to search for in filenames: &#34;</span> keywords
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Iterate over all files in the current directory</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">for</span> file in ./*<span style="color:#111">;</span> <span style="color:#00a8c8">do</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">if</span> <span style="color:#f92672">[</span> -f <span style="color:#d88200">&#34;</span><span style="color:#111">$file</span><span style="color:#d88200">&#34;</span> <span style="color:#f92672">]</span><span style="color:#111">;</span> <span style="color:#00a8c8">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Extract the base name of the file</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">filename</span><span style="color:#f92672">=</span><span style="color:#00a8c8">$(</span>basename <span style="color:#d88200">&#34;</span><span style="color:#111">$file</span><span style="color:#d88200">&#34;</span><span style="color:#00a8c8">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Check if the file name contains the specified keywords</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">if</span> <span style="color:#f92672">[[</span> <span style="color:#d88200">&#34;</span><span style="color:#111">$filename</span><span style="color:#d88200">&#34;</span> <span style="color:#f92672">==</span> *<span style="color:#d88200">&#34;</span><span style="color:#111">$keywords</span><span style="color:#d88200">&#34;</span>* <span style="color:#f92672">]]</span><span style="color:#111">;</span> <span style="color:#00a8c8">then</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Check if the file already exists in the destination folder on Dropbox</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">if</span> ! dbxcli ls <span style="color:#d88200">&#34;</span><span style="color:#111">$dest_dir</span><span style="color:#d88200">&#34;</span> <span style="color:#111">|</span> grep -q <span style="color:#d88200">&#34;</span><span style="color:#111">$filename</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#00a8c8">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Run the dbxcli command to upload the file</span>
+</span></span><span style="display:flex;"><span>        dbxcli put <span style="color:#d88200">&#34;</span><span style="color:#111">$file</span><span style="color:#d88200">&#34;</span> <span style="color:#d88200">&#34;</span><span style="color:#111">$dest_dir</span><span style="color:#d88200">/</span><span style="color:#111">$filename</span><span style="color:#d88200">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">echo</span> <span style="color:#d88200">&#34;Uploaded </span><span style="color:#111">$filename</span><span style="color:#d88200">&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">echo</span> <span style="color:#d88200">&#34;File </span><span style="color:#111">$filename</span><span style="color:#d88200"> already exists in </span><span style="color:#111">$dest_dir</span><span style="color:#d88200">, skipping download.&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fi</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">echo</span> <span style="color:#d88200">&#34;All matching files have been processed.&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As <code>syncwrds.sh</code> is in DOS/Windows format and WRDS Cloud uses Unix/Linux format, we need to run the <code>dosunix</code> command to convert the line endings.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli get syncwrds.sh
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dos2unix syncwrds.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now you’re ready to batch-download files from WRDS to your Dropbox folders! For example, if I want to download all files with names containing the word <code>get</code> to my local Dropbox folder <code>.\Dropbox\Blogbackup\blogdata</code>, I simply run the bash file <code>syncwrds.sh</code> as follows.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ sh syncwrds.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It will ask you to enter the directory where you want to download the data, to which I enter <code>\Blogbackup\blogdata</code>, and then ask for the keyword that filenames should contain, to which I enter <code>get</code>. All files satisfying this criteria that do not already exist in <code>/Blogbackup/blogdata</code> will then be downloaded to this directory.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-11">11</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>xumj2024@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ sh syncwrds.sh
+</span></span><span style="display:flex;"><span>Enter the directory to download to: /Blogbackup/blogdata
+</span></span><span style="display:flex;"><span>Enter the keywords to search <span style="color:#00a8c8">for</span> in filenames: get
+</span></span><span style="display:flex;"><span>Uploading <span style="color:#ae81ff">70</span> KiB/70 KiB
+</span></span><span style="display:flex;"><span>Uploaded getclinical.log
+</span></span><span style="display:flex;"><span>File getclinical.sas already exists in /Blogbackup/blogdata, skipping download.
+</span></span><span style="display:flex;"><span>Uploading 8.2 KiB/8.2 KiB
+</span></span><span style="display:flex;"><span>Uploaded getlinksori.sas
+</span></span><span style="display:flex;"><span>Uploading 8.4 KiB/8.4 KiB
+</span></span><span style="display:flex;"><span>Uploaded getlinks.sas
+</span></span><span style="display:flex;"><span>All matching files have been processed.
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="discussion">Discussion</h2>
-<p>Note that the calculation method in this post is relatively rough, as it cannot distinguish literal &lsquo;off-exchange one-share&rsquo; trades from fractional trades, since they appear identical in the order book. For those who prefer more precise measures of fractional trading, I recommend Bartlett et al. (2024 JFE). According to this study, it is technologically feasible to leverage the latency between order submission and execution to more accurately identify fractional trading.</p>
+<p>Note that the calculation method in this post is relatively rough, as it cannot distinguish literal &lsquo;off-exchange one-share&rsquo; trades from fractional trades—they appear identical in the order book. For those who prefer more precise measures of fractional trading, I recommend Bartlett et al. (2024 JFE). According to this study, it is technologically feasible to leverage the latency between order submission and execution to more accurately identify fractional trading.</p>
 <p>On the other hand, the imperfection of the calculation method in this blog post creates unique research opportunities: Although &lsquo;real fractional trading&rsquo; only appears after November 2019, using &lsquo;off-exchange one-share trades&rsquo; as a proxy for fractional trading allows researchers to observe &lsquo;placebo&rsquo; fractional trades prior to 2019, which bodes well for the design of quasi-natural experiments.</p>
-<p>A powerful example comes from Da et al. (2024, RFS), who find that, relative to cheap stocks (e.g., lower than $80 per share), more expensive ones seem to attract more fractional trading after November 2019. This finding supports the idea that fractional trading relaxes investors&rsquo; capital constraints and allows them to invest in stocks they could not afford without the option to buy in slices.</p>
+<p>A powerful case comes from Da et al. (2024, RFS), who find that, relative to cheap stocks (e.g., lower than $80 per share), more expensive ones attracted more fractional trading after November 2019. This finding supports the idea that fractional trading relaxes investors&rsquo; capital constraints and allows them to invest in stocks they could not afford without the option to buy in slices.</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
@@ -488,9 +610,9 @@ time-consuming, as it requires iterating huge daily order books from 2020 to 202
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #999;
-    padding: 2px;">Figure 2: Off-Exchange One-Share Trading for High- and Low-Priced Stocks</div>
+    padding: 2px;">Figure 3: Off-Exchange One-Share Trading for High- and Low-Priced Stocks</div>
 </center>
-<p>Last but not least, by plotting the trend of &lsquo;placebo&rsquo; fractional trading before November 2019 and the real such trading afterward, I find that the measurement error of using off-exchange one-share trades as a proxy for fractional trading is reasonably acceptable: at least before November 2019, the number of literal off-exchange one-share trades appears to be minimal.</p>
+<p>Last but not least, by plotting the trend of &lsquo;placebo&rsquo; fractional trading before November 2019 and the real such trading afterward, one may find that the measurement error of using off-exchange one-share trades as a proxy for fractional trading is reasonably acceptable: at least before November 2019, the number of literal off-exchange one-share trades appears to be minimal.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>In this blog post, I follow Da et al. (2024, RFS) and present a workflow for calculating off-exchange one-share trading as a proxy for fractional trading, which has been shown to be market-moving during attention-grabbing events or under savvy coordination. Although more precise measures exist, this relatively rough proxy has an acceptable measurement error and offers additional identification advantages for researchers.</p>
 <h2 id="references">References</h2>
