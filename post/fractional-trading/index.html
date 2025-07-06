@@ -427,14 +427,136 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 <h2 id="step-3-deploy-the-batched-job-in-wrds-cloud">Step 3: Deploy the Batched Job in WRDS Cloud</h2>
 <p>Given the substantial volume of data involved, I highly recommend packaging the code and running it as a batched job in WRDS Cloud. This approach offers several benefits: freeing up your PC’s resources for other tasks, avoiding inefficient data transfers between your PC and WRDS, and leveraging the computational power of WRDS Cloud to accelerate the calculation.</p>
 <p>In my earlier blog post, <a href="https://mengjiexu.com/post/connect-to-wrds-via-python/">&ldquo;Exploit WRDS Cloud via Python&rdquo;</a>, I introduced how to connect to WRDS Cloud via SSH, link WRDS to your Dropbox account for convenient file exchanges, and deploy batch jobs there. Readers interested in more details can refer to that post. In this post, I assume you’ve already linked your WRDS Cloud to your Dropbox, and I’ll provide another example of how to deploy a batch job to WRDS Cloud—and why you might want to do that.</p>
-<p>As a preparatory step, I batched the code for calculating fractional trading into a SAS file named <code>testft.sas</code>, which is available at <a href="https://www.dropbox.com/scl/fi/0dd5fk3ghm4lfuxxd82qq/testft.sas?rlkey=w440ud3kgcu0bei3rl2vgu9rh&amp;dl=0">this link</a>. Download this SAS file to the root directory of your Dropbox folder to proceed.</p>
-<p>To deploy it to WRDS Cloud, we need:</p>
+<p>As a preparatory step, I batched the following code into a SAS file named <code>testft.sas</code>, which is available at <a href="https://www.dropbox.com/scl/fi/0dd5fk3ghm4lfuxxd82qq/testft.sas?rlkey=w440ud3kgcu0bei3rl2vgu9rh&amp;dl=0">this link</a>. Download this SAS file to the root directory of your Dropbox folder to proceed.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-36">36</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-37"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-37">37</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-38"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-38">38</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-39"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-39">39</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-40"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-40">40</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-41"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-41">41</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-42"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-42">42</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-43"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-43">43</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-44"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-44">44</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-45"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-45">45</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-46"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-46">46</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-47"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-47">47</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-48"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-48">48</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-49"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-49">49</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-50"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-50">50</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-51"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-51">51</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-52"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-52">52</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-53"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-53">53</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-54"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-54">54</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-55"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-55">55</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-56"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-56">56</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-57"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-57">57</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-58"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-58">58</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sas" data-lang="sas"><span style="display:flex;"><span><span style="color:#00a8c8">Options</span> syntaxcheck=<span style="color:#ae81ff">0</span> obs=MAX<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">proc sql;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> sp500 <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> symbol
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">from</span> crsp<span style="color:#ae81ff">.</span>dsp500list a, wrdsapps<span style="color:#ae81ff">.</span>tclink b
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">where</span> a<span style="color:#ae81ff">.</span>permno=b<span style="color:#ae81ff">.</span>permno <span style="color:#00a8c8">and</span> start&lt;=<span style="color:#d88200">&#34;31Dec2019&#34;</span>d&lt;=ending<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">quit;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">proc sql </span>noprint;
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> symbol <span style="color:#00a8c8">into</span> :ticlist separated <span style="color:#00a8c8">by</span> <span style="color:#d88200">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">from</span> sp500<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">quit;</span>  
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">data </span><span style="color:#00a8c8">_null_</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">length</span> temp $<span style="color:#ae81ff">20000</span>;
+</span></span><span style="display:flex;"><span>	temp=cat(<span style="color:#d88200">&#39;&#34;&#39;</span>,<span style="color:#111">tranwrd(</span><span style="color:#d88200">&#34;</span><span style="color:#111">&amp;ticlist.</span><span style="color:#d88200">&#34;</span>,<span style="color:#d88200">&#34; &#34;</span>,<span style="color:#d88200">&#39;&#34; &#34;&#39;</span>),<span style="color:#d88200">&#39;&#34;&#39;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">call</span> symput(<span style="color:#d88200">&#39;ticlist_formatted&#39;</span>,temp)<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">run;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">data </span>home<span style="color:#ae81ff">.</span>spft_2020_2024;
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">stop</span><span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">run;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">%macro</span> getsp(yyyymmdd)<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    data </span>temp1;
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">set</span> taqmsec<span style="color:#ae81ff">.</span>ctm_<span style="color:#111">&amp;yyyymmdd</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">where</span> sym_root <span style="color:#00a8c8">in</span> ( <span style="color:#111">&amp;ticlist_formatted.</span>) <span style="color:#00a8c8">and</span> tr_corr = <span style="color:#d88200">&#34;00&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">if</span> TR_RF <span style="color:#00a8c8">in</span> (<span style="color:#d88200">&#34;B&#34;</span>, <span style="color:#d88200">&#34;N&#34;</span>, <span style="color:#d88200">&#34;T&#34;</span>, <span style="color:#d88200">&#34;Q&#34;</span>) <span style="color:#00a8c8">and</span> size=<span style="color:#ae81ff">1</span> <span style="color:#00a8c8">then</span> ft_flag = <span style="color:#ae81ff">1</span>; <span style="color:#00a8c8">else</span> ft_flag = <span style="color:#ae81ff">0</span><span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    run;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    proc sql;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">create</span> <span style="color:#00a8c8">table</span> temp2 <span style="color:#00a8c8">as</span> <span style="color:#00a8c8">select</span> <span style="color:#00a8c8">distinct</span> sym_root, date, sym_suffix,
+</span></span><span style="display:flex;"><span>        count(tr_id) <span style="color:#00a8c8">as</span> numt_trd, <span style="color:#111">sum(</span>ft_flag) <span style="color:#00a8c8">as</span> num_ft, <span style="color:#111">max(</span>price) <span style="color:#00a8c8">as</span> maxprice,
+</span></span><span style="display:flex;"><span>        <span style="color:#111">min(</span>price) <span style="color:#00a8c8">as</span> minprice
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">from</span> temp1
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">group</span> <span style="color:#00a8c8">by</span> sym_root, date, sym_suffix<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    quit;</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    data </span>home<span style="color:#ae81ff">.</span>spft_2020_2024;
+</span></span><span style="display:flex;"><span>    	<span style="color:#00a8c8">set</span> home<span style="color:#ae81ff">.</span>spft_2020_2024 temp2<span style="color:#00a8c8">;
+</span></span></span><span style="display:flex;"><span><span style="color:#00a8c8">    run;</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">%mend</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">%macro</span> trading_days(start_date, end_date);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">/* Convert start and end dates to SAS date format */</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%let</span> start_date_num = <span style="color:#111">%sysfunc</span>(<span style="color:#111">inputn(</span><span style="color:#111">&amp;start_date</span>, yymmdd10.));
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%let</span> end_date_num = <span style="color:#111">%sysfunc</span>(<span style="color:#111">inputn(</span><span style="color:#111">&amp;end_date</span>, yymmdd10.));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">/* Loop through each date in the range */</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%do</span> trading_date = <span style="color:#111">&amp;start_date_num</span> <span style="color:#111">%to</span> <span style="color:#111">&amp;end_date_num</span>;
+</span></span><span style="display:flex;"><span>	        <span style="color:#75715e">/* Check if the day is not a weekend */</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#111">%let</span> yyyymmdd = <span style="color:#111">%sysfunc</span>(<span style="color:#111">putn(</span><span style="color:#111">&amp;trading_date</span>, yymmddn8.));
+</span></span><span style="display:flex;"><span>			<span style="color:#111">%if</span> <span style="color:#111">%sysfunc</span>(<span style="color:#111">exist(</span>taqmsec<span style="color:#ae81ff">.</span>ctm_<span style="color:#111">&amp;yyyymmdd</span>)) <span style="color:#111">%then</span> <span style="color:#75af00">%getsp</span>(<span style="color:#111">&amp;yyyymmdd</span>);
+</span></span><span style="display:flex;"><span>	    <span style="color:#111">%end</span>;
+</span></span><span style="display:flex;"><span><span style="color:#111">%mend</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75af00">%trading_days</span>(<span style="color:#ae81ff">2020-01-01</span>, <span style="color:#ae81ff">2024-12-31</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To deploy it to WRDS Cloud, we need:</p>
 <ul>
 <li>
 <p>Open Windows command line or Mac Terminal, and connect WRDS Could through <code>ssh</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh yourwrdsusername@wrds-cloud.wharton.upenn.edu
@@ -443,7 +565,7 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </div><p>Successful connection will give you:</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$
@@ -454,7 +576,7 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 <p>Upload <code>testft.sas</code> from Dropbox to the home directory of the WRDS Cloud</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli get testft.sas .
@@ -465,8 +587,8 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 <p>Run <code>testft.sas</code> in WRDS Cloud</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-1">1</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-2">2</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-2">2</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ qsas testft.sas
@@ -475,18 +597,9 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </div>
 </div></li>
 </ul>
-<p>You can check the job status with <code>qstat</code> and view the SAS running logs with <code>cat check testft.log</code>. If the logs indicate that the code is running smoothly, you can enjoy your break (or evening) and harvest your data a little later.</p>
+<p>You can check the job status with <code>qstat</code> and view the SAS running logs with <code>cat check testft.log</code>. If the logs indicate that the code is running smoothly, you can enjoy your break (or evening) and harvest your data a while later.</p>
 <h2 id="step-4-harvest-data-from-wrds-cloud">Step 4: Harvest Data From WRDS Cloud</h2>
-<p>Now it&rsquo;s time to harvest your fractional trading measures! Remember, if the code runs smoothly, the fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in your home directory of the Cloud. You can use <code>ls</code> to check whether the dataset has appeared there. If it has, simply download <code>spft_2020_2024.sas7bdat</code> to your Dropbox folder. In my case, I would like to place it in <code>/Blogbackup/blogdata</code>, so my code is as follows:</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-1">1</a>
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli put spft_2020_2024.sas7bdat /Blogbackup/blogdata/spft_2020_2024.sas7bdat
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>If you have multiple files with similar names and find downloading them one by one time-consuming, I recommend writing a <code>bash</code> script to automate the task. Simply save the following shell script as a bash file named <code>syncwrds.sh</code> and upload <a href="https://www.dropbox.com/scl/fi/glh849vhfbkp0nd2389dp/syncwrds.sh?rlkey=jjz0nwbgewd6z110hcv0bbn88&amp;dl=0">this bash file</a> to WRDS Cloud in the same way you upload a SAS file.</p>
+<p>I had this batched job running in WRDS before I left work, and harvested the data the next morning. The running log suggests that it takes <code>8:09:35.93</code> to finish this batched job, and there are 774485 observations and 7 variables collected into <code>spft_2020_2024.sas7bdat</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-1"> 1</a>
@@ -500,23 +613,196 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-9"> 9</a>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-10">10</a>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-11">11</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-12">12</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-13">13</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-14">14</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-15">15</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-16">16</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-17">17</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-18">18</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-19">19</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-20">20</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-21">21</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-22">22</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-23">23</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-24">24</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-25">25</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-26">26</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-27">27</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-28">28</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sas" data-lang="sas"><span style="display:flex;"><span>NOTE: There were <span style="color:#ae81ff">773901</span> observations read <span style="color:#00a8c8">from</span> the data <span style="color:#00a8c8">set</span> HOME<span style="color:#ae81ff">.</span>SPFT_2020_2024.
+</span></span><span style="display:flex;"><span>NOTE: There were <span style="color:#ae81ff">584</span> observations read <span style="color:#00a8c8">from</span> the data <span style="color:#00a8c8">set</span> WORK<span style="color:#ae81ff">.</span>TEMP2.
+</span></span><span style="display:flex;"><span>NOTE: The data <span style="color:#00a8c8">set</span> HOME<span style="color:#ae81ff">.</span>SPFT_2020_2024 has <span style="color:#ae81ff">774485</span> observations <span style="color:#00a8c8">and</span> <span style="color:#ae81ff">7</span> variables.
+</span></span><span style="display:flex;"><span>NOTE: DATA statement used (Total process time):
+</span></span><span style="display:flex;"><span>      real time           <span style="color:#ae81ff">0.19</span> seconds
+</span></span><span style="display:flex;"><span>      cpu time            <span style="color:#ae81ff">0.10</span> seconds
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA <span style="color:#ae81ff">27513-2414</span>
+</span></span><span style="display:flex;"><span>NOTE: The SAS System used:
+</span></span><span style="display:flex;"><span>      real time           <span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">09</span>:<span style="color:#ae81ff">35.93</span>
+</span></span><span style="display:flex;"><span>      cpu time            <span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">37</span>:<span style="color:#ae81ff">46.06</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now it&rsquo;s time to harvest your fractional trading measures! Remember, if the code runs smoothly, the fractional trading calculations will be integrated into <code>spft_2020_2024.sas7bdat</code> in your home directory of the Cloud. You can use <code>ls</code> to check whether the dataset has appeared there. If it has, simply download <code>spft_2020_2024.sas7bdat</code> to your Dropbox folder. In my case, I would like to place it in <code>/Blogbackup/blogdata</code>, so my code is as follows:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli put spft_2020_2024.sas7bdat /Blogbackup/blogdata/spft_2020_2024.sas7bdat
+</span></span><span style="display:flex;"><span>Uploading <span style="color:#ae81ff">42</span> MiB/42 MiB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The output dataset is as follows.</p>
+<table>
+  <thead>
+      <tr>
+          <th>SYM_ROOT</th>
+          <th>DATE</th>
+          <th>SYM_SUFFIX</th>
+          <th>numt_trd</th>
+          <th>num_ft</th>
+          <th>maxprice</th>
+          <th>minprice</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>A</td>
+          <td>20200102</td>
+          <td></td>
+          <td>15694</td>
+          <td>108</td>
+          <td>86.35</td>
+          <td>85.03</td>
+      </tr>
+      <tr>
+          <td>AA</td>
+          <td>20200102</td>
+          <td></td>
+          <td>19189</td>
+          <td>64</td>
+          <td>21.86</td>
+          <td>21</td>
+      </tr>
+      <tr>
+          <td>AAL</td>
+          <td>20200102</td>
+          <td></td>
+          <td>38034</td>
+          <td>358</td>
+          <td>29.3</td>
+          <td>28.65</td>
+      </tr>
+      <tr>
+          <td>AAP</td>
+          <td>20200102</td>
+          <td></td>
+          <td>12278</td>
+          <td>199</td>
+          <td>161</td>
+          <td>157.53</td>
+      </tr>
+      <tr>
+          <td>AAPL</td>
+          <td>20200102</td>
+          <td></td>
+          <td>283484</td>
+          <td>10634</td>
+          <td>311.9366</td>
+          <td>289.44</td>
+      </tr>
+      <tr>
+          <td>ABBV</td>
+          <td>20200102</td>
+          <td></td>
+          <td>45884</td>
+          <td>927</td>
+          <td>89.73</td>
+          <td>88.51</td>
+      </tr>
+      <tr>
+          <td>ABC</td>
+          <td>20200102</td>
+          <td></td>
+          <td>11450</td>
+          <td>130</td>
+          <td>86.39</td>
+          <td>84.3201</td>
+      </tr>
+      <tr>
+          <td>…</td>
+          <td>…</td>
+          <td></td>
+          <td>…</td>
+          <td>…</td>
+          <td>…</td>
+          <td>…</td>
+      </tr>
+      <tr>
+          <td>YUM</td>
+          <td>20241231</td>
+          <td></td>
+          <td>22099</td>
+          <td>2993</td>
+          <td>136.46</td>
+          <td>130</td>
+      </tr>
+      <tr>
+          <td>ZBRA</td>
+          <td>20241231</td>
+          <td></td>
+          <td>12417</td>
+          <td>1678</td>
+          <td>397.87</td>
+          <td>380.02</td>
+      </tr>
+      <tr>
+          <td>ZION</td>
+          <td>20241231</td>
+          <td></td>
+          <td>15955</td>
+          <td>1274</td>
+          <td>55.7</td>
+          <td>53.94</td>
+      </tr>
+      <tr>
+          <td>ZION</td>
+          <td>20241231</td>
+          <td>P</td>
+          <td>62</td>
+          <td>0</td>
+          <td>24.99</td>
+          <td>22.61</td>
+      </tr>
+      <tr>
+          <td>ZTS</td>
+          <td>20241231</td>
+          <td></td>
+          <td>24746</td>
+          <td>2820</td>
+          <td>178.78</td>
+          <td>160.01</td>
+      </tr>
+  </tbody>
+</table>
+<p>If you have multiple files with similar names and find downloading them one by one time-consuming, I recommend writing a <code>bash</code> script to automate the task. Simply save the following shell script as a bash file named <code>syncwrds.sh</code> and upload <a href="https://www.dropbox.com/scl/fi/glh849vhfbkp0nd2389dp/syncwrds.sh?rlkey=jjz0nwbgewd6z110hcv0bbn88&amp;dl=0">this bash file</a> to WRDS Cloud in the same way you upload a SAS file.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-28">28</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
@@ -540,7 +826,7 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </span></span><span style="display:flex;"><span>        dbxcli put <span style="color:#d88200">&#34;</span><span style="color:#111">$file</span><span style="color:#d88200">&#34;</span> <span style="color:#d88200">&#34;</span><span style="color:#111">$dest_dir</span><span style="color:#d88200">/</span><span style="color:#111">$filename</span><span style="color:#d88200">&#34;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#111">echo</span> <span style="color:#d88200">&#34;Uploaded </span><span style="color:#111">$filename</span><span style="color:#d88200">&#34;</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">else</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#111">echo</span> <span style="color:#d88200">&#34;File </span><span style="color:#111">$filename</span><span style="color:#d88200"> already exists in </span><span style="color:#111">$dest_dir</span><span style="color:#d88200">, skipping download.&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">echo</span> <span style="color:#d88200">&#34;File </span><span style="color:#111">$filename</span><span style="color:#d88200"> already exists in </span><span style="color:#111">$dest_dir</span><span style="color:#d88200">, skipping upload.&#34;</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#00a8c8">fi</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fi</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#00a8c8">fi</span>
@@ -552,8 +838,8 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </div><p>As <code>syncwrds.sh</code> is in DOS/Windows format and WRDS Cloud uses Unix/Linux format, we need to run the <code>dosunix</code> command to convert the line endings.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-1">1</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-2">2</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-2">2</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ dbxcli get syncwrds.sh
@@ -563,26 +849,26 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </div><p>Now you’re ready to batch-download files from WRDS to your Dropbox folders! For example, if I want to download all files with names containing the word <code>get</code> to my local Dropbox folder <code>.\Dropbox\Blogbackup\blogdata</code>, I simply run the bash file <code>syncwrds.sh</code> as follows.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-1">1</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-1">1</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ sh syncwrds.sh
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>It will ask you to enter the directory where you want to download the data, to which I enter <code>/Blogbackup/blogdata</code>, and then ask for the keyword that filenames should contain, to which I enter <code>get</code>. All files in your WRDS Cloud that satisfy this criterion and do not already exist in <code>/Blogbackup/blogdata</code> will then be downloaded to your designated local Dropbox folder <code>/Blogbackup/blogdata</code>.</p>
+</div><p>It will ask you to enter the directory where you want to download the data, to which I enter <code>/Blogbackup/blogdata</code>, and then ask for the keyword that filenames should contain, to which I enter <code>get</code>. All files in your WRDS Cloud that satisfy this criterion and do not already exist in <code>/Blogbackup/blogdata</code> will then be uploaded to your designated local Dropbox folder <code>/Blogbackup/blogdata</code>.</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-1"> 1</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-2"> 2</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-3"> 3</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-4"> 4</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-5"> 5</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-6"> 6</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-7"> 7</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-8"> 8</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-9"> 9</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-10">10</a>
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-11">11</a>
+<pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-11">11</a>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>yourwrdsusername@wrds-cloud-login1-w ~<span style="color:#f92672">]</span>$ sh syncwrds.sh
@@ -590,7 +876,7 @@ time-consuming, as it requires iterating <a href="https://mengjiexu.com/post/dea
 </span></span><span style="display:flex;"><span>Enter the keywords to search <span style="color:#00a8c8">for</span> in filenames: get
 </span></span><span style="display:flex;"><span>Uploading <span style="color:#ae81ff">70</span> KiB/70 KiB
 </span></span><span style="display:flex;"><span>Uploaded getclinical.log
-</span></span><span style="display:flex;"><span>File getclinical.sas already exists in /Blogbackup/blogdata, skipping download.
+</span></span><span style="display:flex;"><span>File getclinical.sas already exists in /Blogbackup/blogdata, skipping upload.
 </span></span><span style="display:flex;"><span>Uploading 8.2 KiB/8.2 KiB
 </span></span><span style="display:flex;"><span>Uploaded getlinksori.sas
 </span></span><span style="display:flex;"><span>Uploading 8.4 KiB/8.4 KiB
